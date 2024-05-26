@@ -48,9 +48,9 @@ class DPSInstallmentBottomSheet{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: LabelColumn(header: MyStrings.givenInstallment.tr, body: (controller.dps?.givenInstallment ?? '0').padLeft(2,'0'),)),
+                    Expanded(child: LabelColumn(header: MyStrings.givenInstallment.tr, body: (controller.dps?.givenInstallment ?? '0').toString()/*.padLeft(2,'0'),*/)),
                     const SizedBox(width: 10,),
-                    Expanded(child: LabelColumn(alignmentEnd:true,header: MyStrings.totalInstallment.tr, body: (controller.dps?.totalInstallment ?? '0').padLeft(2,'0'),)),
+                    Expanded(child: LabelColumn(alignmentEnd:true,header: MyStrings.totalInstallment.tr, body: (controller.dps?.totalInstallment ?? '0').toString()/*padLeft(2,'0'),*/)),
                   ],
                 ),
                 const SizedBox(height: 15,),

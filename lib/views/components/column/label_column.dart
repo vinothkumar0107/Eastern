@@ -19,7 +19,7 @@ class LabelColumn extends StatelessWidget {
       children: [
         Text(header.tr,style: interLightDefault.copyWith(fontSize:isSmallFont?Dimensions.fontSmall:Dimensions.fontDefault,color: MyColor.getBodyTextColor()),overflow: TextOverflow.ellipsis,),
         const SizedBox(height: 5,),
-        Text(body.tr,style: lastTextRed?interRegularDefault.copyWith(fontSize:isSmallFont?Dimensions.fontSmall:Dimensions.fontDefault,color: MyColor.redCancelTextColor):interRegularDefault.copyWith(fontSize:isSmallFont?Dimensions.fontSmall:Dimensions.fontDefault,),overflow: TextOverflow.ellipsis,)
+        Text(body.tr,style: lastTextRed?interRegularDefault.copyWith(fontSize:isSmallFont?Dimensions.fontSmall:Dimensions.fontDefault,color: MyColor.redCancelTextColor):interRegularLarge.copyWith(fontSize:isSmallFont?Dimensions.fontSmall:Dimensions.fontDefault,),overflow: TextOverflow.ellipsis,)
       ],
     );
   }

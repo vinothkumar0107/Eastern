@@ -89,18 +89,18 @@ class MainData {
 class Dps {
   Dps({
       int? id, 
-      String? dpsNumber, 
-      String? userId, 
-      String? planId, 
+      String? dpsNumber,
+      int? userId,
+      int? planId,
       String? perInstallment, 
-      String? interestRate, 
-      String? installmentInterval, 
-      String? delayValue, 
+      String? interestRate,
+      int? installmentInterval,
+    int? delayValue,
       String? chargePerInstallment, 
-      String? delayCharge, 
-      String? givenInstallment, 
-      String? totalInstallment, 
-      String? status, 
+      String? delayCharge,
+    int? givenInstallment,
+    int? totalInstallment,
+    int? status,
       dynamic withdrawnAt, 
       dynamic dueNotificationSent, 
       String? createdAt, 
@@ -148,17 +148,17 @@ class Dps {
   }
   int? _id;
   String? _dpsNumber;
-  String? _userId;
-  String? _planId;
+  int? _userId;
+  int? _planId;
   String? _perInstallment;
   String? _interestRate;
-  String? _installmentInterval;
-  String? _delayValue;
+  int? _installmentInterval;
+  int? _delayValue;
   String? _chargePerInstallment;
   String? _delayCharge;
-  String? _givenInstallment;
-  String? _totalInstallment;
-  String? _status;
+  int? _givenInstallment;
+  int? _totalInstallment;
+  int? _status;
   dynamic _withdrawnAt;
   dynamic _dueNotificationSent;
   String? _createdAt;
@@ -167,17 +167,17 @@ class Dps {
 
   int? get id => _id;
   String? get dpsNumber => _dpsNumber;
-  String? get userId => _userId;
-  String? get planId => _planId;
+  int? get userId => _userId;
+  int? get planId => _planId;
   String? get perInstallment => _perInstallment;
   String? get interestRate => _interestRate;
-  String? get installmentInterval => _installmentInterval;
-  String? get delayValue => _delayValue;
+  int? get installmentInterval => _installmentInterval;
+  int? get delayValue => _delayValue;
   String? get chargePerInstallment => _chargePerInstallment;
   String? get delayCharge => _delayCharge;
-  String? get givenInstallment => _givenInstallment;
-  String? get totalInstallment => _totalInstallment;
-  String? get status => _status;
+  int? get givenInstallment => _givenInstallment;
+  int? get totalInstallment => _totalInstallment;
+  int? get status => _status;
   dynamic get withdrawnAt => _withdrawnAt;
   dynamic get dueNotificationSent => _dueNotificationSent;
   String? get createdAt => _createdAt;

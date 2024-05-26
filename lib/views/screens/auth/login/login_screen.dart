@@ -60,8 +60,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(child: ColorFiltered(colorFilter: ColorFilter.mode(MyColor.primaryColor2, BlendMode.screen),
-              child: Image.asset(MyImages.appLogo,width: 200,height: 90)),),
+                    Center(child: ColorFiltered(colorFilter: ColorFilter.mode(MyColor.transparentColor, BlendMode.screen),
+                      child: Image.asset(MyImages.appLogo,width: 200,height: 90,
+                        ),
+
+                      ),
+                    ),
                      /* Text(MyStrings.loginTitle.tr, style: interRegularDefault.copyWith(fontSize:Dimensions.fontHeader2,fontWeight: FontWeight.w500)),
                       const SizedBox(height: 15),
                       Padding(

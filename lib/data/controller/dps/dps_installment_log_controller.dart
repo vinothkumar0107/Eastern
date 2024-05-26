@@ -32,6 +32,7 @@ class DPSInstallmentLogController extends GetxController{
     update();
   }
 
+
   void initialSelectedValue() async{
     
     currency = dpsRepo.apiClient.getCurrencyOrUsername();
@@ -47,7 +48,6 @@ class DPSInstallmentLogController extends GetxController{
   }
 
   Future<void> loadInstallmentLog() async{
-
     page = page + 1;
     if(page == 1){
       installmentLogList.clear();
@@ -57,7 +57,7 @@ class DPSInstallmentLogController extends GetxController{
     if(responseModel.statusCode == 200){
       DpsInstallmentLogResponseModel model = DpsInstallmentLogResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       nextPageUrl = model.data?.installments?.nextPageUrl ?? "";
-      
+      isLoading = false;
       depositAmount = model.data?.depositAmount??'0';
       profitAmount = model.data?.profitAmount??'0';
       dps = model.data?.dps;
