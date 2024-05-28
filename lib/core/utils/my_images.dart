@@ -2,7 +2,7 @@ class MyImages{
 
   // static const String appLogo = "assets/images/app_logo/app-logo.png";
   // static const String appLogo = "assets/images/app_logo/eastern_trust.png";
-  static const String appLogo = "assets/images/app_logo/eastern.png";
+  static const String appLogo = "assets/images/app_logo/eastern.jpg";
   static const String appLogoWhite = "assets/images/app_logo/app-logo-white.png";
   static const String filter = "assets/images/filter.png";
 

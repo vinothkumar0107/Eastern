@@ -60,7 +60,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(child: Image.asset(MyImages.appLogo,width: 200,height: 90)),
+                    Center(child: Image.asset(MyImages.appLogo,width: 300,height: 150)),
                    /* Text(MyStrings.signUpTitle.tr, style: interSemiBoldExtraLarge.copyWith(fontSize:Dimensions.fontHeader2,fontWeight: FontWeight.w500)),
                     const SizedBox(height: 15),
                     Padding(

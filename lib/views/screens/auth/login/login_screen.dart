@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(child: ColorFiltered(colorFilter: ColorFilter.mode(MyColor.transparentColor, BlendMode.screen),
-                      child: Image.asset(MyImages.appLogo,width: 200,height: 90,
+                      child: Image.asset(MyImages.appLogo,width: 300,height: 150,
                         ),
 
                       ),
