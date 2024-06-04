@@ -1,0 +1,73 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') {reader -> localProperties.load(reader)
+    }
+    android {
+        namespace "com.eastern.easterntrust"
+        compileSdk flutter.compileSdkVersion
+//    ndkVersion flutter.ndkVersion
+        ndkVersion "25.1.8937393"
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+
+        sourceSets {
+            main.java.srcDirs += 'src/main/kotlin'
+        }
+
+        defaultConfig {
+            applicationId "com.eastern.easterntrust"
+            minSdkVersion 21
+            targetSdkVersion flutter.targetSdkVersion
+            versionCode 3
+            versionName "1.2"
+            multiDexEnabled true
+        }
+
+//    buildTypes {
+//        release {
+//            signingConfig signingConfigs.debug
+//        }
+//    }
+
+        signingConfigs {
+            release {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    flutter {
+        source '../..'
+    }
+
+    dependencies {}
+}

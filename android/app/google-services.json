@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1087143593385",
+    "project_id": "easterntrust-6ac92",
+    "storage_bucket": "easterntrust-6ac92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087143593385:android:f016930152e1cde89f70b8",
+        "android_client_info": {
+          "package_name": "com.eastern.easterntrust"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDnrYSDR7LK90ObcIeKDj7JR2vGx1bV9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
