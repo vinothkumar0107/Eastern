@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: MyStrings.appName,
-      initialRoute: RouteHelper.splashScreen,
+      initialRoute: RouteHelper.launcherScreen,
       defaultTransition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 200),
       getPages: RouteHelper.routes,

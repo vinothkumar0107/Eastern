@@ -21,6 +21,7 @@ class LoginRepo {
     Map<String, String> map = {'username': email, 'password': password};
     String url = '${UrlContainer.baseUrl}${UrlContainer.loginEndPoint}';
     ResponseModel model=await apiClient.request(url, Method.postMethod, map,passHeader: false);
+    print("HeaderValue-->"+password);
     return model;
   }
 
@@ -118,7 +119,7 @@ class LoginRepo {
     return success;
   }
 
-  Future<bool> sendUpdatedToken(String deviceToken) async {
+  Future<bool> sendUpdatedToken(String deviceToken) async{
     String url='${UrlContainer.baseUrl}${UrlContainer.deviceTokenEndPoint}';
     Map<String,String>map = deviceTokenMap(deviceToken);
     ResponseModel responseModel = await apiClient.request(url,Method.postMethod,map,passHeader: true);

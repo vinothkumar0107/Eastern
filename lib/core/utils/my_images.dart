@@ -3,6 +3,8 @@ class MyImages{
   // static const String appLogo = "assets/images/app_logo/app-logo.png";
   // static const String appLogo = "assets/images/app_logo/eastern_trust.png";
   static const String appLogo = "assets/images/app_logo/eastern.jpg";
+  static const String appIcon = "assets/images/app_icon.png";
+  static const String launcherImg = "assets/images/launcher_img.png";
   static const String appLogoWhite = "assets/images/app_logo/app-logo-white.png";
   static const String filter = "assets/images/filter.png";
 

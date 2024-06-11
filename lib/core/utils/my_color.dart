@@ -129,6 +129,7 @@ class MyColor{
   static const Color colorGrey2 = Color(0xFF6E6E6E);
   static const Color bodyTextColor = Color(0xFF747475);
   static  Color transparentColor = Colors.transparent;
+  static const Color appPrimaryColorSecondary2 = Color(0xff233c82);
 
   static const Color colorBlack2 = Color(0xff25282B);
   static const Color colorGrey1 = Color(0xffF8F8F8);

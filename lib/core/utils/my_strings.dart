@@ -15,6 +15,7 @@ class MyStrings{
   static const String loginTitle = "Let’s sign you in.";
   static const String loginSologan = "Welcome back, please enter your details";
 
+  static const String loadingPleaseWait = "Loading please wait";
   static const String signUpTitle = "Start your journey";
   static const String selectCountryFirst = "Select country first";
   static const String signUpSologan = "To create an account, please enter your valid information below";
@@ -132,6 +133,7 @@ class MyStrings{
   static const String viewAll = "View All";
 
   static const String deposit = "Deposit";
+  static const String ticket = "Tickets";
   static const String deposited = "Deposited";
   static const String depositHistory = "Deposit History";
   static const String depositNow = "Deposit Now";

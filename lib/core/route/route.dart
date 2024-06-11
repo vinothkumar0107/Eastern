@@ -1,3 +1,4 @@
+import 'package:eastern_trust/views/screens/tickets/ticket_screen.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/views/screens/about/faq/faq_screen.dart';
 import 'package:eastern_trust/views/screens/about/privacy/privacy_screen.dart';
@@ -28,6 +29,7 @@ import 'package:eastern_trust/views/screens/home/home_screen.dart';
 import 'package:eastern_trust/views/screens/loan/loan_confirm_screen/loan_confirm_screen.dart';
 import 'package:eastern_trust/views/screens/loan/loan_installment_log/loan_installment_log_screen.dart';
 import 'package:eastern_trust/views/screens/loan/loan_screen/loan_screen.dart';
+import 'package:eastern_trust/views/screens/launcher/launcher_screen.dart';
 import 'package:eastern_trust/views/screens/menu/menu_screen.dart';
 import 'package:eastern_trust/views/screens/notification/notification_screen.dart';
 import 'package:eastern_trust/views/screens/operator/select_operator_screen.dart';
@@ -48,6 +50,7 @@ import '../../views/screens/transfer/wire_transfer_screen/wire_transfer_screen.d
 class RouteHelper{
 
   static const String splashScreen = "/splash";
+  static const String launcherScreen = "/launcher";
   static const String forgotPasswordScreen = "/forgot_password_screen";
   static const String onBoardScreen = "/onboard";
   static const String loginScreen = "/login";
@@ -85,6 +88,8 @@ class RouteHelper{
   static const String depositWebViewScreen='/deposit_webView';
 
 
+  //Ticket
+  static const String ticketScreen = "/ticket";
 
   //transfer
   static const String transferScreen = "/transfer";
@@ -135,6 +140,7 @@ class RouteHelper{
 
   static List<GetPage> routes = [
 
+    GetPage(name: launcherScreen,                 page: () => const LauncherScreen()),
     GetPage(name: splashScreen,                   page: () => const SplashScreen()),
     GetPage(name: forgotPasswordScreen,           page: () => const ForgetPasswordScreen()),
     GetPage(name: loginScreen,                    page: () => const LoginScreen()),
@@ -148,6 +154,7 @@ class RouteHelper{
     GetPage(name: resetPasswordScreen,            page: () => const ResetPasswordScreen()),
     GetPage(name: profileCompleteScreen,          page: () => const ProfileCompleteScreen()),
     GetPage(name: depositsScreen,                 page: () => const DepositsScreen()),
+    GetPage(name: ticketScreen,                   page: () => const TicketScreen()),
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
     GetPage(name: withdrawScreen,                 page: () => const WithdrawScreen()),
     GetPage(name: addWithdrawMethodScreen,        page: () => const AddWithdrawMethod()),
