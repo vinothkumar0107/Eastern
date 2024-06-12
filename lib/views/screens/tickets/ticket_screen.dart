@@ -114,7 +114,6 @@ class _TicketScreenState extends State<TicketScreen> {
                         right: Dimensions.space5),
                     child: Column(
                       children: [
-                        TicketTable(),
                         Visibility(
                           visible: controller.isSearch,
                           child: Column(
@@ -176,7 +175,7 @@ class _TicketScreenState extends State<TicketScreen> {
                                             date: DateConverter
                                                 .isoToLocalDateAndTime(
                                                     controller
-                                                            .depositList[index]
+                                                        .depositList[index]
                                                             .createdAt ??
                                                         ""),
                                             status: controller.getStatus(index),

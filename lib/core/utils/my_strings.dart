@@ -172,6 +172,8 @@ class MyStrings{
   static const String requestInvestDPS = "Request to Invest in DPS";
   static const String beSureBeforeConfirm = "Be sure before confirm";
   static const String plan = "Plan";
+  static const String statusTicket = "Status";
+  static const String lastReply = "Last Reply";
   static const String planName = "Plan Name";
   static const String installmentInterval = "Installment Interval";
   static const String installmentAmount = "Installment Amount";
