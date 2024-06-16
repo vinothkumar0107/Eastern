@@ -29,6 +29,9 @@ class MyStrings{
   static const String rememberMe = "Remember Me";
   static const String range = "RANGE";
   static const String fixed = "FIXED";
+  static const String subject = "Subject";
+    static const String message = "Message";
+    static const String fileSize = "Max 5 files can be uploaded. Maximum upload size is 320M";
   static const String selectCountry = "Select country";
   static const String loginForgotPassword = "Forgot Password?";
   static const String forgotPassword = "Forgot Password";
@@ -188,6 +191,7 @@ class MyStrings{
   static const String limitPerTrx = "Limit Per Transaction";
   static const String dailyLimit = "Daily Limit";
   static const String monthlyLimit = "Monthly Limit";
+  static const String createTicket = "Create Ticket";
   static const String chargePerTrx = "Charge Per Transaction";
   static const String totalInvestment = "Total Investment";
   static const String profitRate = "Profit Rate";
@@ -481,6 +485,7 @@ class MyStrings{
   static const String transactionNo = "Transaction No.";
 
   static const String ourPrivacyPolicy = "Our Privacy Policy";
+  static const String priority = "Priority";
   static const String howLongWeRetain = "How Long We Retain";
   static const String yourData = "What we don't do with your data";
   static const String protectionActCompliance = "Protection Act Compliance";

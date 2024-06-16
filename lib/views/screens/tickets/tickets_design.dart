@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/route/route.dart';
 import 'package:eastern_trust/views/screens/tickets/ticket_column.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
 import 'package:eastern_trust/core/utils/my_strings.dart';
 import 'package:eastern_trust/core/utils/util.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class TicketDesign extends StatelessWidget {
   final String trxValue, date, status, amount;
@@ -18,13 +21,14 @@ class TicketDesign extends StatelessWidget {
       required this.status,
       required this.statusBgColor,
       required this.amount,
-      required this.onPressed})
+      required this.onPressed
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap:  onPressed,
       child: Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(

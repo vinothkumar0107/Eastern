@@ -85,7 +85,8 @@ class _WireTransferFormState extends State<WireTransferForm> {
                   },),
                   const SizedBox(height: Dimensions.textToTextSpace+10,),
                 ],
-              )),
+              )
+          ),
           ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

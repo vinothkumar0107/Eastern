@@ -1,3 +1,5 @@
+import 'package:eastern_trust/views/screens/tickets/create_ticket/create_ticket.dart';
+import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/ticket_screen.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/views/screens/about/faq/faq_screen.dart';
@@ -85,11 +87,14 @@ class RouteHelper{
   static const String depositsScreen = "/deposits";
   static const String depositsDetailsScreen = "/deposits_details";
   static const String newDepositScreenScreen = "/deposits_money";
+
   static const String depositWebViewScreen='/deposit_webView';
 
 
   //Ticket
   static const String ticketScreen = "/ticket";
+  static const String createTicketScreen = "/craete_ticket";
+  static const String replyTicketScreen = "/reply_ticket";
 
   //transfer
   static const String transferScreen = "/transfer";
@@ -107,6 +112,7 @@ class RouteHelper{
   static const String withdrawConfirmScreenScreen = "/withdraw_preview_screen";
 
   static const String otpScreen = "/otp_screen";
+
 
   //fdr screen
   static const String fdrScreen = "/fdr_plan_screen";
@@ -156,6 +162,9 @@ class RouteHelper{
     GetPage(name: depositsScreen,                 page: () => const DepositsScreen()),
     GetPage(name: ticketScreen,                   page: () => const TicketScreen()),
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
+    GetPage(name: createTicketScreen,             page: () => const CreateTicketScreen()),
+
+    GetPage(name: replyTicketScreen,              page: () => const ReplyTicketScreen()),
     GetPage(name: withdrawScreen,                 page: () => const WithdrawScreen()),
     GetPage(name: addWithdrawMethodScreen,        page: () => const AddWithdrawMethod()),
     GetPage(name: withdrawConfirmScreenScreen,    page: () => const WithdrawConfirmScreen()),

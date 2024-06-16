@@ -1,4 +1,5 @@
 import 'package:eastern_trust/core/utils/util.dart';
+import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/tickets_design.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -88,10 +89,20 @@ class _TicketScreenState extends State<TicketScreen> {
                     color: MyColor.colorWhite, size: 20),
               ),
               actions: [
-                const SizedBox(width: Dimensions.space7),
+                GestureDetector(
+                  onTap: (){
+                    // controller.changeIsPress();
+                  },
+                  child: Container(
+                      padding: const EdgeInsets.all(Dimensions.space7),
+                      child:  Text(MyStrings.createTicket,style: interRegularDefault.copyWith(color:MyColor.textColor,fontSize: Dimensions.fontLarge)),
+
+                  ),
+                ),
+                // const SizedBox(width: Dimensions.space7),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouteHelper.newDepositScreenScreen);
+                    Get.toNamed(RouteHelper.createTicketScreen);
                   },
                   child: Container(
                     margin: const EdgeInsets.only(
@@ -103,6 +114,7 @@ class _TicketScreenState extends State<TicketScreen> {
                         color: MyColor.primaryColor, size: 15),
                   ),
                 ),
+
               ],
             ),
             body: controller.isLoading
@@ -116,9 +128,9 @@ class _TicketScreenState extends State<TicketScreen> {
                       children: [
                         Visibility(
                           visible: controller.isSearch,
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               DepositHistoryTop(),
                               SizedBox(height: Dimensions.space15),
                             ],
@@ -165,10 +177,14 @@ class _TicketScreenState extends State<TicketScreen> {
                                                 : const SizedBox();
                                           }
                                           return TicketDesign(
+
                                             onPressed: () {
-                                              DepositBottomSheet
-                                                  .depositBottomSheet(
-                                                      context, index);
+                                              ReplyTicketScreen();
+                                              // DepositBottomSheet
+                                              //     .depositBottomSheet(
+                                              //         context, index);
+                                              // Get.toNamed(RouteHelper.replyTicketScreen);
+
                                             },
                                             trxValue: index.toString() ??
                                                 "",
@@ -196,156 +212,6 @@ class _TicketScreenState extends State<TicketScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class TicketTable extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // ElevatedButton(
-        //   onPressed: () {},
-        //   child: Text('+ Create Ticket'),
-        // ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(
-              vertical: Dimensions.space5, horizontal: Dimensions.space5),
-          decoration: BoxDecoration(
-              color: MyColor.colorWhite,
-              borderRadius:
-                  BorderRadius.circular(Dimensions.defaultBorderRadius),
-              boxShadow: MyUtil.getCardShadow()),
-          child: Table(
-            children: [
-              TableRow(
-                decoration: BoxDecoration(color: MyColor.primaryColor2),
-                children: [
-                  TableCell(
-                      child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('S.N.',
-                        style: interRegularSmall.copyWith(
-                            color: MyColor.colorWhite)),
-                  )),
-                  TableCell(
-                      child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('SUBJECT',
-                        style: interRegularSmall.copyWith(
-                            color: MyColor.colorWhite)),
-                  )),
-                  TableCell(
-                      child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('STATUS',
-                        style: interRegularSmall.copyWith(
-                            color: MyColor.colorWhite)),
-                  )),
-                  TableCell(
-                      child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('PRIORITY',
-                        style: interRegularSmall.copyWith(
-                            color: MyColor.colorWhite)),
-                  )),
-                  TableCell(
-                      child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('LAST REPLY',
-                        style: interRegularSmall.copyWith(
-                            color: MyColor.colorWhite)),
-                  )),
-                  TableCell(
-                      child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('ACTION',
-                        style: interRegularSmall.copyWith(
-                            color: MyColor.colorWhite)),
-                  )),
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-
-  TableRow _buildTableRow(String sn, String subject, String status,
-      String priority, String lastReply, String action) {
-    return TableRow(
-      children: [
-        TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(sn,
-              style: interRegularSmall.copyWith(color: MyColor.colorBlack)),
-        )),
-        TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(subject,
-              style: interRegularSmall.copyWith(color: MyColor.primaryColor)),
-        )),
-        TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            padding: const EdgeInsets.all(4.0),
-            child: Text(status,
-                style: interRegularSmall.copyWith(color: MyColor.colorBlack)),
-          ),
-        )),
-        TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            padding: const EdgeInsets.all(4.0),
-            child: Text(priority,
-                style: interRegularSmall.copyWith(color: MyColor.red)),
-          ),
-        )),
-        TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(lastReply,
-              style: interRegularSmall.copyWith(color: MyColor.colorGrey)),
-        )),
-        TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: InkWell(
-            onTap: () => Get.toNamed(RouteHelper.editProfileScreen),
-            child: Container(
-              margin: const EdgeInsetsDirectional.only(start: 1),
-              height: 30,
-              padding: const EdgeInsets.symmetric(horizontal: 1),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.defaultRadius)
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space10),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: MyColor.transparentColor,
-                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                        border: Border.all(color: MyColor.primaryColor, width: 0.5)
-                    ),
-                    child: Text(action.tr, textAlign: TextAlign.center, style: interRegularSmall.copyWith(color: MyColor.primaryColor)),
-                  )
-
-                ],
-              ),
-            ),
-          )
-        )),
-      ],
     );
   }
 }
