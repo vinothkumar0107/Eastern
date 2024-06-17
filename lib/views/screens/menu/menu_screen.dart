@@ -185,6 +185,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           },
                         ),
                         const CustomDivider(space: Dimensions.space15),
+<<<<<<< HEAD
 
                         Visibility(
                             visible: menuController.isDepositEnable,
@@ -200,6 +201,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                 const CustomDivider(space: Dimensions.space15),
                               ],
                             )),
+=======
+>>>>>>> origin/ios-main
                         MenuRowWidget(
                           isLoading: menuController.logoutLoading,
                           image: MyImages.signOut,

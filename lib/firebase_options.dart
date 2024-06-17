@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     }
   }
 
+<<<<<<< HEAD
   // static const FirebaseOptions android = FirebaseOptions(
   //   apiKey: 'AIzaSyAojrVZg7lluDFg2lxt228w3Rot9owdy2Y',
   //   appId: '1:695385430630:android:30db20af89394e46752ba7',
@@ -72,5 +73,22 @@ class DefaultFirebaseOptions {
     projectId: 'viserbank-8844b',
     storageBucket: 'viserbank-8844b.appspot.com',
     iosBundleId: 'com.example.viserBank',
+=======
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyAojrVZg7lluDFg2lxt228w3Rot9owdy2Y',
+    appId: '1:695385430630:android:30db20af89394e46752ba7',
+    messagingSenderId: '695385430630',
+    projectId: 'viserbank-8844b',
+    storageBucket: 'viserbank-8844b.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCV4-YSdgztSlDzdBYylNQvjOBJPaOhX2Y',
+    appId: '1:1087143593385:ios:5528d1ca78cee65b9f70b8',
+    messagingSenderId: '695385430630',
+    projectId: 'easterntrust-6ac92',
+    storageBucket: 'easterntrust-6ac92.appspot.com',
+    iosBundleId: 'com.bank.easterntrust',
+>>>>>>> origin/ios-main
   );
 }

@@ -333,6 +333,10 @@ SPEC CHECKSUMS:
   wakelock_plus: 78ec7c5b202cab7761af8e2b2b3d0671be6c4ae1
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
+<<<<<<< HEAD
 PODFILE CHECKSUM: 148abd01c3acd91da8fb47441f45307b6e9e66a8
+=======
+PODFILE CHECKSUM: 04bf43ecfccab8795d90dccc49356579d43cca57
+>>>>>>> origin/ios-main
 
 COCOAPODS: 1.15.2
