@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 import 'package:eastern_trust/views/screens/tickets/create_ticket/create_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/ticket_screen.dart';
+=======
+>>>>>>> origin/ios-main
 import 'package:get/get.dart';
 import 'package:eastern_trust/views/screens/about/faq/faq_screen.dart';
 import 'package:eastern_trust/views/screens/about/privacy/privacy_screen.dart';
@@ -31,7 +34,10 @@ import 'package:eastern_trust/views/screens/home/home_screen.dart';
 import 'package:eastern_trust/views/screens/loan/loan_confirm_screen/loan_confirm_screen.dart';
 import 'package:eastern_trust/views/screens/loan/loan_installment_log/loan_installment_log_screen.dart';
 import 'package:eastern_trust/views/screens/loan/loan_screen/loan_screen.dart';
+<<<<<<< HEAD
 import 'package:eastern_trust/views/screens/launcher/launcher_screen.dart';
+=======
+>>>>>>> origin/ios-main
 import 'package:eastern_trust/views/screens/menu/menu_screen.dart';
 import 'package:eastern_trust/views/screens/notification/notification_screen.dart';
 import 'package:eastern_trust/views/screens/operator/select_operator_screen.dart';
@@ -52,7 +58,10 @@ import '../../views/screens/transfer/wire_transfer_screen/wire_transfer_screen.d
 class RouteHelper{
 
   static const String splashScreen = "/splash";
+<<<<<<< HEAD
   static const String launcherScreen = "/launcher";
+=======
+>>>>>>> origin/ios-main
   static const String forgotPasswordScreen = "/forgot_password_screen";
   static const String onBoardScreen = "/onboard";
   static const String loginScreen = "/login";
@@ -87,6 +96,7 @@ class RouteHelper{
   static const String depositsScreen = "/deposits";
   static const String depositsDetailsScreen = "/deposits_details";
   static const String newDepositScreenScreen = "/deposits_money";
+<<<<<<< HEAD
 
   static const String depositWebViewScreen='/deposit_webView';
 
@@ -95,6 +105,11 @@ class RouteHelper{
   static const String ticketScreen = "/ticket";
   static const String createTicketScreen = "/craete_ticket";
   static const String replyTicketScreen = "/reply_ticket";
+=======
+  static const String depositWebViewScreen='/deposit_webView';
+
+
+>>>>>>> origin/ios-main
 
   //transfer
   static const String transferScreen = "/transfer";
@@ -113,7 +128,10 @@ class RouteHelper{
 
   static const String otpScreen = "/otp_screen";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/ios-main
   //fdr screen
   static const String fdrScreen = "/fdr_plan_screen";
   static const String fdrConfirmScreen = "/fdr_confirm_screen";
@@ -146,7 +164,10 @@ class RouteHelper{
 
   static List<GetPage> routes = [
 
+<<<<<<< HEAD
     GetPage(name: launcherScreen,                 page: () => const LauncherScreen()),
+=======
+>>>>>>> origin/ios-main
     GetPage(name: splashScreen,                   page: () => const SplashScreen()),
     GetPage(name: forgotPasswordScreen,           page: () => const ForgetPasswordScreen()),
     GetPage(name: loginScreen,                    page: () => const LoginScreen()),
@@ -160,11 +181,15 @@ class RouteHelper{
     GetPage(name: resetPasswordScreen,            page: () => const ResetPasswordScreen()),
     GetPage(name: profileCompleteScreen,          page: () => const ProfileCompleteScreen()),
     GetPage(name: depositsScreen,                 page: () => const DepositsScreen()),
+<<<<<<< HEAD
     GetPage(name: ticketScreen,                   page: () => const TicketScreen()),
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
     GetPage(name: createTicketScreen,             page: () => const CreateTicketScreen()),
 
     GetPage(name: replyTicketScreen,              page: () => const ReplyTicketScreen()),
+=======
+    GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
+>>>>>>> origin/ios-main
     GetPage(name: withdrawScreen,                 page: () => const WithdrawScreen()),
     GetPage(name: addWithdrawMethodScreen,        page: () => const AddWithdrawMethod()),
     GetPage(name: withdrawConfirmScreenScreen,    page: () => const WithdrawConfirmScreen()),

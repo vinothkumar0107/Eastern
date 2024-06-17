@@ -37,8 +37,13 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                   child: Row(
                     children: [
                       CircleImageWidget(
+<<<<<<< HEAD
                         height:40,
                         width:40,
+=======
+                        height:60,
+                        width:60,
+>>>>>>> origin/ios-main
                         isProfile:true,
                         isAsset: false,
                         imagePath: '${UrlContainer.domainUrl}/assets/images/user/profile/${controller.imagePath}',

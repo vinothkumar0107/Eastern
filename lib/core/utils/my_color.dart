@@ -105,6 +105,10 @@ class MyColor{
 
   static const Color primaryColor           = Color(0xff246EE9);
   static const Color primaryColor2          = Color(0xFF14233d);
+<<<<<<< HEAD
+=======
+  static const Color appPrimaryColorSecondary2 = Color(0xff233c82);
+>>>>>>> origin/ios-main
   static const Color green                  = Color(0xff2ECC06);
   static const Color secondaryColor         = Color(0xffFFFFFF);
   static const Color containerBgColor       = Color(0xffF9F9F9);
@@ -129,7 +133,10 @@ class MyColor{
   static const Color colorGrey2 = Color(0xFF6E6E6E);
   static const Color bodyTextColor = Color(0xFF747475);
   static  Color transparentColor = Colors.transparent;
+<<<<<<< HEAD
   static const Color appPrimaryColorSecondary2 = Color(0xff233c82);
+=======
+>>>>>>> origin/ios-main
 
   static const Color colorBlack2 = Color(0xff25282B);
   static const Color colorGrey1 = Color(0xffF8F8F8);
