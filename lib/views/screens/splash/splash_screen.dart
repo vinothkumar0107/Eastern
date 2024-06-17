@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/ios-main
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/theme/theme_util.dart';
@@ -40,11 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _startLoading();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Timer(
-<<<<<<< HEAD
-          const Duration(milliseconds: 500),
-=======
          const Duration(milliseconds: 500),
->>>>>>> origin/ios-main
               () => controller.gotoNextPage());
     });
   }

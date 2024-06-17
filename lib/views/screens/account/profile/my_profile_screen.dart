@@ -13,10 +13,7 @@ import 'package:eastern_trust/views/components/appbar/custom_appbar.dart';
 import 'package:eastern_trust/views/components/circle_widget/circle_button_with_icon.dart';
 import 'package:eastern_trust/views/components/custom_loader.dart';
 import 'package:eastern_trust/views/components/divider/custom_divider.dart';
-<<<<<<< HEAD
-=======
 import 'package:eastern_trust/views/components/circle_widget/circle_image_button.dart';
->>>>>>> origin/ios-main
 
 import 'widget/user_info_field.dart';
 
@@ -44,10 +41,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void dispose() {
     super.dispose();
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/ios-main
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,28 +69,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       Expanded(
                         child: Row(
                           children: [
-<<<<<<< HEAD
-                            CircleButtonWithIcon(
-                              circleSize: 35,
-                              imageSize: 35,
-                              padding: 0,
-                              borderColor: Colors.transparent,
-                              isIcon: false,
+                            CircleImageWidget(
+                              height:60,
+                              width:60,
+                              isProfile:true,
                               isAsset: false,
                               imagePath: controller.imageUrl,
-                              isProfile: true,
-                              press: () {  },
-                            ),
-=======
-                          CircleImageWidget(
-                          height:60,
-                          width:60,
-                          isProfile:true,
-                          isAsset: false,
-                          imagePath: controller.imageUrl,
-                          press: (){
-                          },),
->>>>>>> origin/ios-main
+                              press: (){
+                              },),
                             const SizedBox(width: Dimensions.space15),
                             Expanded(
                               child: Column(
@@ -203,7 +182,3 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/ios-main

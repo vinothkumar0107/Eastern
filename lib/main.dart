@@ -37,11 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: MyStrings.appName,
-<<<<<<< HEAD
-      initialRoute: RouteHelper.launcherScreen,
-=======
       initialRoute: RouteHelper.splashScreen,
->>>>>>> origin/ios-main
       defaultTransition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 200),
       getPages: RouteHelper.routes,

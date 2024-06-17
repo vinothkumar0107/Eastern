@@ -10,19 +10,12 @@ class MyStrings{
   static const String errorDownloadingFile = "Error downloading file";
   static const String downloading = "Downloading";
   static const String fileDownloadedSuccess = "File downloaded successfully";
-<<<<<<< HEAD
-=======
   static const String loadingPleaseWait = "Loading please wait";
->>>>>>> origin/ios-main
 
   static const String googleAuthenticatorCode = 'Google Authenticator Code';
   static const String loginTitle = "Let’s sign you in.";
   static const String loginSologan = "Welcome back, please enter your details";
 
-<<<<<<< HEAD
-  static const String loadingPleaseWait = "Loading please wait";
-=======
->>>>>>> origin/ios-main
   static const String signUpTitle = "Start your journey";
   static const String selectCountryFirst = "Select country first";
   static const String signUpSologan = "To create an account, please enter your valid information below";
@@ -36,12 +29,9 @@ class MyStrings{
   static const String rememberMe = "Remember Me";
   static const String range = "RANGE";
   static const String fixed = "FIXED";
-<<<<<<< HEAD
   static const String subject = "Subject";
     static const String message = "Message";
     static const String fileSize = "Max 5 files can be uploaded. Maximum upload size is 320M";
-=======
->>>>>>> origin/ios-main
   static const String selectCountry = "Select country";
   static const String loginForgotPassword = "Forgot Password?";
   static const String forgotPassword = "Forgot Password";
@@ -146,10 +136,7 @@ class MyStrings{
   static const String viewAll = "View All";
 
   static const String deposit = "Deposit";
-<<<<<<< HEAD
   static const String ticket = "Tickets";
-=======
->>>>>>> origin/ios-main
   static const String deposited = "Deposited";
   static const String depositHistory = "Deposit History";
   static const String depositNow = "Deposit Now";
@@ -188,11 +175,8 @@ class MyStrings{
   static const String requestInvestDPS = "Request to Invest in DPS";
   static const String beSureBeforeConfirm = "Be sure before confirm";
   static const String plan = "Plan";
-<<<<<<< HEAD
   static const String statusTicket = "Status";
   static const String lastReply = "Last Reply";
-=======
->>>>>>> origin/ios-main
   static const String planName = "Plan Name";
   static const String installmentInterval = "Installment Interval";
   static const String installmentAmount = "Installment Amount";
@@ -207,10 +191,7 @@ class MyStrings{
   static const String limitPerTrx = "Limit Per Transaction";
   static const String dailyLimit = "Daily Limit";
   static const String monthlyLimit = "Monthly Limit";
-<<<<<<< HEAD
   static const String createTicket = "Create Ticket";
-=======
->>>>>>> origin/ios-main
   static const String chargePerTrx = "Charge Per Transaction";
   static const String totalInvestment = "Total Investment";
   static const String profitRate = "Profit Rate";
@@ -504,10 +485,7 @@ class MyStrings{
   static const String transactionNo = "Transaction No.";
 
   static const String ourPrivacyPolicy = "Our Privacy Policy";
-<<<<<<< HEAD
   static const String priority = "Priority";
-=======
->>>>>>> origin/ios-main
   static const String howLongWeRetain = "How Long We Retain";
   static const String yourData = "What we don't do with your data";
   static const String protectionActCompliance = "Protection Act Compliance";

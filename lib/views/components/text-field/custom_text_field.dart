@@ -57,11 +57,7 @@ class CustomTextField extends StatefulWidget {
     this.needLabel = true,
     this.prefixText = '',
     this.disableColor =  MyColor.borderColor,
-<<<<<<< HEAD
-    this.isRequired = false,
-=======
     this.isRequired = false
->>>>>>> origin/ios-main
   }) : super(key: key);
 
   @override
