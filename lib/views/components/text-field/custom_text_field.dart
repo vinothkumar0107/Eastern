@@ -31,6 +31,7 @@ class CustomTextField extends StatefulWidget {
   final bool isRequired;
   final String prefixText;
   final Color disableColor;
+  final int maxiLines;
 
  const CustomTextField({
     Key? key,
@@ -57,7 +58,9 @@ class CustomTextField extends StatefulWidget {
     this.needLabel = true,
     this.prefixText = '',
     this.disableColor =  MyColor.borderColor,
-    this.isRequired = false
+    this.isRequired = false,
+    this.maxiLines = 1
+
   }) : super(key: key);
 
   @override
@@ -88,6 +91,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           validator: widget.validator,
           keyboardType: widget.textInputType,
           obscureText: widget.isPassword?obscureText:false,
+          maxLines: widget.maxiLines,
           decoration: InputDecoration(
             errorMaxLines: 2,
             isDense: false,
@@ -148,6 +152,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       validator: widget.validator,
       keyboardType: widget.textInputType,
       obscureText: widget.isPassword?obscureText:false,
+      maxLines: widget.maxiLines,
       decoration: InputDecoration(
         errorMaxLines: 2,
         prefixIcon: widget.prefixText.isEmpty?null:Container(

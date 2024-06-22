@@ -10,17 +10,20 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class TicketDesign extends StatelessWidget {
-  final String trxValue, date, status, amount;
-  final Color statusBgColor;
+  final String ticketID, subject, status, priority, lastReplyDate;
+  final Color statusTextColor;
+  final Color priorityTextColor;
   final VoidCallback onPressed;
 
   const TicketDesign(
       {Key? key,
-      required this.trxValue,
-      required this.date,
+      required this.ticketID,
+      required this.subject,
       required this.status,
-      required this.statusBgColor,
-      required this.amount,
+      required this.priority,
+      required this.lastReplyDate,
+      required this.statusTextColor,
+      required this.priorityTextColor,
       required this.onPressed
       })
       : super(key: key);
@@ -45,20 +48,22 @@ class TicketDesign extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TicketColumn(
-                    header: "[Ticket#9999985]",
-                    body: "Customer reply",
+                    header: ticketID,
+                    body: subject,
                   ),
                   TicketColumn(
                     alignmentEnd: true,
-                    header: "High",
+                    header: priority,
                     isDate: true,
-                    body: MyStrings.lastReply + ": " + "14 seconds ago",
+                    body: '${MyStrings.lastReply}: $lastReplyDate',
+                    textColor: priorityTextColor,
                   ),
                 ],
               ),
               TicketColumn(
                 header: "",
-                body: MyStrings.statusTicket + ": " + "ok",
+                body: status,
+                textColor: statusTextColor,
               ),
             ],
           )),

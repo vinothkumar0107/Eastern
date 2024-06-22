@@ -1,4 +1,6 @@
 import 'package:eastern_trust/core/utils/util.dart';
+import 'package:eastern_trust/data/controller/tickets/ticket_list_controller.dart';
+import 'package:eastern_trust/data/repo/tickets/ticket_list_repo.dart';
 import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/tickets_design.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class _TicketScreenState extends State<TicketScreen> {
   final ScrollController scrollController = ScrollController();
 
   fetchData() {
-    Get.find<DepositController>().fetchNewList();
+    Get.find<TicketListController>().loadTicketData();
   }
 
   void _scrollListener() {
@@ -46,11 +48,11 @@ class _TicketScreenState extends State<TicketScreen> {
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DepositRepo(apiClient: Get.find()));
-    final controller = Get.put(DepositController(depositRepo: Get.find()));
+    Get.put(TicketListRepo(apiClient: Get.find()));
+    final controller = Get.put(TicketListController(ticketListRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.beforeInitLoadData();
+      controller.loadTicketData();
       scrollController.addListener(_scrollListener);
     });
   }
@@ -63,10 +65,8 @@ class _TicketScreenState extends State<TicketScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DepositController>(
+    return GetBuilder<TicketListController>(
       builder: (controller) => WillPopWidget(
-        nextRoute: controller.isGoHome() ? RouteHelper.homeScreen : '',
-        isOnlyBack: controller.isGoHome() ? false : true,
         child: SafeArea(
           child: Scaffold(
             backgroundColor: MyColor.containerBgColor,
@@ -126,26 +126,11 @@ class _TicketScreenState extends State<TicketScreen> {
                         right: Dimensions.space5),
                     child: Column(
                       children: [
-                        Visibility(
-                          visible: controller.isSearch,
-                          child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DepositHistoryTop(),
-                              SizedBox(height: Dimensions.space15),
-                            ],
-                          ),
-                        ),
                         Expanded(
-                          child: controller.depositList.isEmpty &&
-                                  controller.searchLoading == false
-                              ? NoDataFoundScreen(
+                          child: controller.ticketList.isEmpty
+                              ? const NoDataFoundScreen(
                                   title: MyStrings.noDepositFound,
-                                  height: controller.isSearch ? 0.75 : 0.8)
-                              : controller.searchLoading
-                                  ? const Center(
-                                      child: CustomLoader(),
-                                    )
+                                  height: 0.8)
                                   : SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height,
@@ -156,12 +141,12 @@ class _TicketScreenState extends State<TicketScreen> {
                                         physics: const BouncingScrollPhysics(),
                                         padding: EdgeInsets.zero,
                                         itemCount:
-                                            controller.depositList.length + 1,
+                                            controller.ticketList.length + 1,
                                         separatorBuilder: (context, index) =>
                                             const SizedBox(
                                                 height: Dimensions.space10),
                                         itemBuilder: (context, index) {
-                                          if (controller.depositList.length ==
+                                          if (controller.ticketList.length ==
                                               index) {
                                             return controller.hasNext()
                                                 ? SizedBox(
@@ -179,29 +164,22 @@ class _TicketScreenState extends State<TicketScreen> {
                                           return TicketDesign(
 
                                             onPressed: () {
-                                              ReplyTicketScreen();
+                                              // ReplyTicketScreen();
                                               // DepositBottomSheet
                                               //     .depositBottomSheet(
                                               //         context, index);
-                                              // Get.toNamed(RouteHelper.replyTicketScreen);
+                                              Get.toNamed(RouteHelper.replyTicketScreen);
 
                                             },
-                                            trxValue: index.toString() ??
-                                                "",
-                                            date: DateConverter
-                                                .isoToLocalDateAndTime(
-                                                    controller
-                                                        .depositList[index]
-                                                            .createdAt ??
-                                                        ""),
-                                            status: controller.getStatus(index),
-                                            statusBgColor: controller
-                                                .getStatusColor(index),
-                                            amount:
-                                                "${Converter.formatNumber(controller.depositList[index].amount ?? " ")} ${controller.currency}",
+                                            ticketID: 'Ticket ID: #${controller.ticketList[index].ticket}',
+                                            subject: controller.ticketList[index].subject,
+                                            lastReplyDate: controller.ticketList[index].lastReply,
+                                            status: controller.getStatus(controller.ticketList[index].status),
+                                            statusTextColor: controller
+                                                .getStatusColor(controller.ticketList[index].status),
+                                            priorityTextColor: controller.getPriorityColor(controller.ticketList[index].priority),
+                                            priority: controller.getPriority(controller.ticketList[index].priority),
                                           );
-
-
                                         },
                                       ),
                                     ),

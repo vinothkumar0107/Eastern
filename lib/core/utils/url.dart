@@ -96,4 +96,8 @@ class UrlContainer{
   static const String submitOtpUrl = 'check/otp/';
   static const String resendOtpUrl = 'resend/otp/';
 
+  //Tickets
+  static const String createTicketUrl = 'ticket/create';
+  static const String getTicketListUrl = 'ticket';
+
 }

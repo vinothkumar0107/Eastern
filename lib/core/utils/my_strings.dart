@@ -637,6 +637,11 @@ class MyStrings{
   static const String airtime = "Airtime";
   static const String addBeneficiaryToVBank = "Add Beneficiary to $appName";
   static const String addBeneficiaryToOtherBank = "Add Beneficiary to $otherBanks";
+  static const String high  = "High";
+  static const String medium  = "Medium";
+  static const String low  = "Low";
+  static const String open  = "Open";
+  static const String customerReply  = "Customer Reply";
 
   static List<LanguageModel> languages = [
     LanguageModel(imageUrl: '', languageName: 'English', countryCode: 'US', languageCode: 'en'),
