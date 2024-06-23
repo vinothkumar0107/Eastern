@@ -5,6 +5,7 @@ class UrlContainer{
   static const String domainUrl = 'https://easterntrusts.com/';
  // static const String domainUrl = 'https://url8.viserlab.com/viserbankv2.5/';
   static const String baseUrl = '${domainUrl}api/';
+  static const String assetViewBaseUrl = 'https://easterntrusts.com/assets/support/';
 
   static const String registrationEndPoint = 'register';
   static const String loginEndPoint = 'login';
@@ -99,5 +100,8 @@ class UrlContainer{
   //Tickets
   static const String createTicketUrl = 'ticket/create';
   static const String getTicketListUrl = 'ticket';
+  static const String viewTicketUrl = 'ticket/view';
+  static const String replyTicketUrl = 'ticket/reply';
+  static const String closeTicketUrl = 'ticket/close';
 
 }

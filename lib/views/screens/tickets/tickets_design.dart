@@ -13,6 +13,7 @@ class TicketDesign extends StatelessWidget {
   final String ticketID, subject, status, priority, lastReplyDate;
   final Color statusTextColor;
   final Color priorityTextColor;
+  final int selectedIndex;
   final VoidCallback onPressed;
 
   const TicketDesign(
@@ -24,6 +25,7 @@ class TicketDesign extends StatelessWidget {
       required this.lastReplyDate,
       required this.statusTextColor,
       required this.priorityTextColor,
+      required this.selectedIndex,
       required this.onPressed
       })
       : super(key: key);

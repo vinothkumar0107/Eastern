@@ -33,28 +33,60 @@ class TicketListController extends GetxController {
     return nextPageUrl.isNotEmpty && nextPageUrl != 'null' ? true : false;
   }
 
-  String getStatus(int index) {
-    String status = ticketList[index].status == 0 ? MyStrings.open
-        : ticketList[index].status == 1 ? MyStrings.closed
-        : ticketList[index].status == 2 ? MyStrings.customerReply : "";
-
-    return status;
+  String getStatusFromCode(int code) {
+    switch (code) {
+      case 0:
+        return MyStrings.open;
+      case 1:
+        return MyStrings.answered;
+      case 2:
+        return MyStrings.customerReply;
+      case 3:
+        return MyStrings.closed;
+      default:
+        return ' ';
+    }
   }
 
-  String getPriority(int index) {
-    String status = ticketList[index].priority == 1 ? MyStrings.low :
-    ticketList[index].priority == 2 ? MyStrings.medium :
-    ticketList[index].priority == 3 ? MyStrings.high : " ";
-    return status;
+  Color getStatusColorFromCode(int code) {
+    switch (code) {
+      case 0:
+        return MyColor.greenSuccessColor;
+      case 1:
+        return MyColor.purpleColor;
+      case 2:
+        return MyColor.pendingColor;
+      case 3:
+        return MyColor.redCancelTextColor;
+      default:
+        return Colors.white;
+    }
   }
 
-  Color getStatusColor(int index) {
-    int status = ticketList[index].status;
-    return status == 0 ? MyColor.greenSuccessColor:status == 1 ? MyColor.redCancelTextColor : status == 2 ? MyColor.pendingColor : MyColor.colorGrey;
+  String getPriorityFromCode(int code) {
+    switch (code) {
+      case 1:
+        return MyStrings.low;
+      case 2:
+        return MyStrings.medium;
+      case 3:
+        return MyStrings.high;
+      default:
+        return ' ';
+    }
   }
-  Color getPriorityColor(int index) {
-    int status = ticketList[index].priority;
-    return status == 1 ? MyColor.colorGrey:status == 2 ? MyColor.pendingColor : status == 3 ? MyColor.redCancelTextColor : MyColor.colorGrey;
+
+  Color getPriorityColorFromCode(int code) {
+    switch (code) {
+      case 1:
+        return MyColor.colorBlack2;
+      case 2:
+        return MyColor.pendingColor;
+      case 3:
+        return MyColor.redCancelTextColor;
+      default:
+        return Colors.black;
+    }
   }
 
   Future<void> loadTicketListData() async{

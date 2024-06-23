@@ -47,8 +47,12 @@ class CreateTicketController extends GetxController{
     bool b= await createTicketRepo.submitCreateTicket(ticketData);
 
     if(b){
-      // Get.offAllNamed(RouteHelper.homeScreen);
-      // return;
+      print('<=== Ticket submitted successfully ===> ');
+      Get.offAllNamed(RouteHelper.ticketScreen);
+      // Get.back();
+      submitLoading = false;
+      update();
+      return;
     }
 
     submitLoading = false;

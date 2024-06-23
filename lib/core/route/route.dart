@@ -1,3 +1,4 @@
+import 'package:eastern_trust/data/repo/tickets/ticket_list_repo.dart';
 import 'package:eastern_trust/views/screens/tickets/create_ticket/create_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/ticket_screen.dart';
@@ -164,7 +165,7 @@ class RouteHelper{
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
     GetPage(name: createTicketScreen,             page: () => const CreateTicketScreen()),
 
-    GetPage(name: replyTicketScreen,              page: () => const ReplyTicketScreen()),
+    // GetPage(name: replyTicketScreen,              page: () => const ReplyTicketScreen(selectedReply: Get.arguments,)),
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
     GetPage(name: withdrawScreen,                 page: () => const WithdrawScreen()),
     GetPage(name: addWithdrawMethodScreen,        page: () => const AddWithdrawMethod()),

@@ -27,7 +27,6 @@ import 'package:eastern_trust/data/controller/tickets/create_ticket_controller.d
 import 'package:permission_handler/permission_handler.dart';
 
 
-
 class CreateTicketScreen extends StatefulWidget {
   const CreateTicketScreen({Key? key}) : super(key: key);
 
@@ -36,12 +35,12 @@ class CreateTicketScreen extends StatefulWidget {
 }
 
 class _CreateTicketScreenState extends State<CreateTicketScreen> {
-  String? _selectedValue = "Priority";
+  String? _selectedValue = MyStrings.low;
   String? _fileName;
   final List<String> _dropdownItems = [
-    'Priority',
-    'High',
-    'Medium',
+    MyStrings.low,
+    MyStrings.medium,
+    MyStrings.high,
   ];
   XFile? imageFile;
 
@@ -90,6 +89,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
     setState(() {
       if (selectedFiles.length < 5) {
         selectedFiles.add('No file chosen');
+        selectedFilesData.add(File(""));
       } else {
         // Optional: Show a message or disable adding more items
         // if the maximum count (5) is reached.
@@ -103,6 +103,12 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
     });
   }
 
+  void removeFile(int index)  {
+    setState(() {
+      selectedFiles.removeAt(index);
+      selectedFilesData.removeAt(index);
+    });
+  }
 
   void chooseFile(int index) {
     // Replace this with your file selection logic
@@ -114,6 +120,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
     // chooseImage(index);
     showFileSelectionSheet(index);
   }
+
   void showFileSelectionSheet(int index) {
     showModalBottomSheet(
       context: context,
@@ -201,40 +208,6 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
     });
   }
 
-
-
-
-void removeFile(int index)  {
-    setState(() {
-      selectedFiles.removeAt(index);
-    });
-  }
-
-  Future<void> uploadFile(File file) async {
-    var request = http.MultipartRequest(
-      'POST',
-      Uri.parse('https://your-server-url/upload'),
-    );
-    request.files.add(await http.MultipartFile.fromPath('file', file.path));
-
-    var response = await request.send();
-
-    if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-       const SnackBar(
-          content: Text('File uploaded successfully!'),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-       const SnackBar(
-          content: Text('File upload failed!'),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    }
-  }
 
 
   @override

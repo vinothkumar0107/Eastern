@@ -642,6 +642,10 @@ class MyStrings{
   static const String low  = "Low";
   static const String open  = "Open";
   static const String customerReply  = "Customer Reply";
+  static const String reply  = "Reply";
+  static const String replyTicket = "Reply Ticket";
+  static const String answered = "Answered";
+  static const String replied  = "Replied";
 
   static List<LanguageModel> languages = [
     LanguageModel(imageUrl: '', languageName: 'English', countryCode: 'US', languageCode: 'en'),

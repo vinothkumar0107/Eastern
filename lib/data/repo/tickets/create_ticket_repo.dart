@@ -17,6 +17,19 @@ class CreateTicketRepo {
   ApiClient apiClient;
   CreateTicketRepo({required this.apiClient});
 
+  String getPriorityStatusCode(String priority) {
+    switch (priority) {
+      case MyStrings.low:
+        return "1";
+      case MyStrings.medium:
+        return "2";
+      case MyStrings.high:
+        return "3";
+      default:
+        return '';
+    }
+  }
+
 
   Future<bool> submitCreateTicket(CreateTicketData ticketData) async {
     try{
@@ -27,7 +40,7 @@ class CreateTicketRepo {
       Map<String,String>finalMap={
         'subject': ticketData.subjectStr,
         'message': ticketData.messageStr,
-        'priority': ticketData.priorityStr.toLowerCase() == 'High'.toLowerCase() ? '1' : '2',
+        'priority': getPriorityStatusCode(ticketData.priorityStr),
       };
       print('Params ==> $finalMap');
       print('ticketData.selectedFilesData ==> ${ticketData.selectedFilesData}');
@@ -54,10 +67,6 @@ class CreateTicketRepo {
         // print('finalMap params ==> $finalMap');
 
       }
-
-
-
-
       request.fields.addAll(finalMap);
       http.StreamedResponse response = await request.send();
       String jsonResponse=await response.stream.bytesToString();

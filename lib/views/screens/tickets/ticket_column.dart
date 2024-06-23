@@ -11,12 +11,14 @@ class TicketColumn extends StatelessWidget {
   final bool alignmentEnd;
   final bool isDate;
   final Color? textColor;
+  final bool? isNeedBox;
   
   const TicketColumn({Key? key,
     this.alignmentEnd=false,
     required this.header,
     this.isDate = false,
     this.textColor,
+    this.isNeedBox = false,
     required this.body}) : super(key: key);
 
   @override

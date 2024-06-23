@@ -136,6 +136,7 @@ class MyColor{
   static const Color borderColor=Color(0xFFEFEFEF);
 
   static const Color highPriorityPurpleColor=Color(0xFF7367F0);
+  static const Color purpleColor=Color(0xFF77349b);
   static const bgColorLight = Color(0xFFf2f2f2);
   static const bgColor1 = Color(0xFFF9F9F9);
 

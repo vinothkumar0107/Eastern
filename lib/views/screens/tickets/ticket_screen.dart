@@ -145,7 +145,7 @@ class _TicketScreenState extends State<TicketScreen> {
                                         separatorBuilder: (context, index) =>
                                             const SizedBox(
                                                 height: Dimensions.space10),
-                                        itemBuilder: (context, index) {
+                                        itemBuilder: (context, index)  {
                                           if (controller.ticketList.length ==
                                               index) {
                                             return controller.hasNext()
@@ -161,24 +161,29 @@ class _TicketScreenState extends State<TicketScreen> {
                                                   )
                                                 : const SizedBox();
                                           }
-                                          return TicketDesign(
-
+                                         return TicketDesign(
                                             onPressed: () {
                                               // ReplyTicketScreen();
                                               // DepositBottomSheet
                                               //     .depositBottomSheet(
                                               //         context, index);
-                                              Get.toNamed(RouteHelper.replyTicketScreen);
-
+                                              // Get.toNamed(RouteHelper.replyTicketScreen);
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => ReplyTicketScreen(selectedReply: controller.ticketList[index]),
+                                                ),
+                                              );
                                             },
                                             ticketID: 'Ticket ID: #${controller.ticketList[index].ticket}',
                                             subject: controller.ticketList[index].subject,
                                             lastReplyDate: controller.ticketList[index].lastReply,
-                                            status: controller.getStatus(controller.ticketList[index].status),
+                                            status: controller.getStatusFromCode(controller.ticketList[index].status),
                                             statusTextColor: controller
-                                                .getStatusColor(controller.ticketList[index].status),
-                                            priorityTextColor: controller.getPriorityColor(controller.ticketList[index].priority),
-                                            priority: controller.getPriority(controller.ticketList[index].priority),
+                                                .getStatusColorFromCode(controller.ticketList[index].status),
+                                            priorityTextColor: controller.getPriorityColorFromCode(controller.ticketList[index].priority),
+                                            priority: controller.getPriorityFromCode(controller.ticketList[index].priority),
+                                            selectedIndex: index,
                                           );
                                         },
                                       ),
