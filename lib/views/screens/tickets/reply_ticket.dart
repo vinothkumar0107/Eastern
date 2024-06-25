@@ -40,7 +40,7 @@ import '../../../data/repo/tickets/ticket_list_repo.dart';
 class ReplyTicketScreen extends StatefulWidget {
 
   final Ticket selectedReply;
-  const ReplyTicketScreen({Key? key, required this.selectedReply}) : super(key: key);
+  const ReplyTicketScreen({Key? key,  required this.selectedReply}) : super(key: key);
 
   @override
   State<ReplyTicketScreen> createState() => _ReplyTicketScreenState();
@@ -66,8 +66,10 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ReplyTicketRepo(apiClient: Get.find()));
-    final controller = Get.put(ReplyTicketController(replyTicketRepo: Get.find()));
+    final controller = Get.put(ReplyTicketController(replyTicketRepo: Get.find(), onReplyComplete: () {  }));
     controller.isLoading = false;
+    controller.selectedFiles = selectedFiles;
+    controller.selectedFilesData = selectedFilesData;
     super.initState();
     requestPermissions();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -91,17 +93,24 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
     Get.find<ReplyTicketController>().clearData();
     super.dispose();
   }
+  void _refreshList() {
+    setState(() {
+      selectedFilesData.clear();
+      selectedFiles.clear();
+      addNewChooseFileView();
+    });
+  }
 
   void addNewChooseFileView() {
     setState(() {
       if (selectedFiles.length < 5) {
-        selectedFiles.add('No file chosen');
-        selectedFilesData.add(File(""));
+        selectedFiles.add(MyStrings.noFileChosen);
+        // selectedFilesData.add(File(""));
       } else {
         // Optional: Show a message or disable adding more items
         // if the maximum count (5) is reached.
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('You have added maximum number of files'),
+          const SnackBar(content: Text(MyStrings.youHaveAddedMaximumFiles),
               behavior: SnackBarBehavior.floating),
 
         );
@@ -113,7 +122,9 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
   void removeFile(int index)  {
     setState(() {
       selectedFiles.removeAt(index);
-      selectedFilesData.removeAt(index);
+      if (selectedFilesData.length > index){
+        selectedFilesData.removeAt(index);
+      }
     });
   }
 
@@ -143,7 +154,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
             const SizedBox(height: 10),
             ListTile(
               leading: const Icon(Icons.photo),
-              title: const Text('Choose Image'),
+              title: const Text(MyStrings.chooseImage),
               onTap: () {
                 Navigator.pop(context);
                 chooseImage(context, index);
@@ -151,7 +162,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.attach_file),
-              title: const Text('Choose Document'),
+              title: const Text(MyStrings.chooseDocument),
               onTap: () {
                 Navigator.pop(context);
                 chooseDocuments(index);
@@ -159,7 +170,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.cancel),
-              title: const Text('Cancel'),
+              title: const Text(MyStrings.cancel),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -178,9 +189,14 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
     );
     if (result != null) {
       setState(() {
-        selectedFiles[index] = result.files.single.name;
+        if (index >= 0 && index <= selectedFilesData.length) {
+          selectedFiles[index] = result.files.single.name;
+          selectedFilesData.insert(index, result.files as File);
+        } else {
+          selectedFiles[index] = result.files.single.name;
+          selectedFilesData.add(result.files as File);
+        }
       });
-      selectedFilesData.add(File(result.files.single.path!));
     }
   }
 
@@ -204,7 +220,6 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
       }
     }
   }
-
 
   String getStatusFromCode() {
     int code = widget.selectedReply.status;
@@ -241,12 +256,46 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
   String getTicketId() {
     return widget.selectedReply.ticket.toString();
   }
+
   String getId() {
     return widget.selectedReply.id.toString();
   }
 
   String getSubject() {
     return widget.selectedReply.subject.toString();
+  }
+
+  Future<void> _showCloseTicketConfirmationDialog(BuildContext context) async {
+    bool? shouldClose = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(MyStrings.confirmAlert),
+          content: const Text(MyStrings.areYouSureCloseTicket),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false); // User pressed 'No'
+              },
+              child: const Text(MyStrings.no),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // User pressed 'Yes'
+              },
+              child: const Text(MyStrings.yes),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldClose ?? false) {
+      // Perform the close ticket action
+      final controller = Get.put(ReplyTicketController(replyTicketRepo: Get.find(), onReplyComplete: () { }));
+      controller.ticketId = getId();
+      controller.closeTicket();
+    }
   }
 
   @override
@@ -286,10 +335,9 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                             ),
                             child: Text(
                               getStatusFromCode(),
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                color: getStatusColorFromCode(), // Text color
-                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: interRegularDefault.copyWith(color:getStatusColorFromCode(),fontSize: Dimensions.fontDefault),
                             ),
                           ),
                           const SizedBox(width: 5),
@@ -297,21 +345,16 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                             '[Ticket#${getTicketId()}]',
                             maxLines: 1,
                              overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.black, // Text color
-                            ),
+                            style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault),
                           ),
                           const SizedBox(width: 5),
-                          Text(
+                          Expanded(child: Text(
                             getSubject(),
-                            maxLines: 2,
+                            maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.black, // Text color
-                            ),
-                          ),
+                            style: interRegularDefault.copyWith(color:MyColor.getGreyText(),fontSize: Dimensions.fontSmall12 ),
+                          ),),
+
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -325,6 +368,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                           MyStrings.message.capitalizeFirst!.tr,
                           isRequired: true,
                           maxiLines: 3,
+                          disableColor: MyColor.getGreyText(),
                           onChanged: (value) {
                             // controller.changeSelectedValue(value, index);
                           }),
@@ -339,9 +383,9 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                             ),
                             onPressed:addNewChooseFileView,
                             //_openGallery(context);
-                            child: const Row(
+                            child: Row(
                               children: [
-                                Text('+ Add New')
+                                Text('+ ${MyStrings.addNew}', style: interRegularDefault.copyWith(color:MyColor.colorWhite,fontSize: Dimensions.fontLarge ))
                               ],
                             ),
                           ),
@@ -349,19 +393,22 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                       ),
 
                       const SizedBox(height: 10),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: 'Attachments ',
-                          style: interSemiBoldSmall.copyWith(
-                              color: MyColor.colorBlack),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: MyStrings.fileSize,
-                              style: interMediumSmall.copyWith(
-                                  color: MyColor.red),
-                            ),
-                          ],
+                      Padding(
+                      padding: const EdgeInsets.all(0.0),
+                        child: RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: '${MyStrings.attachment}s ',
+                            style: interSemiBoldSmall.copyWith(
+                                color: MyColor.colorBlack),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: MyStrings.fileSize,
+                                style: interMediumSmall.copyWith(
+                                    color: MyColor.red),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -381,9 +428,9 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                           }),
                       const SizedBox(height: 10),
                       Text(
-                        'Allowed File Extensions: .jpg, .jpeg, .png, .pdf, .doc, .docx',
+                        MyStrings.allowedFileExtensionHint,
                         style: interMediumSmall.copyWith(
-                          color: MyColor.colorGrey,
+                          color: MyColor.colorBlack,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -394,9 +441,22 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                         width: double.infinity,
                         press: () {
                           controller.selectedFilesData = selectedFilesData;
+                          controller.selectedFiles = selectedFiles;
                           controller.ticketId = getTicketId();
                           controller.id = getId();
+                          controller.onReplyComplete = _refreshList;
                           controller.submitTicket();
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      controller.closeLoading?const RoundedLoadingBtn():
+                      RoundedButton(
+                        text: MyStrings.closeTicket,
+                        textColor: MyColor.textColor,
+                        color: MyColor.redCancelTextColor,
+                        width: double.infinity,
+                        press: () {
+                          _showCloseTicketConfirmationDialog(context);
                         },
                       ),
                       const SizedBox(height: 20),
@@ -463,10 +523,7 @@ class RepliedListView extends StatelessWidget {
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.right,
-              style: const TextStyle(
-                color: MyColor.colorBlack, //error in this line
-                fontSize: 14,
-              ),
+              style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontLarge ),
             ),
           ),
 
@@ -475,7 +532,7 @@ class RepliedListView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10.0),
             width: 1.0,
-            height: 100,
+            height: 70,
             color: Colors.grey,
           ),
           const SizedBox(width: 10.0),
@@ -487,20 +544,14 @@ class RepliedListView extends StatelessWidget {
                 'Posted on ${messages?.ticket.lastReply ?? " "}',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: MyColor.colorBlack, //error in this line
-                  fontSize: 14,
-                ),
+                style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault ),
               ),
               const SizedBox(height: 5.0),
               Text(
                 messages?.message ?? " ",
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: MyColor.naturalDark, //error in this line
-                  fontSize: 14,
-                ),
+                style: interRegularSmall.copyWith(color:MyColor.getGreyText(),fontSize: Dimensions.fontDefault ),
               ),
               const SizedBox(height: 5.0),
               SizedBox(
@@ -524,13 +575,10 @@ class RepliedListView extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          'Attachments ${index + 1}',
+                          'Attachment ${index + 1}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: MyColor.primaryColor, // Replace with your desired color
-                            fontSize: 14,
-                          ),
+                          style: interRegularDefault.copyWith(color:MyColor.primaryColor,fontSize: Dimensions.fontDefault ),
                         ),
                       ),
                     );
@@ -563,3 +611,6 @@ class WebViewScreen extends StatelessWidget {
     );
   }
 }
+
+
+

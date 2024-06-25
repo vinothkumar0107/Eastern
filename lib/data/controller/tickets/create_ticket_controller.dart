@@ -42,16 +42,16 @@ class CreateTicketController extends GetxController{
         selectedFilesData: selectedFilesData
     );
 
-    print('ticket data ==> $ticketData');
 
     bool b= await createTicketRepo.submitCreateTicket(ticketData);
 
     if(b){
-      print('<=== Ticket submitted successfully ===> ');
-      Get.offAllNamed(RouteHelper.ticketScreen);
-      // Get.back();
+      await Future.delayed(const Duration(seconds: 2));
       submitLoading = false;
       update();
+      // Get.toNamed(RouteHelper.replyTicketScreen);
+      Get.offAllNamed(RouteHelper.ticketScreen);
+      // Get.back();
       return;
     }
 

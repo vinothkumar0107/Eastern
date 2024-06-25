@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:eastern_trust/data/repo/tickets/ticket_list_repo.dart';
+import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/route/route.dart';
@@ -19,7 +20,8 @@ import 'dart:io';
 class ReplyTicketController extends GetxController{
 
   ReplyTicketRepo replyTicketRepo;
-  ReplyTicketController({required this.replyTicketRepo});
+  VoidCallback onReplyComplete;
+  ReplyTicketController({required this.replyTicketRepo, required this.onReplyComplete});
 
   bool isLoading = true;
   String ticketId = "";
@@ -27,7 +29,10 @@ class ReplyTicketController extends GetxController{
   ReplyTicketData replyModel = ReplyTicketData();
   TextEditingController messageController = TextEditingController();
   bool submitLoading = false;
+  bool closeLoading = false;
   List<File>? selectedFilesData = [];
+  List<String> selectedFiles = [];
+
 
   Future<void> getViewTicketData() async{
     isLoading = true;
@@ -35,18 +40,12 @@ class ReplyTicketController extends GetxController{
     isLoading = false;
     update();
   }
-  void clearData() {
-    isLoading = false;
-  }
-
 
   Future<void> loadViewTicket() async{
 
     ResponseModel responseModel = await replyTicketRepo.getViewTicket(ticketId: ticketId);
     if(responseModel.statusCode == 200){
       ViewReplyTicketModel model = responseFromReplyTicket(responseModel.responseJson);
-      print('ViewReplyTicketModel ===== > ${model.status}');
-
       if(model.status.toString().toLowerCase() == "success"){
         replyModel = model.data;
       }
@@ -69,18 +68,13 @@ class ReplyTicketController extends GetxController{
         messageStr: messageController.text,
         selectedFilesData: selectedFilesData
     );
-
-    print('Reply data ==> $ticketData');
-
     bool b= await replyTicketRepo.submitReply(ticketData);
-
     if(b){
       // Get.offAllNamed(RouteHelper.homeScreen);
-      print('ticketId ====> $ticketId');
       submitLoading = false;
       update();
       getViewTicketData();
-      messageController.text = "";
+      clearData();
       return;
     }
 
@@ -88,6 +82,39 @@ class ReplyTicketController extends GetxController{
     update();
 
   }
+
+  Future<void> closeTicket() async{
+    closeLoading = true;
+    await closeTicketFunc();
+    closeLoading = false;
+    update();
+  }
+
+  Future<void> closeTicketFunc() async{
+    ResponseModel responseModel = await replyTicketRepo.closeTicket(ticketId: ticketId);
+    if(responseModel.statusCode == 200){
+      CloseTicketModel model = responseFromJsonCloseTicket(responseModel.responseJson);
+      if(model.status.toString().toLowerCase() == "success"){
+        Get.offAllNamed(RouteHelper.ticketScreen);
+        CustomSnackBar.success(successList: [model.message.success.first.last].isNotEmpty ? [model.message.success.first.last] : [MyStrings.success]);
+      }
+      else{
+        CustomSnackBar.error(errorList: [responseModel.message].isNotEmpty ? [responseModel.message] : [MyStrings.somethingWentWrong]);
+      }
+    }
+    else{
+      CustomSnackBar.error(errorList: [responseModel.message],);
+    }
+  }
+
+  void clearData() {
+    isLoading = false;
+    messageController.text = "";
+    selectedFiles.clear();
+    selectedFilesData?.clear();
+    onReplyComplete();
+  }
+
 }
 
 class ReplyData {

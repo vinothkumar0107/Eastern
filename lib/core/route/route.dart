@@ -165,7 +165,7 @@ class RouteHelper{
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
     GetPage(name: createTicketScreen,             page: () => const CreateTicketScreen()),
 
-    // GetPage(name: replyTicketScreen,              page: () => const ReplyTicketScreen(selectedReply: Get.arguments,)),
+    GetPage(name: replyTicketScreen,               page: () => ReplyTicketScreen(selectedReply: Get.arguments,)),
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
     GetPage(name: withdrawScreen,                 page: () => const WithdrawScreen()),
     GetPage(name: addWithdrawMethodScreen,        page: () => const AddWithdrawMethod()),

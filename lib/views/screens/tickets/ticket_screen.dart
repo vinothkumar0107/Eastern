@@ -1,6 +1,7 @@
 import 'package:eastern_trust/core/utils/util.dart';
 import 'package:eastern_trust/data/controller/tickets/ticket_list_controller.dart';
 import 'package:eastern_trust/data/repo/tickets/ticket_list_repo.dart';
+import 'package:eastern_trust/views/screens/tickets/create_ticket/create_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/tickets_design.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _TicketScreenState extends State<TicketScreen> {
   void _scrollListener() {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      if (Get.find<DepositController>().hasNext()) {
+      if (Get.find<TicketListController>().hasNext()) {
         fetchData();
       }
     }
@@ -52,7 +53,7 @@ class _TicketScreenState extends State<TicketScreen> {
     final controller = Get.put(TicketListController(ticketListRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.loadTicketData();
+      controller.loadInitialTicketData();
       scrollController.addListener(_scrollListener);
     });
   }
@@ -71,16 +72,22 @@ class _TicketScreenState extends State<TicketScreen> {
           child: Scaffold(
             backgroundColor: MyColor.containerBgColor,
             appBar: AppBar(
-              title: Text(MyStrings.ticket,
+              title: Text(MyStrings.supportTicket,
                   style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
               backgroundColor: MyColor.primaryColor,
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
                   String previousRoute = Get.previousRoute;
-                  if (previousRoute == RouteHelper.menuScreen ||
-                      previousRoute == RouteHelper.notificationScreen) {
-                    Get.back();
+                  if (previousRoute == RouteHelper.replyTicketScreen ||
+                      previousRoute == RouteHelper.createTicketScreen) {
+                    Get.offAndToNamed(RouteHelper.homeScreen);
+                  }
+                 else if (previousRoute == RouteHelper.menuScreen ||
+                      previousRoute == RouteHelper.notificationScreen
+                  ) {
+                    // Get.back(); // Need to check
+                    Get.offAndToNamed(RouteHelper.homeScreen);
                   } else {
                     Get.offAndToNamed(RouteHelper.homeScreen);
                   }
@@ -129,7 +136,7 @@ class _TicketScreenState extends State<TicketScreen> {
                         Expanded(
                           child: controller.ticketList.isEmpty
                               ? const NoDataFoundScreen(
-                                  title: MyStrings.noDepositFound,
+                                  title: MyStrings.noSupportTicketFound,
                                   height: 0.8)
                                   : SizedBox(
                                       height:
@@ -179,11 +186,19 @@ class _TicketScreenState extends State<TicketScreen> {
                                             subject: controller.ticketList[index].subject,
                                             lastReplyDate: controller.ticketList[index].lastReply,
                                             status: controller.getStatusFromCode(controller.ticketList[index].status),
-                                            statusTextColor: controller
+                                            statusColor: controller
                                                 .getStatusColorFromCode(controller.ticketList[index].status),
-                                            priorityTextColor: controller.getPriorityColorFromCode(controller.ticketList[index].priority),
+                                            headerRightColor: controller.getPriorityColorFromCode(controller.ticketList[index].priority),
                                             priority: controller.getPriorityFromCode(controller.ticketList[index].priority),
                                             selectedIndex: index,
+                                           headerLeftColor: MyColor.primaryColor2,
+                                           bodyLeftColor: MyColor.colorBlack,
+                                           bodyRightColor: MyColor.getGreyText(),
+                                           isNeedLeftHeaderBox: false,
+                                           isNeedLeftBodyBox: false,
+                                           isNeedRightHeaderBox: true,
+                                           isNeedRightBodyBox: false,
+                                           isNeedStatusBox: true,
                                           );
                                         },
                                       ),

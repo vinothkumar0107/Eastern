@@ -44,7 +44,7 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
             decoration: BoxDecoration(
                 color: MyColor.getCardBg(),
                 borderRadius:const  BorderRadius.all(Radius.circular(Dimensions.defaultRadius)),
-              border: Border.all(color: MyColor.getBorderColor())
+              border: Border.all(color: MyColor.getGreyText())
             ),
             child: Padding(
               padding: const EdgeInsets.only(

@@ -136,7 +136,7 @@ class MyStrings{
   static const String viewAll = "View All";
 
   static const String deposit = "Deposit";
-  static const String ticket = "Tickets";
+  static const String supportTicket = "Support Tickets";
   static const String deposited = "Deposited";
   static const String depositHistory = "Deposit History";
   static const String depositNow = "Deposit Now";
@@ -646,6 +646,19 @@ class MyStrings{
   static const String replyTicket = "Reply Ticket";
   static const String answered = "Answered";
   static const String replied  = "Replied";
+  static const String closeTicket  = "Close Ticket";
+  static const String noSupportTicketFound = "No Support Tickets Found";
+  static const String allowedFileExtensionHint = "Allowed File Extensions: .jpg, .jpeg, .png, .pdf, .doc, .docx";
+  static const String youHaveAddedMaximumFiles = "You have added maximum number of files";
+  static const String chooseImage = "Choose Image";
+  static const String chooseDocument = "Choose Document";
+  static const String confirmAlert = "Confirmation Alert!";
+  static const String areYouSureCloseTicket = "Are you sure to close this ticket?";
+
+
+
+
+
 
   static List<LanguageModel> languages = [
     LanguageModel(imageUrl: '', languageName: 'English', countryCode: 'US', languageCode: 'en'),

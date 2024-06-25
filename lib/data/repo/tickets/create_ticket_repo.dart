@@ -42,8 +42,6 @@ class CreateTicketRepo {
         'message': ticketData.messageStr,
         'priority': getPriorityStatusCode(ticketData.priorityStr),
       };
-      print('Params ==> $finalMap');
-      print('ticketData.selectedFilesData ==> ${ticketData.selectedFilesData}');
 
       request.headers.addAll(<String,String>{'Authorization' : 'Bearer ${apiClient.token}'});
       if(ticketData.selectedFilesData != null){
@@ -56,21 +54,16 @@ class CreateTicketRepo {
               file.readAsBytes().asStream(),
               file.lengthSync(),
               filename: file.path.split('/').last));
-
-          print('request request ==> $request');
-          print('file path ==> $file');
           // String base64File = base64Encode(await file.readAsBytes());
           // filesData.add(base64File);
         }
         // String jsonString = jsonEncode(filesData);
         // finalMap['attachments'] =  jsonString;
         // print('finalMap params ==> $finalMap');
-
       }
       request.fields.addAll(finalMap);
       http.StreamedResponse response = await request.send();
       String jsonResponse=await response.stream.bytesToString();
-      print('json response ==> $jsonResponse');
 
       CreateTicketModel model = CreateTicketModel.fromJson(jsonDecode(jsonResponse));
 
@@ -81,16 +74,15 @@ class CreateTicketRepo {
         CustomSnackBar.error(errorList: model.message?.error??[MyStrings.requestFail]);
         return false;
       }
-
     }catch(e){
       return false;
     }
-
   }
 
 }
 
 
+// Create Ticket Model
 
 class CreateTicketModel {
   CreateTicketModel({

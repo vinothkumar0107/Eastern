@@ -104,13 +104,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
             prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
             contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
             hintText: widget.hintText!=null?widget.hintText!.tr:'',
-            hintStyle: interRegularSmall.copyWith(color: MyColor.colorWhite),
+            hintStyle: interRegularSmall.copyWith(color: MyColor.getGreyText()),
             fillColor: MyColor.colorWhite,
             filled: true,
             border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5),
                 borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: .5), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
             suffixIcon: widget.isShowSuffixIcon
                 ? widget.isPassword
                 ? IconButton(

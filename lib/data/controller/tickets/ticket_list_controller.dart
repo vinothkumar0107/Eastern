@@ -21,6 +21,12 @@ class TicketListController extends GetxController {
   bool isLoading = true;
   List<Ticket> ticketList = [];
   String nextPageUrl = "";
+  int page=1;
+
+  Future<void> loadInitialTicketData() async{
+    page=1;
+    loadTicketData();
+  }
 
   Future<void> loadTicketData() async{
     isLoading = true;
@@ -57,9 +63,9 @@ class TicketListController extends GetxController {
       case 2:
         return MyColor.pendingColor;
       case 3:
-        return MyColor.redCancelTextColor;
+        return MyColor.colorBlack2;
       default:
-        return Colors.white;
+        return Colors.black;
     }
   }
 
@@ -92,14 +98,11 @@ class TicketListController extends GetxController {
   Future<void> loadTicketListData() async{
 
 
-    ResponseModel responseModel = await ticketListRepo.getTicketListData(1);
-    print('Response Ticket list == >${responseModel.responseJson}');
+    ResponseModel responseModel = await ticketListRepo.getTicketListData(page);
     if(responseModel.statusCode == 200){
-
+      page=page+1;
       TicketListModel model = responseFromJson(responseModel.responseJson);
-
       nextPageUrl = model.data.ticketData.nextPageUrl ?? "";
-
       if(model.status.toString().toLowerCase() == "success"){
         List<Ticket>? ticketListModel = model.data.ticketData.data;
         if(ticketListModel.isNotEmpty){

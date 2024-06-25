@@ -11,9 +11,17 @@ import 'package:get/get_core/src/get_main.dart';
 
 class TicketDesign extends StatelessWidget {
   final String ticketID, subject, status, priority, lastReplyDate;
-  final Color statusTextColor;
-  final Color priorityTextColor;
+  final Color headerLeftColor;
+  final Color bodyLeftColor;
+  final Color headerRightColor;
+  final Color bodyRightColor;
+  final Color statusColor;
   final int selectedIndex;
+  final bool? isNeedLeftHeaderBox;
+  final bool? isNeedLeftBodyBox;
+  final bool? isNeedRightHeaderBox;
+  final bool? isNeedRightBodyBox;
+  final bool? isNeedStatusBox;
   final VoidCallback onPressed;
 
   const TicketDesign(
@@ -23,9 +31,17 @@ class TicketDesign extends StatelessWidget {
       required this.status,
       required this.priority,
       required this.lastReplyDate,
-      required this.statusTextColor,
-      required this.priorityTextColor,
+      required this.headerLeftColor,
+      required this.bodyLeftColor,
+      required this.headerRightColor,
+      required this.bodyRightColor,
+      required this.statusColor,
       required this.selectedIndex,
+      this.isNeedLeftHeaderBox,
+      this.isNeedLeftBodyBox,
+      this.isNeedRightHeaderBox,
+      this.isNeedRightBodyBox,
+      this.isNeedStatusBox,
       required this.onPressed
       })
       : super(key: key);
@@ -52,20 +68,30 @@ class TicketDesign extends StatelessWidget {
                   TicketColumn(
                     header: ticketID,
                     body: subject,
+                    headerColor: headerLeftColor,
+                    bodyColor: bodyLeftColor,
+                    isNeedHeaderBox: isNeedLeftHeaderBox ?? false,
+                    isNeedBodyBox: isNeedLeftBodyBox ?? false,
                   ),
                   TicketColumn(
                     alignmentEnd: true,
                     header: priority,
                     isDate: true,
                     body: '${MyStrings.lastReply}: $lastReplyDate',
-                    textColor: priorityTextColor,
+                    headerColor: headerRightColor,
+                    bodyColor: bodyRightColor,
+                    isNeedHeaderBox: isNeedRightHeaderBox ?? false ,
+                    isNeedBodyBox: isNeedRightBodyBox ?? false,
                   ),
                 ],
               ),
               TicketColumn(
                 header: "",
                 body: status,
-                textColor: statusTextColor,
+                headerColor: statusColor,
+                bodyColor: statusColor,
+                isNeedHeaderBox: false,
+                isNeedBodyBox: isNeedStatusBox ?? false,
               ),
             ],
           )),

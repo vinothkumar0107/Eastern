@@ -20,6 +20,7 @@ class TicketListRepo {
 
 
 
+// Ticket List Model
 
 // Function to convert a JSON string to a Response object
 TicketListModel responseFromJson(String str) => TicketListModel.fromJson(json.decode(str));
@@ -58,7 +59,6 @@ class TicketListModel {
   bool hasMessage() => message.success.isNotEmpty;
   bool hasData() => data.ticketData.data.isNotEmpty;
 }
-
 class Message {
   List<String> success;
 
@@ -75,7 +75,6 @@ class Message {
   // Helper method to check if success has values
   bool hasSuccess() => success.isNotEmpty;
 }
-
 class Data {
   TicketData ticketData;
 
@@ -92,7 +91,6 @@ class Data {
   // Helper method to check if ticketData has values
   bool hasTicketData() => ticketData.data.isNotEmpty;
 }
-
 class TicketData {
   int currentPage;
   List<Ticket> data;
@@ -172,7 +170,6 @@ class TicketData {
     total: 0,
   );
 }
-
 class Ticket {
   int id;
   int userId;
@@ -228,7 +225,6 @@ class Ticket {
     "updated_at": updatedAt.toIso8601String(),
   };
 }
-
 class Link {
   dynamic url;
   String label;

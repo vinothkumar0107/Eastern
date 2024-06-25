@@ -193,7 +193,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               children: [
                                 MenuRowWidget(
                                   image: MyImages.deposit,
-                                  label: MyStrings.ticket.tr,
+                                  label: MyStrings.supportTicket.tr,
                                   onPressed: () => Get.toNamed(RouteHelper.ticketScreen),
                                 ),
 

@@ -59,6 +59,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
     Get.put(CreateTicketRepo(apiClient: Get.find()));
     final controller = Get.put(CreateTicketController(createTicketRepo: Get.find()));
     controller.isLoading = false;
+    controller.submitLoading = false;
     super.initState();
     requestPermissions();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -88,13 +89,13 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   void addNewChooseFileView() {
     setState(() {
       if (selectedFiles.length < 5) {
-        selectedFiles.add('No file chosen');
-        selectedFilesData.add(File(""));
+        selectedFiles.add(MyStrings.noFileChosen);
+        // selectedFilesData.add(File(""));
       } else {
         // Optional: Show a message or disable adding more items
         // if the maximum count (5) is reached.
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('You have added maximum number of files'),
+          const SnackBar(content: Text(MyStrings.youHaveAddedMaximumFiles),
             behavior: SnackBarBehavior.floating),
 
         );
@@ -106,7 +107,10 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   void removeFile(int index)  {
     setState(() {
       selectedFiles.removeAt(index);
-      selectedFilesData.removeAt(index);
+      if (selectedFilesData.length > index){
+        selectedFilesData.removeAt(index);
+      }
+
     });
   }
 
@@ -136,7 +140,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
             const SizedBox(height: 10),
             ListTile(
               leading: const Icon(Icons.photo),
-              title: const Text('Choose Image'),
+              title: const Text(MyStrings.chooseImage),
               onTap: () {
                 Navigator.pop(context);
                 chooseImage(context, index);
@@ -144,7 +148,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.attach_file),
-              title: const Text('Choose Document'),
+              title: const Text(MyStrings.chooseDocument),
               onTap: () {
                 Navigator.pop(context);
                 chooseDocuments(index);
@@ -152,7 +156,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.cancel),
-              title: const Text('Cancel'),
+              title: const Text(MyStrings.cancel),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -170,10 +174,20 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
       allowedExtensions: ['doc', 'docx', 'pdf'],
     );
     if (result != null) {
+      // setState(() {
+      //   selectedFiles[index] = result.files.single.name;
+      // });
+      // selectedFilesData.add(File(result.files.single.path!));
       setState(() {
-        selectedFiles[index] = result.files.single.name;
+        if (index >= 0 && index <= selectedFilesData.length) {
+          selectedFiles[index] = result.files.single.name;
+          selectedFilesData.insert(index, result.files as File);
+        } else {
+          selectedFiles[index] = result.files.single.name;
+          selectedFilesData.add(result.files as File);
+        }
       });
-      selectedFilesData.add(File(result.files.single.path!));
+
     }
   }
 
@@ -241,6 +255,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                   labelText:
                                       MyStrings.subject.capitalizeFirst!.tr,
                                   isRequired: true,
+                                  disableColor: MyColor.getGreyText(),
                                   onChanged: (value) {
                                     // controller.changeSelectedValue(value, index);
                                   }),
@@ -259,7 +274,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                     onChanged: (value) {
                                       setState(() {
                                         _selectedValue = value;
-                                        controller.priority = value;
+                                        controller.priority = _selectedValue;
                                       });
                                     },
                                   )
@@ -276,6 +291,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                       MyStrings.message.capitalizeFirst!.tr,
                                   isRequired: true,
                                   maxiLines: 5,
+                                  disableColor: MyColor.getGreyText(),
                                   onChanged: (value) {
                                     // controller.changeSelectedValue(value, index);
                                   }),
@@ -290,9 +306,9 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                  ),
                                  onPressed:addNewChooseFileView,
                                  //_openGallery(context);
-                                 child: const Row(
+                                 child:  Row(
                                    children: [
-                                     Text('+ Add New')
+                                   Text('+ ${MyStrings.addNew}', style: interRegularDefault.copyWith(color:MyColor.colorWhite,fontSize: Dimensions.fontLarge )),
                                    ],
                                  ),
                                ),
@@ -300,19 +316,22 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                            ),
 
                               const SizedBox(height: 10),
-                              RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(
-                                  text: 'Attachments ',
-                                  style: interSemiBoldSmall.copyWith(
-                                      color: MyColor.colorBlack),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: MyStrings.fileSize,
-                                      style: interMediumSmall.copyWith(
-                                          color: MyColor.red),
-                                    ),
-                                  ],
+                              Padding(
+                                padding: const EdgeInsets.all(0.0),
+                                child: RichText(
+                                  textAlign: TextAlign.start,
+                                  text: TextSpan(
+                                    text: '${MyStrings.attachment}s ',
+                                    style: interSemiBoldSmall.copyWith(
+                                        color: MyColor.colorBlack),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: MyStrings.fileSize,
+                                        style: interMediumSmall.copyWith(
+                                            color: MyColor.red),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -332,9 +351,9 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                   }),
                               const SizedBox(height: 10),
                               Text(
-                                'Allowed File Extensions: .jpg, .jpeg, .png, .pdf, .doc, .docx',
+                                MyStrings.allowedFileExtensionHint,
                                 style: interMediumSmall.copyWith(
-                                  color: MyColor.colorGrey,
+                                  color: MyColor.colorBlack,
                                 ),
                               ),
                               const SizedBox(height: 35),
@@ -345,6 +364,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                       width: double.infinity,
                                       press: () {
                                         controller.selectedFilesData = selectedFilesData;
+                                        controller.priority = _selectedValue;
                                         controller.submitTicket();
                                       },
                                     ),
@@ -388,13 +408,10 @@ class ChooseFileView extends StatelessWidget {
               foregroundColor: MyColor.colorBlack, // Text color
             ),
             onPressed: chooseFile,
-            child: const Text(
-              'Choose File',
+            child: Text(
+              MyStrings.chooseFile,
               maxLines: 1,
-              style: TextStyle(
-                color: MyColor.colorBlack, //error in this line
-                fontSize: 14,
-              ),
+              style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontLarge ),
             ),
           ),
           const SizedBox(width: 10.0),
@@ -402,10 +419,8 @@ class ChooseFileView extends StatelessWidget {
             child: Text(
               selectedFileName,
               maxLines: 1,
-              style: const TextStyle(
-                color: MyColor.colorBlack, //error in this line
-                fontSize: 13,
-              ),
+              overflow: TextOverflow.ellipsis,
+              style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault ),
             ),
           ),
           if (removeFile != null) // Conditionally show cancel button if removeFile callback is not null

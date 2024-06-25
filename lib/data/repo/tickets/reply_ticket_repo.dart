@@ -31,8 +31,6 @@ class ReplyTicketRepo {
       Map<String,String>finalMap={
         'message': ticketData.messageStr,
       };
-      print('Reply Params ==> $finalMap');
-      print('Reply selectedFilesData ==> ${ticketData.selectedFilesData}');
 
       request.headers.addAll(<String,String>{'Authorization' : 'Bearer ${apiClient.token}'});
       if(ticketData.selectedFilesData != null){
@@ -42,14 +40,11 @@ class ReplyTicketRepo {
               file.lengthSync(),
               filename: file.path.split('/').last));
 
-          print('Reply request ==> $request');
-          print('Reply file path ==> $file');
         }
       }
       request.fields.addAll(finalMap);
       http.StreamedResponse response = await request.send();
       String jsonResponse=await response.stream.bytesToString();
-      print('Reply json response ==> $jsonResponse');
 
       CreateTicketModel model = CreateTicketModel.fromJson(jsonDecode(jsonResponse));
 
@@ -60,19 +55,25 @@ class ReplyTicketRepo {
         CustomSnackBar.error(errorList: model.message?.error??[MyStrings.requestFail]);
         return false;
       }
-
     }catch(e){
       return false;
     }
+  }
 
+  Future<ResponseModel> closeTicket({String ticketId = ""}) async{
+    String url = "${UrlContainer.baseUrl}${UrlContainer.closeTicketUrl}/$ticketId";
+    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, null, passHeader: true);
+    return responseModel;
   }
 
 }
 
 
+
+// Reply Ticket  Model
+
 // Function to convert a JSON string to a Response object
 ViewReplyTicketModel responseFromReplyTicket(String str) => ViewReplyTicketModel.fromJson(json.decode(str));
-
 // Function to convert a Response object to a JSON string
 String responseToJson(ViewReplyTicketModel data) => json.encode(data.toJson());
 
@@ -145,7 +146,6 @@ class ReplyTicketData {
     };
   }
 }
-
 class MessageReply {
   int id;
   int supportTicketId;
@@ -231,6 +231,64 @@ class Attachment {
       'attachment': attachment,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
+    };
+  }
+}
+
+
+// Close Ticket Model
+
+// Function to convert a JSON string to a Response object
+CloseTicketModel responseFromJsonCloseTicket(String str) => CloseTicketModel.fromJson(json.decode(str));
+// Function to convert a Response object to a JSON string
+String responseToJsonCloseTicket(CloseTicketModel data) => json.encode(data.toJson());
+
+class CloseTicketModel {
+  final String status;
+  final CloseMessage message;
+  final String remark;
+
+  CloseTicketModel({
+    required this.status,
+    required this.message,
+    required this.remark,
+  });
+
+  factory CloseTicketModel.fromJson(Map<String, dynamic> json) {
+    return CloseTicketModel(
+      status: json['status'],
+      message: CloseMessage.fromJson(json['message']),
+      remark: json['remark'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'status': status,
+      'message': message.toJson(),
+      'remark': remark,
+    };
+  }
+}
+class CloseMessage {
+  final List<List<String>> success;
+
+  CloseMessage({
+    required this.success,
+  });
+
+  factory CloseMessage.fromJson(Map<String, dynamic> json) {
+    var successList = json['success'] as List;
+    List<List<String>> success = successList.map((i) => List<String>.from(i)).toList();
+
+    return CloseMessage(
+      success: success,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'success': success,
     };
   }
 }
