@@ -11,7 +11,7 @@ class TicketListRepo {
   TicketListRepo({required this.apiClient});
 
   Future<ResponseModel> getTicketListData(int page, {String searchText = ""}) async{
-    String url = "${UrlContainer.baseUrl}${UrlContainer.getTicketListUrl}";
+    String url = "${UrlContainer.baseUrl}${UrlContainer.getTicketListUrl}?page=$page";
     ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
     return responseModel;
   }

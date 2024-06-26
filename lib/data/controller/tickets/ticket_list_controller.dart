@@ -101,6 +101,7 @@ class TicketListController extends GetxController {
     ResponseModel responseModel = await ticketListRepo.getTicketListData(page);
     if(responseModel.statusCode == 200){
       page=page+1;
+      print("page =====> $page");
       TicketListModel model = responseFromJson(responseModel.responseJson);
       nextPageUrl = model.data.ticketData.nextPageUrl ?? "";
       if(model.status.toString().toLowerCase() == "success"){

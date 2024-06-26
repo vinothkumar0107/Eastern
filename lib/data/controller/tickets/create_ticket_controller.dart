@@ -31,10 +31,8 @@ class CreateTicketController extends GetxController{
   }
 
   Future<void> submitTicket() async {
-
     submitLoading = true;
     update();
-
     CreateTicketData ticketData=CreateTicketData(
         subjectStr: subjectController.text,
         priorityStr: priority.toString(),
@@ -42,11 +40,9 @@ class CreateTicketController extends GetxController{
         selectedFilesData: selectedFilesData
     );
 
-
     bool b= await createTicketRepo.submitCreateTicket(ticketData);
-
     if(b){
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       submitLoading = false;
       update();
       // Get.toNamed(RouteHelper.replyTicketScreen);

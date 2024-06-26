@@ -96,7 +96,7 @@ class ReplyTicketController extends GetxController{
       CloseTicketModel model = responseFromJsonCloseTicket(responseModel.responseJson);
       if(model.status.toString().toLowerCase() == "success"){
         Get.offAllNamed(RouteHelper.ticketScreen);
-        CustomSnackBar.success(successList: [model.message.success.first.last].isNotEmpty ? [model.message.success.first.last] : [MyStrings.success]);
+        CustomSnackBar.success(successList: [model.message.success.first.last].isNotEmpty ? [model.message.success.first.last] : [MyStrings.success], duration: 3);
       }
       else{
         CustomSnackBar.error(errorList: [responseModel.message].isNotEmpty ? [responseModel.message] : [MyStrings.somethingWentWrong]);

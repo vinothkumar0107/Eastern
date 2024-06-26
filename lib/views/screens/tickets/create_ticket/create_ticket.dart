@@ -181,7 +181,11 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
       setState(() {
         if (index >= 0 && index <= selectedFilesData.length) {
           selectedFiles[index] = result.files.single.name;
-          selectedFilesData.insert(index, result.files as File);
+          if (index < selectedFilesData.length){
+            selectedFilesData[index] = result.files as File;
+          }else{
+            selectedFilesData.insert(index, result.files as File);
+          }
         } else {
           selectedFiles[index] = result.files.single.name;
           selectedFilesData.add(result.files as File);
@@ -200,7 +204,11 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
         setState(() {
           if (index >= 0 && index <= selectedFilesData.length) {
             selectedFiles[index] = image.name;
-            selectedFilesData.insert(index, file);
+            if (index < selectedFilesData.length){
+              selectedFilesData[index] = file;
+            }else{
+              selectedFilesData.insert(index, file);
+            }
           } else {
             selectedFiles[index] = image.name;
             selectedFilesData.add(file);
