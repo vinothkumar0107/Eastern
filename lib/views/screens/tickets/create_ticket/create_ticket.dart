@@ -86,6 +86,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   List<File> selectedFilesData = [];
   final ImagePicker _picker = ImagePicker();
 
+
   void addNewChooseFileView() {
     setState(() {
       if (selectedFiles.length < 5) {
@@ -178,17 +179,18 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
       //   selectedFiles[index] = result.files.single.name;
       // });
       // selectedFilesData.add(File(result.files.single.path!));
+      File attachmentData = File(result.files.single.path!);
       setState(() {
         if (index >= 0 && index <= selectedFilesData.length) {
           selectedFiles[index] = result.files.single.name;
           if (index < selectedFilesData.length){
-            selectedFilesData[index] = result.files as File;
+            selectedFilesData[index] = attachmentData;
           }else{
-            selectedFilesData.insert(index, result.files as File);
+            selectedFilesData.insert(index, attachmentData);
           }
         } else {
           selectedFiles[index] = result.files.single.name;
-          selectedFilesData.add(result.files as File);
+          selectedFilesData.add(attachmentData);
         }
       });
 

@@ -129,13 +129,6 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
   }
 
   void chooseFile(int index) {
-    // Replace this with your file selection logic
-    // setState(() {
-    //   selectedFiles[index] = 'Selected File: Example.txt'; // Example file name
-    //   _openGallery(context);
-    // });
-
-    // chooseImage(index);
     showFileSelectionSheet(index);
   }
 
@@ -188,17 +181,19 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
       allowedExtensions: ['doc', 'docx', 'pdf'],
     );
     if (result != null) {
+      // Convert PlatformFile to File
+      File attachmentData = File(result.files.single.path!);
       setState(() {
         if (index >= 0 && index <= selectedFilesData.length) {
           selectedFiles[index] = result.files.single.name;
           if (index < selectedFilesData.length){
-            selectedFilesData[index] = result.files as File;
+            selectedFilesData[index] = attachmentData;
           }else{
-            selectedFilesData.insert(index, result.files as File);
+            selectedFilesData.insert(index, attachmentData);
           }
         } else {
           selectedFiles[index] = result.files.single.name;
-          selectedFilesData.add(result.files as File);
+          selectedFilesData.add(attachmentData);
         }
       });
     }
@@ -215,10 +210,8 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
             selectedFiles[index] = image.name;
             if (index < selectedFilesData.length){
               selectedFilesData[index] = file;
-              print("<=== Replace file ===>");
             }else{
               selectedFilesData.insert(index, file);
-              print("<=== Insert file ===>");
             }
           } else {
             selectedFiles[index] = image.name;
@@ -578,7 +571,7 @@ class RepliedListView extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => WebViewScreen(
+                              builder: (context) => DocumentViewer(
                                 url: '${UrlContainer.assetViewBaseUrl}${messages?.attachments[index].attachment ?? " "}', // Replace with your URL
                               ),
                             ),
@@ -611,6 +604,7 @@ class WebViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Web url $url");
     return SafeArea(child: Scaffold(
       appBar: const CustomAppBar(title: 'Attachments'),
       body: WebView(
@@ -618,6 +612,53 @@ class WebViewScreen extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
       ),
     ),
+    );
+  }
+}
+
+class DocumentViewer extends StatefulWidget {
+  final String url;
+
+  const DocumentViewer({super.key, required this.url});
+
+  @override
+  _DocumentViewerState createState() => _DocumentViewerState();
+}
+
+class _DocumentViewerState extends State<DocumentViewer> {
+  bool isImage = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfImage();
+  }
+
+  void checkIfImage() {
+    final uri = Uri.parse(widget.url);
+    final path = uri.path.toLowerCase();
+    if (path.endsWith('.png') || path.endsWith('.jpg') ||
+        path.endsWith('.jpeg') || path.endsWith('.gif')) {
+      setState(() {
+        isImage = true;
+      });
+    } else {
+      setState(() {
+        isImage = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const CustomAppBar(title: 'Attachments'),
+      body: WebView(
+        initialUrl: isImage
+            ? widget.url
+            : 'https://docs.google.com/viewer?url=${widget.url}&embedded=true',
+        javascriptMode: JavascriptMode.unrestricted,
+      ),
     );
   }
 }
