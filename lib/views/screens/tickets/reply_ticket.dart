@@ -35,6 +35,7 @@ import 'package:eastern_trust/data/repo/tickets/create_ticket_repo.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../data/repo/tickets/ticket_list_repo.dart';
+import '../../components/snackbar/show_custom_snackbar.dart';
 
 
 class ReplyTicketScreen extends StatefulWidget {
@@ -100,6 +101,9 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
       addNewChooseFileView();
     });
   }
+  void dismissKeyboard() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
 
   void addNewChooseFileView() {
     setState(() {
@@ -109,14 +113,10 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
       } else {
         // Optional: Show a message or disable adding more items
         // if the maximum count (5) is reached.
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(MyStrings.youHaveAddedMaximumFiles),
-              behavior: SnackBarBehavior.floating),
-
-        );
-        // CustomSnackBar.error(errorList: ['You have added maximum number of files']);
+        CustomSnackBar.error(errorList: [MyStrings.youHaveAddedMaximumFiles]);
       }
     });
+    dismissKeyboard();
   }
 
   void removeFile(int index)  {
@@ -130,6 +130,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
 
   void chooseFile(int index) {
     showFileSelectionSheet(index);
+    dismissKeyboard();
   }
 
   void showFileSelectionSheet(int index) {
@@ -449,6 +450,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                           controller.id = getId();
                           controller.onReplyComplete = _refreshList;
                           controller.submitTicket();
+                          dismissKeyboard();
                         },
                       ),
                       const SizedBox(height: 20),
@@ -460,6 +462,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                         width: double.infinity,
                         press: () {
                           _showCloseTicketConfirmationDialog(context);
+                          dismissKeyboard();
                         },
                       ),
                       const SizedBox(height: 20),
@@ -572,7 +575,7 @@ class RepliedListView extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => DocumentViewer(
-                                url: '${UrlContainer.assetViewBaseUrl}${messages?.attachments[index].attachment ?? " "}', // Replace with your URL
+                                url: '${UrlContainer.assetViewBaseUrl}${messages?.attachments[index].attachment ?? " "}', attachmentName: 'Attachment ${index + 1}', // Replace with your URL
                               ),
                             ),
                           );
@@ -618,8 +621,9 @@ class WebViewScreen extends StatelessWidget {
 
 class DocumentViewer extends StatefulWidget {
   final String url;
+  final String attachmentName;
 
-  const DocumentViewer({super.key, required this.url});
+  const DocumentViewer({super.key, required this.url, required this.attachmentName});
 
   @override
   _DocumentViewerState createState() => _DocumentViewerState();
@@ -651,14 +655,15 @@ class _DocumentViewerState extends State<DocumentViewer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(title: 'Attachments'),
+    return  SafeArea(child: Scaffold(
+      appBar: CustomAppBar(title: widget.attachmentName),
       body: WebView(
         initialUrl: isImage
             ? widget.url
             : 'https://docs.google.com/viewer?url=${widget.url}&embedded=true',
         javascriptMode: JavascriptMode.unrestricted,
       ),
+    )
     );
   }
 }

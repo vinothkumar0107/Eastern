@@ -86,7 +86,9 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   List<File> selectedFilesData = [];
   final ImagePicker _picker = ImagePicker();
 
-
+  void dismissKeyboard() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
   void addNewChooseFileView() {
     setState(() {
       if (selectedFiles.length < 5) {
@@ -95,14 +97,15 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
       } else {
         // Optional: Show a message or disable adding more items
         // if the maximum count (5) is reached.
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(MyStrings.youHaveAddedMaximumFiles),
-            behavior: SnackBarBehavior.floating),
-
-        );
-        // CustomSnackBar.error(errorList: ['You have added maximum number of files']);
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(content: Text(MyStrings.youHaveAddedMaximumFiles),
+        //     behavior: SnackBarBehavior.floating),
+        //
+        // );
+        CustomSnackBar.error(errorList: [MyStrings.youHaveAddedMaximumFiles]);
       }
     });
+    dismissKeyboard();
   }
 
   void removeFile(int index)  {
@@ -124,6 +127,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
 
     // chooseImage(index);
     showFileSelectionSheet(index);
+    dismissKeyboard();
   }
 
   void showFileSelectionSheet(int index) {
@@ -376,6 +380,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                         controller.selectedFilesData = selectedFilesData;
                                         controller.priority = _selectedValue;
                                         controller.submitTicket();
+                                        dismissKeyboard();
                                       },
                                     ),
                             ],

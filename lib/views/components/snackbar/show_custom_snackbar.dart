@@ -10,7 +10,7 @@ import 'package:eastern_trust/core/utils/style.dart';
 
 class CustomSnackBar{
 
-  static  error({required List<String>errorList,int duration=5}){
+  static  error({required List<String>errorList,int duration=3}){
     String message='';
       if(errorList.isEmpty){
         message = MyStrings.somethingWentWrong.tr;
@@ -49,7 +49,7 @@ class CustomSnackBar{
       forwardAnimationCurve: Curves.easeIn,
       showProgressIndicator: true,
       leftBarIndicatorColor: MyColor.transparentColor,
-      animationDuration: const Duration(seconds: 1),
+      animationDuration: const Duration(milliseconds: 400),
       borderColor: MyColor.transparentColor,
       reverseAnimationCurve:Curves.easeOut,
       borderWidth: 2,
@@ -96,7 +96,7 @@ class CustomSnackBar{
       forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
       showProgressIndicator: true,
       leftBarIndicatorColor: MyColor.transparentColor,
-      animationDuration: const Duration(seconds: 2),
+      animationDuration: const Duration(milliseconds: 400),
       borderColor: MyColor.transparentColor,
       reverseAnimationCurve:Curves.easeOut,
       borderWidth: 2,

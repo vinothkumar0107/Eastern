@@ -79,17 +79,13 @@ class _TicketScreenState extends State<TicketScreen> {
               leading: IconButton(
                 onPressed: () {
                   String previousRoute = Get.previousRoute;
-                  if (previousRoute == RouteHelper.replyTicketScreen ||
-                      previousRoute == RouteHelper.createTicketScreen) {
-                    Get.offAndToNamed(RouteHelper.homeScreen);
-                  }
-                 else if (previousRoute == RouteHelper.menuScreen ||
+                   if (previousRoute == RouteHelper.menuScreen ||
                       previousRoute == RouteHelper.notificationScreen
                   ) {
                     // Get.back(); // Need to check
-                    Get.offAndToNamed(RouteHelper.homeScreen);
+                    Get.offAndToNamed(RouteHelper.menuScreen);
                   } else {
-                    Get.offAndToNamed(RouteHelper.homeScreen);
+                    Get.offAndToNamed(RouteHelper.menuScreen);
                   }
                 },
                 icon: const Icon(Icons.arrow_back,
