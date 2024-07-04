@@ -46,6 +46,7 @@ import 'package:eastern_trust/views/screens/withdraw/add_withdraw_screen/add_wit
 import 'package:eastern_trust/views/screens/withdraw/confirm_withdraw_screen/withdraw_confirm_screen.dart';
 import 'package:eastern_trust/views/screens/withdraw/withdraw_history/withdraw_screen.dart';
 
+import '../../views/screens/auth/two_factor_screen/two_factor_screen.dart';
 import '../../views/screens/transfer/other_bank_transfer_screen/transfer_other_bank_screen.dart';
 import '../../views/screens/transfer/transfer_history_screen/transfer_history_screen.dart';
 import '../../views/screens/transfer/wire_transfer_screen/wire_transfer_screen.dart';
@@ -67,6 +68,7 @@ class RouteHelper{
   static const String resetPasswordScreen = '/reset_pass' ;
   static const String twoFactorVerificationScreen = '/two_fa_screen' ;
   static const String privacyScreen='/privacy_screen';
+  static const String twoFactorScreen = '/two_factor_screen' ;
 
   //account
   static const String profileScreen='/profile';
@@ -204,6 +206,8 @@ class RouteHelper{
     GetPage(name: kycScreen,                      page: () => const KycScreen()),
     GetPage(name: otpScreen,                      page: () => const OtpScreen()),
     GetPage(name: twoFactorVerificationScreen,    page: () => TwoFactorVerificationScreen(isProfileCompleteEnable: Get.arguments)),
+    GetPage(name: twoFactorScreen,    page: () => Setup2FAScreen()),
+
 
   ];
 }

@@ -185,6 +185,14 @@ class _MenuScreenState extends State<MenuScreen> {
                           },
                         ),
                         const CustomDivider(space: Dimensions.space15),
+                        MenuRowWidget(
+                          image: MyImages.profile,
+                          label: MyStrings.twoFactorSecurity.tr,
+                          onPressed: (){
+                            Get.toNamed(RouteHelper.twoFactorScreen);
+                          },
+                        ),
+                        const CustomDivider(space: Dimensions.space15),
 
                         Visibility(
                             visible: menuController.isDepositEnable,

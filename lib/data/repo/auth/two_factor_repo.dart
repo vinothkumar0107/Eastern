@@ -17,4 +17,22 @@ class TwoFactorRepo {
     return responseModel;
   }
 
+  Future<ResponseModel> getTwoFactorData() async{
+    String url = "${UrlContainer.baseUrl}${UrlContainer.getTwoFactorUrl}";
+    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    return responseModel;
+  }
+
+  Future<ResponseModel> enableAuthenticate(final param) async{
+    String url = "${UrlContainer.baseUrl}${UrlContainer.enableTwoFactorUrl}";
+    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, param, passHeader: true);
+    return responseModel;
+  }
+
+  Future<ResponseModel> disableAuthenticate(final param) async{
+    String url = "${UrlContainer.baseUrl}${UrlContainer.disableTwoFactorUrl}";
+    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, param, passHeader: true);
+    return responseModel;
+  }
+
 }

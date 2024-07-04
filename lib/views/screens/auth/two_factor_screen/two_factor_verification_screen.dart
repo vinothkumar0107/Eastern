@@ -14,6 +14,8 @@ import 'package:eastern_trust/views/components/appbar/custom_appbar.dart';
 import 'package:eastern_trust/views/components/buttons/rounded_button.dart';
 import 'package:eastern_trust/views/components/buttons/rounded_loading_button.dart';
 
+import '../../../../data/repo/home/home_repo.dart';
+
 class TwoFactorVerificationScreen extends StatefulWidget {
 
   final bool isProfileCompleteEnable;
@@ -33,7 +35,8 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(TwoFactorRepo(apiClient: Get.find()));
-    final controller = Get.put(TwoFactorController(repo: Get.find()));
+    Get.put(HomeRepo(apiClient: Get.find()));
+    final controller = Get.put(TwoFactorController(repo: Get.find(), homeRepo: Get.find()),);
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.isProfileCompleteEnable=widget.isProfileCompleteEnable;

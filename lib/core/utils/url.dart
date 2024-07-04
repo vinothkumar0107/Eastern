@@ -104,4 +104,9 @@ class UrlContainer{
   static const String replyTicketUrl = 'ticket/reply';
   static const String closeTicketUrl = 'ticket/close';
 
+//Two Factor
+  static const String getTwoFactorUrl = 'twofactor';
+  static const String enableTwoFactorUrl = 'twofactor/enable';
+  static const String disableTwoFactorUrl = 'twofactor/disable';
+
 }

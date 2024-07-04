@@ -67,11 +67,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCV4-YSdgztSlDzdBYylNQvjOBJPaOhX2Y',
-    appId: '1:1087143593385:ios:5528d1ca78cee65b9f70b8',
-    messagingSenderId: '695385430630',
-    projectId: 'easterntrust-6ac92',
-    storageBucket: 'easterntrust-6ac92.appspot.com',
-    iosBundleId: 'com.bank.easterntrust',
+    apiKey: 'AIzaSyB0DnJX08MzBsIQPD7-ZeEeKHm-Nh9S_eM',
+    appId: '1:481555797518:ios:ffec607c3fbe5679498e5f',
+    messagingSenderId: '481555797518',
+    projectId: 'easterntrust-f462a',
+    storageBucket: 'easterntrust-f462a.appspot.com',
+    iosBundleId: 'com.account.easterntrust',
   );
 }

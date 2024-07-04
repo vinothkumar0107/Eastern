@@ -102,6 +102,7 @@ class MyStrings{
 
   static const String twoFactorAuth = "Two-Factor Authentication";
   static const String twoFactorMsg = 'Enter 6-digit code from your two factor authenticator APP.';
+  static const String twoFASecurity = "2FA Security";
 
   static const String profileComplete = "Profile Complete";
   static const String firstName = "First Name";
@@ -654,6 +655,17 @@ class MyStrings{
   static const String chooseDocument = "Choose Document";
   static const String confirmAlert = "Confirmation Alert!";
   static const String areYouSureCloseTicket = "Are you sure to close this ticket?";
+  static const String twoFactorSecurity = "2FA Security";
+  static const String disableTwoFactorSecurity = "Disable 2FA Security";
+  static const String googleAuthOtp = "Google Authenticator OTP";
+  static const String addYourAccount = "Add Your Account";
+  static const String useQRCode = "Use the QR code or setup key on your Google Authenticator app to add your account.";
+  static const String setupKey = "Setup Key";
+  static const String setupKeyCopiedSuccessfully = "Setup key copied to clipboard successfully";
+  static const String googleAuthenticateHint = "Google Authenticator is a multifactor app for mobile devices. It generates timed codes used during the 2-step verification process. To use Google Authenticator, install the Google Authenticator application on your mobile device.";
+  static const String download = "Download";
+  static const String enableTwoFactorSecurity = "Enable 2FA Security";
+  static const String codeIsRequired = "Please enter Google Authenticator OTP";
 
 
 

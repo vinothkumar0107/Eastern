@@ -272,7 +272,8 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                   disableColor: MyColor.getGreyText(),
                                   onChanged: (value) {
                                     // controller.changeSelectedValue(value, index);
-                                  }),
+                                  }
+                                  ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

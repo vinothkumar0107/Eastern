@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCV4-YSdgztSlDzdBYylNQvjOBJPaOhX2Y</string>
+	<string>AIzaSyB0DnJX08MzBsIQPD7-ZeEeKHm-Nh9S_eM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1087143593385</string>
+	<string>481555797518</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.bank.easterntrust</string>
+	<string>com.account.easterntrust</string>
 	<key>PROJECT_ID</key>
-	<string>easterntrust-6ac92</string>
+	<string>easterntrust-f462a</string>
 	<key>STORAGE_BUCKET</key>
-	<string>easterntrust-6ac92.appspot.com</string>
+	<string>easterntrust-f462a.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1087143593385:ios:5528d1ca78cee65b9f70b8</string>
+	<string>1:481555797518:ios:ffec607c3fbe5679498e5f</string>
 </dict>
 </plist>
