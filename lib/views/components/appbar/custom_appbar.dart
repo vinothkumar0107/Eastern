@@ -88,7 +88,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     icon: const Icon(Icons.arrow_back,
                         color: MyColor.colorWhite, size: 20))
                 : const SizedBox.shrink(),
-            backgroundColor: widget.bgColor,
+            backgroundColor: Colors.transparent,
             title: Text(widget.title.tr,
                 style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
             centerTitle: widget.isTitleCenter,

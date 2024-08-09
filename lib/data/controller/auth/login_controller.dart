@@ -21,8 +21,6 @@ class LoginController extends GetxController{
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-
-
   List<String>errors=[];
   String? email;
   String? password;

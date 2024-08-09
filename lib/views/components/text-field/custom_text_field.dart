@@ -81,7 +81,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         widget.needLabel?const SizedBox(height: Dimensions.textToTextSpace): const SizedBox(),
         TextFormField(
           readOnly: widget.readOnly,
-          style: interRegularDefault.copyWith(color: MyColor.colorBlack),
+          style: interRegularDefault.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
           cursorColor: MyColor.primaryColor,
           controller: widget.controller,
           autofocus: false,
@@ -94,6 +94,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           maxLines: widget.maxiLines,
           decoration: InputDecoration(
             errorMaxLines: 2,
+            errorStyle: interMediumDefault.copyWith(color:MyColor.red),
             isDense: false,
             prefixIcon: widget.prefixText.isEmpty?null:Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -104,13 +105,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
             prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
             contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
             hintText: widget.hintText!=null?widget.hintText!.tr:'',
-            hintStyle: interRegularSmall.copyWith(color: MyColor.getGreyText()),
-            fillColor: MyColor.colorWhite,
+            hintStyle: interRegularDefault.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
+            fillColor: MyColor.liteGreyColor,
             filled: true,
             border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5),
-                borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+                borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
             suffixIcon: widget.isShowSuffixIcon
                 ? widget.isPassword
                 ? IconButton(

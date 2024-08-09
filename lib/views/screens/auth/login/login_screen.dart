@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
@@ -10,6 +11,8 @@ import 'package:eastern_trust/data/repo/auth/login_repo.dart';
 import 'package:eastern_trust/data/services/api_service.dart';
 import 'package:eastern_trust/views/components/will_pop_widget.dart';
 import 'package:eastern_trust/views/screens/auth/login/widget/login_form.dart';
+
+import 'package:eastern_trust/views/screens/auth/login/widget/bottom_section.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -30,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LoginRepo(apiClient: Get.find()));
     final controller = Get.put(LoginController(loginRepo: Get.find()));
+    controller.emailController.text = 'demoaccount@gmail.com';
+    controller.passwordController.text = 'DemoAccount@123';
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.remember = false;
@@ -38,6 +43,87 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+
+// Need to remove
+  @override
+  Widget build3(BuildContext context) {
+    return GetBuilder<LoginController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: '',
+        child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+              backgroundColor: Colors.transparent,
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 2.8, // Half of the screen height
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: MyColor.colorWhite, // Use the same color for the bottom half
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
+                  child: SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight: 601.0,
+                      ),
+                      child: Card(
+                        color: MyColor.colorWhite,
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              Center(
+                                child: SizedBox(
+                                  width: 200,
+                                  height: 100, // Adjust height as needed
+                                  child: Image.asset(
+                                    MyImages.appLogo,
+                                    fit: BoxFit.fitWidth, // Image covers the entire container
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: Dimensions.space15),
+                              const LoginForm(), // Your form goes here
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ),
+      ),
+    );
   }
 
   @override
@@ -52,35 +138,82 @@ class _LoginScreenState extends State<LoginScreen> {
               currentFocus.unfocus();
             }
           },
-          child: SafeArea(
-            child: Scaffold(
-              backgroundColor: MyColor.primaryColor2,
-              body: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: Dimensions.screenPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Stack(
+              children: [
+                Column(
                   children: [
-                    Center(child: ColorFiltered(colorFilter: ColorFilter.mode(MyColor.transparentColor, BlendMode.screen),
-                      child: Image.asset(MyImages.appLogo,width: 300,height: 150,
+                    Container(
+                      height: MediaQuery.of(context).size.height / 2.8, // Half of the screen height
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
-
                       ),
                     ),
-                     /* Text(MyStrings.loginTitle.tr, style: interRegularDefault.copyWith(fontSize:Dimensions.fontHeader2,fontWeight: FontWeight.w500)),
-                      const SizedBox(height: 15),
-                      Padding(
-                        padding:EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*.4),
-                        child: Text(MyStrings.loginSologan.tr, textAlign: TextAlign.left,style: interRegularDefault.copyWith(color: MyColor.getGreyText()),)
-                      ),*/
-                      const SizedBox(height: Dimensions.space30),
-                      const LoginForm()
-                    ],
+                    Expanded(
+                      child: Container(
+                        color: MyColor.colorWhite, // Use the same color for the bottom half
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Card(
+                            color: MyColor.colorWhite,
+                            elevation: 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: SizedBox(
+                                      width: 200,
+                                      height: 100, // Adjust height as needed
+                                      child: Image.asset(
+                                        MyImages.appLogo,
+                                        fit: BoxFit.fitWidth, // Image covers the entire container
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: Dimensions.space15),
+                                  const LoginForm(), // Your form goes here
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10), // Add spacing if needed
+                          const BottomSection(), // Your bottom section goes here
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
+        ),
       ),
-      );
+    );
   }
+
+
+
 }
+
+
+
+
+

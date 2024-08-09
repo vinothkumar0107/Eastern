@@ -24,13 +24,13 @@ class OTPFieldWidget extends StatelessWidget {
         animationType: AnimationType.fade,
         pinTheme: PinTheme(
             shape: PinCodeFieldShape.box,
-            borderWidth: 1,
+            borderWidth: 1.5,
             borderRadius: BorderRadius.circular(5),
             fieldHeight: 40,
             fieldWidth: 40,
             inactiveColor:  MyColor.getBorderColor(),
-            inactiveFillColor: MyColor.transparentColor,
-            activeFillColor: MyColor.transparentColor,
+            inactiveFillColor: MyColor.liteGreyColor,
+            activeFillColor: MyColor.colorWhite,
             activeColor: MyColor.getPrimaryColor(),
             selectedFillColor: MyColor.containerBgColor,
             selectedColor: MyColor.primaryColor

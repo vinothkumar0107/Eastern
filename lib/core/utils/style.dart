@@ -270,7 +270,7 @@ const TextStyle interBoldHeader1 = TextStyle(
     fontFamily: 'Roboto',
     color: MyColor.colorBlack,
     fontWeight: FontWeight.w700,
-    fontSize: Dimensions.fontHeader1
+    fontSize: Dimensions.fontExtraHeader
 );
 
 

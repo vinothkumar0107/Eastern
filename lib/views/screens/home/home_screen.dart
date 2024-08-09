@@ -74,19 +74,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       pinned: false,
                       elevation: 0,
                       automaticallyImplyLeading: false,
-                      backgroundColor:  MyColor.primaryColor,
+                      backgroundColor: Colors.transparent, // Set backgroundColor to transparent to avoid any color conflicts
                       expandedHeight: 90,
-                      flexibleSpace:  FlexibleSpaceBar(
-                      background: Container(
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: Container(
                           decoration: const BoxDecoration(
-                            color: MyColor.primaryColor,
-                            borderRadius: BorderRadius.only(bottomLeft:Radius.circular(Dimensions.space15),bottomRight:Radius.circular(Dimensions.space15))
+                            gradient: LinearGradient(
+                              colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(0),
+                              bottomRight: Radius.circular(0),
+                            ),
                           ),
-                          padding: const EdgeInsets.only(left: Dimensions.space15, right: Dimensions.space15, top: Dimensions.space20),
+                          padding: const EdgeInsets.only(
+                            left: Dimensions.space15,
+                            right: Dimensions.space15,
+                            top: Dimensions.space20,
+                          ),
                           child: const HomeScreenTop(),
                         ),
                       ),
                     ),
+
                     SliverToBoxAdapter(
                       child: Container(
                         decoration: const BoxDecoration(

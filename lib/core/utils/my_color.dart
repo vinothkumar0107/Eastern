@@ -148,6 +148,9 @@ class MyColor{
   static const Color red= Color(0xFFD92027);
   static const Color greenP= Color(0xFF28C76F);
 
+  static const Color liteGreyColorBorder = Color(0xFFEFEFEF);
+  static const Color liteGreyColor = Color(0xFFFAFAFA);
+
   static Color getTextFieldDisableBorder(){
     return textFieldDisableBorderColor;
   }

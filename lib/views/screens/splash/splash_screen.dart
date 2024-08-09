@@ -11,6 +11,7 @@ import 'package:eastern_trust/data/services/api_service.dart';
 import 'dart:async';
 import 'package:eastern_trust/core/utils/my_strings.dart';
 
+
 class SplashScreen extends StatefulWidget {
 
   const SplashScreen({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _startLoading();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Timer(
-         const Duration(milliseconds: 500),
+         const Duration(milliseconds: 40),
               () => controller.gotoNextPage());
     });
   }
@@ -63,51 +64,59 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor2],
+            colors: [MyColor.colorWhite, MyColor.colorWhite],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(MyImages.appIcon, width: 100, height: 140, fit: BoxFit.fill),
-              const SizedBox(height: 50),
-              Container(
-                width: 200, // Set the width of the progress bar
-                height: 10, // Set the height of the progress bar
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5), // Set the corner radius
-                  boxShadow: [
-                    BoxShadow(
-                      color: MyColor.primaryColor2.withOpacity(0.5), // Set the shadow color
-                      spreadRadius: 2, // Set the spread radius
-                      blurRadius: 4, // Set the blur radius
-                      offset: const Offset(0, 2), // Set the shadow offset
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  // Set the corner radius
-                  child: LinearProgressIndicator(
-                    value: _progress,
-                    minHeight: 10,
-                    backgroundColor: MyColor.primaryColor2,
-                    valueColor: const AlwaysStoppedAnimation<Color>(MyColor.primaryColor),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(MyStrings.loadingPleaseWait, style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.normal)),
-              const SizedBox(height: 200),
-
-            ],
+          child: Image.asset(
+            MyImages.splashAnimationGif,
+            height: MediaQuery.sizeOf(context).width,
+            width: MediaQuery.sizeOf(context).width,
           ),
+          // child: Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: <Widget>[
+          //     Image.asset(MyImages.appIcon, width: 100, height: 140, fit: BoxFit.fill),
+          //     const SizedBox(height: 50),
+          //     Container(
+          //       width: 200, // Set the width of the progress bar
+          //       height: 10, // Set the height of the progress bar
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(5), // Set the corner radius
+          //         boxShadow: [
+          //           BoxShadow(
+          //             color: MyColor.primaryColor2.withOpacity(0.5), // Set the shadow color
+          //             spreadRadius: 2, // Set the spread radius
+          //             blurRadius: 4, // Set the blur radius
+          //             offset: const Offset(0, 2), // Set the shadow offset
+          //           ),
+          //         ],
+          //       ),
+          //       child: ClipRRect(
+          //         borderRadius: BorderRadius.circular(5),
+          //         // Set the corner radius
+          //         child: LinearProgressIndicator(
+          //           value: _progress,
+          //           minHeight: 10,
+          //           backgroundColor: MyColor.primaryColor2,
+          //           valueColor: const AlwaysStoppedAnimation<Color>(MyColor.primaryColor),
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(height: 20),
+          //     const Text(MyStrings.loadingPleaseWait, style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.normal)),
+          //     const SizedBox(height: 200),
+          //
+          //   ],
+          // ),
         ),
       ),
     ));
   }
+}
+
+class GifImage {
 }
 

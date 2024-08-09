@@ -18,7 +18,7 @@ class _LauncherScreenState extends State<LauncherScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 0), () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SplashScreen()),
@@ -28,26 +28,26 @@ class _LauncherScreenState extends State<LauncherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColor.appPrimaryColorSecondary2,
+      backgroundColor: MyColor.colorWhite,
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor2],
+            colors: [MyColor.colorWhite, MyColor.colorWhite],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
-        child: const Center(
-          child: Image(
-            image: AssetImage(MyImages.launcherImg),
-            alignment: Alignment.center,
-            height: double.infinity,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-        ),
+        // child: const Center(
+        //   child: Image(
+        //     image: AssetImage(MyImages.launcherImg),
+        //     alignment: Alignment.center,
+        //     height: double.infinity,
+        //     width: double.infinity,
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
       ),
     );
   }

@@ -21,7 +21,7 @@ class HeaderText extends StatelessWidget {
     return Text(
       text.tr,
       textAlign: textAlign,
-      style: textStyle,
+      style: interRegularDefault.copyWith(color: MyColor.colorBlack),
     );
   }
 }

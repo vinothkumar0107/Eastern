@@ -46,7 +46,7 @@ class RoundedButton extends StatelessWidget {
                 border: Border.all(color: borderColor),
                 color: Colors.transparent
             ),
-            child: Center(child: Text(text.tr,style:TextStyle(color: textColor, fontSize: 14, fontWeight: FontWeight.w500)))),
+            child: Center(child: Text(text.tr,style:TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)))),
       ),
     ): SizedBox(
       width: size.width * width,
@@ -59,11 +59,11 @@ class RoundedButton extends StatelessWidget {
               backgroundColor: color,
               shadowColor: MyColor.transparentColor,
               padding:  EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
-              textStyle: TextStyle(color: textColor, fontSize: 14, fontWeight: FontWeight.w500)),
+              textStyle: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
           child: Text(
             text.tr,
             maxLines: 1,
-            style: interRegularDefault.copyWith(color: textColor),
+            style: interBoldExtraLarge.copyWith(color: textColor),
           ),
         ),
       ),
