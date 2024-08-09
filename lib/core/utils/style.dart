@@ -88,6 +88,12 @@ const TextStyle interRegularLarge = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: Dimensions.fontLarge
 );
+const TextStyle interMenuMedium = TextStyle(
+    fontFamily: 'Roboto',
+    color: MyColor.black,
+    fontWeight: FontWeight.bold,
+    fontSize: Dimensions.fontDefault
+);
 const TextStyle interRegularMediumLarge = TextStyle(
     fontFamily: 'Roboto',
     color: MyColor.colorBlack,

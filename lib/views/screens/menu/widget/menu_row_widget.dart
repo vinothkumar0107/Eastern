@@ -1,3 +1,5 @@
+import 'package:eastern_trust/views/screens/account/profile/widget/menu.dart';
+import 'package:eastern_trust/views/screens/account/profile/widget/user_info_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
@@ -35,17 +37,17 @@ class MenuRowWidget extends StatelessWidget {
             children: [
               image.isEmpty?const SizedBox.shrink():
               image.contains('svg')?
-              SvgPicture.asset(image, color: MyColor.getTextColor2(), height: 15, width: 15,fit: BoxFit.cover):
+              Menu(icon: image, label: label, value: ''):
               Image.asset(image, color: MyColor.getTextColor2(), height: 15, width: 15,fit: BoxFit.cover,),
               image.isEmpty?const SizedBox.shrink():const SizedBox(width: Dimensions.space15),
-              DefaultText(text: label, textColor: MyColor.getTextColor())
+              // DefaultText(text: label, textColor: MyColor.getTextColor())
             ],
           ),
           image.isEmpty?DefaultText(text: number.toString()):Container(
             alignment: Alignment.center,
             height: 30, width: 30,
             decoration: BoxDecoration(color: MyColor.transparentColor, shape: BoxShape.circle),
-            child: Icon(Icons.arrow_forward_ios_rounded, color: MyColor.getTextColor2(), size: 15),
+            child: Icon(Icons.arrow_forward_ios_rounded, color: MyColor.black, size: 15),
           )
         ],
       ),

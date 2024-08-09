@@ -1,5 +1,8 @@
 import 'package:eastern_trust/views/components/alert-dialog/exit_dialog.dart';
+import 'package:eastern_trust/views/components/buttons/circle_animated_button_with_text.dart';
+import 'package:eastern_trust/views/screens/account/profile/widget/user_info_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eastern_trust/core/helper/shared_preference_helper.dart';
@@ -63,7 +66,6 @@ class _MenuScreenState extends State<MenuScreen> {
             backgroundColor: MyColor.getScreenBgColor1(),
             appBar: CustomAppBar(title: MyStrings.menu.tr, isShowBackBtn: false, isShowActionBtn: false, bgColor:  MyColor.getAppbarBgColor()),
             body: SingleChildScrollView(
-              padding: Dimensions.screenPaddingHV,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -71,31 +73,35 @@ class _MenuScreenState extends State<MenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         MenuRowWidget(
-                          image: MyImages.profile,
-                          label: MyStrings.profile,
-                          onPressed: () => Get.toNamed(RouteHelper.profileScreen),
-                        ),
+                            image: MyImages.menu_profile,
+                            label: MyStrings.profile,
+                            onPressed: () => Get.toNamed(RouteHelper.profileScreen),
+                          ),
 
-                        const CustomDivider(space: Dimensions.space15),
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
+
                         MenuRowWidget(
                           image: MyImages.changePass,
                           label: MyStrings.changePassword.tr,
                           onPressed: () => Get.toNamed(RouteHelper.changePasswordScreen),
                         ),
-                        const CustomDivider(space: Dimensions.space15),
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
                         MenuRowWidget(
-                          image: MyImages.referral,
+                          image: MyImages.menu_referral,
                           label: MyStrings.referral.tr,
                           onPressed: () => Get.toNamed(RouteHelper.referralScreen),
                         ),
-
-
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
+                        MenuRowWidget(
+                          image: MyImages.airtime,
+                          label: MyStrings.airTime.tr,
+                          onPressed: () => Get.toNamed(RouteHelper.airtimeScreen),
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: Dimensions.space12),
+                  // const SizedBox(height: Dimensions.space12),
 
                   MenuCard(
                     child: Column(
@@ -108,7 +114,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           onPressed: () => Get.toNamed(RouteHelper.notificationScreen),
                         ),
 
-                        const CustomDivider(space: Dimensions.space15),
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
 
                         Visibility(
                           visible: menuController.isDepositEnable,
@@ -121,7 +127,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               onPressed: () => Get.toNamed(RouteHelper.depositsScreen),
                             ),
 
-                            const CustomDivider(space: Dimensions.space15),
+                            const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
                           ],
                         )),
 
@@ -136,7 +142,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               onPressed: () => Get.toNamed(RouteHelper.withdrawScreen),
                             ),
 
-                            const CustomDivider(space: Dimensions.space15),
+                            const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
                           ],
                         )),
 
@@ -164,7 +170,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: Dimensions.space12),
+                  // const SizedBox(height: Dimensions.space12),
                   MenuCard(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +182,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             Get.toNamed(RouteHelper.privacyScreen);
                           },
                         ),
-                        const CustomDivider(space: Dimensions.space15),
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
                         MenuRowWidget(
                           image: MyImages.faq,
                           label: MyStrings.faq.tr,
@@ -184,15 +190,15 @@ class _MenuScreenState extends State<MenuScreen> {
                             Get.toNamed(RouteHelper.faqScreen);
                           },
                         ),
-                        const CustomDivider(space: Dimensions.space15),
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
                         MenuRowWidget(
-                          image: MyImages.profile,
+                          image: MyImages.security,
                           label: MyStrings.twoFactorSecurity.tr,
                           onPressed: (){
                             Get.toNamed(RouteHelper.twoFactorScreen);
                           },
                         ),
-                        const CustomDivider(space: Dimensions.space15),
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
 
                         Visibility(
                             visible: menuController.isDepositEnable,
@@ -200,12 +206,12 @@ class _MenuScreenState extends State<MenuScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 MenuRowWidget(
-                                  image: MyImages.deposit,
+                                  image: MyImages.support_ticket,
                                   label: MyStrings.supportTicket.tr,
                                   onPressed: () => Get.toNamed(RouteHelper.ticketScreen),
                                 ),
 
-                                const CustomDivider(space: Dimensions.space15),
+                                const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
                               ],
                             )),
                         MenuRowWidget(
@@ -216,7 +222,7 @@ class _MenuScreenState extends State<MenuScreen> {
                            menuController.logout();
                           },
                         ),
-                        const CustomDivider(space: Dimensions.space15),
+                        const CustomDivider(space: Dimensions.space10,borderColor: MyColor.colorWhite),
                         MenuRowWidget(
                           isLoading: menuController.deleteLoading,
                           image: MyImages.delete,

@@ -16,6 +16,7 @@ class MyColor{
   static const Color naturalLight   = Color(0xffA1ACB2);
   static const Color skyBlue        = Color(0xffD8F3E2);
   static const Color blueLight        = Color(0xfff2fafe);
+  static const Color black        = Color(0xff000000);
 
   static Color getLabelTextColor(){
     return labelTextColor;
@@ -129,6 +130,8 @@ class MyColor{
   static const Color colorGrey  = Color(0xFFA0A4A8);
   static const Color colorGrey2 = Color(0xFF6E6E6E);
   static const Color bodyTextColor = Color(0xFF747475);
+  static const Color menu_icon_bg = Color(0xFFD9D9D9);
+  static const Color menu_icon_color = Color(0xFF818181);
   static  Color transparentColor = Colors.transparent;
 
   static const Color colorBlack2 = Color(0xff25282B);

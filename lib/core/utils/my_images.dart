@@ -46,15 +46,22 @@ class MyImages{
 
   //menu icon
   static const String profile = "assets/images/menu/profile.svg";
-  static const String changePass = "assets/images/menu/change_password.svg";
+  static const String changePass = "assets/images/menu/new_change_password.svg";
   static const String deposit = "assets/images/menu/deposit.svg";
   static const String referral = "assets/images/menu/referral.svg";
-  static const String language = "assets/images/menu/language.svg";
-  static const String termsAndCon = "assets/images/menu/privacy.svg";
-  static const String faq = "assets/images/menu/faq.svg";
+  static const String language = "assets/images/menu/new_language.svg";
+  static const String termsAndCon = "assets/images/menu/terms.svg";
+  static const String faq = "assets/images/menu/new_faq.svg";
   static const String signOut = "assets/images/menu/logout.svg";
   static const String delete = "assets/images/menu/delete.svg";
 
+
+  //new menu icons
+  static const String menu_profile = "assets/images/menu/menu_profile.svg";
+  static const String menu_referral = "assets/images/menu/new_referral.svg";
+  static const String security = "assets/images/menu/security.svg";
+  static const String airtime = "assets/images/menu/airtime.svg";
+  static const String support_ticket = "assets/images/menu/support.svg";
 
   //error and success icon
   static const String errorIcon = "assets/icons/Error.svg";

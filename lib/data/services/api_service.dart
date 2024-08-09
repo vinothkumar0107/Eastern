@@ -247,7 +247,8 @@ class ApiClient extends GetxService{
         onTap: (){
           Get.toNamed(RouteHelper.depositsScreen);
         },
-      ));
+      )
+      );
     }
 
 

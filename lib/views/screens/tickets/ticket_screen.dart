@@ -88,8 +88,10 @@ class _TicketScreenState extends State<TicketScreen> {
                     Get.offAndToNamed(RouteHelper.menuScreen);
                   }
                 },
-                icon: const Icon(Icons.arrow_back,
-                    color: MyColor.colorWhite, size: 20),
+                icon: const Icon(
+                    Icons.arrow_back,
+                    color: MyColor.colorWhite, size: 20
+                ),
               ),
               actions: [
                 GestureDetector(
