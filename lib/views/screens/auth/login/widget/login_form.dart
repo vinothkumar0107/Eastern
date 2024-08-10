@@ -47,11 +47,11 @@ class _LoginFormState extends State<LoginForm> {
               child: TextField(
                 controller: controller.emailController,
                 focusNode: controller.emailFocusNode,
-                style: interRegularDefault.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
+                style: interMediumLarge.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
                 onChanged: (value) {},
                 decoration: InputDecoration(
                   hintText: MyStrings.enterUsernameOrEmail,
-                  hintStyle: interRegularDefault.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),// Placeholder text
+                  hintStyle: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),// Placeholder text
                   filled: true, // Enable background color
                   fillColor: MyColor.liteGreyColor, // Background color
                   border: OutlineInputBorder(
@@ -102,7 +102,7 @@ class _LoginFormState extends State<LoginForm> {
                     controller.clearData();
                     controller.forgetPassword();
                   },
-                  child: Text(MyStrings.loginForgotPassword.tr, style: interBoldMediumLarge.copyWith(color: MyColor.colorGrey2,decorationColor:MyColor.colorGrey,decoration: TextDecoration.none)),
+                  child: Text(MyStrings.loginForgotPassword.tr, style: interMediumLarge.copyWith(color: MyColor.colorGrey2,decorationColor:MyColor.colorGrey,decoration: TextDecoration.none, fontSize: 14.0)),
                 )
               ],
             ),

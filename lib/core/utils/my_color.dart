@@ -103,9 +103,9 @@ class MyColor{
   }
 
 
-  static const Color primaryColor           = Color(0xff246EE9);
-  static const Color primaryColor2          = Color(0xFF14233d);
-  static const Color appPrimaryColorSecondary2 = Color(0xff233c82);
+  static const Color primaryColor           = Color(0xFF065CCB);
+  static const Color primaryColor2          = Color(0xFF082790);
+  static const Color appPrimaryColorSecondary2 = Color(0xFF07349F);
   static const Color green                  = Color(0xff2ECC06);
   static const Color secondaryColor         = Color(0xffFFFFFF);
   static const Color containerBgColor       = Color(0xffF9F9F9);

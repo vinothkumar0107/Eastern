@@ -275,7 +275,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 ],
               ),
               ),
-            bottomNavigationBar: const CustomBottomNav(currentIndex: 2),
+            bottomNavigationBar: const CustomBottomNav(currentIndex: 3),
             ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/my_images.dart';
 import 'package:flutter/material.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
@@ -31,70 +32,82 @@ class LatestTransactionListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return  GestureDetector(
           onTap: onPressed,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration:  BoxDecoration(color: MyColor.transparentColor),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                         Container(
-                height: 35, width: 35,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: isCredit?MyColor.greenSuccessColor.withOpacity(0.17):MyColor.colorRed.withOpacity(0.2),
-                    shape: BoxShape.circle
-                ),
-                child: Icon(
-                  isCredit?Icons.arrow_downward:Icons.arrow_upward,
-                  color:  isCredit?MyColor.greenSuccessColor: MyColor.colorRed,
-                  size: 20,
-                )
+        child: Container(
+          padding: const EdgeInsets.only(top: 15, left: 10, right: 10, bottom: 5),
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: MyColor.colorWhite,
+            borderRadius: BorderRadius.circular(12.0),
+            border: Border.all(
+              color: MyColor.liteGreyColorBorder, // Border color
+              width: 1.0, // Border width
             ),
-                        const SizedBox(width: Dimensions.space12),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(trx,
-                              style: interRegularDefault.copyWith(color: MyColor.getTextColor(), fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(height: Dimensions.space10),
-                            SizedBox(
-                              width: 150,
-                              child: Text(
-                                date,
-                                style: interRegularSmall.copyWith(color: MyColor.getTextColor().withOpacity(0.5)),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    Flexible(
-                      child: Text(
-                          amount,
-                          overflow: TextOverflow.ellipsis,
-                          style: interRegularDefault.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w600)
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1), // Shadow color
+                spreadRadius: 0, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: const Offset(0, 3), // Shadow offset
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                          height: 35, width: 35,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: isCredit?MyColor.greenSuccessColor.withOpacity(0.17):MyColor.colorRed.withOpacity(0.2),
+                              shape: BoxShape.circle
+                          ),
+                          child: isCredit?Image.asset(MyImages.greenArrowUp, height: 20, width: 20,fit: BoxFit.cover,):Image.asset(MyImages.redArrowDown, height: 20, width: 20,fit: BoxFit.cover,)
                       ),
-                    )
-                  ],
-                ),
-                isShowDivider?
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Dimensions.space5),
-                  child:  CustomDivider(space: 20,borderColor: MyColor.bgColor1,),
-                ): const SizedBox(height: Dimensions.space20)
-              ],
-            ),
-          )
+                      const SizedBox(width: Dimensions.space12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(trx,
+                            style: interRegularDefault.copyWith(color: MyColor.getTextColor(), fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(height: Dimensions.space10),
+                          SizedBox(
+                            width: 150,
+                            child: Text(
+                              date,
+                              style: interRegularSmall.copyWith(color: MyColor.getTextColor().withOpacity(0.5)),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  Flexible(
+                    child: Text(
+                        amount,
+                        overflow: TextOverflow.ellipsis,
+                        style: interRegularDefault.copyWith(color: isCredit?MyColor.greenSuccessColor: MyColor.colorRed, fontWeight: FontWeight.w600)
+                    ),
+                  )
+                ],
+              ),
+              isShowDivider?
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.space5),
+                child:  CustomDivider(space: 20,borderColor: MyColor.bgColor1,),
+              ): const SizedBox(height: Dimensions.space20)
+            ],
+          ),
+        )
       );
   }
 }

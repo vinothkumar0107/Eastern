@@ -81,7 +81,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         widget.needLabel?const SizedBox(height: Dimensions.textToTextSpace): const SizedBox(),
         TextFormField(
           readOnly: widget.readOnly,
-          style: interRegularDefault.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
+          style: interMediumLarge.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
           cursorColor: MyColor.primaryColor,
           controller: widget.controller,
           autofocus: false,
@@ -105,7 +105,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
             contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
             hintText: widget.hintText!=null?widget.hintText!.tr:'',
-            hintStyle: interRegularDefault.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
+            hintStyle: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
             fillColor: MyColor.liteGreyColor,
             filled: true,
             border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5),

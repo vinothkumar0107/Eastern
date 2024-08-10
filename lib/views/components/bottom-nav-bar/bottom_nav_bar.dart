@@ -26,8 +26,8 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
 
   var bottomNavIndex = 0;
 
-  List<String> iconList = [MyImages.homeIcon, MyImages.transferIcon2, MyImages.transactionIcon, MyImages.menuIcon];
-  final textList = [MyStrings.home, MyStrings.transfer,MyStrings.transaction, MyStrings.menu];
+  List<String> iconList = [MyImages.homeIcon, MyImages.supportIcon, MyImages.transferIcon2, MyImages.historyIcon, MyImages.menuIcon];
+  final textList = [MyStrings.home, MyStrings.support, MyStrings.transfer,MyStrings.history, MyStrings.menu];
 
   @override
   void initState() {
@@ -78,16 +78,21 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
     }
     else if (index == 1) {
       if (!(widget.currentIndex == 1)) {
-        Get.offAndToNamed(RouteHelper.transferScreen);
+        Get.offAndToNamed(RouteHelper.ticketScreen);
       }
     }
     else if (index == 2) {
       if (!(widget.currentIndex == 2)) {
-        Get.offAndToNamed(RouteHelper.transactionScreen);
+        Get.offAndToNamed(RouteHelper.transferScreen);
       }
     }
     else if (index == 3) {
       if (!(widget.currentIndex == 3)) {
+        Get.offAndToNamed(RouteHelper.transactionScreen);
+      }
+    }
+    else if (index == 4) {
+      if (!(widget.currentIndex == 4)) {
         Get.offAndToNamed(RouteHelper.menuScreen);
       }
     }

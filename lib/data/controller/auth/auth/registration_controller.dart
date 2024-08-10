@@ -154,7 +154,8 @@ class RegistrationController extends GetxController {
     bool isTwoFactorEnable =  false;
 
     if(needEmailVerification == false && needSmsVerification == false){
-      Get.offAndToNamed(RouteHelper.profileCompleteScreen);
+      // Get.offAndToNamed(RouteHelper.profileCompleteScreen);
+      Get.toNamed(RouteHelper.profileCompleteScreen);
     }
     else if(needEmailVerification == true && needSmsVerification == true){
       Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true,isProfileCompleteEnable,isTwoFactorEnable]);

@@ -4,6 +4,8 @@ import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
 import 'package:eastern_trust/core/utils/style.dart';
 
+import '../../../../../core/utils/my_strings.dart';
+
 class CountryTextField extends StatelessWidget {
 
   final String text;
@@ -31,8 +33,8 @@ class CountryTextField extends StatelessWidget {
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
-              Text(text.tr,style: interRegularDefault.copyWith(color: MyColor.colorGrey),),
-              Icon(Icons.expand_more_rounded,color: MyColor.colorBlack,size: 20,)
+              Text(text.tr,style: interMediumLarge.copyWith(color: text == MyStrings.selectACountry.tr ? MyColor.colorGrey : MyColor.colorBlack),),
+              const Icon(Icons.expand_more_rounded,color: MyColor.colorBlack,size: 20,)
             ],
           ),
       ),

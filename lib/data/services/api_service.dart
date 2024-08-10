@@ -17,6 +17,8 @@ import 'package:eastern_trust/data/model/general_setting/general_settings_respon
 import 'package:eastern_trust/data/model/global/response_model/response_model.dart';
 import 'package:eastern_trust/views/components/buttons/circle_animated_button_with_text.dart';
 
+import '../../views/components/buttons/dashboard_button_with_text.dart';
+
 
 class ApiClient extends GetxService{
 
@@ -239,11 +241,11 @@ class ApiClient extends GetxService{
 
 
     if(isDepositEnable){
-      moduleList.add(CircleAnimatedButtonWithText(
+      moduleList.add(DashboardAnimatedButtonWithText(
         buttonName: MyStrings.deposit,
         height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[0].withOpacity(.1),
-        child: SvgPicture.asset(MyImages.depositIcon, color: MyColor.homeColorList[0], height: 20, width: 20),
+        backgroundColor: MyColor.homeColorList[0].withOpacity(.0),
+        child: SvgPicture.asset(MyImages.depositIcon, height: 35, width: 35),
         onTap: (){
           Get.toNamed(RouteHelper.depositsScreen);
         },
@@ -254,21 +256,20 @@ class ApiClient extends GetxService{
     if(isFDREnable){
       moduleList.add(CircleAnimatedButtonWithText(
         buttonName: MyStrings.fdr,
-        height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[1].withOpacity(.1),
-        child: SvgPicture.asset(MyImages.fdrIcon, color: MyColor.homeColorList[1], height: 20, width: 20),
+        height: 50, width: 50,
+        backgroundColor: MyColor.homeColorList[1].withOpacity(.0),
+        child: Image.asset(MyImages.fdrIcon, height: 50, width: 50),
         onTap: (){
           Get.toNamed(RouteHelper.fdrScreen);
         },
       ));
     }
     if(isDPSEnable){
-      print(MyStrings.dps.tr);
       moduleList.add(CircleAnimatedButtonWithText(
         buttonName: MyStrings.dps,
-        height: 40, width: 40,
-        backgroundColor:  MyColor.homeColorList[2].withOpacity(.1),
-        child: SvgPicture.asset(MyImages.dpsIcon, color: MyColor.homeColorList[2], height: 20, width: 20),
+        height: 50, width: 50,
+        backgroundColor:  MyColor.homeColorList[2].withOpacity(.0),
+        child: Image.asset(MyImages.dpsIcon,  height: 50, width: 50),
         onTap: (){
           Get.toNamed(RouteHelper.dpsScreen);
         },
@@ -277,20 +278,31 @@ class ApiClient extends GetxService{
     if(isLoanEnable){
       moduleList.add(CircleAnimatedButtonWithText(
         buttonName: MyStrings.loan,
-        height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[3].withOpacity(.1),
-        child: Image.asset(MyImages.loanIcon1, color: MyColor.homeColorList[3], height: 22, width: 22,fit: BoxFit.cover,),
+        height: 50, width: 50,
+        backgroundColor: MyColor.homeColorList[3].withOpacity(.0),
+        child: Image.asset(MyImages.loanIcon1, height: 50, width: 50,fit: BoxFit.cover,),
         onTap: (){
           Get.toNamed(RouteHelper.loanScreen);
         },
       ));
     }
+    // if(isWithdrawEnable){
+    //   moduleList.add(CircleAnimatedButtonWithText(
+    //     buttonName: MyStrings.withdrawal,
+    //     height: 40, width: 40,
+    //     backgroundColor: MyColor.homeColorList[4].withOpacity(.1),
+    //     child: SvgPicture.asset(MyImages.withdrawIcon, color: MyColor.homeColorList[4], height: 20, width: 20),
+    //     onTap: (){
+    //       Get.toNamed(RouteHelper.withdrawScreen);
+    //     },
+    //   ));
+    // }
     if(isWithdrawEnable){
-      moduleList.add(CircleAnimatedButtonWithText(
+      moduleList.add(DashboardAnimatedButtonWithText(
         buttonName: MyStrings.withdrawal,
         height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[4].withOpacity(.1),
-        child: SvgPicture.asset(MyImages.withdrawIcon, color: MyColor.homeColorList[4], height: 20, width: 20),
+        backgroundColor: MyColor.homeColorList[4].withOpacity(.0),
+        child: SvgPicture.asset(MyImages.withdrawIcon, height: 35, width: 35),
         onTap: (){
           Get.toNamed(RouteHelper.withdrawScreen);
         },
@@ -301,7 +313,7 @@ class ApiClient extends GetxService{
         buttonName: MyStrings.transfer,
         height: 40, width: 40,
         backgroundColor: MyColor.homeColorList[5].withOpacity(.1),
-        child: SvgPicture.asset(MyImages.transferIcon2, color:MyColor.homeColorList[5], height: 20, width: 20),
+        child: SvgPicture.asset(MyImages.transferIcon2, height: 35, width: 35),
         onTap: (){
           Get.toNamed(RouteHelper.transferScreen);
         },

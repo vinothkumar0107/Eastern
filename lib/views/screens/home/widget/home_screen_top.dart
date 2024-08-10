@@ -1,3 +1,4 @@
+import 'package:eastern_trust/views/screens/home/widget/top_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/route/route.dart';
@@ -50,9 +51,9 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(controller.username, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularLarge.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w500)),
+                            Text(controller.username, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularLarge.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w600)),
                             const SizedBox(height: Dimensions.space5),
-                            Text(controller.accountNumber, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularSmall.copyWith(fontSize:Dimensions.fontExtraSmall+1,color: MyColor.colorWhite.withOpacity(.8))),
+                            Text(controller.accountNumber, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularSmall.copyWith(fontSize:Dimensions.fontExtraSmall+1,fontWeight: FontWeight.w600, color: MyColor.colorWhite.withOpacity(.8))),
                             const SizedBox(height: Dimensions.space5),
                           ],
                         ),
@@ -61,9 +62,31 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                   ),
                 ),
               ),
-              const SizedBox(width: 10),
               const Spacer(),
-              SizedBox(width:120,child: BalanceAnimationContainer(amount: controller.balance,curSymbol: controller.currencySymbol,)),
+              IconButton(
+                icon: const Icon(Icons.notifications_none_sharp, color: Colors.white),
+                onPressed: () {
+                  Get.toNamed(RouteHelper.notificationScreen);
+                },
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width:120,child: BalanceAnimationContainer(amount: controller.balance,curSymbol: controller.currencySymbol))
+                    ],
+                  )
+
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: Dimensions.space30),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(child: controller.moduleList[0]),
+              Expanded(child: controller.moduleList[4]),
             ],
           ),
         ],

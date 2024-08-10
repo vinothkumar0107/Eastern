@@ -23,6 +23,9 @@ import 'package:eastern_trust/views/screens/deposits/widget/custom_deposits_card
 import 'package:eastern_trust/views/screens/deposits/widget/deposit_bottom_sheet.dart';
 import 'package:eastern_trust/views/screens/deposits/widget/deposit_history_top.dart';
 
+import '../../components/appbar/custom_appbar.dart';
+import '../../components/bottom-nav-bar/bottom_nav_bar.dart';
+
 class TicketScreen extends StatefulWidget {
   const TicketScreen({Key? key}) : super(key: key);
 
@@ -68,142 +71,93 @@ class _TicketScreenState extends State<TicketScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<TicketListController>(
       builder: (controller) => WillPopWidget(
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: MyColor.containerBgColor,
-            appBar: AppBar(
-              title: Text(MyStrings.supportTicket,
-                  style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
-              backgroundColor: MyColor.primaryColor,
-              elevation: 0,
-              leading: IconButton(
-                onPressed: () {
-                  String previousRoute = Get.previousRoute;
-                   if (previousRoute == RouteHelper.menuScreen ||
-                      previousRoute == RouteHelper.notificationScreen
-                  ) {
-                    // Get.back(); // Need to check
-                    Get.offAndToNamed(RouteHelper.menuScreen);
-                  } else {
-                    Get.offAndToNamed(RouteHelper.menuScreen);
-                  }
-                },
-                icon: const Icon(Icons.arrow_back,
-                    color: MyColor.colorWhite, size: 20),
-              ),
-              actions: [
-                GestureDetector(
-                  onTap: (){
-                    // controller.changeIsPress();
-                  },
-                  child: Container(
-                      padding: const EdgeInsets.all(Dimensions.space7),
-                      child:  Text(MyStrings.createTicket,style: interRegularDefault.copyWith(color:MyColor.textColor,fontSize: Dimensions.fontLarge)),
-
-                  ),
-                ),
-                // const SizedBox(width: Dimensions.space7),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(RouteHelper.createTicketScreen);
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                        left: 7, right: 10, bottom: 7, top: 7),
-                    padding: const EdgeInsets.all(Dimensions.space7),
-                    decoration: const BoxDecoration(
-                        color: MyColor.colorWhite, shape: BoxShape.circle),
-                    child: const Icon(Icons.add,
-                        color: MyColor.primaryColor, size: 15),
-                  ),
-                ),
-
-              ],
-            ),
-            body: controller.isLoading
-                ? const CustomLoader()
-                : Padding(
-                    padding: const EdgeInsets.only(
-                        top: Dimensions.space5,
-                        left: Dimensions.space5,
-                        right: Dimensions.space5),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: controller.ticketList.isEmpty
-                              ? const NoDataFoundScreen(
-                                  title: MyStrings.noSupportTicketFound,
-                                  height: 0.8)
-                                  : SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height,
-                                      child: ListView.separated(
-                                        shrinkWrap: true,
-                                        controller: scrollController,
-                                        scrollDirection: Axis.vertical,
-                                        physics: const BouncingScrollPhysics(),
-                                        padding: EdgeInsets.zero,
-                                        itemCount:
-                                            controller.ticketList.length + 1,
-                                        separatorBuilder: (context, index) =>
-                                            const SizedBox(
-                                                height: Dimensions.space10),
-                                        itemBuilder: (context, index)  {
-                                          if (controller.ticketList.length ==
-                                              index) {
-                                            return controller.hasNext()
-                                                ? SizedBox(
-                                                    height: 40,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    child: const Center(
-                                                      child: CustomLoader(),
-                                                    ),
-                                                  )
-                                                : const SizedBox();
-                                          }
-                                         return TicketDesign(
-                                            onPressed: () {
-                                              // ReplyTicketScreen();
-                                              // DepositBottomSheet
-                                              //     .depositBottomSheet(
-                                              //         context, index);
-                                              // Get.toNamed(RouteHelper.replyTicketScreen);
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => ReplyTicketScreen(selectedReply: controller.ticketList[index]),
-                                                ),
-                                              );
-                                            },
-                                            ticketID: 'Ticket ID: #${controller.ticketList[index].ticket}',
-                                            subject: controller.ticketList[index].subject,
-                                            lastReplyDate: controller.ticketList[index].lastReply,
-                                            status: controller.getStatusFromCode(controller.ticketList[index].status),
-                                            statusColor: controller
-                                                .getStatusColorFromCode(controller.ticketList[index].status),
-                                            headerRightColor: controller.getPriorityColorFromCode(controller.ticketList[index].priority),
-                                            priority: controller.getPriorityFromCode(controller.ticketList[index].priority),
-                                            selectedIndex: index,
-                                           headerLeftColor: MyColor.primaryColor2,
-                                           bodyLeftColor: MyColor.colorBlack,
-                                           bodyRightColor: MyColor.getGreyText(),
-                                           isNeedLeftHeaderBox: false,
-                                           isNeedLeftBodyBox: false,
-                                           isNeedRightHeaderBox: true,
-                                           isNeedRightBodyBox: false,
-                                           isNeedStatusBox: true,
-                                          );
-                                        },
-                                      ),
-                                    ),
-                        ),
-                      ],
+        child: Scaffold(
+          backgroundColor: MyColor.containerBgColor,
+          appBar: CustomAppBar(title: MyStrings.supportTicket.tr, isShowBackBtn: false, isShowActionBtn: false, bgColor:  MyColor.getAppbarBgColor()),
+          body: controller.isLoading
+              ? const CustomLoader()
+              : Padding(
+            padding: const EdgeInsets.only(
+                top: Dimensions.space5,
+                left: Dimensions.space5,
+                right: Dimensions.space5),
+            child: Column(
+              children: [
+                Expanded(
+                  child: controller.ticketList.isEmpty
+                      ? const NoDataFoundScreen(
+                      title: MyStrings.noSupportTicketFound,
+                      height: 0.8)
+                      : SizedBox(
+                    height:
+                    MediaQuery.of(context).size.height,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      controller: scrollController,
+                      scrollDirection: Axis.vertical,
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      itemCount:
+                      controller.ticketList.length + 1,
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(
+                          height: Dimensions.space10),
+                      itemBuilder: (context, index)  {
+                        if (controller.ticketList.length ==
+                            index) {
+                          return controller.hasNext()
+                              ? SizedBox(
+                            height: 40,
+                            width:
+                            MediaQuery.of(context)
+                                .size
+                                .width,
+                            child: const Center(
+                              child: CustomLoader(),
+                            ),
+                          )
+                              : const SizedBox();
+                        }
+                        return TicketDesign(
+                          onPressed: () {
+                            // ReplyTicketScreen();
+                            // DepositBottomSheet
+                            //     .depositBottomSheet(
+                            //         context, index);
+                            // Get.toNamed(RouteHelper.replyTicketScreen);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ReplyTicketScreen(selectedReply: controller.ticketList[index]),
+                              ),
+                            );
+                          },
+                          ticketID: 'Ticket ID: #${controller.ticketList[index].ticket}',
+                          subject: controller.ticketList[index].subject,
+                          lastReplyDate: controller.ticketList[index].lastReply,
+                          status: controller.getStatusFromCode(controller.ticketList[index].status),
+                          statusColor: controller
+                              .getStatusColorFromCode(controller.ticketList[index].status),
+                          headerRightColor: controller.getPriorityColorFromCode(controller.ticketList[index].priority),
+                          priority: controller.getPriorityFromCode(controller.ticketList[index].priority),
+                          selectedIndex: index,
+                          headerLeftColor: MyColor.primaryColor2,
+                          bodyLeftColor: MyColor.colorBlack,
+                          bodyRightColor: MyColor.getGreyText(),
+                          isNeedLeftHeaderBox: false,
+                          isNeedLeftBodyBox: false,
+                          isNeedRightHeaderBox: true,
+                          isNeedRightBodyBox: false,
+                          isNeedStatusBox: true,
+                        );
+                      },
                     ),
                   ),
+                ),
+              ],
+            ),
           ),
+          bottomNavigationBar: const CustomBottomNav(currentIndex: 1),
         ),
       ),
     );

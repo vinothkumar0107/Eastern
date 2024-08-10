@@ -60,6 +60,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     super.dispose();
   }
 
+  //need to remove
   @override
   Widget build2(BuildContext context) {
     return  WillPopWidget(
@@ -88,7 +89,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       const SizedBox(height: Dimensions.space50),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.1),
-                        child: Text(MyStrings.otpSubText.tr, maxLines: 2, textAlign: TextAlign.center,style: interRegularDefault.copyWith(color: MyColor.labelTextColor)),
+                        child: Text(MyStrings.otpSubText.tr, maxLines: 2, textAlign: TextAlign.center,style: interRegularLarge.copyWith(color: MyColor.labelTextColor)),
                       ),
                       const SizedBox(height: 30),
                       OTPFieldWidget(
@@ -183,7 +184,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         child: Text(
                             MyStrings.emailVerification,
                             textAlign: TextAlign.left,
-                            style: interBoldOverLarge.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor)
+                            style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor)
                         ),
                       ),
                       // To keep the title centered, you can add an empty `SizedBox`
@@ -214,9 +215,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                                       const SizedBox(height: Dimensions.space30),
                                       Padding(
                                         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.1),
-                                        child: Text(MyStrings.otpSubText.tr, maxLines: 2, textAlign: TextAlign.center,style: interRegularDefault.copyWith(color: MyColor.labelTextColor)),
+                                        child: Text(MyStrings.otpSubText.tr, maxLines: 2, textAlign: TextAlign.center,style: interRegularLarge.copyWith(color: MyColor.labelTextColor)),
                                       ),
-                                      const SizedBox(height: 30),
+                                      const SizedBox(height: Dimensions.space30),
                                       OTPFieldWidget(
                                         onChanged: (value) {
                                           controller.currentText = value;
@@ -235,7 +236,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Text(MyStrings.didNotReceiveCode.tr, style: interRegularDefault.copyWith(color: MyColor.labelTextColor)),
+                                          Text(MyStrings.didNotReceiveCode.tr, style: interMediumLarge.copyWith(color: MyColor.labelTextColor)),
                                           const SizedBox(width: Dimensions.space5),
                                           controller.resendLoading?
                                           Container(margin:const EdgeInsets.only(left: 5,top: 5),height:20,width:20,child: const CircularProgressIndicator(color: MyColor.primaryColor)):
@@ -243,7 +244,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                                             onTap: (){
                                               controller.sendCodeAgain();
                                             },
-                                            child: Text(MyStrings.resend.tr, style: interRegularDefault.copyWith(color: MyColor.appPrimaryColorSecondary2,decoration: TextDecoration.underline)),
+                                            child: Text(MyStrings.resend.tr, style: interBoldLarge.copyWith(color: MyColor.appPrimaryColorSecondary2,decoration: TextDecoration.underline)),
                                           )
                                         ],
                                       ),

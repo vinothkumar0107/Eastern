@@ -60,7 +60,8 @@ class LoginController extends GetxController{
 
     if( needSmsVerification == false && needEmailVerification == false && isTwoFactorEnable == false) {
       if(isProfileCompleteEnable){
-        Get.offAndToNamed(RouteHelper.profileCompleteScreen);
+        // Get.offAndToNamed(RouteHelper.profileCompleteScreen);
+        Get.toNamed(RouteHelper.profileCompleteScreen);
       }else{
         Get.offAndToNamed(RouteHelper.homeScreen);
       }
@@ -94,6 +95,8 @@ class LoginController extends GetxController{
     if(model.statusCode==200){
       LoginResponseModel loginModel = LoginResponseModel.fromJson(jsonDecode(model.responseJson));
       if(loginModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()){
+        isSubmitLoading = false;
+        update();
         checkAndGotoNextStep(loginModel);
         return;
       }else{

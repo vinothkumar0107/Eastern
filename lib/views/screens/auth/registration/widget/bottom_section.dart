@@ -13,14 +13,14 @@ class BottomSectionRegistration extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(MyStrings.alreadyAccount.tr, style: interSemiBoldDefault.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.colorGrey,decoration: TextDecoration.none)),
+        Text(MyStrings.alreadyAccount.tr, style: interMediumLarge.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.colorGrey,decoration: TextDecoration.none)),
         TextButton(
           onPressed: () {
             Get.offAndToNamed(RouteHelper.loginScreen);
           },
           child: Text(
             MyStrings.signInNow.tr,
-            style: interSemiBoldLarge.copyWith(color: MyColor.appPrimaryColorSecondary2, decoration: TextDecoration.underline),
+            style: interBoldLarge.copyWith(color: MyColor.appPrimaryColorSecondary2, decoration: TextDecoration.underline),
           ),
         )
       ],

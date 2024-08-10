@@ -4,7 +4,7 @@ import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
 import 'package:eastern_trust/core/utils/style.dart';
 
-class CircleAnimatedButtonWithText extends StatefulWidget {
+class DashboardAnimatedButtonWithText extends StatefulWidget {
 
   final Widget child;
   final VoidCallback onTap;
@@ -12,7 +12,7 @@ class CircleAnimatedButtonWithText extends StatefulWidget {
   final double height, width;
   final Color backgroundColor;
 
-  const CircleAnimatedButtonWithText({
+  const DashboardAnimatedButtonWithText({
     Key? key,
     required this.buttonName,
     required this.child,
@@ -23,10 +23,10 @@ class CircleAnimatedButtonWithText extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CircleAnimatedButtonWithText> createState() => _CircleAnimatedButtonWithTextState();
+  State<DashboardAnimatedButtonWithText> createState() => _DashboardAnimatedButtonWithText();
 }
 
-class _CircleAnimatedButtonWithTextState extends State<CircleAnimatedButtonWithText> with SingleTickerProviderStateMixin{
+class _DashboardAnimatedButtonWithText extends State<DashboardAnimatedButtonWithText> with SingleTickerProviderStateMixin{
 
   late double _scale;
   late AnimationController _controller;
@@ -67,9 +67,29 @@ class _CircleAnimatedButtonWithTextState extends State<CircleAnimatedButtonWithT
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _animatedButton(),
-              const SizedBox(height: Dimensions.space10),
-              Text(widget.buttonName.tr, textAlign: TextAlign.center, style: interRegularSmall.copyWith(color: MyColor.titleColor, fontWeight: FontWeight.w600))
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center, // Center the children in the Row
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: MyColor.appPrimaryColorSecondary2,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Row(
+                        children: [
+                          const SizedBox(width: Dimensions.space10),
+                          _animatedButton(),
+                          const SizedBox(width: Dimensions.space10),
+                          Text(widget.buttonName.tr, textAlign: TextAlign.center, style: interRegularDefault.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w500)),
+                        ],
+                      )
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

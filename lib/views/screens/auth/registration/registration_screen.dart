@@ -69,7 +69,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       padding: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*.2),
                       child: Text(MyStrings.signUpSologan.tr, textAlign: TextAlign.left,style: interRegularDefault.copyWith(color: MyColor.getGreyText(),fontWeight: FontWeight.w500),)),
                    */ const SizedBox(height: Dimensions.space30),
-                    const RegistrationForm()
+                    const RegistrationForm(),
                     ],
                   ),
                 ),
@@ -148,8 +148,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 10), // Add spacing if needed
+                          const SizedBox(height: 5), // Add spacing if needed
                           const BottomSectionRegistration(),
+                          const SizedBox(height: Dimensions.space30),
                         ],
                       ),
                     ),

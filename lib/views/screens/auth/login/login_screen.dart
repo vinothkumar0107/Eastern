@@ -33,8 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LoginRepo(apiClient: Get.find()));
     final controller = Get.put(LoginController(loginRepo: Get.find()));
-    controller.emailController.text = 'demoaccount@gmail.com';
-    controller.passwordController.text = 'DemoAccount@123';
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.remember = false;

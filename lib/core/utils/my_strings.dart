@@ -668,6 +668,7 @@ class MyStrings{
   static const String codeIsRequired = "Please enter Google Authenticator OTP";
 
   static const String welcomeBackAgain = "Welcome back! Glad to see you, Again!";
+  static const String seeAll = "See all";
 
 
 

@@ -125,7 +125,7 @@ class _TransferScreenState extends State<TransferScreen> {
               ],
             ),
           )),
-          bottomNavigationBar: const CustomBottomNav(currentIndex: 1),
+          bottomNavigationBar: const CustomBottomNav(currentIndex: 2),
         ),
       ),
     );

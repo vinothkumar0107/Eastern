@@ -193,21 +193,6 @@ class _MenuScreenState extends State<MenuScreen> {
                           },
                         ),
                         const CustomDivider(space: Dimensions.space15),
-
-                        Visibility(
-                            visible: menuController.isDepositEnable,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                MenuRowWidget(
-                                  image: MyImages.deposit,
-                                  label: MyStrings.supportTicket.tr,
-                                  onPressed: () => Get.toNamed(RouteHelper.ticketScreen),
-                                ),
-
-                                const CustomDivider(space: Dimensions.space15),
-                              ],
-                            )),
                         MenuRowWidget(
                           isLoading: menuController.logoutLoading,
                           image: MyImages.signOut,
@@ -232,7 +217,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ],
               ),
             ),
-            bottomNavigationBar: const CustomBottomNav(currentIndex: 3),
+            bottomNavigationBar: const CustomBottomNav(currentIndex: 4),
           ),
         ),
       ));

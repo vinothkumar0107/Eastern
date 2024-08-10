@@ -98,7 +98,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             Row(
               children: [
                 Flexible(
-                  flex: 2,
+                  flex: 3,
                   child: FractionallySizedBox(
                     widthFactor: 1, // This will give you the desired effect
                     child:CustomTextField(
@@ -117,7 +117,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   ),
                 const SizedBox(width: 8,),
                 Flexible(
-                    flex: 8,
+                    flex: 10,
                     child: Focus(
                       onFocusChange: (hasFocus){
                         controller.changeMobileFocus(hasFocus);
@@ -217,7 +217,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     const SizedBox(width: 8,),
                     Row(
                       children: [
-                        Text(MyStrings.iAgreeWith.tr, style: interSemiBoldDefault.copyWith(color: MyColor.colorBlack)),
+                        Text(MyStrings.iAgreeWith.tr, style: interSemiBoldDefault.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w400)),
                         const SizedBox(width: 3),
                         GestureDetector(
                           onTap: (){
@@ -245,7 +245,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   }
                 }
             ),
-            const SizedBox(height: Dimensions.space30),
+            const SizedBox(height: Dimensions.space20),
           ],
         ),
       ),
