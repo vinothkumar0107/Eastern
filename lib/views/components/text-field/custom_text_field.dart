@@ -98,7 +98,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             prefixIcon: widget.prefixText.isEmpty?null:Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-              decoration: BoxDecoration(color: MyColor.primaryColor.withOpacity(.1),borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+              decoration: BoxDecoration(color: MyColor.primaryColor.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(Dimensions.defaultRadius)
+              ),
               child: Text(widget.prefixText,style: interRegularDefault.copyWith(color:MyColor.primaryColor),),
             ),
             prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
@@ -109,8 +111,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             filled: true,
             border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5),
                 borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
             suffixIcon: widget.isShowSuffixIcon
                 ? widget.isPassword
                 ? IconButton(

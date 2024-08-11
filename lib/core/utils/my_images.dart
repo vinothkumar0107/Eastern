@@ -56,9 +56,11 @@ class MyImages{
   static const String delete = "assets/images/menu/delete.svg";
 
 
-  //new menu icons
+  //new menu icons and images
   static const String menu_profile = "assets/images/menu/menu_profile.svg";
   static const String menu_referral = "assets/images/menu/new_referral.svg";
+  static const String group_referral = "assets/images/group_referral.svg";
+  static const String referral_copy = "assets/images/copy.svg";
   static const String security = "assets/images/menu/security.svg";
   static const String airtime = "assets/images/menu/airtime.svg";
   static const String support_ticket = "assets/images/menu/support.svg";

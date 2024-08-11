@@ -22,7 +22,6 @@ class OperatorSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: Dimensions.textFieldToTextFieldSpace + 4),
-          FormRow(label: MyStrings.operator.tr, isRequired: true),
           const SizedBox(height: Dimensions.space8,),
           OperatorWidget(
             title: controller.selectedOperator.id == -1 ? MyStrings.selectOperator.tr : controller.selectedOperator.name,

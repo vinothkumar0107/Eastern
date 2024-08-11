@@ -132,6 +132,7 @@ class MyColor{
   static const Color bodyTextColor = Color(0xFF747475);
   static const Color menu_icon_bg = Color(0xFFD9D9D9);
   static const Color menu_icon_color = Color(0xFF818181);
+  static const Color top_icon = Color(0xFF050B99);
   static  Color transparentColor = Colors.transparent;
 
   static const Color colorBlack2 = Color(0xff25282B);

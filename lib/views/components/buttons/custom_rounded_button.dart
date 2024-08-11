@@ -28,7 +28,7 @@ class CustomRoundedButton extends StatelessWidget {
     this.svgImage,
     this.verticalPadding = 13,
     this.horizontalPadding = 15,
-    this.buttonColor = MyColor.primaryColor,
+    this.buttonColor = MyColor.top_icon,
     this.buttonTextColor = MyColor.colorWhite,
     this.isLoading = false,
     this.isOutline = false,

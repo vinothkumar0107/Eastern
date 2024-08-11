@@ -39,6 +39,7 @@ class Dimensions{
   static const double space35 = 35;
   static const double space40 = 40;
   static const double space50 = 50;
+  static const double space60 = 60;
 
   // screen-padding
   static const double defaultScreenTopPadding = 20.00;

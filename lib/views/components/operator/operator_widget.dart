@@ -31,26 +31,16 @@ class OperatorWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space16,vertical: 13),
+        height: Dimensions.space60,
+        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20,vertical: 13),
         decoration: BoxDecoration(
-          // color: MyColor.skyBlue.withOpacity(.7),
-          color: MyColor.primaryColor.withOpacity(.2),
-          borderRadius: BorderRadius.circular(4),
-          boxShadow: MyUtil.getCardShadow()
+            color: MyColor.transparentColor,
+            border:  Border.all(color: MyColor.borderColor, width: .9),
+            borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
         ),
         child: Row(
           children: [
-
-            CachedNetworkImage(
-              height: 25,
-              width: 25,
-              fit: BoxFit.cover,
-              imageUrl: image ?? "",
-              placeholder: (context, url) => const CustomImageLoader(),
-              errorWidget: (context, url, error) => Image.asset(MyImages.tower,width: 25,height: 25,),
-            ),
-            const SizedBox(width: 14,),
-            Expanded(child: Text(title ?? "".tr,style: interRegularLarge.copyWith(color:MyColor.colorBlack),maxLines: 1,overflow: TextOverflow.ellipsis,)),
+            Expanded(child: Text(title ?? "".tr,style: interMediumOverLarge.copyWith(color:MyColor.menu_icon_color),maxLines: 1,overflow: TextOverflow.ellipsis,)),
 
             isShowChangeButton ?
             Container(
@@ -59,8 +49,9 @@ class OperatorWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   color: MyColor.primaryColor
               ),
-              child: Text(MyStrings.change.tr,style: interMediumLarge.copyWith(color: MyColor.textColor),),
-            ) : const SizedBox.shrink()
+              child: Text(MyStrings.change.tr,style: interMediumLarge.copyWith(color: MyColor.menu_icon_color),),
+            ) : const SizedBox.shrink(),
+            const Icon(Icons.expand_more_rounded,color: MyColor.menu_icon_color,size: 20,)
           ],
         ),
       ),

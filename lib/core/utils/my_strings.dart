@@ -55,7 +55,7 @@ class MyStrings{
   static const String suggestedAmount = "Suggested Amount";
   static const String confirmPassword = "Confirm Password";
   static const String confirm = "Confirm";
-  static const String topUp = "Top Up";
+  static const String topUp = "Topup";
   static const String confirmYourPassword = "Confirm your password";
   static const String iAgreeWith = "I agree with the";
   static const String signUp = "Sign Up";

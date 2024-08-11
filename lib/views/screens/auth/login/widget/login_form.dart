@@ -100,7 +100,9 @@ class _LoginFormState extends State<LoginForm> {
               obscureText: obscureText,
               controller: controller.passwordController,
               focusNode: controller.passwordFocusNode,
-              onChanged: (value){},
+              onChanged: (value){
+
+              },
             ),
 
             /*CustomTextField(

@@ -40,11 +40,11 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height:45,
+            height: Dimensions.space60,
             decoration: BoxDecoration(
-                color: MyColor.getCardBg(),
-                borderRadius:const  BorderRadius.all(Radius.circular(Dimensions.defaultRadius)),
-              border: Border.all(color: MyColor.getGreyText())
+                color: MyColor.transparentColor,
+                border: Border.all(color: MyColor.borderColor, width: .9),
+                borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
             ),
             child: Padding(
               padding: const EdgeInsets.only(
@@ -63,7 +63,7 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
                 value: widget.selectedValue,
                 dropdownColor: MyColor.colorGrey1,
                 onChanged: widget.onChanged,
-                icon: const Icon(Icons.arrow_drop_down,color: MyColor.colorGrey,),
+                icon: const Icon(Icons.arrow_drop_down, color: MyColor.colorGrey),
                 items: widget.list!.map((value) {
                   return DropdownMenuItem(
                     value: value,
