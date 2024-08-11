@@ -45,9 +45,9 @@ class MyUtil{
   static dynamic getCardShadow(){
     return  [
       BoxShadow(
-        color: Colors.grey.shade400.withOpacity(0.05),
-        spreadRadius: 2,
-        blurRadius: 2,
+        color: Colors.grey.shade400.withOpacity(0.2),
+        spreadRadius: 0,
+        blurRadius: 5,
         offset: const Offset(0, 3),
       ),
     ];

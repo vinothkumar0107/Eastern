@@ -68,12 +68,45 @@ class _TicketScreenState extends State<TicketScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
     return GetBuilder<TicketListController>(
       builder: (controller) => WillPopWidget(
         child: Scaffold(
           backgroundColor: MyColor.containerBgColor,
-          appBar: CustomAppBar(title: MyStrings.supportTicket.tr, isShowBackBtn: false, isShowActionBtn: false, bgColor:  MyColor.getAppbarBgColor()),
+          appBar: AppBar(
+            title: Text(MyStrings.supportTicket,
+                style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
+            backgroundColor: MyColor.primaryColor,
+            elevation: 0,
+            actions: [
+              GestureDetector(
+                onTap: (){
+                  // controller.changeIsPress();
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(Dimensions.space7),
+                  child:  Text(MyStrings.createTicket,style: interRegularDefault.copyWith(color:MyColor.textColor,fontSize: Dimensions.fontLarge)),
+
+                ),
+              ),
+              // const SizedBox(width: Dimensions.space7),
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(RouteHelper.createTicketScreen);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(
+                      left: 7, right: 10, bottom: 7, top: 7),
+                  padding: const EdgeInsets.all(Dimensions.space7),
+                  decoration: const BoxDecoration(
+                      color: MyColor.colorWhite, shape: BoxShape.circle),
+                  child: const Icon(Icons.add,
+                      color: MyColor.primaryColor, size: 15),
+                ),
+              ),
+
+            ],
+          ),
           body: controller.isLoading
               ? const CustomLoader()
               : Padding(
@@ -149,6 +182,171 @@ class _TicketScreenState extends State<TicketScreen> {
                           isNeedRightHeaderBox: true,
                           isNeedRightBodyBox: false,
                           isNeedStatusBox: true,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          bottomNavigationBar: const CustomBottomNav(currentIndex: 1),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<TicketListController>(
+      builder: (controller) => WillPopWidget(
+        child: Scaffold(
+          backgroundColor: MyColor.colorWhite,
+          appBar:CustomAppBar(title: MyStrings.supportTicket.tr, isShowBackBtn: false, isShowActionBtn: false, bgColor:  MyColor.getAppbarBgColor()),
+          body: controller.isLoading
+              ? const CustomLoader()
+              : Padding(
+            padding: const EdgeInsets.all(0),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                      top: Dimensions.space20,
+                      left: Dimensions.space15,
+                      right: Dimensions.space15,
+                  bottom: Dimensions.space20),
+                  decoration: BoxDecoration(
+                    color: MyColor.colorWhite,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1), // Shadow color
+                        spreadRadius: 0, // Spread radius
+                        blurRadius: 5, // Blur radius
+                        offset: const Offset(0, 2), // Shadow offset
+                      ),
+                    ],
+                  ),
+
+                  child: Container(
+                    padding: const EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space15),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.paddingSize10),
+                      color: MyColor.liteBlueColor,
+                      border: Border.all(
+                        color: MyColor.liteGreyColorBorder, // Border color
+                        width: 1.0, // Border width
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.0), // Shadow color
+                          spreadRadius: 0, // Spread radius
+                          blurRadius: 10, // Blur radius
+                          offset: const Offset(0, 3), // Shadow offset
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(MyStrings.needHelp,style: interMediumDefault.copyWith(color:MyColor.colorBlack,fontSize: 14.0)),
+                            Text(MyStrings.provideHelp,style: interRegularSmall.copyWith(color:MyColor.smallTextColor1,fontSize: 12.0))
+                          ],
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteHelper.createTicketScreen);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 15.0),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor2], // Set your gradient colors
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(20.0), // Set the corner radius
+                            ),
+                            child: Center(
+                                child: Text(MyStrings.createTicket,style: interSemiBoldDefault.copyWith(color:MyColor.textColor,fontSize: 14.0))
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: Dimensions.space15),
+                Expanded(
+                  child: controller.ticketList.isEmpty
+                      ? const NoDataFoundScreen(
+                      title: MyStrings.noSupportTicketFound,
+                      height: 0.8)
+                      : SizedBox(
+                    height:
+                    MediaQuery.of(context).size.height,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      controller: scrollController,
+                      scrollDirection: Axis.vertical,
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      itemCount:
+                      controller.ticketList.length + 1,
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(
+                          height: Dimensions.space10),
+                      itemBuilder: (context, index)  {
+                        if (controller.ticketList.length ==
+                            index) {
+                          return controller.hasNext()
+                              ? SizedBox(
+                            height: 40,
+                            width:
+                            MediaQuery.of(context)
+                                .size
+                                .width,
+                            child: const Center(
+                              child: CustomLoader(),
+                            ),
+                          )
+                              : const SizedBox();
+                        }
+                        return TicketDesign(
+                          onPressed: () {
+                            // ReplyTicketScreen();
+                            // DepositBottomSheet
+                            //     .depositBottomSheet(
+                            //         context, index);
+                            // Get.toNamed(RouteHelper.replyTicketScreen);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ReplyTicketScreen(selectedReply: controller.ticketList[index]),
+                              ),
+                            );
+                          },
+                          ticketID: '#${controller.ticketList[index].ticket}',
+                          subject: controller.ticketList[index].subject,
+                          lastReplyDate: controller.ticketList[index].lastReply,
+                          status: controller.getStatusFromCode(controller.ticketList[index].status),
+                          statusColor: controller
+                              .getStatusColorFromCode(controller.ticketList[index].status),
+                          headerRightColor: controller.getPriorityColorFromCode(controller.ticketList[index].priority),
+                          priority: controller.getPriorityFromCode(controller.ticketList[index].priority),
+                          selectedIndex: index,
+                          headerLeftColor: MyColor.primaryColor2,
+                          bodyLeftColor: MyColor.colorBlack,
+                          bodyRightColor: MyColor.getGreyText(),
+                          isNeedLeftHeaderBox: false,
+                          isNeedLeftBodyBox: false,
+                          isNeedRightHeaderBox: true,
+                          isNeedRightBodyBox: false,
+                          isNeedStatusBox: false,
                         );
                       },
                     ),

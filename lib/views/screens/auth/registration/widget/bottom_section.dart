@@ -20,7 +20,7 @@ class BottomSectionRegistration extends StatelessWidget {
           },
           child: Text(
             MyStrings.signInNow.tr,
-            style: interBoldLarge.copyWith(color: MyColor.appPrimaryColorSecondary2, decoration: TextDecoration.underline),
+            style: interBoldLarge.copyWith(color: MyColor.appPrimaryColorSecondary2, decoration: TextDecoration.none),
           ),
         )
       ],

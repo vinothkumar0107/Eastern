@@ -16,6 +16,8 @@ class TicketColumn extends StatelessWidget {
   final bool isNeedBodyBox;
   final Color? headerColor;
   final Color? bodyColor;
+  final TextStyle? headerTextStyle;
+  final TextStyle? bodyTextStyle;
   
   const TicketColumn({Key? key,
     this.alignmentEnd=false,
@@ -27,6 +29,8 @@ class TicketColumn extends StatelessWidget {
     required this.isNeedBodyBox,
     this.headerColor,
     this.bodyColor,
+    this.headerTextStyle,
+    this.bodyTextStyle,
     required this.body}) : super(key: key);
 
   @override
@@ -36,25 +40,16 @@ class TicketColumn extends StatelessWidget {
       children: [
        isNeedHeaderBox ?
        Container(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 1, bottom: 1), // Padding inside the border
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 2), // Padding inside the border
         decoration: BoxDecoration(
           color: headerColor?.withOpacity(0.2), // Background color
-          border: Border.all(
-            color: headerColor ?? MyColor.colorBlack, // Border color
-            width: 1.0, // Border width
-          ),
-          borderRadius: BorderRadius.circular(6.0), // Border radius
+          borderRadius: BorderRadius.circular(20.0), // Border radius
         ),
-        child: Text(
+        child:  header.tr.isNotEmpty ? Text(
           header.tr,
-          style: isDate?interRegularDefault.copyWith(color:headerColor??
-          MyColor.red,fontSize: Dimensions.fontSmall12):
-          interRegularDefault.copyWith(color:headerColor??MyColor.primaryColor, fontSize: Dimensions.fontSmall12 )),
+          style: headerTextStyle ?? interRegularDefault.copyWith(color: headerColor, fontSize: 12)) : const SizedBox.shrink(),
       )
-        : Text(header.tr,style: isDate?interRegularDefault.copyWith(color:textColor??
-          MyColor.red,fontSize: Dimensions.fontLarge):
-      interRegularDefault.copyWith(color:textColor??MyColor.primaryColor, fontSize: Dimensions.fontLarge )),
-        // Text(header.tr,style: interRegularSmall.copyWith(color: MyColor.getGreyText(),fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,),
+        : header.tr.isNotEmpty ? Text(header.tr,style: headerTextStyle ?? interRegularDefault.copyWith(color: headerColor, fontSize: 12)) : const SizedBox.shrink(),
         const SizedBox(height: 8,),
         isNeedBodyBox ?
         Container(
@@ -67,14 +62,10 @@ class TicketColumn extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(6.0), // Border radius
           ),
-          child: Text(body.tr,style: isDate?interRegularDefault.copyWith(
-              color: bodyColor??
-                  MyColor.smallTextColor1,fontSize: Dimensions.fontSmall12):interRegularDefault.copyWith(color:bodyColor??MyColor.smallTextColor1, fontSize: Dimensions.fontSmall12 )),
-        ) :
-        Text(body.tr,style: isDate?interRegularDefault.copyWith(
-            color: MyColor.colorGrey??
-            MyColor.smallTextColor1,fontSize: Dimensions.fontSmall12):interRegularDefault.copyWith(color:textColor??MyColor.smallTextColor1, fontSize: Dimensions.fontDefault )),
-
+          child: body.tr.isNotEmpty ? Text(body.tr,style: bodyTextStyle ?? interRegularDefault.copyWith(color: bodyColor, fontSize: 12)) : const SizedBox.shrink(),
+        ) :  body.tr.isNotEmpty ?
+          Text(body.tr,style: bodyTextStyle ?? interRegularDefault.copyWith(color: bodyColor, fontSize: 12)) : const SizedBox.shrink(),
+        const SizedBox(height: 8)
       ],
     );
   }

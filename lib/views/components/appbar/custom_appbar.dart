@@ -30,7 +30,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
       {Key? key,
       this.isProfileCompleted = false,
       this.fromAuth = false,
-      this.isTitleCenter = false,
+      this.isTitleCenter = true,
       this.isShowBackBtn = true,
       required this.title,
       this.actionText = '',
@@ -110,37 +110,47 @@ class _CustomAppBarState extends State<CustomAppBar> {
           )
         : AppBar(
       scrolledUnderElevation: 0,
-            systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: MyColor.primaryColor,
-                statusBarIconBrightness: Brightness.light,
-                systemNavigationBarColor: MyColor.navigationBarColor,
-                systemNavigationBarIconBrightness: Brightness.dark),
-            elevation: 0,
-            backgroundColor: widget.bgColor,
-            title: Text(widget.title.tr,
-                style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
-            actions: [
-              widget.isShowActionBtn
-                  ? InkWell(
-                      onTap: () {
-                        Get.toNamed(RouteHelper.notificationScreen)
-                            ?.then((value) {
-                          setState(() {
-                            hasNotification = false;
-                          });
-                        });
-                      },
-                      child: SvgPicture.asset(
-                        hasNotification
-                            ? MyIcons.activeNotificationIcon
-                            : MyIcons.inActiveNotificationIcon,
-                        height: 28,
-                        width: 28,
-                      ))
-                  : const SizedBox.shrink(),
-              const SizedBox(width: 10)
-            ],
-            automaticallyImplyLeading: false,
-          );
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [MyColor.primaryColor2, MyColor.primaryColor],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
+      systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: MyColor.primaryColor,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: MyColor.navigationBarColor,
+          systemNavigationBarIconBrightness: Brightness.dark),
+      elevation: 0,
+      backgroundColor: widget.bgColor,
+      centerTitle: widget.isTitleCenter,
+      title: Text(widget.title.tr,
+          style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite)),
+      actions: [
+        widget.isShowActionBtn
+            ? InkWell(
+            onTap: () {
+              Get.toNamed(RouteHelper.notificationScreen)
+                  ?.then((value) {
+                setState(() {
+                  hasNotification = false;
+                });
+              });
+            },
+            child: SvgPicture.asset(
+              hasNotification
+                  ? MyIcons.activeNotificationIcon
+                  : MyIcons.inActiveNotificationIcon,
+              height: 28,
+              width: 28,
+            ))
+            : const SizedBox.shrink(),
+        const SizedBox(width: 10)
+      ],
+      automaticallyImplyLeading: false,
+    );
   }
 }

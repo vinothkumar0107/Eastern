@@ -1,4 +1,5 @@
 import 'package:eastern_trust/core/route/route.dart';
+import 'package:eastern_trust/core/utils/style.dart';
 import 'package:eastern_trust/views/screens/tickets/ticket_column.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,50 +52,104 @@ class TicketDesign extends StatelessWidget {
     return GestureDetector(
       onTap:  onPressed,
       child: Container(
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(
-              vertical: Dimensions.space15, horizontal: Dimensions.space15),
-          decoration: BoxDecoration(
-              color: MyColor.colorWhite,
-              borderRadius:
-                  BorderRadius.circular(Dimensions.defaultBorderRadius),
-              boxShadow: MyUtil.getCardShadow()),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TicketColumn(
-                    header: ticketID,
-                    body: subject,
-                    headerColor: headerLeftColor,
-                    bodyColor: bodyLeftColor,
-                    isNeedHeaderBox: isNeedLeftHeaderBox ?? false,
-                    isNeedBodyBox: isNeedLeftBodyBox ?? false,
+        padding: const EdgeInsets.only(
+            top: 0,
+            left: Dimensions.space15,
+            right: Dimensions.space15,
+            bottom: Dimensions.space5),
+        color: MyColor.colorWhite,
+        child: Container(
+            width: MediaQuery.of(context).size.width,
+
+            decoration: BoxDecoration(
+                color: MyColor.colorWhite,
+                borderRadius:
+                BorderRadius.circular(Dimensions.paddingSize10),
+                boxShadow: MyUtil.getCardShadow(),
+            border: Border.all(
+              color: MyColor.liteGreyColorBorder, // Border color
+              width: 1.0, // Border width
+            )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+               Container(
+                 padding: const EdgeInsets.symmetric(
+                     vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                 child:  Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                   children: [
+                     TicketColumn(
+                       header: ticketID,
+                       body: subject,
+                       headerColor: headerLeftColor,
+                       bodyColor: bodyLeftColor,
+                       isNeedHeaderBox: isNeedLeftHeaderBox ?? false,
+                       isNeedBodyBox: isNeedLeftBodyBox ?? false,
+                       headerTextStyle: interMediumDefault.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontSize14),
+                       bodyTextStyle: interRegularSmall.copyWith(color: MyColor.colorGrey, fontSize: Dimensions.fontSmall12),
+                     ),
+                     TicketColumn(
+                       alignmentEnd: true,
+                       header: priority,
+                       isDate: true,
+                       body: '',
+                       headerColor: headerRightColor,
+                       bodyColor: bodyRightColor,
+                       isNeedHeaderBox: isNeedRightHeaderBox ?? false ,
+                       isNeedBodyBox: isNeedRightBodyBox ?? false,
+                       headerTextStyle: interMediumDefault.copyWith(color: headerRightColor, fontSize: Dimensions.fontSmall),
+                       bodyTextStyle: interRegularSmall.copyWith(color: bodyRightColor, fontSize: Dimensions.fontSmall12),
+                     ),
+                   ],
+                 ),
+               ),
+               Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: Dimensions.space5, horizontal: Dimensions.space15),
+                  decoration: BoxDecoration(
+                    color: MyColor.colorGrey.withOpacity(0.1),
+                    border: Border(
+                      top: BorderSide(
+                        color: MyColor.colorGrey.withOpacity(0.2), // Top border color
+                        width: 1.0, // Top border width
+                      ),
+                    ),
+                    borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(Dimensions.space10), bottomRight: Radius.circular(Dimensions.space10))
                   ),
-                  TicketColumn(
-                    alignmentEnd: true,
-                    header: priority,
-                    isDate: true,
-                    body: '${MyStrings.lastReply}: $lastReplyDate',
-                    headerColor: headerRightColor,
-                    bodyColor: bodyRightColor,
-                    isNeedHeaderBox: isNeedRightHeaderBox ?? false ,
-                    isNeedBodyBox: isNeedRightBodyBox ?? false,
-                  ),
-                ],
-              ),
-              TicketColumn(
-                header: "",
-                body: status,
-                headerColor: statusColor,
-                bodyColor: statusColor,
-                isNeedHeaderBox: false,
-                isNeedBodyBox: isNeedStatusBox ?? false,
-              ),
-            ],
-          )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TicketColumn(
+                        header: "",
+                        body: status,
+                        headerColor: statusColor,
+                        bodyColor: statusColor,
+                        isNeedHeaderBox: false,
+                        isNeedBodyBox: isNeedStatusBox ?? false,
+                        headerTextStyle: interMediumDefault.copyWith(color: headerRightColor, fontSize: Dimensions.fontSmall),
+                        bodyTextStyle: interMediumDefault.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontSmall12),
+                      ),
+                      TicketColumn(
+                        alignmentEnd: true,
+                        header: '',
+                        isDate: true,
+                        body: '${MyStrings.lastReply}: $lastReplyDate',
+                        headerColor: headerRightColor,
+                        bodyColor: bodyRightColor,
+                        isNeedHeaderBox: false ,
+                        isNeedBodyBox: false,
+                        headerTextStyle: interMediumDefault.copyWith(color: headerRightColor, fontSize: Dimensions.fontSmall),
+                        bodyTextStyle: interMediumDefault.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontSmall12),
+                      ),
+                    ],
+                  )
+                ),
+              ],
+            )),
+      )
     );
   }
 }

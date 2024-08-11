@@ -669,6 +669,9 @@ class MyStrings{
 
   static const String welcomeBackAgain = "Welcome back! Glad to see you, Again!";
   static const String seeAll = "See all";
+  static const String needHelp = "Need Help?";
+  static const String provideHelp = "we provide help 24*7";
+
 
 
 

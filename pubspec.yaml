@@ -100,3 +100,7 @@ flutter:
           weight: 600
         - asset: assets/fonts/mulish/Mulish-Bold.ttf
           weight: 700
+
+    - family: SF-UI-Display-Regular
+      fonts:
+        - asset: assets/fonts/SF-UI-Display-Regular.ttf
