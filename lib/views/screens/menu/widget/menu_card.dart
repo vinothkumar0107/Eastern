@@ -13,7 +13,16 @@ class MenuCard extends StatelessWidget {
     padding: const EdgeInsets.all(Dimensions.space15),
     decoration: BoxDecoration(
       color: MyColor.getCardBg(),
-      borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+      borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.1), // Shadow color
+          spreadRadius: 0, // Spread radius
+          blurRadius: 5, // Blur radius
+          offset: const Offset(0, 2), // Shadow offset
+        ),
+      ],
+    ),
     child: child,
     );
   }

@@ -58,167 +58,177 @@ class _MenuScreenState extends State<MenuScreen> {
     return GetBuilder<LocalizationController>(builder: (localizationController){
       return  GetBuilder<menu.MenuController>(builder: (menuController)=>WillPopWidget(
         nextRoute: RouteHelper.homeScreen,
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: MyColor.getScreenBgColor1(),
-            appBar: CustomAppBar(title: MyStrings.menu.tr, isShowBackBtn: false, isShowActionBtn: false, bgColor:  MyColor.getAppbarBgColor()),
-            body: SingleChildScrollView(
-              padding: Dimensions.screenPaddingHV,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MenuCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+        child: Scaffold(
+          backgroundColor: MyColor.getScreenBgColor1(),
+          appBar: CustomAppBar(title: MyStrings.menu.tr, isShowBackBtn: false, isShowActionBtn: false, bgColor:  MyColor.getAppbarBgColor()),
+          body: SingleChildScrollView(
+            padding: Dimensions.screenPaddingHV,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MenuCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                        MenuRowWidget(
-                          image: MyImages.profile,
-                          label: MyStrings.profile,
-                          onPressed: () => Get.toNamed(RouteHelper.profileScreen),
-                        ),
+                      MenuRowWidget(
+                        image: MyImages.profile,
+                        label: MyStrings.profile,
+                        onPressed: () => Get.toNamed(RouteHelper.profileScreen),
+                      ),
 
-                        const CustomDivider(space: Dimensions.space15),
-                        MenuRowWidget(
-                          image: MyImages.changePass,
-                          label: MyStrings.changePassword.tr,
-                          onPressed: () => Get.toNamed(RouteHelper.changePasswordScreen),
-                        ),
-                        const CustomDivider(space: Dimensions.space15),
-                        MenuRowWidget(
-                          image: MyImages.referral,
-                          label: MyStrings.referral.tr,
-                          onPressed: () => Get.toNamed(RouteHelper.referralScreen),
-                        ),
-
-
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: Dimensions.space12),
-
-                  MenuCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                        MenuRowWidget(
-                          image: MyImages.notificationIcon,
-                          label: MyStrings.notification.tr,
-                          onPressed: () => Get.toNamed(RouteHelper.notificationScreen),
-                        ),
-
-                        const CustomDivider(space: Dimensions.space15),
-
-                        Visibility(
+                      const CustomDivider(space: Dimensions.space15),
+                      MenuRowWidget(
+                        image: MyImages.changePass,
+                        label: MyStrings.changePassword.tr,
+                        onPressed: () => Get.toNamed(RouteHelper.changePasswordScreen),
+                      ),
+                      const CustomDivider(space: Dimensions.space15),
+                      MenuRowWidget(
+                        image: MyImages.referral,
+                        label: MyStrings.referral.tr,
+                        onPressed: () => Get.toNamed(RouteHelper.referralScreen),
+                      ),
+                      const CustomDivider(space: Dimensions.space15),
+                      Visibility(
                           visible: menuController.isDepositEnable,
                           child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            MenuRowWidget(
-                              image: MyImages.deposit,
-                              label: MyStrings.deposit.tr,
-                              onPressed: () => Get.toNamed(RouteHelper.depositsScreen),
-                            ),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MenuRowWidget(
+                                image: MyImages.mobile,
+                                label: MyStrings.airTime.tr,
+                                onPressed: () => Get.toNamed(RouteHelper.airtimeScreen),
+                              ),
+                            ],
+                          )),
 
-                            const CustomDivider(space: Dimensions.space15),
-                          ],
-                        )),
 
-                        Visibility(
+                    ],
+                  ),
+                ),
+                const SizedBox(height: Dimensions.space12),
+                MenuCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      MenuRowWidget(
+                        image: MyImages.notificationIcon,
+                        label: MyStrings.notification.tr,
+                        onPressed: () => Get.toNamed(RouteHelper.notificationScreen),
+                      ),
+
+                      const CustomDivider(space: Dimensions.space15),
+
+                      Visibility(
+                          visible: menuController.isDepositEnable,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MenuRowWidget(
+                                image: MyImages.deposit,
+                                label: MyStrings.deposit.tr,
+                                onPressed: () => Get.toNamed(RouteHelper.depositsScreen),
+                              ),
+
+                              const CustomDivider(space: Dimensions.space15),
+                            ],
+                          )),
+
+                      Visibility(
                           visible: menuController.isWithdrawEnable,
                           child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            MenuRowWidget(
-                              image: MyImages.withdrawIcon,
-                              label: MyStrings.withdraw.tr,
-                              onPressed: () => Get.toNamed(RouteHelper.withdrawScreen),
-                            ),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MenuRowWidget(
+                                image: MyImages.withdrawMenu,
+                                label: MyStrings.withdraw.tr,
+                                onPressed: () => Get.toNamed(RouteHelper.withdrawScreen),
+                              ),
 
-                            const CustomDivider(space: Dimensions.space15),
-                          ],
-                        )),
+                              const CustomDivider(space: Dimensions.space15),
+                            ],
+                          )),
 
-                        Visibility(
-                            visible: menuController.langSwitchEnable,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                MenuRowWidget(
-                                  image: MyImages.language,
-                                  label: MyStrings.language.tr,
-                                  onPressed: (){
-                                    final apiClient = Get.put(ApiClient(sharedPreferences: Get.find()));
-                                    SharedPreferences pref = apiClient.sharedPreferences;
-                                    String language = pref.getString(SharedPreferenceHelper.languageListKey)  ??'';
-                                    String countryCode = pref.getString(SharedPreferenceHelper.countryCode)   ??'US';
-                                    String languageCode = pref.getString(SharedPreferenceHelper.languageCode) ??'en';
-                                    Locale local = Locale(languageCode,countryCode);
-                                    showLanguageDialog(language, local, context);
-                                    //Get.toNamed(RouteHelper.languageScreen);
-                                  },
-                                ),
-                              ],
-                            )),
-                      ],
-                    ),
+                      Visibility(
+                          visible: menuController.langSwitchEnable,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MenuRowWidget(
+                                image: MyImages.language,
+                                label: MyStrings.language.tr,
+                                onPressed: (){
+                                  final apiClient = Get.put(ApiClient(sharedPreferences: Get.find()));
+                                  SharedPreferences pref = apiClient.sharedPreferences;
+                                  String language = pref.getString(SharedPreferenceHelper.languageListKey)  ??'';
+                                  String countryCode = pref.getString(SharedPreferenceHelper.countryCode)   ??'US';
+                                  String languageCode = pref.getString(SharedPreferenceHelper.languageCode) ??'en';
+                                  Locale local = Locale(languageCode,countryCode);
+                                  showLanguageDialog(language, local, context);
+                                  //Get.toNamed(RouteHelper.languageScreen);
+                                },
+                              ),
+                            ],
+                          )),
+                    ],
                   ),
-                  const SizedBox(height: Dimensions.space12),
-                  MenuCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MenuRowWidget(
-                          image: MyImages.termsAndCon,
-                          label: MyStrings.terms.tr,
-                          onPressed: (){
-                            Get.toNamed(RouteHelper.privacyScreen);
-                          },
-                        ),
-                        const CustomDivider(space: Dimensions.space15),
-                        MenuRowWidget(
-                          image: MyImages.faq,
-                          label: MyStrings.faq.tr,
-                          onPressed: (){
-                            Get.toNamed(RouteHelper.faqScreen);
-                          },
-                        ),
-                        const CustomDivider(space: Dimensions.space15),
-                        MenuRowWidget(
-                          image: MyImages.profile,
-                          label: MyStrings.twoFactorSecurity.tr,
-                          onPressed: (){
-                            Get.toNamed(RouteHelper.twoFactorScreen);
-                          },
-                        ),
-                        const CustomDivider(space: Dimensions.space15),
-                        MenuRowWidget(
-                          isLoading: menuController.logoutLoading,
-                          image: MyImages.signOut,
-                          label: MyStrings.signOut.tr,
-                          onPressed: (){
-                           menuController.logout();
-                          },
-                        ),
-                        const CustomDivider(space: Dimensions.space15),
-                        MenuRowWidget(
-                          isLoading: menuController.deleteLoading,
-                          image: MyImages.delete,
-                          label: MyStrings.deleteAccount.tr,
-                          onPressed: (){
-                            deleteAccountDialog(context,menuController);
-                           // menuController.deleteAccount();
-                          },
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(height: Dimensions.space12),
+                MenuCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MenuRowWidget(
+                        image: MyImages.termsAndCon,
+                        label: MyStrings.terms.tr,
+                        onPressed: (){
+                          Get.toNamed(RouteHelper.privacyScreen);
+                        },
+                      ),
+                      const CustomDivider(space: Dimensions.space15),
+                      MenuRowWidget(
+                        image: MyImages.faq,
+                        label: MyStrings.faq.tr,
+                        onPressed: (){
+                          Get.toNamed(RouteHelper.faqScreen);
+                        },
+                      ),
+                      const CustomDivider(space: Dimensions.space15),
+                      MenuRowWidget(
+                        image: MyImages.lock,
+                        label: MyStrings.twoFactorSecurity.tr,
+                        onPressed: (){
+                          Get.toNamed(RouteHelper.twoFactorScreen);
+                        },
+                      ),
+                      const CustomDivider(space: Dimensions.space15),
+                      MenuRowWidget(
+                        isLoading: menuController.logoutLoading,
+                        image: MyImages.signOut,
+                        label: MyStrings.signOut.tr,
+                        onPressed: (){
+                          menuController.logout();
+                        },
+                      ),
+                      const CustomDivider(space: Dimensions.space15),
+                      MenuRowWidget(
+                        isLoading: menuController.deleteLoading,
+                        image: MyImages.delete,
+                        label: MyStrings.deleteAccount.tr,
+                        onPressed: (){
+                          deleteAccountDialog(context,menuController);
+                          // menuController.deleteAccount();
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            bottomNavigationBar: const CustomBottomNav(currentIndex: 4),
           ),
+          bottomNavigationBar: const CustomBottomNav(currentIndex: 4),
         ),
       ));
     });

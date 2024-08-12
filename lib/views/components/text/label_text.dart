@@ -9,12 +9,14 @@ class LabelText extends StatelessWidget {
   final String text;
   final TextAlign? textAlign;
   final bool required;
+  final TextStyle? textStyle;
 
   const LabelText({
     Key? key,
     required this.text,
     this.textAlign,
-    this.required = false
+    this.required = false,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class LabelText extends StatelessWidget {
     return required?FormRow(label: text.tr, isRequired: true):Text(
       text.tr,
       textAlign: textAlign,
-      style: interRegularDefault.copyWith(color: MyColor.getLabelTextColor()),
+      style: textStyle??interRegularDefault.copyWith(color: MyColor.getLabelTextColor()),
     );
   }
 }

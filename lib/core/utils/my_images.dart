@@ -55,6 +55,8 @@ class MyImages{
   static const String faq = "assets/images/menu/faq.svg";
   static const String signOut = "assets/images/menu/logout.svg";
   static const String delete = "assets/images/menu/delete.svg";
+  static const String withdrawMenu = "assets/images/menu/menu_withdraw_1.svg";
+  static const String lock = "assets/images/menu/lock.svg";
 
 
   //error and success icon

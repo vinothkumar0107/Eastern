@@ -8,6 +8,8 @@ import 'package:eastern_trust/data/model/transaction/transaction_response_model.
 import 'package:eastern_trust/data/repo/account/transaction_log_repo.dart';
 import 'package:eastern_trust/views/components/snackbar/show_custom_snackbar.dart';
 
+import '../../../core/utils/my_images.dart';
+
 class TransactionController extends GetxController{
 
   TransactionRepo transactionRepo;
@@ -138,6 +140,9 @@ class TransactionController extends GetxController{
 
   Color changeTextColor(String trxType){
     return trxType == "+" ? MyColor.green : MyColor.colorRed;
+  }
+  Image changeImage(String trxType){
+    return trxType == "+" ? Image.asset(MyImages.greenArrowUp, height: 25, width: 25,fit: BoxFit.cover,):Image.asset(MyImages.redArrowDown, height: 25, width: 25,fit: BoxFit.cover,);
   }
 
   int expandIndex = -1;

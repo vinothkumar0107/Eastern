@@ -60,7 +60,6 @@ class TicketDesign extends StatelessWidget {
         color: MyColor.colorWhite,
         child: Container(
             width: MediaQuery.of(context).size.width,
-
             decoration: BoxDecoration(
                 color: MyColor.colorWhite,
                 borderRadius:

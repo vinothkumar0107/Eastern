@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
@@ -38,7 +39,7 @@ class MenuRowWidget extends StatelessWidget {
               SvgPicture.asset(image, color: MyColor.getTextColor2(), height: 15, width: 15,fit: BoxFit.cover):
               Image.asset(image, color: MyColor.getTextColor2(), height: 15, width: 15,fit: BoxFit.cover,),
               image.isEmpty?const SizedBox.shrink():const SizedBox(width: Dimensions.space15),
-              DefaultText(text: label, textColor: MyColor.getTextColor())
+              DefaultText(text: label, textColor: MyColor.getTextColor(), textStyle: interRegularLarge.copyWith(fontWeight: FontWeight.w500),)
             ],
           ),
           image.isEmpty?DefaultText(text: number.toString()):Container(

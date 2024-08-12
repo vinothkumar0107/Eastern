@@ -11,12 +11,14 @@ class CardColumn extends StatelessWidget {
   final bool alignmentEnd;
   final bool isDate;
   final Color? textColor;
+  final TextAlign? textAlignment;
   
   const CardColumn({Key? key,
     this.alignmentEnd=false,
     required this.header,
     this.isDate = false,
     this.textColor,
+    this.textAlignment,
     required this.body}) : super(key: key);
 
   @override
@@ -24,9 +26,9 @@ class CardColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: alignmentEnd?CrossAxisAlignment.end:CrossAxisAlignment.start,
       children: [
-        Text(header.tr,style: interRegularSmall.copyWith(color: MyColor.getGreyText(),fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,),
-        const SizedBox(height: 8,),
-        Text(body.tr,style: isDate?interRegularDefault.copyWith(fontStyle: FontStyle.italic,color:textColor??MyColor.smallTextColor1,fontSize: Dimensions.fontSmall):interRegularDefault.copyWith(color:textColor??MyColor.smallTextColor1 ))
+        header.tr.isNotEmpty ? Text(header.tr,style: isDate?interMediumDefault.copyWith(color:textColor??MyColor.smallTextColor1,fontSize: Dimensions.fontSize14, fontWeight: FontWeight.w600):interMediumDefault.copyWith(color:textColor??MyColor.smallTextColor1, fontSize: Dimensions.fontSize14, fontWeight: FontWeight.w600 )) : const SizedBox.shrink(),
+        const SizedBox(height: 5,),
+        body.tr.isNotEmpty ? Text(body.tr,textAlign: textAlignment, style: isDate?interRegularSmall.copyWith(color:textColor??MyColor.smallTextColor1,fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w400):interRegularSmall.copyWith(color:textColor??MyColor.smallTextColor1, fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w400 )) : const SizedBox.shrink()
       ],
     );
   }
