@@ -6,6 +6,8 @@ import 'package:eastern_trust/core/utils/my_strings.dart';
 import 'package:eastern_trust/views/components/column/card_column.dart';
 import 'package:eastern_trust/views/components/widget-divider/widget_divider.dart';
 
+import '../../../../../../core/utils/util.dart';
+
 class InstallmentLogItem extends StatelessWidget {
   final String serialNumber;
   final String installmentDate;
@@ -26,8 +28,8 @@ class InstallmentLogItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(Dimensions.screenPadding,),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-        color: MyColor.getCardBg()
+        borderRadius: BorderRadius.circular(Dimensions.defaultBorderRadius),
+        color: MyColor.getCardBg(),boxShadow: MyUtil.getCardShadow()
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

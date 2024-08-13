@@ -52,7 +52,7 @@ class _CustomAmountTextFieldState extends State<CustomAmountTextField> {
           decoration: BoxDecoration(
             color: MyColor.transparentColor,
             border: Border.all(color: isFocus ? MyColor.primaryColor : MyColor.borderColor, width: 1),
-            borderRadius: BorderRadius.circular(Dimensions.defaultRadius)
+            borderRadius: BorderRadius.circular(25)
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,15 +71,15 @@ class _CustomAmountTextFieldState extends State<CustomAmountTextField> {
                       cursorColor: MyColor.primaryColor,
                       controller: widget.controller,
                       autofocus: widget.autoFocus,
-                      style: interRegularDefault.copyWith(color: MyColor.colorBlack),
+                      style: interRegularLarge.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontDefault),
                       //textAlign: TextAlign.left,
                       keyboardType: TextInputType.number,
                       textInputAction: widget.inputAction,
                       onChanged: widget.onChanged,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(bottom: 16),
+                          contentPadding: const EdgeInsets.only(bottom: 13),
                           hintText: widget.hintText.tr,
-                          hintStyle: interRegularSmall.copyWith(color: MyColor.getGreyText()),
+                          hintStyle: interRegularDefault.copyWith(color: MyColor.getGreyText(), fontWeight: FontWeight.w500),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,

@@ -21,19 +21,19 @@ class PlanTabBar extends StatelessWidget {
     return GestureDetector(
         onTap: press,
         child: Container(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(3),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius:  BorderRadiusDirectional.circular(Dimensions.space30),
             color: isActive
-                ? MyColor.primaryColor
+                ? MyColor.colorWhite
                 : MyColor.transparentColor,
           ),
           child: Text(
             text.tr,
             style: interSemiBoldDefault.copyWith(
                 color: isActive
-                    ? MyColor.colorWhite
+                    ? MyColor.colorBlack
                     : MyColor.colorBlack),
           ),
         ));

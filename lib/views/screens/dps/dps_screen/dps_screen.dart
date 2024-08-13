@@ -54,8 +54,8 @@ class _DPSScreenState extends State<DPSScreen> {
     return GetBuilder<DPSController>(builder: (controller)=>WillPopWidget(
       nextRoute: controller.getPreviousRoute(),
       child: Scaffold(
-        backgroundColor: MyColor.getScreenBgColor(),
-        appBar: CustomAppBar(title: MyStrings.dps,isForceBackHome: controller.getPreviousRoute()!=RouteHelper.notificationScreen,),
+        backgroundColor: MyColor.liteGreyColor,
+        appBar: CustomAppBar(title: MyStrings.dps, isTitleCenter: false, isForceBackHome: controller.getPreviousRoute()!=RouteHelper.notificationScreen,),
         body: Padding(
           padding: Dimensions.screenPaddingHV,
           child: Column(

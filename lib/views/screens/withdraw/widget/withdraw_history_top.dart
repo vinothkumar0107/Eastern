@@ -46,7 +46,7 @@ class _WithdrawHistoryTopState extends State<WithdrawHistoryTop> {
                             onChanged: (value){
                               return;
                             },
-                            hintText:'',
+                            hintText:'Enter TRX  No',
                           ),
                         ),
                   ),
@@ -61,7 +61,7 @@ class _WithdrawHistoryTopState extends State<WithdrawHistoryTop> {
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         borderRadius:
-                        BorderRadius.circular(4),
+                        BorderRadius.circular(10),
                         color: MyColor.primaryColor,
                       ),
                       child: const Icon(Icons.search_outlined, color:  MyColor.colorWhite, size: 18),

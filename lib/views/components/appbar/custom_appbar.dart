@@ -61,54 +61,65 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return widget.isShowBackBtn
-        ? AppBar(
+        ?
+    AppBar(
       scrolledUnderElevation: 0,
-            systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: MyColor.primaryColor,
-                statusBarIconBrightness: Brightness.light,
-                systemNavigationBarColor: MyColor.navigationBarColor,
-                systemNavigationBarIconBrightness: Brightness.dark),
-            elevation: 0,
-            leading: widget.isShowBackBtn
-                ? IconButton(
-                    onPressed: () {
-                      if (widget.fromAuth) {
-                        Get.offAllNamed(RouteHelper.loginScreen);
-                      } else if (widget.isProfileCompleted) {
-                        showExitDialog(Get.context!);
-                      } else {
-                        String previousRoute = Get.previousRoute;
-                        if (previousRoute == '/splash-screen' || widget.isForceBackHome == true) {
-                          Get.offAndToNamed(RouteHelper.homeScreen);
-                        } else {
-                          Get.back();
-                        }
-                      }
-                    },
-                    icon: const Icon(Icons.arrow_back,
-                        color: MyColor.colorWhite, size: 20))
-                : const SizedBox.shrink(),
-            backgroundColor: MyColor.primaryColor,
-            title: Text(widget.title.tr,
-                style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
-            centerTitle: widget.isTitleCenter,
-            actions: [
-              widget.isShowActionBtn
-                  ?GestureDetector(
-                onTap: widget.press,
-                child: Container(
-                  margin: const EdgeInsetsDirectional.only(end: 7,bottom: 7,top: 7),
-                  padding: const EdgeInsets.all(Dimensions.space7),
-                  decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
-                  child:  Icon(widget.actionIcon, color: MyColor.primaryColor, size: 15),
-                ),
-              ) : const SizedBox.shrink(),
-              const SizedBox(
-                width: 10,
-              )
-            ],
-          )
-        : AppBar(
+      systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: MyColor.primaryColor,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: MyColor.navigationBarColor,
+          systemNavigationBarIconBrightness: Brightness.dark),
+      elevation: 0,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [MyColor.primaryColor2, MyColor.primaryColor],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
+      leading: widget.isShowBackBtn
+          ? IconButton(
+          onPressed: () {
+            if (widget.fromAuth) {
+              Get.offAllNamed(RouteHelper.loginScreen);
+            } else if (widget.isProfileCompleted) {
+              showExitDialog(Get.context!);
+            } else {
+              String previousRoute = Get.previousRoute;
+              if (previousRoute == '/splash-screen' || widget.isForceBackHome == true) {
+                Get.offAndToNamed(RouteHelper.homeScreen);
+              } else {
+                Get.back();
+              }
+            }
+          },
+          icon: const Icon(Icons.arrow_back,
+              color: MyColor.colorWhite, size: 20))
+          : const SizedBox.shrink(),
+      backgroundColor: MyColor.primaryColor,
+      title: Text(widget.title.tr,
+          style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite)),
+      centerTitle: widget.isTitleCenter,
+      actions: [
+        widget.isShowActionBtn
+            ?GestureDetector(
+          onTap: widget.press,
+          child: Container(
+            margin: const EdgeInsetsDirectional.only(end: 7,bottom: 7,top: 7),
+            padding: const EdgeInsets.all(Dimensions.space7),
+            decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
+            child:  Icon(widget.actionIcon, color: MyColor.primaryColor, size: 15),
+          ),
+        ) : const SizedBox.shrink(),
+        const SizedBox(
+          width: 10,
+        )
+      ],
+    )
+        :
+    AppBar(
       scrolledUnderElevation: 0,
       flexibleSpace: Container(
         decoration: const BoxDecoration(

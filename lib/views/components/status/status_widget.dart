@@ -27,11 +27,11 @@ class StatusWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: MyColor.transparentColor,
-        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+        color: borderColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(25),
         border: Border.all(color: borderColor, width: 0.5)
       ),
-      child: Text(status.tr, textAlign: TextAlign.center, style: interRegularExtraSmall.copyWith(color: borderColor)),
+      child: Text(status.tr, textAlign: TextAlign.center, style: interRegularExtraSmall.copyWith(color: borderColor, fontWeight: FontWeight.w600)),
     ) : Container(
       padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space10),
       alignment: Alignment.center,
@@ -39,7 +39,7 @@ class StatusWidget extends StatelessWidget {
           color: backgroundColor,
           borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
       ),
-      child: Text(status.tr, textAlign: TextAlign.center, style: interRegularExtraSmall.copyWith(color: foregroundColor)),
+      child: Text(status.tr, textAlign: TextAlign.center, style: interRegularExtraSmall.copyWith(color: foregroundColor, fontWeight: FontWeight.w600)),
     );
   }
 }

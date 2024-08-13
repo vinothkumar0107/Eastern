@@ -42,9 +42,14 @@ class RoundedButton extends StatelessWidget {
             padding:  EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
             width: size.width * width,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(cornerRadius),
-                border: Border.all(color: borderColor),
-                color: Colors.transparent
+              borderRadius: BorderRadius.circular(cornerRadius),
+              border: Border.all(color: borderColor),
+              color: Colors.transparent,
+              gradient: const LinearGradient(
+                colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
             ),
             child: Center(child: Text(text.tr,style:TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)))),
       ),
@@ -52,20 +57,29 @@ class RoundedButton extends StatelessWidget {
       width: size.width * width,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(0),
-        child: ElevatedButton(
-          onPressed: press,
-          style: ElevatedButton.styleFrom(
-
-              backgroundColor: color,
-              shadowColor: MyColor.transparentColor,
-              padding:  EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
-              textStyle: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
-          child: Text(
-            text.tr,
-            maxLines: 1,
-            style: interBoldExtraLarge.copyWith(color: textColor),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor2],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            borderRadius: BorderRadius.circular(50), // Apply the same border radius
           ),
-        ),
+          child: ElevatedButton(
+            onPressed: press,
+            style: ElevatedButton.styleFrom(
+                backgroundColor:  MyColor.transparentColor,
+                shadowColor: MyColor.transparentColor,
+                padding:  EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
+                textStyle: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
+            child: Text(
+              text.tr,
+              maxLines: 1,
+              style: interBoldExtraLarge.copyWith(color: textColor),
+            ),
+          ),
+        )
       ),
     );
   }

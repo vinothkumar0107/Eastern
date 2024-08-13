@@ -15,6 +15,7 @@ import 'package:eastern_trust/views/components/custom_loader.dart';
 import 'package:eastern_trust/views/components/text-field/custom_amount_text_field.dart';
 import 'package:eastern_trust/views/components/text-field/custom_drop_down_button_with_text_field2.dart';
 
+import '../../../../core/utils/util.dart';
 import 'info_widget.dart';
 
 class AddWithdrawMethod extends StatefulWidget {
@@ -50,84 +51,88 @@ class _AddWithdrawMethodState extends State<AddWithdrawMethod> {
       builder: (controller) {
         return Scaffold(
           backgroundColor: MyColor.getScreenBgColor2(),
-          appBar: CustomAppBar(title: MyStrings.addWithdraw.tr) ,
+          appBar: CustomAppBar(title: MyStrings.addWithdraw.tr, isTitleCenter: false) ,
           body: controller.isLoading?
           const CustomLoader():
-          SingleChildScrollView(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: Dimensions.screenPaddingHV1,
-              decoration: BoxDecoration(
-                color: MyColor.getScreenBgColor2(),
-                borderRadius: BorderRadius.circular(3),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomDropDownTextField2(
-                    labelText: MyStrings.paymentMethod.tr,
-                    selectedValue: controller.withdrawMethod,
-                    onChanged: (value){
-                      controller.setWithdrawMethod(value);
-                    },
-                    items: controller.withdrawMethodList.map((WithdrawMethod method) {
+          Container(
+            padding: const EdgeInsets.all(15),
+            child: SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: Dimensions.screenPaddingHV1,
+                decoration: BoxDecoration(
+                  color: MyColor.getScreenBgColor2(),
+                  borderRadius: BorderRadius.circular(Dimensions.defaultBorderRadius),
+                  boxShadow: MyUtil.getCardShadow(),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomDropDownTextField2(
+                      labelText: MyStrings.paymentMethod.tr,
+                      selectedValue: controller.withdrawMethod,
+                      onChanged: (value){
+                        controller.setWithdrawMethod(value);
+                      },
+                      items: controller.withdrawMethodList.map((WithdrawMethod method) {
                         return DropdownMenuItem<WithdrawMethod>(
                           value: method,
-                          child: Text((method.name??'').tr, style: interRegularDefault.copyWith(color: MyColor.getTextColor())),
+                          child: Text((method.name??'').tr, style: interRegularLarge.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontDefault)),
                         );
                       }).toList(),),
-                  const SizedBox(height: Dimensions.space15),
-                  CustomAmountTextField(
-                    labelText: MyStrings.amount.tr,
-                    hintText: MyStrings.enterAmount.tr,
-                    inputAction: TextInputAction.done,
-                    currency: controller.currency,
-                    controller: controller.amountController,
-                    onChanged: (value) {
-                      if(value.toString().isEmpty){
-                        controller.changeInfoWidgetValue(0);
-                      }else{
-                        double amount = double.tryParse(value.toString())??0;
-                        controller.changeInfoWidgetValue(amount);
-                      }
-                      return;
-                    },
-                  ),
-                 Visibility(
-                   visible: controller.authorizationList.length>1,
-                   child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     const SizedBox(height: Dimensions.space15),
-                     CustomDropDownTextField2(
-                       labelText:  MyStrings.authorizationMethod.tr,
-                       selectedValue: controller.selectedAuthorizationMode,
-                       onChanged: (value) {
-                         controller.changeAuthorizationMode(value);
-                       },
-                       items: controller.authorizationList.map((String value) {
-                         return DropdownMenuItem<String>(
-                           value: value,
-                           child: Text((value.toString()).tr, style: interRegularDefault.copyWith(color: MyColor.getTextColor())),
-                         );
-                       }).toList(),),
-                   ],
-                 )),
-                  controller.mainAmount>0?const InfoWidget():const SizedBox(),
-                  const SizedBox(height: Dimensions.space30,),
-                  controller.submitLoading? const RoundedLoadingBtn():
-                  RoundedButton(
-                    color: MyColor.getButtonColor(),
-                    text: MyStrings.submit.tr,
-                    textColor: MyColor.getButtonTextColor(),
-                    press: () {
-                      controller.submitWithdrawRequest();
-                    },
-                  ),
-                ],
+                    const SizedBox(height: Dimensions.space15),
+                    CustomAmountTextField(
+                      labelText: MyStrings.amount.tr,
+                      hintText: MyStrings.enterAmount.tr,
+                      inputAction: TextInputAction.done,
+                      currency: controller.currency,
+                      controller: controller.amountController,
+                      onChanged: (value) {
+                        if(value.toString().isEmpty){
+                          controller.changeInfoWidgetValue(0);
+                        }else{
+                          double amount = double.tryParse(value.toString())??0;
+                          controller.changeInfoWidgetValue(amount);
+                        }
+                        return;
+                      },
+                    ),
+                    Visibility(
+                        visible: controller.authorizationList.length>1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: Dimensions.space15),
+                            CustomDropDownTextField2(
+                              labelText:  MyStrings.authorizationMethod.tr,
+                              selectedValue: controller.selectedAuthorizationMode,
+                              onChanged: (value) {
+                                controller.changeAuthorizationMode(value);
+                              },
+                              items: controller.authorizationList.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text((value.toString()).tr, style: interRegularLarge.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontDefault)),
+                                );
+                              }).toList(),),
+                          ],
+                        )),
+                    controller.mainAmount>0?const InfoWidget():const SizedBox(),
+                    const SizedBox(height: Dimensions.space30,),
+                    controller.submitLoading? const RoundedLoadingBtn():
+                    RoundedButton(
+                      color: MyColor.getButtonColor(),
+                      text: MyStrings.submit.tr,
+                      textColor: MyColor.getButtonTextColor(),
+                      press: () {
+                        controller.submitWithdrawRequest();
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          )
         );
       });
   }

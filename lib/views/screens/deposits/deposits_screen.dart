@@ -60,7 +60,7 @@ class _DepositsScreenState extends State<DepositsScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
 
     return GetBuilder<DepositController>(
       builder: (controller) => WillPopWidget(
@@ -164,6 +164,126 @@ class _DepositsScreenState extends State<DepositsScreen> {
                   ),
                 ],
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return GetBuilder<DepositController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: controller.isGoHome()?RouteHelper.homeScreen:'',
+        isOnlyBack: controller.isGoHome()?false:true,
+        child: Scaffold(
+          backgroundColor: MyColor.containerBgColor,
+          appBar: AppBar(
+            title: Text(MyStrings.deposits, style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite)),
+            backgroundColor: MyColor.primaryColor,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+              ),
+            ),
+            centerTitle: false,
+            elevation: 0,
+            leading: IconButton(
+              onPressed: (){
+                String previousRoute = Get.previousRoute;
+                if(previousRoute==RouteHelper.menuScreen||previousRoute==RouteHelper.notificationScreen){
+                  Get.back();
+                } else{
+                  Get.offAndToNamed(RouteHelper.homeScreen);
+                }
+              },
+              icon: const Icon(Icons.arrow_back,
+                  color: MyColor.colorWhite, size: 20),
+            ),
+            actions: [
+              GestureDetector(
+                onTap: (){
+                  controller.changeIsPress();
+                },
+                child: Container(
+                    padding: const EdgeInsets.all(Dimensions.space7),
+                    decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
+                    child:  Icon(controller.isSearch?Icons.clear:Icons.search, color: MyColor.primaryColor, size: 15)
+                ),
+              ),
+              const SizedBox(width: Dimensions.space7),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(RouteHelper.newDepositScreenScreen);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(left: 7,right: 10,bottom: 7,top: 7),
+                  padding: const EdgeInsets.all(Dimensions.space7),
+                  decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
+                  child:  const Icon(Icons.add, color: MyColor.primaryColor, size: 15),
+                ),
+              ),
+            ],
+          ),
+          body: controller.isLoading ? const CustomLoader() : Padding(
+            padding: const EdgeInsets.only(top: Dimensions.space20, left: Dimensions.space15, right: Dimensions.space15),
+            child: Column(
+              children: [
+                Visibility(
+                  visible: controller.isSearch,
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      DepositHistoryTop(),
+                      SizedBox(height: Dimensions.space15),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: controller.depositList.isEmpty && controller.searchLoading == false ? NoDataFoundScreen(title:MyStrings.noDepositFound,height:controller.isSearch?0.75:0.8) :
+                  controller.searchLoading ? const Center(
+                    child: CustomLoader(),
+                  ) : SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      controller: scrollController,
+                      scrollDirection: Axis.vertical,
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      itemCount: controller.depositList.length+1,
+                      separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+                      itemBuilder: (context, index) {
+                        if(controller.depositList.length == index){
+                          return controller.hasNext() ? SizedBox(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child: CustomLoader(),
+                            ),
+                          ) : const SizedBox();
+                        }
+                        return CustomDepositsCard(
+                          onPressed: (){
+                            DepositBottomSheet.depositBottomSheet(context,index);
+                          },
+                          trxValue: controller.depositList[index].trx ?? "",
+                          date: DateConverter.isoToLocalDateAndTime(controller.depositList[index].createdAt ?? ""),
+                          status:controller.getStatus(index),
+                          statusBgColor:controller.getStatusColor(index),
+                          amount: "${Converter.formatNumber(controller.depositList[index].amount ?? " ")} ${controller.currency}",
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

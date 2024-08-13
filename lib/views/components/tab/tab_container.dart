@@ -24,9 +24,10 @@ class TabContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.symmetric(horizontal: Dimensions.space7,vertical: Dimensions.space5),
+      height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Dimensions.space30),
-        color: MyColor.colorWhite,
+        color: MyColor.liteGreyColorBorder,
         boxShadow: MyUtil.getBottomSheetShadow()
       ),
       child: Row(
