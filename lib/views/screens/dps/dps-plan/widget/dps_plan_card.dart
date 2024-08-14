@@ -214,7 +214,7 @@ class _DPSPlanCardState extends State<DPSPlanCard> {
                       ],
                     ),
                     const SizedBox(width: 15,),
-                    Container(width: 1.0, color: Colors.grey,height: 30,),
+                    Container(width: 1, color: MyColor.getBorderColor(),height: 30,),
                     const SizedBox(width: 15,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,7 +227,7 @@ class _DPSPlanCardState extends State<DPSPlanCard> {
                       ],
                     ),
                     const SizedBox(width: 15,),
-                    Container(width: 1.0, color: Colors.grey,height: 30,),
+                    Container(width: 1, color: MyColor.getBorderColor(),height: 30,),
                     const SizedBox(width: 15,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,7 +261,7 @@ class _DPSPlanCardState extends State<DPSPlanCard> {
                     children: [
                       Text('${MyStrings.installmentInterval} - ${controller.planList[widget.index].installmentInterval??''}${MyStrings.days.tr}',
                           style: interRegularSmall.copyWith(color: MyColor.smallTextColor1)),
-                      Icon(Icons.arrow_forward_ios, color: MyColor.colorBlack.withOpacity(0.6),size: 15)
+                      Icon(Icons.keyboard_arrow_down, color: MyColor.colorBlack.withOpacity(0.6),size: 15)
                     ],
                   )
               ),

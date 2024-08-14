@@ -50,7 +50,7 @@ class _FDRScreenState extends State<FDRScreen> {
       nextRoute: controller.getPreviousRoute(),
       child: Scaffold(
         backgroundColor: MyColor.getScreenBgColor(),
-        appBar:  CustomAppBar(title: MyStrings.fdr,isForceBackHome: controller.getPreviousRoute()!=RouteHelper.notificationScreen,),
+        appBar:  CustomAppBar(title: MyStrings.fdr, isTitleCenter: false,isForceBackHome: controller.getPreviousRoute()!=RouteHelper.notificationScreen,),
         body: Padding(
           padding: Dimensions.screenPaddingHV,
           child: Column(
