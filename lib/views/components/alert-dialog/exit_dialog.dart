@@ -37,7 +37,9 @@ import '../../../core/utils/style.dart';
       },horizontalPadding: 3,verticalPadding: 3,color: MyColor.primaryColor2,),
       btnOk:
       RoundedButton(text: MyStrings.yes.tr, press: (){
-        SystemNavigator.pop();
+        // SystemNavigator.pop();
+        Navigator.of(context).pop();
+        Get.back();
       },horizontalPadding: 3,verticalPadding: 3,color: MyColor.red,textColor: MyColor.colorWhite,),
       btnCancelOnPress: () {},
       btnOkOnPress: () {

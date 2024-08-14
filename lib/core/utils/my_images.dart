@@ -2,7 +2,8 @@ class MyImages{
 
   // static const String appLogo = "assets/images/app_logo/app-logo.png";
   // static const String appLogo = "assets/images/app_logo/eastern_trust.png";
-  static const String appLogo = "assets/images/app_logo/eastern.jpg";
+  static const String splashAnimationGif = "assets/images/splash_animation.gif";
+  static const String appLogo = "assets/images/app_logo/eastern.png";
   static const String appIcon = "assets/images/app_icon.png";
   static const String launcherImg = "assets/images/launcher_img.png";
   static const String appLogoWhite = "assets/images/app_logo/app-logo-white.png";
@@ -19,8 +20,8 @@ class MyImages{
   static const String referralIcon1= "assets/images/referral.svg";
   static const String transactionIcon = "assets/images/transaction_solid.svg";
   static const String loanIcon1 = "assets/images/common/loan.png";
-  static const String fdrIcon = "assets/images/fdr.svg";
-  static const String dpsIcon = "assets/images/dps.svg";
+  static const String fdrIcon = "assets/images/fdr.png";
+  static const String dpsIcon = "assets/images/dps.png";
   static const String depositIcon = "assets/images/deposit_1.svg";
   static const String withdrawIcon = "assets/images/withdraw.svg";
   static const String transferIcon2 = "assets/images/transfer_solid.svg";
@@ -54,6 +55,8 @@ class MyImages{
   static const String faq = "assets/images/menu/new_faq.svg";
   static const String signOut = "assets/images/menu/logout.svg";
   static const String delete = "assets/images/menu/delete.svg";
+  static const String withdrawMenu = "assets/images/menu/menu_withdraw_1.svg";
+  static const String lock = "assets/images/menu/lock.svg";
 
 
   //new menu icons and images
@@ -80,5 +83,11 @@ class MyImages{
   static const String noInternet = "assets/animation/no_internet.json";
   static const String defaultImage = "assets/images/default_image.png";
   static const String mobile = "assets/images/mobile_icon.svg";
+
+  static const String supportIcon = "assets/images/support.svg";
+  static const String historyIcon = "assets/images/history.svg";
+  static const String transferIcon = "assets/images/transfer_image.svg";
+  static const String greenArrowUp = "assets/images/green_arrow_down.png";
+  static const String redArrowDown = "assets/images/red_arrow_up.png";
 
 }

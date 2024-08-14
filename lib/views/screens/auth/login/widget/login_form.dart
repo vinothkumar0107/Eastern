@@ -37,141 +37,79 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             RichText(
               text: TextSpan(
-                  text: MyStrings.usernameOrEmail.tr,
-                  style: interRegularDefault.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor),
-                  children: [
-                    TextSpan(
-                        text: ' *', style: TextStyle(fontSize: 20,color: Colors.red,fontWeight: FontWeight.bold))
-                  ]),
+                  text: MyStrings.welcomeBackAgain.tr,
+                  style: interBoldHeader1.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
+                  ),
             ),
-            // Text(MyStrings.usernameOrEmail.tr, style: interRegularDefault.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor)),
-
-            const SizedBox(height:Dimensions.space10),
-           TextField(
-            decoration: new InputDecoration(
-                border: new OutlineInputBorder(
-                    borderSide: new BorderSide(color: Colors.teal)
+            const SizedBox(height:Dimensions.space30),
+            SizedBox(
+              height: 60,
+              child: TextField(
+                controller: controller.emailController,
+                focusNode: controller.emailFocusNode,
+                style: interMediumLarge.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
+                onChanged: (value) {},
+                decoration: InputDecoration(
+                  hintText: MyStrings.enterUsernameOrEmail,
+                  hintStyle: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),// Placeholder text
+                  filled: true, // Enable background color
+                  fillColor: MyColor.liteGreyColor, // Background color
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0), // Rounded corners
+                    borderSide: const BorderSide(
+                      color: MyColor.liteGreyColorBorder, // Border color
+                      width: 1.0, // Border width
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0), // Rounded corners when enabled
+                    borderSide: const BorderSide(
+                      color: MyColor.liteGreyColorBorder, // Border color when enabled
+                      width: 1.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0), // Rounded corners when focused
+                    borderSide: const BorderSide(
+                      color: MyColor.primaryColor, // Border color when focused
+                      width: 1.0,
+                    ),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0), // Padding inside the TextField
                 ),
-
-            ),
-             controller: controller.emailController,
-             focusNode: controller.emailFocusNode,
-             onChanged: (value){},
-          ),
-            /*CustomTextField(
-              labelText: MyStrings.usernameOrEmail,
-              textInputType: TextInputType.name,
-              hintText: MyStrings.enterUsernameOrEmail,
-              controller: controller.emailController,
-              focusNode: controller.emailFocusNode,
-              nextFocus: controller.passwordFocusNode,
-              inputAction: TextInputAction.next,
-              onChanged: (value){},
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return MyStrings.fieldErrorMsg.tr;
-                } else {
-                  return null;
-                }
-              },
-            ),*/
-
-            const SizedBox(height:Dimensions.space10),
-            RichText(
-              text: TextSpan(
-                  text: MyStrings.password.tr, style: interRegularDefault.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor),
-                  children: [
-                    TextSpan(
-                        text: ' *', style: TextStyle(fontSize: 20,color: Colors.red,fontWeight: FontWeight.bold))
-                  ]
               ),
             ),
-
-            const SizedBox(height:Dimensions.space10),
-            TextField(
-              decoration: new InputDecoration(
-                border: new OutlineInputBorder(
-                    borderSide: new BorderSide(color: Colors.white)
-                ),
-                  suffixIcon: IconButton(
-                      icon:Icon(obscureText ? Icons.visibility_off : Icons.visibility, color: MyColor.colorWhite, size: 16),
-                      onPressed: _toggle)
-              ),
-              obscureText: obscureText,
-              controller: controller.passwordController,
-              focusNode: controller.passwordFocusNode,
-              onChanged: (value){
-
-              },
-            ),
-
-            /*CustomTextField(
-              labelText: MyStrings.password,
-              isPassword: true,
-              hintText: MyStrings.enterYourPassword,
-              onChanged: (value){},
+            const SizedBox(height:Dimensions.space25),
+            CustomTextField(
+              needOutlineBorder: true,
+              needLabel: false,
               isShowSuffixIcon: true,
+              isPassword: true,
+              labelText: MyStrings.password,
               controller: controller.passwordController,
               focusNode: controller.passwordFocusNode,
-              inputAction: TextInputAction.go,
-              onSubmitted:(value){
-                if(formKey.currentState!.validate()){
-                  controller.loginUser();
-                }
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return MyStrings.fieldErrorMsg.tr;
-                } else {
-                  return null;
-                }
-              },
-            ),*/
+              hintText: MyStrings.enterYourPassword.tr,
+              textInputType: TextInputType.text,
+              onChanged: (value) {},
+              validator: (value) {return;},
+            ),
             const SizedBox(height:Dimensions.space10),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                GestureDetector(
-                  onTap: (){
-                    controller.changeRememberMe();
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: Checkbox(
-                            fillColor: MaterialStatePropertyAll<Color>(controller.remember ?MyColor.primaryColor:Colors.white,),
-                            activeColor:  controller.remember ?MyColor.colorWhite:Colors.white,
-                            value: controller.remember,
-                            side: MaterialStateBorderSide.resolveWith((states) => BorderSide(
-                                width: 1.0,
-                                color: controller.remember ? MyColor.transparentColor : MyColor.colorWhite),
-                            ),
-                            onChanged: (value) {
-                              controller.changeRememberMe();
-                            }
-                        ),
-                      ),
-                      const SizedBox(width: Dimensions.space10),
-                      Text(MyStrings.rememberMe.tr,
-                        style: interRegularDefault.copyWith(color: MyColor.colorWhite),overflow: TextOverflow.ellipsis,)
-                    ],
-                  ),
-                ),
                 TextButton(
                   onPressed: (){
                     controller.clearData();
                     controller.forgetPassword();
                   },
-                  child: Text(MyStrings.loginForgotPassword.tr, style: interRegularDefault.copyWith(color: MyColor.primaryColor,decorationColor:MyColor.primaryColor,decoration: TextDecoration.underline)),
+                  child: Text(MyStrings.loginForgotPassword.tr, style: interMediumLarge.copyWith(color: MyColor.colorGrey2,decorationColor:MyColor.colorGrey,decoration: TextDecoration.none, fontSize: 14.0)),
                 )
               ],
             ),
-            const SizedBox(height: Dimensions.space35,),
+            const SizedBox(height: Dimensions.space25,),
             controller.isSubmitLoading ? const RoundedLoadingBtn() : RoundedButton(
-              text: MyStrings.signIn,
-              color: MyColor.primaryColor,
+              text: MyStrings.login,
+              color: MyColor.appPrimaryColorSecondary2,
               textColor: MyColor.colorWhite,
               press: (){
                 if(formKey.currentState!.validate()){
@@ -179,8 +117,8 @@ class _LoginFormState extends State<LoginForm> {
                 }
               }
             ),
-            const SizedBox(height: Dimensions.space40),
-            const BottomSection()
+            const SizedBox(height: Dimensions.space10),
+            // const BottomSection()
           ],
         ),
       ),

@@ -59,17 +59,17 @@ class _DPSInstallmentLogScreenState extends State<DPSInstallmentLogScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GetBuilder<DPSInstallmentLogController>(builder: (controller)=>Scaffold(
+    return GetBuilder<DPSInstallmentLogController>(builder: (controller)=>Scaffold(
         backgroundColor: MyColor.getScreenBgColor1(),
         appBar: CustomAppBar(
           title: MyStrings.dpsInstallments,
           isShowActionBtn:true,
           actionIcon: Icons.info_outline,
           actionText: MyStrings.dpsInfo,
+          isTitleCenter: false,
           press: (){
-          DPSInstallmentBottomSheet().show(context);
-        },),
+            DPSInstallmentBottomSheet().show(context);
+          },),
         body: controller.isLoading?const CustomLoader() : controller.installmentLogList.isEmpty?const NoDataWidget():Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(Dimensions.screenPadding),
@@ -94,8 +94,7 @@ class _DPSInstallmentLogScreenState extends State<DPSInstallmentLogScreen> {
                   delayCharge: '${controller.currencySymbol}${Converter.formatNumber(controller.dps?.chargePerInstallment??'0')}',
                   delay: DateConverter.delayDate(controller.installmentLogList[index].installmentDate,controller.installmentLogList[index].givenAt));
             },
-        ),
-      ))
-    ));
+          ),
+        )));
   }
 }

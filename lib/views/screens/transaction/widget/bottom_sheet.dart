@@ -51,7 +51,7 @@ showTrxBottomSheet(List<String>? list, int callFrom,String header, {required Bui
                       ),
                       child: Text(
                         ' ${callFrom ==2 ? Converter.replaceUnderscoreWithSpace(list[index].capitalizeFirst??''):list[index]}',
-                        style: interRegularDefault.copyWith(fontSize: Dimensions.fontDefault),
+                        style: interRegularDefault.copyWith(fontSize: Dimensions.fontDefault, color: MyColor.colorBlack),
                       ),
                     ),
                   ),

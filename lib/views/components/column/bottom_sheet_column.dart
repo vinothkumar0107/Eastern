@@ -18,7 +18,7 @@ class BottomSheetColumn extends StatelessWidget {
       children: [
         Text(header.tr,style: interLightDefault.copyWith(color: MyColor.getBodyTextColor()),overflow: TextOverflow.ellipsis,),
         const SizedBox(height: 5,),
-        Text(body.tr,style: isCharge?interRegularDefault.copyWith(color: MyColor.redCancelTextColor):interRegularLarge,overflow: TextOverflow.ellipsis,)
+        Text(body.tr,style: isCharge?interSemiBoldDefault.copyWith(color: MyColor.redCancelTextColor):interSemiBoldDefault,overflow: TextOverflow.ellipsis,)
       ],
     );
   }

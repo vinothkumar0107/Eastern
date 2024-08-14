@@ -104,9 +104,9 @@ class MyColor{
   }
 
 
-  static const Color primaryColor           = Color(0xff246EE9);
-  static const Color primaryColor2          = Color(0xFF14233d);
-  static const Color appPrimaryColorSecondary2 = Color(0xff233c82);
+  static const Color primaryColor           = Color(0xFF065CCB);
+  static const Color primaryColor2          = Color(0xFF082790);
+  static const Color appPrimaryColorSecondary2 = Color(0xFF07349F);
   static const Color green                  = Color(0xff2ECC06);
   static const Color secondaryColor         = Color(0xffFFFFFF);
   static const Color containerBgColor       = Color(0xffF9F9F9);
@@ -151,6 +151,12 @@ class MyColor{
 
   static const Color red= Color(0xFFD92027);
   static const Color greenP= Color(0xFF28C76F);
+
+  static const Color liteGreyColorBorder = Color(0xFFEFEFEF);
+  static const Color liteGreyColor = Color(0xFFFAFAFA);
+
+  static const Color liteBlueColor = Color(0xFFDCDCF3);
+
 
   static Color getTextFieldDisableBorder(){
     return textFieldDisableBorderColor;

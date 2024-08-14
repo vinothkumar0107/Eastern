@@ -32,7 +32,7 @@ class CustomRow extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(child: Text(firstText.tr,style: interRegularDefault.copyWith(color: MyColor.getPrimaryTextColor()),overflow: TextOverflow.ellipsis,maxLines: 1,)),
+            Flexible(child: Text(firstText.tr,style: interMediumDefault.copyWith(color: MyColor.getPrimaryTextColor()),overflow: TextOverflow.ellipsis,maxLines: 1,)),
             child ?? const SizedBox(),
           ],
         ),
@@ -43,9 +43,9 @@ class CustomRow extends StatelessWidget {
     ): isAbout ? Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(firstText.tr,style: interRegularDefault.copyWith(color: MyColor.getPrimaryTextColor())),
+        Text(firstText.tr,style: interMediumDefault.copyWith(color: MyColor.getPrimaryTextColor())),
         const SizedBox(height: 4,),
-       Text(lastText.tr,style: interRegularDefault.copyWith(color: isStatus ? statusTextColor : MyColor.getPrimaryTextColor()),),
+       Text(lastText.tr,style: interMediumDefault.copyWith(color: isStatus ? statusTextColor : MyColor.getPrimaryTextColor()),),
         const SizedBox(height: 5,),
       ],
     ) :
@@ -54,8 +54,8 @@ class CustomRow extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(child: Text(firstText.tr,style: interRegularDefault.copyWith(color: MyColor.getPrimaryTextColor()),overflow: TextOverflow.ellipsis,maxLines: 1,)),
-            isStatus ? StatusWidget(status: lastText) : Flexible(child:Text(lastText.tr, maxLines:2, style: interRegularDefault.copyWith(color: isStatus ? MyColor.green : MyColor.getPrimaryTextColor()),overflow: TextOverflow.ellipsis,textAlign: TextAlign.end,))
+            Flexible(child: Text(firstText.tr,style: interMediumDefault.copyWith(color: MyColor.getPrimaryTextColor(), fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,maxLines: 1,)),
+            isStatus ? StatusWidget(status: lastText) : Flexible(child:Text(lastText.tr, maxLines:2, style: interMediumDefault.copyWith(color: isStatus ? MyColor.green : MyColor.getPrimaryTextColor()),overflow: TextOverflow.ellipsis,textAlign: TextAlign.end,))
           ],
         ),
         const SizedBox(height: 5),

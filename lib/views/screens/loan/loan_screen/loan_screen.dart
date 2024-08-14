@@ -55,7 +55,7 @@ class _LoanScreenState extends State<LoanScreen> {
       nextRoute: controller.getPreviousRoute(),
       child: Scaffold(
         backgroundColor: MyColor.getScreenBgColor(),
-        appBar: CustomAppBar(title: MyStrings.loan,isForceBackHome: controller.getPreviousRoute()!=RouteHelper.notificationScreen,),
+        appBar: CustomAppBar(title: MyStrings.loan,isTitleCenter:false, isForceBackHome: controller.getPreviousRoute()!=RouteHelper.notificationScreen,),
         body: Padding(
           padding: Dimensions.screenPaddingHV,
           child: Column(

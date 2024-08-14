@@ -29,7 +29,11 @@ class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
     return GetBuilder<HomeController>(
       builder: (controller) => Container(
         decoration: BoxDecoration(
-            color: MyColor.getCardBg(),
+          color: MyColor.getCardBg(),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
         ),
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: Dimensions.space20, horizontal: Dimensions.space15),
@@ -37,16 +41,16 @@ class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const TopButtons(),
-              const WidgetDivider(space: 20,),
+              const SizedBox(height: Dimensions.space15),
               const LatestTransaction(),
-              controller.debitsLists.isEmpty ? const NoDataWidget(topMargin: 60) : ListView.builder(
+              controller.debitsLists.isEmpty ? const NoDataWidget(topMargin: 60) : ListView.separated(
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 itemCount: controller.debitsLists.length,
                 itemBuilder: (context, index) => LatestTransactionListItem(
-                  isShowDivider:true,
+                  isShowDivider:false,
                   isCredit:controller.debitsLists[index].trxType=='+'?true:false,
                   trx: controller.debitsLists[index].trx ?? "",
                   date: '${DateConverter.isoStringToLocalDateOnly(controller.debitsLists[index].createdAt ?? "")}, ${DateConverter.isoStringToLocalTimeOnly(controller.debitsLists[index].createdAt ?? "")}',
@@ -56,6 +60,7 @@ class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
 
                   },
                 ),
+                separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
               ),
             ],
           ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/route/route.dart';
@@ -33,8 +34,16 @@ class _RegistrationFormState extends State<RegistrationForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            RichText(
+              text: TextSpan(
+                text: MyStrings.signUp.tr,
+                style: interBoldHeader1.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
+              ),
+            ),
+            const SizedBox(height:Dimensions.space30),
             CustomTextField(
-              needLabel: true,
+              needLabel: false,
+              needOutlineBorder: true,
               labelText: MyStrings.username.tr,
               hintText: MyStrings.enterYourUsername.tr,
               controller: controller.userNameController,
@@ -56,7 +65,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
             ),
             const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
             CustomTextField(
-              needLabel: true,
+              needLabel: false,
+              needOutlineBorder: true,
               labelText: MyStrings.email.tr,
               hintText: MyStrings.enterYourEmail.tr,
               controller: controller.emailController,
@@ -87,27 +97,34 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
             Row(
               children: [
-                Expanded(
-                  flex: 1,
-                  child:CustomTextField(
-                    labelText: MyStrings.phone,
-
-                    controller: TextEditingController(text: controller.mobileCode??''),
-                    textInputType: TextInputType.phone,
-                    disableColor: controller.hasMobileFocus?MyColor.colorWhite:MyColor.borderColor,
-                    isEnable: false,
-                    onChanged: (value) {
-                      return;
-                    },
-                  ),),
+                Flexible(
+                  flex: 3,
+                  child: FractionallySizedBox(
+                    widthFactor: 1, // This will give you the desired effect
+                    child:CustomTextField(
+                      labelText: MyStrings.phone,
+                      hintText: MyStrings.code.tr,
+                      needOutlineBorder: true,
+                      needLabel: false,
+                      controller: TextEditingController(text: controller.mobileCode??''),
+                      textInputType: TextInputType.phone,
+                      disableColor: controller.hasMobileFocus?MyColor.colorWhite:MyColor.borderColor,
+                      isEnable: false,
+                      onChanged: (value) {
+                        return;
+                      },
+                    ),),
+                  ),
                 const SizedBox(width: 8,),
-                Expanded(
-                    flex: 6,
+                Flexible(
+                    flex: 10,
                     child: Focus(
                       onFocusChange: (hasFocus){
                         controller.changeMobileFocus(hasFocus);
                       },
                       child:  CustomTextField(
+                        needOutlineBorder: true,
+                        needLabel: false,
                         labelText: '',
                         hintText: MyStrings.enterYourPhoneNo.tr,
                         controller: controller.mobileController,
@@ -137,6 +154,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   controller.changePasswordFocus(hasFocus);
                 },
                 child: CustomTextField(
+                  needOutlineBorder: true,
+                  needLabel: false,
                   isShowSuffixIcon: true,
                   isPassword: true,
                   labelText: MyStrings.password,
@@ -156,6 +175,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 )),
             const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
             CustomTextField(
+              needOutlineBorder: true,
+              needLabel: false,
               labelText: MyStrings.confirmPassword.tr,
               hintText: MyStrings.confirmYourPassword.tr,
               controller: controller.cPasswordController,
@@ -182,7 +203,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       height: 20,
                       child: Checkbox(
                           fillColor: MaterialStatePropertyAll<Color>(controller.agreeTC ?MyColor.primaryColor:Colors.transparent,),
-                          activeColor:  controller.agreeTC ?MyColor.primaryColor:Colors.transparent,
+                          activeColor:  controller.agreeTC ?MyColor.colorGrey:Colors.transparent,
                           value: controller.agreeTC,
                           side: MaterialStateBorderSide.resolveWith((states) => BorderSide(
                               width: 1.0,
@@ -196,7 +217,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     const SizedBox(width: 8,),
                     Row(
                       children: [
-                        Text(MyStrings.iAgreeWith.tr, style: interRegularDefault.copyWith(color: MyColor.colorWhite)),
+                        Text(MyStrings.iAgreeWith.tr, style: interSemiBoldDefault.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w400)),
                         const SizedBox(width: 3),
                         GestureDetector(
                           onTap: (){
@@ -204,8 +225,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           },
                           child: Text(MyStrings.privacyPolicies.tr.toLowerCase(), style: interSemiBoldDefault.copyWith(
                               color: MyColor.primaryColor,
-                              decoration: TextDecoration.underline,
-                              fontSize: Dimensions.fontSmall,
+                              decoration: TextDecoration.none,
                               decorationColor: MyColor.primaryColor
                           )),
                         ),
@@ -218,14 +238,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
             controller.submitLoading ? const RoundedLoadingBtn() : RoundedButton(
                 text: MyStrings.signUp,
                 textColor: MyColor.colorWhite,
-                color: MyColor.primaryColor,
+                color: MyColor.appPrimaryColorSecondary2,
                 press: (){
                   if (formKey.currentState!.validate()) {
                     controller.signUpUser();
                   }
                 }
             ),
-            const SizedBox(height: Dimensions.space30),
+            const SizedBox(height: Dimensions.space20),
           ],
         ),
       ),

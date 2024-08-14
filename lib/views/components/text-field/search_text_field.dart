@@ -61,7 +61,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
     return widget.needOutlineBorder ?
     TextFormField(
       readOnly: widget.readOnly,
-      style: interRegularDefault.copyWith(color: MyColor.colorBlack),
+      style: interSemiBoldDefault.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontSize14),
       textAlign: TextAlign.left,
       cursorColor: MyColor.primaryColor,
       controller: widget.controller,
@@ -75,12 +75,12 @@ class _SearchTextFieldState extends State<SearchTextField> {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
         hintText: widget.hintText!=null?widget.hintText?.tr:'',
-        hintStyle: interRegularSmall.copyWith(color: MyColor.hintTextColor),
+        hintStyle: interMediumDefault.copyWith(color: MyColor.bodyTextColor, fontSize: Dimensions.fontSize14),
         fillColor: MyColor.transparentColor,
         filled: true,
-        border: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.borderColor), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-        focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
-        enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.borderColor), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+        border: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.borderColor), borderRadius: BorderRadius.circular(25)),
+        focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor), borderRadius: BorderRadius.circular(25)),
+        enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.borderColor), borderRadius: BorderRadius.circular(25)),
         suffixIcon: widget.isShowSuffixIcon
             ? widget.isPassword
             ? IconButton(

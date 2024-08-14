@@ -14,6 +14,10 @@ import 'package:eastern_trust/views/components/appbar/custom_appbar.dart';
 import 'package:eastern_trust/views/components/buttons/rounded_button.dart';
 import 'package:eastern_trust/views/components/buttons/rounded_loading_button.dart';
 
+import '../../../../core/route/route.dart';
+import '../../../components/otp_field_widget/otp_field_widget.dart';
+import '../../../components/will_pop_widget.dart';
+
 
 
 class SmsVerificationScreen extends StatefulWidget {
@@ -43,8 +47,9 @@ class _SmsVerificationScreenState extends State<SmsVerificationScreen> {
     super.dispose();
   }
 
+  // need to remove
   @override
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
    return  WillPopScope(
      onWillPop: () async {
        return false;
@@ -159,6 +164,145 @@ class _SmsVerificationScreenState extends State<SmsVerificationScreen> {
         ),
       ),
    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<SmsVerificationController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: '',
+        child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            backgroundColor: MyColor.appPrimaryColorSecondary2,
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 3.0, // Half of the screen height
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: MyColor.colorWhite, // Use the same color for the bottom half
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 60.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          // Navigator.of(context).pop();
+                          Get.offAndToNamed(RouteHelper.loginScreen);
+                        },
+                      ),
+                      Expanded(
+                        child: Text(
+                            MyStrings.smsVerification.tr,
+                            textAlign: TextAlign.left,
+                            style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor)
+                        ),
+                      ),
+                      // To keep the title centered, you can add an empty `SizedBox`
+                      const SizedBox(width: 48.0),
+                    ],
+                  ),
+                ),
+                controller.isLoading ? const Center(
+                    child: CircularProgressIndicator(color: MyColor.primaryColor)
+                ) : Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(15.0, 130.0, 15.0, 0.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Card(
+                            color: MyColor.colorWhite,
+                            elevation: 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      const SizedBox(height: Dimensions.space30),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                        child: Text(MyStrings.smsVerificationMsg.tr, maxLines: 2, textAlign: TextAlign.center,style: interRegularLarge.copyWith(color: MyColor.labelTextColor)),
+                                      ),
+                                      const SizedBox(height: Dimensions.space30),
+                                      OTPFieldWidget(
+                                        onChanged: (value) {
+                                          controller.currentText = value;
+                                        },
+                                      ),
+                                      const SizedBox(height: Dimensions.space30),
+                                      controller.submitLoading ? const RoundedLoadingBtn() : RoundedButton(
+                                        text: MyStrings.verify.tr,
+                                        textColor: MyColor.colorWhite,
+                                        press: (){
+                                          controller.verifyYourSms(controller.currentText);
+                                        },
+                                        color: MyColor.appPrimaryColorSecondary2,
+                                      ),
+                                      const SizedBox(height: Dimensions.space20),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(MyStrings.didNotReceiveCode.tr, style: interMediumLarge.copyWith(color: MyColor.labelTextColor)),
+                                          const SizedBox(width: Dimensions.space5),
+                                          controller.resendLoading?
+                                          Container(margin:const EdgeInsets.only(left: 5,top: 5),height:20,width:20,child: const CircularProgressIndicator(color: MyColor.primaryColor)):
+                                          GestureDetector(
+                                            onTap: (){
+                                              controller.sendCodeAgain();
+                                            },
+                                            child: Text(MyStrings.resend.tr, style: interBoldLarge.copyWith(color: MyColor.appPrimaryColorSecondary2,decoration: TextDecoration.underline)),
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(height: Dimensions.space20),
+                                    ],
+                                  ),
+                                )
+                            ),
+                          ),
+                          const SizedBox(height: Dimensions.space20), // Add spacing if needed
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

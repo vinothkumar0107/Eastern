@@ -5,22 +5,22 @@ import 'package:eastern_trust/core/route/route.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
 import 'package:eastern_trust/core/utils/style.dart';
 
-class BottomSection extends StatelessWidget {
-  const BottomSection({Key? key}) : super(key: key);
+class BottomSectionRegistration extends StatelessWidget {
+  const BottomSectionRegistration({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(MyStrings.alreadyAccount.tr, style: interRegularDefault),
+        Text(MyStrings.alreadyAccount.tr, style: interMediumLarge.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.colorGrey,decoration: TextDecoration.none)),
         TextButton(
           onPressed: () {
             Get.offAndToNamed(RouteHelper.loginScreen);
           },
           child: Text(
             MyStrings.signInNow.tr,
-            style: interRegularDefault.copyWith(color: MyColor.primaryColor, decoration: TextDecoration.underline),
+            style: interBoldLarge.copyWith(color: MyColor.appPrimaryColorSecondary2, decoration: TextDecoration.none),
           ),
         )
       ],

@@ -69,7 +69,7 @@ class _CircleAnimatedButtonWithTextState extends State<CircleAnimatedButtonWithT
             children: [
               _animatedButton(),
               const SizedBox(height: Dimensions.space10),
-              Text(widget.buttonName.tr, textAlign: TextAlign.center, style: interRegularSmall.copyWith(color: MyColor.titleColor, fontWeight: FontWeight.w500))
+              Text(widget.buttonName.tr, textAlign: TextAlign.center, style: interRegularSmall.copyWith(color: MyColor.titleColor, fontWeight: FontWeight.w600))
             ],
           ),
         ),

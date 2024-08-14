@@ -61,6 +61,7 @@ class DepositBottomSheet{
 
               ],
             ),
+            const SizedBox(height: Dimensions.space20),
           ],
         )),
         Visibility(

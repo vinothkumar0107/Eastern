@@ -13,6 +13,10 @@ import 'package:eastern_trust/views/components/bottom-nav-bar/bottom_nav_bar.dar
 import 'package:eastern_trust/views/components/buttons/rounded_button.dart';
 import 'package:eastern_trust/views/components/will_pop_widget.dart';
 
+import '../../../components/appbar/custom_appbar.dart';
+import '../../../components/divider/custom_divider.dart';
+import '../../menu/widget/menu_card.dart';
+import '../../menu/widget/menu_row_widget.dart';
 import 'widget/transfer_card.dart';
 
 class TransferScreen extends StatefulWidget {
@@ -38,7 +42,7 @@ class _TransferScreenState extends State<TransferScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
 
     return WillPopWidget(
       nextRoute: RouteHelper.homeScreen,
@@ -125,9 +129,81 @@ class _TransferScreenState extends State<TransferScreen> {
               ],
             ),
           )),
-          bottomNavigationBar: const CustomBottomNav(currentIndex: 1),
+          bottomNavigationBar: const CustomBottomNav(currentIndex: 2),
         ),
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return WillPopWidget(
+      nextRoute: RouteHelper.homeScreen,
+      child: Scaffold(
+        backgroundColor: MyColor.containerBgColor,
+        appBar: CustomAppBar(title: MyStrings.transfer.tr, isShowBackBtn: false, isShowActionBtn: false, bgColor:  MyColor.getAppbarBgColor()),
+        body: GetBuilder<TransferController>(builder: (controller)=>SingleChildScrollView(
+          padding: Dimensions.screenPaddingHV,
+          child: Column(
+            children: [
+              MenuCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MenuRowWidget(
+                      image: MyImages.myBankTransferIcon,
+                      label: MyStrings.transferWithinViserBank,
+                      onPressed: () => Get.toNamed(RouteHelper.myBankTransferScreen)
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: Dimensions.space12),
+              MenuCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MenuRowWidget(
+                        image: MyImages.otherBankTransferIcon,
+                        label: MyStrings.otherBank.tr,
+                        onPressed: () => Get.toNamed(RouteHelper.otherBankTransferScreen)
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: Dimensions.space12),
+              MenuCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MenuRowWidget(
+                        image: MyImages.wireTransferIcon,
+                        label: MyStrings.wireTransfer.tr,
+                        onPressed: () => Get.toNamed(RouteHelper.wireTransferScreen)
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: Dimensions.space12),
+              MenuCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MenuRowWidget(
+                        image: MyImages.transferHistoryIcon,
+                        label: MyStrings.transferHistory.tr,
+                        onPressed: () => Get.toNamed(RouteHelper.transferHistoryScreen)
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        )),
+        bottomNavigationBar: const CustomBottomNav(currentIndex: 2),
+      ),
+    );
+  }
+
 }

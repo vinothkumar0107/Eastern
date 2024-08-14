@@ -16,6 +16,7 @@ class Dimensions{
   static const double fontSmall = 11.00;
   static const double fontSmall12 = 12.00;
   static const double fontDefault = 13.00;
+  static const double fontSize14 = 14.00;
   static const double fontLarge = 15.00;
   static const double fontMediumLarge = 16.00;
   static const double fontExtraLarge = 17.00;
@@ -40,6 +41,7 @@ class Dimensions{
   static const double space40 = 40;
   static const double space50 = 50;
   static const double space60 = 60;
+  static const double space70 = 70;
 
   // screen-padding
   static const double defaultScreenTopPadding = 20.00;

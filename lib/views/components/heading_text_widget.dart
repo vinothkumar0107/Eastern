@@ -16,15 +16,10 @@ class HeadingTextWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height *.025,
-        ), // 4%
          HeaderText(text: header),
         const SizedBox(height: 5,),
-        Text(body.tr,style: interRegularDefault.copyWith(color: MyColor.colorWhite),),
-        SizedBox(
-          height: MediaQuery.of(context).size.height *.03,
-        ),
+        Text(body.tr,style: interMediumDefault.copyWith(color: MyColor.colorBlack),),
+
       ],
     );
   }

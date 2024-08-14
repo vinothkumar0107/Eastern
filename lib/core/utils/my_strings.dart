@@ -49,7 +49,7 @@ class MyStrings{
   static const String operator = "Operator";
   static const String change = "Change";
   static const String phone = "Phone";
-  static const String code = "---";
+  static const String code = "Code";
   static const String enterYourPhoneNo = "Enter your phone number";
   static const String enterYourAmount = "Enter your Amount";
   static const String suggestedAmount = "Suggested Amount";
@@ -568,7 +568,7 @@ class MyStrings{
   static const String registerMsg = "Please enter valid info to\ncreate account";
   static const String noCodeReceive = "Didn't receive the code?";
 
-  static const String createNew = 'Create New';
+  static const String createNew = 'Register Now';
   static const String wellComeBack = 'Welcome back';
   static const String loginMsg = 'Log in with the data that you entered during your registration';
   static const String register = 'Register';
@@ -666,6 +666,12 @@ class MyStrings{
   static const String download = "Download";
   static const String enableTwoFactorSecurity = "Enable 2FA Security";
   static const String codeIsRequired = "Please enter Google Authenticator OTP";
+
+  static const String welcomeBackAgain = "Welcome back! Glad to see you, Again!";
+  static const String seeAll = "See all";
+  static const String needHelp = "Need Help?";
+  static const String provideHelp = "we provide help 24*7";
+
 
 
 

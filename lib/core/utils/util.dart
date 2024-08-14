@@ -34,9 +34,9 @@ class MyUtil{
     return  [
       BoxShadow(
         // color: MyColor.screenBgColor,
-        color: Colors.grey.shade400.withOpacity(0.08),
-        spreadRadius: 3,
-        blurRadius: 4,
+        color: Colors.black.withOpacity(0.1),
+        spreadRadius: 0,
+        blurRadius: 5,
         offset: const Offset(0, 3), // changes position of shadow
       ),
     ];
@@ -45,9 +45,9 @@ class MyUtil{
   static dynamic getCardShadow(){
     return  [
       BoxShadow(
-        color: Colors.grey.shade400.withOpacity(0.05),
-        spreadRadius: 2,
-        blurRadius: 2,
+        color: Colors.black.withOpacity(0.1),
+        spreadRadius: 0,
+        blurRadius: 5,
         offset: const Offset(0, 3),
       ),
     ];

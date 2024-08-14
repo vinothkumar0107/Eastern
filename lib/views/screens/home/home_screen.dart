@@ -46,61 +46,77 @@ class _HomeScreenState extends State<HomeScreen> {
     return GetBuilder<HomeController>(
       builder: (controller) => WillPopWidget(
         nextRoute: '',
-        child: SafeArea(
-          child: Scaffold(
+        child: Scaffold(
+          backgroundColor: controller.isLoading ? MyColor.colorWhite : MyColor.primaryColor,
+          body: controller.isLoading ? const CustomLoader() : controller.noInternet?
+          NoDataFoundScreen(
+            isNoInternet: true,
+            press:(value){
+              if(value){
+                controller.changeNoInternetStatus(false);
+                controller.loadData();
+              }
+            },
+          ) :SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: RefreshIndicator(color: MyColor.primaryColor,
               backgroundColor: MyColor.colorWhite,
-              body: controller.isLoading ? const CustomLoader() : controller.noInternet?
-              NoDataFoundScreen(
-                isNoInternet: true,
-                press:(value){
-                  if(value){
-                    controller.changeNoInternetStatus(false);
-                    controller.loadData();
-                  }
-                  },
-              ) :SizedBox(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: RefreshIndicator(color: MyColor.primaryColor,
-                  backgroundColor: MyColor.colorWhite,
-                  onRefresh: () async {
-                    await controller.loadData();
-                  },
-                  child: CustomScrollView(
-                  controller: scrollController,
-                  physics: const ClampingScrollPhysics(),
-                  slivers: [
-                    SliverAppBar(
-                      pinned: false,
-                      elevation: 0,
-                      automaticallyImplyLeading: false,
-                      backgroundColor:  MyColor.primaryColor,
-                      expandedHeight: 90,
-                      flexibleSpace:  FlexibleSpaceBar(
+              onRefresh: () async {
+                await controller.loadData();
+              },
+              child: CustomScrollView(
+                controller: scrollController,
+                physics: const ClampingScrollPhysics(),
+                slivers: [
+                  SliverAppBar(
+                    pinned: false,
+                    elevation: 0,
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.transparent, // Set backgroundColor to transparent to avoid any color conflicts
+                    expandedHeight: 160,
+                    flexibleSpace: FlexibleSpaceBar(
                       background: Container(
-                          decoration: const BoxDecoration(
-                            color: MyColor.primaryColor,
-                            borderRadius: BorderRadius.only(bottomLeft:Radius.circular(Dimensions.space15),bottomRight:Radius.circular(Dimensions.space15))
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                           ),
-                          padding: const EdgeInsets.only(left: Dimensions.space15, right: Dimensions.space15, top: Dimensions.space20),
-                          child: const HomeScreenTop(),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                          ),
                         ),
+                        padding: const EdgeInsets.only(
+                          left: Dimensions.space15,
+                          right: Dimensions.space15,
+                          top: Dimensions.space60,
+                        ),
+                        child: const HomeScreenTop(),
                       ),
                     ),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: MyColor.colorWhite,
-                        ),
-                        child: const HomeScreenItemsSection()
-                      )
-                    )
-                  ],
-            ),
-                ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Transform.translate(
+                        offset: const Offset(0, 0), // If need change x, y position
+                        child: Container(
+                            decoration: const BoxDecoration(
+                              color: MyColor.colorWhite,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(24),
+                                topRight: Radius.circular(24),
+                              ),
+                            ),
+                            child: const HomeScreenItemsSection()
+                        )
+                    ),
+                  ),
+                ],
               ),
-            bottomNavigationBar: const CustomBottomNav(currentIndex: 0),
+            ),
           ),
+          bottomNavigationBar: const CustomBottomNav(currentIndex: 0),
         ),
       ),
     );

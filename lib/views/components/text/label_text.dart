@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
@@ -9,12 +10,14 @@ class LabelText extends StatelessWidget {
   final String text;
   final TextAlign? textAlign;
   final bool required;
+  final TextStyle? textStyle;
 
   const LabelText({
     Key? key,
     required this.text,
     this.textAlign,
-    this.required = false
+    this.required = false,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -22,7 +25,7 @@ class LabelText extends StatelessWidget {
     return required?FormRow(label: text.tr, isRequired: true):Text(
       text.tr,
       textAlign: textAlign,
-      style: interRegularDefault.copyWith(color: MyColor.getLabelTextColor()),
+      style: textStyle??interSemiBoldLarge.copyWith(color: MyColor.getLabelTextColor(), fontSize: Dimensions.fontSize14),
     );
   }
 }

@@ -81,13 +81,13 @@ class _CustomDropDownTextField2State extends State<CustomDropDownTextField2> {
             value: widget.selectedValue,
             dropdownColor: widget.dropDownColor,
             focusColor: widget.focusColor,
-            style: interRegularLarge,
+            style: interRegularLarge.copyWith(fontSize: Dimensions.fontDefault, fontWeight: FontWeight.w600),
             alignment: Alignment.centerLeft,
             decoration: InputDecoration(
               hintText: widget.hintText.toString(),
               filled: true,
               fillColor: widget.fillColor,
-              hintStyle: interRegularDefault.copyWith(color: MyColor.getTextColor()),
+              hintStyle: interRegularDefault.copyWith(color: MyColor.getTextColor(), fontSize: Dimensions.fontDefault, fontWeight: FontWeight.w500),
               contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.radius),

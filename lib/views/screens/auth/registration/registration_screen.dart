@@ -1,3 +1,4 @@
+import 'package:eastern_trust/views/screens/auth/registration/widget/bottom_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/route/route.dart';
@@ -15,6 +16,7 @@ import 'package:eastern_trust/views/screens/auth/registration/widget/registratio
 
 import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/my_strings.dart';
+
 
 class RegistrationScreen extends StatefulWidget {
 
@@ -45,7 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
 
     return GetBuilder<RegistrationController>(
       builder: (controller) => WillPopWidget(
@@ -67,7 +69,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       padding: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*.2),
                       child: Text(MyStrings.signUpSologan.tr, textAlign: TextAlign.left,style: interRegularDefault.copyWith(color: MyColor.getGreyText(),fontWeight: FontWeight.w500),)),
                    */ const SizedBox(height: Dimensions.space30),
-                    const RegistrationForm()
+                    const RegistrationForm(),
                     ],
                   ),
                 ),
@@ -76,5 +78,89 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
       ),
       );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<RegistrationController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: '',
+        child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            backgroundColor: MyColor.appPrimaryColorSecondary2,
+            body: controller.isLoading ? const CustomLoader() : Stack(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 2.8, // Half of the screen height
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: MyColor.colorWhite, // Use the same color for the bottom half
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Card(
+                            color: MyColor.colorWhite,
+                            elevation: 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: SizedBox(
+                                      width: 200,
+                                      height: 100, // Adjust height as needed
+                                      child: Image.asset(
+                                        MyImages.appLogo,
+                                        fit: BoxFit.fitWidth, // Image covers the entire container
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: Dimensions.space15),
+                                  const RegistrationForm(), // Your form goes here
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 5), // Add spacing if needed
+                          const BottomSectionRegistration(),
+                          const SizedBox(height: Dimensions.space30),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
