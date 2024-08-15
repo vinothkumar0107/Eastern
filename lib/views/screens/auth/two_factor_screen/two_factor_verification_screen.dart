@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -51,6 +52,7 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
     super.dispose();
   }
 
+  // need to remove
   @override
   Widget build2(BuildContext context) {
     return SafeArea(
@@ -202,6 +204,138 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
                   alignment: Alignment.topCenter,
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(15.0, 130.0, 15.0, 0.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Card(
+                            color: MyColor.colorWhite,
+                            elevation: 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      const SizedBox(height: Dimensions.space30),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.1),
+                                        child: Text(MyStrings.twoFactorMsg.tr, maxLines: 2, textAlign: TextAlign.center,style: interRegularLarge.copyWith(color: MyColor.labelTextColor)),
+                                      ),
+                                      const SizedBox(height: Dimensions.space30),
+                                      OTPFieldWidget(
+                                        onChanged: (value) {
+                                          controller.currentText = value;
+                                        },
+                                      ),
+                                      const SizedBox(height: Dimensions.space30),
+                                      controller.submitLoading?const RoundedLoadingBtn() : RoundedButton(
+                                        press: (){
+                                          controller.verifyYourSms(controller.currentText);
+                                        },
+                                        text: MyStrings.verify,
+                                        textColor: MyColor.colorWhite,
+                                        color: MyColor.appPrimaryColorSecondary2,
+                                      ),
+                                      const SizedBox(height: Dimensions.space30),
+                                    ],
+                                  ),
+                                )
+                            ),
+                          ),
+                          const SizedBox(height: Dimensions.space20), // Add spacing if needed
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // need to remove
+  @override
+  Widget build3(BuildContext context) {
+    return GetBuilder<TwoFactorController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: '',
+        child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              scrolledUnderElevation: 0,
+              elevation: 0,
+              toolbarHeight: 0,
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: MyColor.primaryColor2,
+                  statusBarIconBrightness: Brightness.light,
+                  systemNavigationBarColor: MyColor.navigationBarColor,
+                  systemNavigationBarIconBrightness: Brightness.dark),
+            ),
+            backgroundColor: MyColor.appPrimaryColorSecondary2,
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 3.5, // Half of the screen height
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [MyColor.primaryColor2, MyColor.primaryColor, MyColor.primaryColor],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: MyColor.colorWhite, // Use the same color for the bottom half
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          // Navigator.of(context).pop();
+                          Get.offAndToNamed(RouteHelper.loginScreen);
+                        },
+                      ),
+                      Expanded(
+                        child: Text(
+                            MyStrings.twoFactorAuth.tr,
+                            textAlign: TextAlign.left,
+                            style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor)
+                        ),
+                      ),
+                      // To keep the title centered, you can add an empty `SizedBox`
+                      const SizedBox(width: 48.0),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(15.0, 80.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [

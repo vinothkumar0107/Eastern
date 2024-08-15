@@ -1,4 +1,6 @@
+import 'package:eastern_trust/views/components/appbar/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/theme/theme_util.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
@@ -59,7 +61,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
     return GetBuilder<SplashController>(builder: (controller) => Scaffold(
+      appBar: AppBar(backgroundColor: MyColor.colorWhite,foregroundColor: MyColor.colorWhite,toolbarHeight: 0.0,),
       backgroundColor: controller.noInternet?MyColor.primaryColor2:MyColor.primaryColor2,
       body: Container(
         decoration: const BoxDecoration(

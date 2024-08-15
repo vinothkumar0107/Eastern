@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
@@ -13,6 +14,8 @@ import 'package:eastern_trust/views/components/will_pop_widget.dart';
 import 'package:eastern_trust/views/screens/auth/login/widget/login_form.dart';
 
 import 'package:eastern_trust/views/screens/auth/login/widget/bottom_section.dart';
+
+import '../../../components/appbar/custom_appbar.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -46,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 // Need to remove
   @override
-  Widget build3(BuildContext context) {
+  Widget build2(BuildContext context) {
     return GetBuilder<LoginController>(
       builder: (controller) => WillPopWidget(
         nextRoute: '',
@@ -126,6 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
     return GetBuilder<LoginController>(
       builder: (controller) => WillPopWidget(
         nextRoute: '',
@@ -137,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           },
           child: Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor: MyColor.getScreenBgColor2(),
             body: Stack(
               children: [
                 Column(

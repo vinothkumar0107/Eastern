@@ -64,11 +64,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
         ?
     AppBar(
       scrolledUnderElevation: 0,
-      systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: MyColor.primaryColor,
-          statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: MyColor.navigationBarColor,
-          systemNavigationBarIconBrightness: Brightness.dark),
+      // systemOverlayStyle: const SystemUiOverlayStyle(
+      //     statusBarColor: MyColor.primaryColor2,
+      //     statusBarIconBrightness: Brightness.light,
+      //     systemNavigationBarColor: MyColor.navigationBarColor,
+      //     systemNavigationBarIconBrightness: Brightness.dark),
       elevation: 0,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
@@ -130,11 +130,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
         ),
       ),
-      systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: MyColor.primaryColor,
-          statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: MyColor.navigationBarColor,
-          systemNavigationBarIconBrightness: Brightness.dark),
+      // systemOverlayStyle: const SystemUiOverlayStyle(
+      //     statusBarColor: MyColor.primaryColor,
+      //     statusBarIconBrightness: Brightness.light,
+      //     systemNavigationBarColor: MyColor.navigationBarColor,
+      //     systemNavigationBarIconBrightness: Brightness.dark),
       elevation: 0,
       backgroundColor: widget.bgColor,
       centerTitle: widget.isTitleCenter,

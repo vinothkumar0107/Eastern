@@ -56,6 +56,7 @@ class _OtpTimerState extends State<OtpTimer> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
               MyStrings.otpWillBeExpired.tr,
