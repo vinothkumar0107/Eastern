@@ -321,6 +321,7 @@ class MyStrings{
   static const String support = "Support";
   static const String warranty = "Warranty";
   static const String unauthorized = "Unauthorized";
+  static const String authorizedMethod = "Authorized Method";
   static const String payment = "Payment";
   static const String couponPolicy = "Coupon Policy";
   static const String transactionDetails = "Transaction Details";

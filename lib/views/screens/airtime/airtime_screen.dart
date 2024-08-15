@@ -129,7 +129,7 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
                     border:  Border.all(color: MyColor.borderColor, width: .9),
                     borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
                 ),
-                        child: ,
+                        // child: Text(""),
                 )
                     ],
                   )

@@ -184,7 +184,7 @@ class AirtimeController extends GetxController{
     }else if(mobileController.text.isEmpty){
       CustomSnackBar.error(errorList: [MyStrings.enterPhoneNumber.tr]);
       return ;
-    }else if(authorizationList.length>1 && selectedAuthorizationMode?.toLowerCase()==MyStrings.selectOne.toLowerCase()){
+    }else if(authorizationList.length>1 && selectedAuthorizationMode?.toLowerCase()==MyStrings.authorizedMethod.toLowerCase()){
       CustomSnackBar.error(errorList: [MyStrings.selectAuthModeMsg]);
       return;
     } else if(selectedCountry.callingCodes == null || selectedCountry.callingCodes![0].isEmpty){

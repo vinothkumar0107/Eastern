@@ -20,15 +20,15 @@ class PhoneSection extends StatelessWidget {
           const SizedBox(height: Dimensions.space8,),
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 13),
-                decoration:  BoxDecoration(
-                    color: MyColor.transparentColor,
-                    border:  Border.all(color: MyColor.borderColor, width: .9),
-                    borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
-                ),
-                child: Text(controller.selectedCountry.callingCodes?[0] ?? MyStrings.code.tr,style: interMediumDefault,),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 13),
+              //   decoration:  BoxDecoration(
+              //       color: MyColor.transparentColor,
+              //       border:  Border.all(color: MyColor.borderColor, width: .9),
+              //       borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
+              //   ),
+              //   child: Text(controller.selectedCountry.callingCodes?[0] ?? MyStrings.code.tr,style: interMediumDefault,),
+              // ),
               const SizedBox(width: 8),
 
               Expanded(
@@ -37,7 +37,7 @@ class PhoneSection extends StatelessWidget {
                     needLabel: false,
                     needOutlineBorder: true,
                     labelText: '',
-                    hintText: MyStrings.enterYourPhoneNo.tr,
+                    hintText: MyStrings.phoneNumber.tr,
                     controller: controller.mobileController,
                     focusNode: controller.mobileFocusNode,
                     textInputType: TextInputType.phone,
