@@ -1,5 +1,6 @@
 import 'package:eastern_trust/views/screens/auth/registration/widget/bottom_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/route/route.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';

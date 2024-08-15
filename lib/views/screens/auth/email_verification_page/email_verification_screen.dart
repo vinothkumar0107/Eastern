@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/route/route.dart';
@@ -167,7 +168,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 60.0),
+                  padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),

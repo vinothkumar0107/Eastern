@@ -61,7 +61,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
     return GetBuilder<SplashController>(builder: (controller) => Scaffold(
+      appBar: AppBar(backgroundColor: MyColor.colorWhite,foregroundColor: MyColor.colorWhite,toolbarHeight: 0.0,),
       backgroundColor: controller.noInternet?MyColor.primaryColor2:MyColor.primaryColor2,
       body: Container(
         decoration: const BoxDecoration(

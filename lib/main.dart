@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
     return GetMaterialApp(
       title: MyStrings.appName,
       initialRoute: RouteHelper.splashScreen,
