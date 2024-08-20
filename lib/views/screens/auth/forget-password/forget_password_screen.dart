@@ -15,6 +15,7 @@ import 'package:eastern_trust/views/components/text-field/custom_text_field.dart
 
 import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/style.dart';
+import '../../../components/appbar/appbar_specific_device.dart';
 import '../../../components/will_pop_widget.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -118,30 +119,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             }
           },
           child: Scaffold(
+            appBar: AppBarSpecificScreen.buildAppBar(),
             backgroundColor: MyColor.appPrimaryColorSecondary2,
             body: Stack(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 3.5, // Half of the screen height
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: MyColor.colorWhite, // Use the same color for the bottom half
-                      ),
-                    ),
-                  ],
-                ),
+                const GradientView(gradientViewHeight: 3.5),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 60.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),
@@ -168,7 +152,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 130.0, 15.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 70.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Form(
                         key: formKey,

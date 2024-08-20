@@ -190,4 +190,16 @@ class MyColor{
     addMoneyBaseColor
   ];
 
+ static LinearGradient getBackgroundGradient() {
+    return const LinearGradient(
+      colors: [
+        MyColor.primaryColor2,
+        MyColor.primaryColor,
+        MyColor.primaryColor,
+      ],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+    );
+  }
+
 }
