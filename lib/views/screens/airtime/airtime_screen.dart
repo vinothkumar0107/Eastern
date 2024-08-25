@@ -48,59 +48,45 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
         backgroundColor: MyColor.containerBgColor,
         appBar: CustomAppBar(
           title: MyStrings.airtime.tr,
+          isTitleCenter: false,
         ),
         body: controller.isLoading ? const CustomLoader() :  SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(
-              vertical: Dimensions.space20,
-              horizontal: Dimensions.space30),
-          child: Container(
-            width: double.infinity,
-            alignment: Alignment.center,
-            margin:
-            const EdgeInsets.only(bottom: Dimensions.space20),
-            padding: const EdgeInsets.symmetric(
-                vertical: Dimensions.space20,
-                horizontal: Dimensions.space15),
-            decoration: BoxDecoration(
-                color: MyColor.getCardBg(),
-                borderRadius:
-                BorderRadius.circular(Dimensions.cardMargin)),
-          child:  Column(
+          padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10),
+          child: Column(
             children: [
+              const SizedBox(height: Dimensions.textFieldToTextFieldSpace + 10),
 
               InkWell(
                 onTap: () {
                   AirtimeCountryBottomSheet.bottomSheet(context, controller);
                 },
                 child: Container(
-                  height: Dimensions.space60,
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(vertical:controller.selectedCountry.id != -1 ? 11 : 13,horizontal:  20),
+                  padding: EdgeInsets.symmetric(vertical:controller.selectedCountry.id != -1 ? 11 : 13,horizontal:  10),
                   decoration: BoxDecoration(
                       color: MyColor.transparentColor,
-                      border:  Border.all(color: MyColor.borderColor, width: .9),
-                      borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
+                      border:  Border.all(color: MyColor.naturalLight,width: .5),
+                    borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children:  [
                       Row(
                         children: [
                           controller.selectedCountry.id != -1 ? ClipRRect(
-                            borderRadius: BorderRadius.circular(Dimensions.paddingSize25),
+                            borderRadius: BorderRadius.circular(4),
                             child: SvgPicture.network(
                                 width: 25,
                                 height:25,
                                 fit: BoxFit.cover,
                                 controller.selectedCountry.flagUrl ?? ""),
                           ) : const SizedBox.shrink() ,
-                          const SizedBox(width: Dimensions.space10),
-                          Text(controller.selectedCountry.id == -1 ? MyStrings.selectACountry : controller.selectedCountry.name ?? "",
-                            style: interMediumOverLarge.copyWith(color: MyColor.menu_icon_color)),
+                          const SizedBox(width: Dimensions.space10,),
+                          Text(controller.selectedCountry.id == -1 ? MyStrings.selectACountry : controller.selectedCountry.name ?? "",style: interRegularDefault.copyWith(color: MyColor.colorBlack),),
                         ],
                       ),
 
-                      const Icon(Icons.expand_more_rounded,color: MyColor.menu_icon_color,size: 20,)
+                      Icon(Icons.expand_more_rounded,color: MyColor.getGreyText(),size: 20,)
                     ],
                   ),
                 ),
@@ -115,22 +101,15 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
+                      LabelText(text: MyStrings.authorizationMethod.tr,required: true,),
                       const SizedBox(height: 8),
-                      CustomDropDownTextField(selectedValue:controller.selectedAuthorizationMode,list: controller.authorizationList,onChanged:(dynamic value) {
+                      CustomDropDownTextField(
+                        selectedValue:controller.selectedAuthorizationMode,
+                        list: controller.authorizationList,onChanged:(dynamic value) {
                         controller.changeAuthorizationMode(value);
                       },
-                      ),
-                      Container(
-                height: Dimensions.space60,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(vertical:controller.selectedCountry.id != -1 ? 11 : 13,horizontal:  20),
-                decoration: BoxDecoration(
-                    color: MyColor.transparentColor,
-                    border:  Border.all(color: MyColor.borderColor, width: .9),
-                    borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
-                ),
-                        // child: Text(""),
-                )
+                      borderWidth: 0.5,
+                      borderColor: MyColor.naturalLight,)
                     ],
                   )
               ),
@@ -143,8 +122,6 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
 
             ],
           ),
-          )
-
         ),
         bottomNavigationBar: controller.isLoading ? const SizedBox.shrink() : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 12),

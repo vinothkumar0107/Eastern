@@ -57,15 +57,15 @@ class _TransferOtherBankScreenState extends State<TransferOtherBankScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return SafeArea(
-      child: GetBuilder<OtherBankTransferController>(builder: (controller)=>Scaffold(
-        backgroundColor: MyColor.containerBgColor,
-        appBar: CustomAppBar(title: MyStrings.transferToOtherBank,  isShowActionBtn: true,
-            press: (){
-              AddOtherBankBeneficiariesBottomSheet().showBottomSheet(context);
-            },
-            actionText: MyStrings.addNew,actionIcon: Icons.add,isActionIconAlignEnd: false),
-        body: controller.isLoading?const CustomLoader():controller.beneficiaryList.isEmpty?const NoDataFoundScreen():Container(
+    return GetBuilder<OtherBankTransferController>(builder: (controller)=>Scaffold(
+      backgroundColor: MyColor.containerBgColor,
+      appBar: CustomAppBar(title: MyStrings.transferToOtherBank,  isShowActionBtn: true,
+          isTitleCenter: false,
+          press: (){
+            AddOtherBankBeneficiariesBottomSheet().showBottomSheet(context);
+          },
+          actionText: MyStrings.addNew,actionIcon: Icons.add,isActionIconAlignEnd: false),
+      body: controller.isLoading?const CustomLoader():controller.beneficiaryList.isEmpty?const NoDataFoundScreen():Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.screenPaddingH, vertical: Dimensions.screenPaddingV),
           child: ListView.builder(
@@ -86,8 +86,7 @@ class _TransferOtherBankScreenState extends State<TransferOtherBankScreen> {
                     index: index
                 );
               })
-        ),
-      )),
-    );
+      ),
+    ));
   }
 }

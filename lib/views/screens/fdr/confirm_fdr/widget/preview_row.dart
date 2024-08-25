@@ -23,8 +23,8 @@ class PreviewRow extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstText.tr,style: interSemiBold.copyWith(fontSize: Dimensions.fontDefault,color:  MyColor.getGreyText())),
-            Text(secondText.tr,style: interSemiBold.copyWith(fontSize: Dimensions.fontSmall12,color:  MyColor.getGreyText1()))
+            Text(firstText.tr,style: interMediumDefault.copyWith(fontSize: Dimensions.fontDefault,color:  MyColor.colorBlack)),
+            Text(secondText.tr,style: interMediumDefault.copyWith(fontSize: Dimensions.fontSmall12,color:  MyColor.colorBlack))
           ],
         ),
         const SizedBox(height: 15),

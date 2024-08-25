@@ -24,6 +24,7 @@ class LoanCard extends StatelessWidget {
   final String totalInstallment;
   final VoidCallback onPressed;
   final int index;
+  final bool isFromLoanConfirmation;
 
   const LoanCard({
     Key? key,
@@ -35,7 +36,8 @@ class LoanCard extends StatelessWidget {
     required this.installmentInterval,
     required this.totalInstallment,
     required this.onPressed,
-    required this.index
+    required this.index,
+    this.isFromLoanConfirmation = false
   }) : super(key: key);
 
   // need to remove
@@ -151,7 +153,8 @@ class LoanCard extends StatelessWidget {
     return GetBuilder<LoanPlanController>(
       builder: (controller) => GestureDetector(
         onTap: (){
-          ApplyLoanBottomSheet().bottomSheet(context, index);
+          !isFromLoanConfirmation ?
+          ApplyLoanBottomSheet().bottomSheet(context, index) : ();
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -160,7 +163,76 @@ class LoanCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(Dimensions.defaultBorderRadius),
               boxShadow: MyUtil.getBottomSheetShadow()
           ),
-          child: Column(
+          child: isFromLoanConfirmation ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: Dimensions.space15, right: Dimensions.space15, top: Dimensions.space15,
+                    bottom: Dimensions.space5
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            (cardStatusTitle ?? "").tr,
+                            style: interRegularDefault.copyWith(color: MyColor.appPrimaryColorSecondary2, fontSize: Dimensions.fontSize14, fontWeight: FontWeight.w600)
+                        ),
+                        const SizedBox(height: Dimensions.space5),
+                        Text('${MyStrings.loanUpTo} - ${Converter.formatNumber(takeMax)}',
+                            style: interRegularSmall.copyWith(color: MyColor.smallTextColor1)),
+                      ],
+                    ),
+                    Container(
+                        padding: const EdgeInsets.only(left: 10,top: 5,right: 10,bottom: 5),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: MyColor.primaryColor2.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(10)
+
+                        ),
+                        child: Column(
+                          children: [
+                            Text('$perInstallment%',
+                                style: interRegularDefault.copyWith(color: MyColor.appPrimaryColorSecondary2, fontSize: Dimensions.fontSize14, fontWeight: FontWeight.w600)),
+                            Text(MyStrings.perInstallment,
+                                style: interRegularSmall.copyWith(color: MyColor.appPrimaryColorSecondary2)),
+                          ],
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: Dimensions.space10, horizontal: Dimensions.space15),
+                  decoration: BoxDecoration(
+                      color: MyColor.colorGrey.withOpacity(0.1),
+                      border: Border(
+                        top: BorderSide(
+                          color: MyColor.colorGrey.withOpacity(0.2), // Top border color
+                          width: 1.0, // Top border width
+                        ),
+                      ),
+                      borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(Dimensions.space10), bottomRight: Radius.circular(Dimensions.space10))
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('${MyStrings.totalInstallment} - $totalInstallment',
+                          style: interRegularSmall.copyWith(color: MyColor.smallTextColor1)),
+                      Text('${MyStrings.installmentInterval} - $installmentInterval ${MyStrings.days.tr}',
+                          style: interRegularSmall.copyWith(color: MyColor.smallTextColor1)),
+                    ],
+                  )
+              ),
+            ],
+          ) :
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -262,7 +334,7 @@ class LoanCard extends StatelessWidget {
                   )
               ),
             ],
-          ),
+          )
         ),
       ),
     );

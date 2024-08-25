@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:eastern_trust/views/components/appbar/appbar_specific_device.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -140,7 +142,7 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build3(BuildContext context) {
     return GetBuilder<TwoFactorController>(
       builder: (controller) => WillPopWidget(
         nextRoute: '',
@@ -260,9 +262,8 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
     );
   }
 
-  // need to remove
   @override
-  Widget build3(BuildContext context) {
+  Widget build(BuildContext context) {
     return GetBuilder<TwoFactorController>(
       builder: (controller) => WillPopWidget(
         nextRoute: '',
@@ -274,16 +275,7 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
             }
           },
           child: Scaffold(
-            appBar: AppBar(
-              scrolledUnderElevation: 0,
-              elevation: 0,
-              toolbarHeight: 0,
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                  statusBarColor: MyColor.primaryColor2,
-                  statusBarIconBrightness: Brightness.light,
-                  systemNavigationBarColor: MyColor.navigationBarColor,
-                  systemNavigationBarIconBrightness: Brightness.dark),
-            ),
+            appBar: AppBarSpecificScreen.buildAppBar(),
             backgroundColor: MyColor.appPrimaryColorSecondary2,
             body: Stack(
               children: [
@@ -335,7 +327,7 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 80.0, 15.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 70.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
@@ -391,4 +383,6 @@ class _TwoFactorVerificationScreenState extends State<TwoFactorVerificationScree
       ),
     );
   }
+
+
 }

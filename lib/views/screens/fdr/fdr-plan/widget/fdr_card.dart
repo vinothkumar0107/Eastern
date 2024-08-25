@@ -211,9 +211,9 @@ class _FDRCardState extends State<FDRCard> {
                             style: interRegularSmall.copyWith(color: MyColor.colorBlack,fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w600)),
                       ],
                     ),
-                    const SizedBox(width: 15,),
+                    const SizedBox(width: 10,),
                     Container(width: 1, color: MyColor.getBorderColor(),height: 30,),
-                    const SizedBox(width: 15,),
+                    const SizedBox(width: 10,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -224,19 +224,20 @@ class _FDRCardState extends State<FDRCard> {
                             style: interRegularSmall.copyWith(color: MyColor.colorBlack,fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w600)),
                       ],
                     ),
-                    const SizedBox(width: 15,),
+                    const SizedBox(width: 10,),
                     Container(width: 1, color: MyColor.getBorderColor(),height: 30,),
-                    const SizedBox(width: 15,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(MyStrings.lockInPeriod,
-                            style: interRegularSmall.copyWith(color: MyColor.smallTextColor1, fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w400)),
-                        const SizedBox(height: Dimensions.space5),
-                        Text('${controller.planList[widget.index].lockedDays} ${MyStrings.days.tr}',
-                            style: interRegularSmall.copyWith(color: MyColor.colorBlack,fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w600)),
-                      ],
-                    ),
+                    const SizedBox(width: 10,),
+                   Expanded(child:  Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Text(MyStrings.lockInPeriod,
+                           style: interRegularSmall.copyWith(color: MyColor.smallTextColor1, fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w400)),
+                       const SizedBox(height: Dimensions.space5),
+                       Text('${controller.planList[widget.index].lockedDays} ${MyStrings.days.tr}',
+                           style: interRegularSmall.copyWith(color: MyColor.colorBlack,fontSize: Dimensions.fontSmall12, fontWeight: FontWeight.w600)),
+                     ],
+                   ),
+                   )
                   ],
                 ),
               ),

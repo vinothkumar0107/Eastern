@@ -10,10 +10,16 @@ class CustomDropDownTextField extends StatefulWidget {
   final String? title, selectedValue;
   final List<String>? list;
   final ValueChanged? onChanged;
+  final Color backgroundColor;
+  final Color borderColor;
+  final double borderWidth;
   const CustomDropDownTextField({Key? key,
     this.title,
     this.selectedValue,
     this.list,
+    this.backgroundColor = MyColor.liteGreyColor,
+    this.borderColor = MyColor.liteGreyColorBorder,
+    this.borderWidth = 0.5,
     this.onChanged, }) : super(key: key);
 
   @override
@@ -40,16 +46,16 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: Dimensions.space60,
+            height:45,
             decoration: BoxDecoration(
-                color: MyColor.transparentColor,
-                border: Border.all(color: MyColor.borderColor, width: .9),
-                borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
+                color: widget.backgroundColor,
+                borderRadius:const  BorderRadius.all(Radius.circular(Dimensions.paddingSize25)),
+              border: Border.all(color: widget.borderColor,width: widget.borderWidth)
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left:10,
-                  right: 5,
+                  left:20,
+                  right: 10,
                   top: 5,
                   bottom: 5
               ),
@@ -58,18 +64,18 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
                 underline: Container(),
                 hint: Text(
                   widget.selectedValue??'',
-                  style:interSemiBoldDefault.copyWith(color: MyColor.getTextColor()),
+                  style:interRegularLarge.copyWith(color: MyColor.getTextColor(),  fontSize: Dimensions.fontDefault),
                 ), // Not necessary for Option 1
                 value: widget.selectedValue,
                 dropdownColor: MyColor.colorGrey1,
                 onChanged: widget.onChanged,
-                icon: const Icon(Icons.arrow_drop_down, color: MyColor.colorGrey),
+                icon: const Icon(Icons.arrow_drop_down,color: MyColor.colorGrey,),
                 items: widget.list!.map((value) {
                   return DropdownMenuItem(
                     value: value,
                     child: Text(
                       value.tr,
-                      style: interRegularDefault.copyWith(color: MyColor.getTextColor()),
+                      style: interRegularLarge.copyWith(color: MyColor.getTextColor(),fontSize: Dimensions.fontDefault),
                     ),
                   );
                 }).toList(),

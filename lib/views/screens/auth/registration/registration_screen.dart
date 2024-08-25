@@ -17,6 +17,7 @@ import 'package:eastern_trust/views/screens/auth/registration/widget/registratio
 
 import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/my_strings.dart';
+import '../../../components/appbar/appbar_specific_device.dart';
 
 
 class RegistrationScreen extends StatefulWidget {
@@ -94,32 +95,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             }
           },
           child: Scaffold(
+            appBar: AppBarSpecificScreen.buildAppBar(),
             backgroundColor: MyColor.appPrimaryColorSecondary2,
             body: controller.isLoading ? const CustomLoader() : Stack(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 2.8, // Half of the screen height
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: MyColor.colorWhite, // Use the same color for the bottom half
-                      ),
-                    ),
-                  ],
-                ),
+                const GradientView(gradientViewHeight: 2.8),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 60.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [

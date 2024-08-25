@@ -16,6 +16,7 @@ import 'package:eastern_trust/views/screens/auth/profile_complete/widget/image_w
 
 import '../../../../core/utils/style.dart';
 import '../../../components/alert-dialog/exit_dialog.dart';
+import '../../../components/appbar/appbar_specific_device.dart';
 
 
 class ProfileCompleteScreen extends StatefulWidget {
@@ -198,30 +199,13 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
             }
           },
           child: Scaffold(
+            appBar: AppBarSpecificScreen.buildAppBar(),
             backgroundColor: MyColor.appPrimaryColorSecondary2,
             body: Stack(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 3.0, // Half of the screen height
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: MyColor.colorWhite, // Use the same color for the bottom half
-                      ),
-                    ),
-                  ],
-                ),
+                const GradientView(gradientViewHeight: 3.5),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 60.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),
@@ -249,7 +233,7 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 130.0, 15.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 70.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [

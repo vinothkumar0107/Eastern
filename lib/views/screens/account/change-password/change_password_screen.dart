@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
@@ -40,35 +41,33 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: MyColor.primaryColor2,
-        appBar: CustomAppBar(isShowBackBtn: true, title: MyStrings.changePassword.tr, bgColor: MyColor.getAppbarBgColor()),
-        body: GetBuilder<ChangePasswordController>(
-          builder: (controller) => SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 45, horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    MyStrings.createNewPassword.tr,
-                    style: interRegularExtraLarge.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: 12),
+    return Scaffold(
+      backgroundColor: MyColor.getScreenBgColor2(),
+      appBar: CustomAppBar(isShowBackBtn: true, title: MyStrings.changePassword.tr, bgColor: MyColor.getAppbarBgColor(),isTitleCenter: false,),
+      body: GetBuilder<ChangePasswordController>(
+        builder: (controller) => SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 45, horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  MyStrings.createNewPassword.tr,
+                  style: interRegularExtraLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(height: 12),
 
-                  Padding(
-                    padding: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*0.3),
-                    child: Text(
-                      MyStrings.createPasswordSubText.tr,
-                      style: interRegularDefault.copyWith(color: MyColor.colorWhite.withOpacity(0.8)),
-                    ),
+                Padding(
+                  padding: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*0.3),
+                  child: Text(
+                    MyStrings.createPasswordSubText.tr,
+                    style: interRegularDefault.copyWith(color: MyColor.colorBlack.withOpacity(0.8), fontWeight: FontWeight.w500, fontSize: Dimensions.fontSmall12),
                   ),
-                  const SizedBox(height: 50),
+                ),
+                const SizedBox(height: 50),
 
-                  const ChangePasswordForm()
-                ],
-              ),
+                const ChangePasswordForm()
+              ],
             ),
           ),
         ),

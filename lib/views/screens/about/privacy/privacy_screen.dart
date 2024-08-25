@@ -42,6 +42,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
         appBar: const CustomAppBar(
           title: MyStrings.policies,
           isShowActionBtn: false,
+          isTitleCenter: false,
         ),
         body: GetBuilder<PrivacyController>(
           builder: (controller) => SizedBox(
@@ -52,7 +53,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: const CustomLoader()
             ) : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: Dimensions.space15, right: Dimensions.space15, top: Dimensions.space20),
@@ -61,7 +62,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: List.generate(
                           controller.policyList.length,
                               (index) => Row(
@@ -70,8 +71,8 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                                   color: controller.selectedIndex == index
                                       ? MyColor.primaryColor
                                       : MyColor.colorWhite,
-                                  horizontalPadding: 8,
-                                  verticalPadding: 7,
+                                  horizontalPadding: 10,
+                                  verticalPadding: 5,
                                   textSize: Dimensions.fontDefault,
                                   text: controller.policyList[index].dataValues?.title ?? '',
                                   textColor: controller.selectedIndex == index

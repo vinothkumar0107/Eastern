@@ -25,7 +25,7 @@ class LabelText extends StatelessWidget {
     return required?FormRow(label: text.tr, isRequired: true):Text(
       text.tr,
       textAlign: textAlign,
-      style: textStyle??interSemiBoldLarge.copyWith(color: MyColor.getLabelTextColor(), fontSize: Dimensions.fontSize14),
+      style: textStyle??interSemiBoldLarge.copyWith(color: MyColor.getLabelTextColor(), fontSize: Dimensions.fontDefault),
     );
   }
 }

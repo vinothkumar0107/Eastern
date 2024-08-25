@@ -16,6 +16,7 @@ import 'package:eastern_trust/views/components/buttons/rounded_button.dart';
 import 'package:eastern_trust/views/components/buttons/rounded_loading_button.dart';
 
 import '../../../../core/route/route.dart';
+import '../../../components/appbar/appbar_specific_device.dart';
 import '../../../components/otp_field_widget/otp_field_widget.dart';
 import '../../../components/will_pop_widget.dart';
 
@@ -180,30 +181,13 @@ class _SmsVerificationScreenState extends State<SmsVerificationScreen> {
             }
           },
           child: Scaffold(
+            appBar: AppBarSpecificScreen.buildAppBar(),
             backgroundColor: MyColor.appPrimaryColorSecondary2,
             body: Stack(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 3.0, // Half of the screen height
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: MyColor.colorWhite, // Use the same color for the bottom half
-                      ),
-                    ),
-                  ],
-                ),
+                const GradientView(gradientViewHeight: 3.5),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 60.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),
@@ -233,7 +217,7 @@ class _SmsVerificationScreenState extends State<SmsVerificationScreen> {
                 ) : Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 130.0, 15.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 70.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [

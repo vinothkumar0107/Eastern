@@ -15,6 +15,7 @@ import 'package:eastern_trust/views/screens/auth/login/widget/login_form.dart';
 
 import 'package:eastern_trust/views/screens/auth/login/widget/bottom_section.dart';
 
+import '../../../components/appbar/appbar_specific_device.dart';
 import '../../../components/appbar/custom_appbar.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -141,32 +142,15 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           },
           child: Scaffold(
+            appBar: AppBarSpecificScreen.buildAppBar(),
             backgroundColor: MyColor.getScreenBgColor2(),
             body: Stack(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 2.8, // Half of the screen height
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [MyColor.primaryColor2, MyColor.primaryColor],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: MyColor.colorWhite, // Use the same color for the bottom half
-                      ),
-                    ),
-                  ],
-                ),
+                const GradientView(gradientViewHeight: 3.5),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [

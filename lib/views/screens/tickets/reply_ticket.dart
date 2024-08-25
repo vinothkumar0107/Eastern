@@ -305,186 +305,202 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ReplyTicketController>(
-        builder: (controller) =>  SafeArea(
-        child: Scaffold(
+        builder: (controller) =>  Scaffold(
           backgroundColor: MyColor.getScreenBgColor2(),
-          appBar: const CustomAppBar(title: MyStrings.replyTicket),
+          appBar: const CustomAppBar(title: MyStrings.replyTicket, isTitleCenter: false,),
+
           body:  controller.isLoading
               ? const CustomLoader() :
-              SingleChildScrollView(
-              padding: Dimensions.screenPaddingHV1,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: MyColor.getScreenBgColor2(),
-                    borderRadius: BorderRadius.circular(Dimensions.defaultBorderRadius),
-                ),
-                child:  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          SingleChildScrollView(
+            padding: Dimensions.screenPaddingHV1,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: MyColor.getScreenBgColor2(),
+                borderRadius: BorderRadius.circular(Dimensions.defaultBorderRadius),
+              ),
+              child:  Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          const SizedBox(width: 0),
-                          Container(
-                            padding: const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2), // Padding inside the border
-                            decoration: BoxDecoration(
-                              color: getStatusColorFromCode().withOpacity(0.2), // Background color
-                              border: Border.all(
-                                color: getStatusColorFromCode(), // Border color
-                                width: 1.0, // Border width
-                              ),
-                              borderRadius: BorderRadius.circular(6.0), // Border radius
-                            ),
-                            child: Text(
-                              getStatusFromCode(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: interRegularDefault.copyWith(color:getStatusColorFromCode(),fontSize: Dimensions.fontDefault),
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                           Text(
-                            '[Ticket#${getTicketId()}]',
-                            maxLines: 1,
-                             overflow: TextOverflow.ellipsis,
-                            style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault),
-                          ),
-                          const SizedBox(width: 5),
-                          Expanded(child: Text(
-                            getSubject(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: interRegularDefault.copyWith(color:MyColor.getGreyText(),fontSize: Dimensions.fontSmall12 ),
-                          ),),
 
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                          hintText:
-                          MyStrings.message.capitalizeFirst!.tr,
-                          needLabel: true,
-                          needOutlineBorder: true,
-                          controller: controller.messageController,
-                          labelText:
-                          MyStrings.message.capitalizeFirst!.tr,
-                          isRequired: true,
-                          maxiLines: 3,
-                          disableColor: MyColor.getGreyText(),
-                          onChanged: (value) {
-                            // controller.changeSelectedValue(value, index);
-                          }),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget> [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: MyColor.primaryColor, // Background color
-                              foregroundColor: MyColor.textColor, // Text color
-                            ),
-                            onPressed:addNewChooseFileView,
-                            //_openGallery(context);
-                            child: Row(
-                              children: [
-                                Text('+ ${MyStrings.addNew}', style: interRegularDefault.copyWith(color:MyColor.colorWhite,fontSize: Dimensions.fontLarge ))
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 10),
-                      Padding(
-                      padding: const EdgeInsets.all(0.0),
-                        child: RichText(
-                          textAlign: TextAlign.start,
-                          text: TextSpan(
-                            text: '${MyStrings.attachment}s ',
-                            style: interSemiBoldSmall.copyWith(
-                                color: MyColor.colorBlack),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: MyStrings.fileSize,
-                                style: interMediumSmall.copyWith(
-                                    color: MyColor.red),
-                              ),
-                            ],
-                          ),
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: 'Ticket: ',
+                          style: interRegularDefault.copyWith(color:MyColor.primaryColor2,fontSize: Dimensions.fontDefault),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: getTicketId(),
+                              style: interRegularLarge.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault)),
+                          ]
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: selectedFiles.length,
-                          itemBuilder: (ctx, index) {
-                            bool isFirstItem = index == 0;
-                            return ChooseFileView(
-                              key: Key('ChooseFileView_$index'),
-                              selectedFileName: selectedFiles[index],
-                              chooseFile: () => chooseFile(index),
-                              removeFile: isFirstItem ? null : () => removeFile(index),
-                            );
-                          }),
-                      const SizedBox(height: 10),
-                      Text(
-                        MyStrings.allowedFileExtensionHint,
-                        style: interMediumSmall.copyWith(
-                          color: MyColor.colorBlack,
+                      const SizedBox(width: 5),
+                      Container(
+                        padding: const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2), // Padding inside the border
+                        decoration: BoxDecoration(
+                          color: getStatusColorFromCode().withOpacity(0.2), // Background color
+                          border: Border.all(
+                            color: getStatusColorFromCode(), // Border color
+                            width: 1.0, // Border width
+                          ),
+                          borderRadius: BorderRadius.circular(Dimensions.paddingSize25), // Border radius
+                        ),
+                        child: Text(
+                          getStatusFromCode(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: interRegularSmall.copyWith(color:getStatusColorFromCode(),fontSize: Dimensions.fontSmall12),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      controller.submitLoading?const RoundedLoadingBtn():
-                      RoundedButton(
-                        text: MyStrings.reply,
-                        textColor: MyColor.textColor,
-                        width: double.infinity,
-                        press: () {
-                          controller.selectedFilesData = selectedFilesData;
-                          controller.selectedFiles = selectedFiles;
-                          controller.ticketId = getTicketId();
-                          controller.id = getId();
-                          controller.onReplyComplete = _refreshList;
-                          controller.submitTicket();
-                          dismissKeyboard();
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      controller.closeLoading?const RoundedLoadingBtn():
-                      RoundedButton(
-                        text: MyStrings.closeTicket,
-                        textColor: MyColor.textColor,
-                        color: MyColor.redCancelTextColor,
-                        width: double.infinity,
-                        press: () {
-                          _showCloseTicketConfirmationDialog(context);
-                          dismissKeyboard();
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: controller.replyModel.messages?.length ?? 0,
-                          itemBuilder: (ctx, index) {
-                            bool isFirstItem = index == 0;
-                            return RepliedListView(
-                              key: Key('RepliedListView_$index'),
-                              messages: controller.replyModel.messages?[index],
-                              callback: () => {},
-                            );
-                          }),
                     ],
                   ),
-                ),
+                  const SizedBox(height: 5),
+                  Column(
+                    children: [
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                            text: 'Subject: ',
+                            style: interRegularDefault.copyWith(color:MyColor.primaryColor2,fontSize: Dimensions.fontDefault),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: getSubject(),
+                                  style: interRegularLarge.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault)),
+                            ]
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextField(
+                      hintText:
+                      MyStrings.message.capitalizeFirst!.tr,
+                      needLabel: true,
+                      needOutlineBorder: true,
+                      controller: controller.messageController,
+                      labelText:
+                      MyStrings.message.capitalizeFirst!.tr,
+                      isRequired: true,
+                      maxiLines: 3,
+                      disableColor: MyColor.getGreyText(),
+                      onChanged: (value) {
+                        // controller.changeSelectedValue(value, index);
+                      }),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget> [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColor.primaryColor, // Background color
+                          foregroundColor: MyColor.textColor, // Text color
+                        ),
+                        onPressed:addNewChooseFileView,
+                        //_openGallery(context);
+                        child: Row(
+                          children: [
+                            Text('+ ${MyStrings.addNew}', style: interRegularDefault.copyWith(color:MyColor.colorWhite,fontSize: Dimensions.fontLarge ))
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: '${MyStrings.attachment}s ',
+                        style: interSemiBoldSmall.copyWith(
+                            color: MyColor.colorBlack),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: MyStrings.fileSize,
+                            style: interMediumSmall.copyWith(
+                                color: MyColor.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: selectedFiles.length,
+                      itemBuilder: (ctx, index) {
+                        bool isFirstItem = index == 0;
+                        return ChooseFileView(
+                          key: Key('ChooseFileView_$index'),
+                          selectedFileName: selectedFiles[index],
+                          chooseFile: () => chooseFile(index),
+                          removeFile: isFirstItem ? null : () => removeFile(index),
+                        );
+                      }),
+                  const SizedBox(height: 0),
+                  Text(
+                    MyStrings.allowedFileExtensionHint,
+                    style: interMediumSmall.copyWith(
+                      color: MyColor.colorBlack,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  controller.submitLoading?const RoundedLoadingBtn():
+                  RoundedButton(
+                    text: MyStrings.reply,
+                    textColor: MyColor.textColor,
+                    width: double.infinity,
+                    press: () {
+                      controller.selectedFilesData = selectedFilesData;
+                      controller.selectedFiles = selectedFiles;
+                      controller.ticketId = getTicketId();
+                      controller.id = getId();
+                      controller.onReplyComplete = _refreshList;
+                      controller.submitTicket();
+                      dismissKeyboard();
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  controller.closeLoading?const RoundedLoadingBtn():
+                  RoundedButton(
+                    text: MyStrings.closeTicket,
+                    textColor: MyColor.textColor,
+                    color: MyColor.red,
+                    width: double.infinity,
+                    press: () {
+                      _showCloseTicketConfirmationDialog(context);
+                      dismissKeyboard();
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: controller.replyModel.messages?.length ?? 0,
+                      itemBuilder: (ctx, index) {
+                        bool isFirstItem = index == 0;
+                        return RepliedListView(
+                          key: Key('RepliedListView_$index'),
+                          messages: controller.replyModel.messages?[index],
+                          callback: () => {},
+                        );
+                      }),
+                ],
               ),
             ),
-          )
+          ),
+        ),
     );
   }
 }

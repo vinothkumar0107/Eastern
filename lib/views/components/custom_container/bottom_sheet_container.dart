@@ -4,7 +4,13 @@ import 'package:eastern_trust/core/utils/my_color.dart';
 class BottomSheetContainer extends StatelessWidget {
   final Widget child;
   final bool showBorder;
-  const BottomSheetContainer({Key? key,required this.child,this.showBorder = false}) : super(key: key);
+  final Color backgroundColor;
+  const BottomSheetContainer({
+    Key? key,
+    required this.child,
+    this.showBorder = false,
+    this.backgroundColor = MyColor.colorWhite
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +18,7 @@ class BottomSheetContainer extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: MyColor.colorWhite,
+          color: backgroundColor,
           border: Border.all(color: MyColor.borderColor)
       ),
       child: child,

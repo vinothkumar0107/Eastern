@@ -32,6 +32,7 @@ class CustomTextField extends StatefulWidget {
   final String prefixText;
   final Color disableColor;
   final int maxiLines;
+  final Color backgroundColor;
 
  const CustomTextField({
     Key? key,
@@ -59,7 +60,8 @@ class CustomTextField extends StatefulWidget {
     this.prefixText = '',
     this.disableColor =  MyColor.borderColor,
     this.isRequired = false,
-    this.maxiLines = 1
+    this.maxiLines = 1,
+   this.backgroundColor =  MyColor.liteGreyColor,
 
   }) : super(key: key);
 
@@ -106,12 +108,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
             contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
             hintText: widget.hintText!=null?widget.hintText!.tr:'',
             hintStyle: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
-            fillColor: MyColor.liteGreyColor,
+            fillColor: widget.backgroundColor,
             filled: true,
             border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5),
                 borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
-            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: 1), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: .5), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
             suffixIcon: widget.isShowSuffixIcon
                 ? widget.isPassword
                 ? IconButton(
@@ -143,8 +145,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ],
     ) : TextFormField(
       readOnly: widget.readOnly,
-      style: interRegularDefault.copyWith(color: MyColor.colorWhite),
-      cursorColor: MyColor.colorWhite,
+      style: interMediumLarge.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.primaryColor),
+      cursorColor: MyColor.primaryColor,
       controller: widget.controller,
       autofocus: false,
       textInputAction: widget.inputAction,
@@ -158,16 +160,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
         errorMaxLines: 2,
         prefixIcon: widget.prefixText.isEmpty?null:Container(
           width: 60,
-          decoration: BoxDecoration(color:MyColor.colorWhite,
-              border:Border(bottom: BorderSide(color: MyColor.colorWhite))),
+          decoration: BoxDecoration(color:MyColor.primaryColor,
+              border:Border(bottom: BorderSide(color: MyColor.primaryColor))),
           child: Align(
             alignment: Alignment.center,
               child: Text(widget.prefixText,style: interRegularDefault.copyWith(color:MyColor.primaryColor),)),
         ),
         contentPadding: const EdgeInsets.only(top: 5, left: 0, right: 0, bottom: 5),
         labelText:  widget.labelText?.tr,
-        labelStyle: interRegularDefault.copyWith(color: MyColor.colorWhite),
-        hintStyle: interRegularSmall.copyWith(color: MyColor.colorWhite),
+        labelStyle: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
+        hintStyle: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
         fillColor: MyColor.transparentColor,
         filled: true,
         border: const UnderlineInputBorder(borderSide: BorderSide(color: MyColor.borderColor)),
@@ -177,7 +179,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.isShowSuffixIcon
             ? widget.isPassword
             ? IconButton(
-            icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility, color: MyColor.colorWhite, size: 16),
+            icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility, color: MyColor.getGreyText(), size: 16),
             onPressed: _toggle)
             : widget.isIcon
             ? IconButton(

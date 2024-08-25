@@ -51,49 +51,47 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GetBuilder<TransferHistoryController>(builder: (controller)=>WillPopWidget(
-        nextRoute: controller.isGoHome()?RouteHelper.homeScreen:'',
-        isOnlyBack: controller.isGoHome()?false:true,
-        child: Scaffold(
-          backgroundColor: MyColor.containerBgColor,
-          appBar: CustomAppBar(title: MyStrings.transferHistory,isForceBackHome: controller.isGoHome()),
-          body: controller.isLoading?const CustomLoader():
-          controller.historyList.isEmpty? const NoDataWidget():
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: Dimensions.screenPaddingV,horizontal: Dimensions.screenPaddingH),
-            child: ListView.separated(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                controller: scrollController,
-                itemCount: controller.historyList.length+1,
-                separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
-                itemBuilder: (context, index){
-                  if(controller.historyList.length == index){
-                    return controller.hasNext() ? SizedBox(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: CustomLoader(),
-                      ),
-                    ) : const SizedBox();
-                  }
-                  return TransferHistoryCard(
-                  onPressed: (){
-                     TransferHistoryBottomSheet().transferHistoryBottomSheet(context,index);
-                  },
-                  trxValue: controller.historyList[index].trx??'',
-                  status: controller.getStatusAndColor(index),
-                  statusBgColor: controller.getStatusAndColor(index,isStatus: false),
-                  accountName:  controller.getAccountName(index),
-                  amount: '${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].amount??'0')}'
+    return GetBuilder<TransferHistoryController>(builder: (controller)=>WillPopWidget(
+      nextRoute: controller.isGoHome()?RouteHelper.homeScreen:'',
+      isOnlyBack: controller.isGoHome()?false:true,
+      child: Scaffold(
+        backgroundColor: MyColor.containerBgColor,
+        appBar: CustomAppBar(title: MyStrings.transferHistory,isForceBackHome: controller.isGoHome(),isTitleCenter: false,),
+        body: controller.isLoading?const CustomLoader():
+        controller.historyList.isEmpty? const NoDataWidget():
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: Dimensions.screenPaddingV,horizontal: Dimensions.screenPaddingH),
+          child: ListView.separated(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              controller: scrollController,
+              itemCount: controller.historyList.length+1,
+              separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+              itemBuilder: (context, index){
+                if(controller.historyList.length == index){
+                  return controller.hasNext() ? SizedBox(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: CustomLoader(),
+                    ),
+                  ) : const SizedBox();
+                }
+                return TransferHistoryCard(
+                    onPressed: (){
+                      TransferHistoryBottomSheet().transferHistoryBottomSheet(context,index);
+                    },
+                    trxValue: controller.historyList[index].trx??'',
+                    status: controller.getStatusAndColor(index),
+                    statusBgColor: controller.getStatusAndColor(index,isStatus: false),
+                    accountName:  controller.getAccountName(index),
+                    amount: '${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].amount??'0')}'
                 );}
-            ),
           ),
         ),
-      )),
-    );
+      ),
+    ));
   }
 }
