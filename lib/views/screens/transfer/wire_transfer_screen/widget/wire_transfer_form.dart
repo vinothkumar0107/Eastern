@@ -62,12 +62,12 @@ class _WireTransferFormState extends State<WireTransferForm> {
                   const Icon(
                     Icons.info_outline,
                     size: 13,
-                    color: MyColor.redCancelTextColor,
+                    color: MyColor.primaryColor,
                   ),
                   const SizedBox(width: 5,),
                   Text(
                     MyStrings.transferLimit.tr,
-                    style: interLightDefault.copyWith(fontSize:Dimensions.fontSmall12,color: MyColor.redCancelTextColor),
+                    style: interLightDefault.copyWith(fontSize:Dimensions.fontSmall12,color: MyColor.primaryColor),
                   ),
                 ],
               ),
@@ -80,9 +80,14 @@ class _WireTransferFormState extends State<WireTransferForm> {
                 children: [
                   LabelText(text: MyStrings.authorizationMethod.tr,required: true,),
                   const SizedBox(height: 8),
-                  CustomDropDownTextField(selectedValue:controller.selectedAuthorizationMode,list: controller.authorizationList,onChanged:(dynamic value) {
+                  CustomDropDownTextField(
+                    selectedValue:controller.selectedAuthorizationMode,
+                    list: controller.authorizationList,
+                    onChanged:(dynamic value) {
                     controller.changeAuthorizationMode(value);
-                  },),
+                  },
+                    backgroundColor: MyColor.colorWhite,
+                  ),
                   const SizedBox(height: Dimensions.textToTextSpace+10,),
                 ],
               )),
@@ -101,7 +106,8 @@ class _WireTransferFormState extends State<WireTransferForm> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextField(
-                            hintText: '${((model.name??'').capitalizeFirst)?.tr}',
+                            backgroundColor: MyColor.colorWhite,
+                            hintText: 'Enter ${((model.name??'')).tr}'.capitalizeFirst,
                             needLabel: true,
                             needOutlineBorder: true,
                             labelText:( model.name??'').tr,
@@ -115,11 +121,12 @@ class _WireTransferFormState extends State<WireTransferForm> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextField(
+                            backgroundColor: MyColor.colorWhite,
                             needLabel: true,
                             needOutlineBorder: true,
                             labelText: (model.name??'').tr,
                             isRequired: model.isRequired=='optional'?false:true,
-                            hintText: '${((model.name??'').capitalizeFirst)?.tr}',
+                            hintText: 'Enter ${((model.name??'')).tr}'.capitalizeFirst,
                             onChanged: (value){
                               controller.changeSelectedValue(value, index);
                             }),
@@ -131,7 +138,7 @@ class _WireTransferFormState extends State<WireTransferForm> {
                         FormRow(label: model.name??'', isRequired: model.isRequired=='optional'?false:true),
                         CustomDropDownTextField(list: model.options??[],onChanged: (value){
                           controller.changeSelectedValue(value,index);
-                        },selectedValue: model.selectedValue,),
+                        },selectedValue: model.selectedValue,backgroundColor: MyColor.colorWhite,),
                       ],
                     ):model.type=='radio'?Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,7 +178,7 @@ class _WireTransferFormState extends State<WireTransferForm> {
                 );
               }
           ),
-          const SizedBox(height: Dimensions.space25),
+          const SizedBox(height: Dimensions.space20),
           controller.submitLoading ?
           const Center(child:RoundedLoadingBtn()) :
           RoundedButton(
@@ -180,6 +187,7 @@ class _WireTransferFormState extends State<WireTransferForm> {
             },
             text: MyStrings.submit.tr,
           ),
+          const SizedBox(height: Dimensions.space20),
         ],
       ),
     ));

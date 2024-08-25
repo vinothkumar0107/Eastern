@@ -47,8 +47,8 @@ class RoundedButton extends StatelessWidget {
               color: Colors.transparent,
               gradient: const LinearGradient(
                 colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
             ),
             child: Center(child: Text(text.tr,style:TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)))),
@@ -60,9 +60,9 @@ class RoundedButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor2],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
             borderRadius: BorderRadius.circular(50), // Apply the same border radius
           ),

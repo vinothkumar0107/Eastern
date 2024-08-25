@@ -36,10 +36,9 @@ class _FaqScreenState extends State<FaqScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: MyColor.getScreenBgColor(),
-        appBar: CustomAppBar(isShowBackBtn: true, title: MyStrings.faq.tr, bgColor: MyColor.getAppbarBgColor()),
+        appBar: CustomAppBar(isShowBackBtn: true, title: MyStrings.faq.tr, bgColor: MyColor.getAppbarBgColor(),isTitleCenter: false,),
         body: GetBuilder<FaqController>(
           builder: (controller) => controller.isLoading? const CustomLoader():
           SingleChildScrollView(
@@ -60,10 +59,9 @@ class _FaqScreenState extends State<FaqScreen> {
                   },
                   selectedIndex: controller.selectedIndex
               ),
-              ),
             ),
-          )
-      ),
+          ),
+        )
     );
   }
 }

@@ -44,7 +44,7 @@ class FaqListItem extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: Text(
                     question.tr,
-                    style:interRegularSmall.copyWith(color: MyColor.getGreyText1(),fontWeight: FontWeight.w600)),
+                    style:interRegularSmall.copyWith(color: MyColor.getGreyText1(),fontWeight: FontWeight.w600, fontSize: Dimensions.fontDefault)),
                 ),
                 SizedBox(
                     height: 30, width: 30,

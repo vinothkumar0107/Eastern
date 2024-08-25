@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
@@ -34,6 +35,7 @@ class AddOtherBankBeneficiariesBottomSheet{
              CustomDropDownTextField2(
                labelText: MyStrings.selectBank,
                selectedValue: controller.selectedBank,
+               radius: Dimensions.paddingSize25,
                onChanged: (newValue) {
                  controller.changeSelectedBank(newValue);
                },
@@ -46,6 +48,7 @@ class AddOtherBankBeneficiariesBottomSheet{
              ),
              const SizedBox(height: Dimensions.textToTextSpace+10),
              CustomTextField(
+               backgroundColor: MyColor.colorWhite,
                  controller: controller.shortNameController,
                  needOutlineBorder: true,
                  labelText: MyStrings.shortName,
@@ -75,6 +78,7 @@ class AddOtherBankBeneficiariesBottomSheet{
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: [
                          CustomTextField(
+                             backgroundColor: MyColor.colorWhite,
                              hintText: '${((model?.name??'').capitalizeFirst)?.tr}',
                              needLabel: true,
                              needOutlineBorder: true,
@@ -89,6 +93,7 @@ class AddOtherBankBeneficiariesBottomSheet{
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: [
                          CustomTextField(
+                           backgroundColor: MyColor.colorWhite,
                              needLabel: true,
                              needOutlineBorder: true,
                              labelText: (model?.name??'').tr,

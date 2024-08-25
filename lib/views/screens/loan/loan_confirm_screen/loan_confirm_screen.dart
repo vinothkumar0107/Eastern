@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:eastern_trust/core/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
@@ -22,6 +25,8 @@ import 'package:eastern_trust/views/screens/withdraw/confirm_withdraw_screen/wid
 
 import '../../../../data/model/dynamic_form/form.dart';
 import '../../../../data/model/loan/loan_preview_response_model.dart';
+import '../widget/loan_card.dart';
+import '../widget/loan_list_card.dart';
 
 class LoanConfirmScreen extends StatefulWidget {
   const LoanConfirmScreen({Key? key}) : super(key: key);
@@ -48,7 +53,7 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
     return GetBuilder<LoanConfirmController>(
         builder: (controller) => Scaffold(
             backgroundColor: MyColor.getScreenBgColor1(),
-            appBar: const CustomAppBar(title: MyStrings.applyForLoan),
+            appBar: const CustomAppBar(title: MyStrings.applyForLoan, isTitleCenter: false,),
             body: controller.isLoading
                 ? const CustomLoader()
                 : SingleChildScrollView(
@@ -57,42 +62,54 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
                 padding: Dimensions.screenPaddingHV,
                 decoration: BoxDecoration(
                     color: MyColor.getScreenBgColor2(),
-                    borderRadius: BorderRadius.circular(3),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(2, 2),
-                          blurRadius: 2)
-                    ]),
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: MyUtil.getBottomSheetShadow()),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    LoanCard(
+                      isFromLoanConfirmation: true,
+                        index: 1,
+                        cardStatusTitle: controller.planName ?? '',
+                        percentRate: controller.perInstallmentPercentage ?? '0',
+                        takeMin: '',
+                        takeMax: ' ${controller.currencySymbol}${controller.maximumAmount}',
+                        perInstallment: controller.perInstallmentPercentage ?? '0',
+                        installmentInterval: controller.installmentInterval ?? '',
+                        totalInstallment: controller.totalInstallment ?? '',
+                        onPressed: () {
+
+                        }
+                    ),
+                    const SizedBox(height: 20,),
                     Flexible(
                         child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 25),
                             decoration: BoxDecoration(
+                              color: MyColor.getScreenBgColor2(),
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: MyColor.borderColor, width: .5)),
+                                border: Border.all(color: MyColor.borderColor, width: .5),
+                                boxShadow: MyUtil.getBottomSheetShadow()),
                             child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(MyStrings.youAreApplyingToTakeLoan.tr, style: header),
-                                  Text('(${MyStrings.beSureBeforeConfirm.tr})', style: interRegularDefault.copyWith(color: MyColor.colorRed),),
+                                  Text('(${MyStrings.beSureBeforeConfirm.tr})', style: interRegularDefault.copyWith(color: MyColor.primaryColor2, fontSize: Dimensions.fontSmall12),),
                                   const SizedBox(height: 25,),
-                                  PreviewRow(firstText: MyStrings.planName, secondText: controller.planName),
-                                  PreviewRow(firstText: MyStrings.loanAmount, secondText: '${controller.currencySymbol}${controller.amount}'),
-                                  PreviewRow(firstText: MyStrings.totalInstallment, secondText: controller.totalInstallment),
-                                  PreviewRow(firstText: MyStrings.perInstallment, secondText: '${controller.currencySymbol}${controller.perInstallment}'),
-                                  PreviewRow(firstText: MyStrings.youNeedToPay, secondText: '${controller.currencySymbol}${controller.youNeedToPay}'),
+                                  PreviewRow(firstText: MyStrings.planName, secondText: controller.planName, showDivider: false,),
+                                  PreviewRow(firstText: MyStrings.loanAmount, secondText: '${controller.currencySymbol}${controller.amount}',showDivider: false,),
+                                  PreviewRow(firstText: MyStrings.totalInstallment, secondText: controller.totalInstallment,showDivider: false,),
+                                  PreviewRow(firstText: MyStrings.perInstallment, secondText: '${controller.currencySymbol}${controller.perInstallment}',showDivider: false,),
+                                  PreviewRow(firstText: MyStrings.youNeedToPay, secondText: '${controller.currencySymbol}${controller.youNeedToPay}',showDivider: false,),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       '*${controller.chargeText}',
                                       style: interRegularDefault.copyWith(
-                                          color: MyColor.redCancelTextColor),
+                                          color: MyColor.primaryColor2, fontSize: Dimensions.fontSmall12),
                                     ),
                                   )
                                 ]))),
@@ -100,7 +117,11 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
                     Flexible(
                       child:  Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 25),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: MyColor.borderColor, width: .5)),
+                        decoration: BoxDecoration(
+                            color: MyColor.getScreenBgColor2(),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: MyColor.borderColor, width: .5),
+                            boxShadow: MyUtil.getBottomSheetShadow()),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,6 +146,7 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             CustomTextField(
+                                                disableColor : MyColor.borderColor,
                                                 hintText: '${((model.name ?? '').capitalizeFirst)?.tr}',
                                                 needLabel: true,
                                                 needOutlineBorder: true,

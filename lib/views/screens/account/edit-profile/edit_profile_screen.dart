@@ -41,16 +41,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       onTap: (){
         FocusScope.of(context).unfocus();
       },
-      child: SafeArea(
-        child: Scaffold(
-          // backgroundColor: MyColor.getScreenBgColor(),
-          backgroundColor: MyColor.primaryColor2,
-          appBar: CustomAppBar(isShowBackBtn: true, title: MyStrings.editProfile.tr, bgColor: MyColor.getAppbarBgColor()),
-          body: GetBuilder<ProfileController>(
-            builder: (controller) => controller.isLoading? const CustomLoader() : const SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-              child: EditProfileForm(),
-            ),
+      child: Scaffold(
+        backgroundColor: MyColor.getScreenBgColor(),
+        appBar: CustomAppBar(isShowBackBtn: true, title: MyStrings.editProfile.tr, bgColor: MyColor.getAppbarBgColor(),isTitleCenter: false,),
+        body: GetBuilder<ProfileController>(
+          builder: (controller) => controller.isLoading? const CustomLoader() : const SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+            child: EditProfileForm(),
           ),
         ),
       ),

@@ -63,235 +63,237 @@ class _Setup2FAScreenState extends State<Setup2FAScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<TwoFactorController>(
-        builder: (controller) =>  WillPopWidget(child: SafeArea(
-          child: Scaffold(
-            backgroundColor: MyColor.getScreenBgColor2(),
-            // appBar: CustomAppBar(title: MyStrings.twoFASecurity.tr),
-            appBar: AppBar(
-              title: Text(MyStrings.twoFASecurity.tr,
-                  style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
-              backgroundColor: MyColor.primaryColor,
-              elevation: 0,
-              leading: IconButton(
-                onPressed: () {
-                  Get.offAndToNamed(RouteHelper.menuScreen);
-                },
-                icon: const Icon(Icons.arrow_back,
-                    color: MyColor.colorWhite, size: 20),
+        builder: (controller) =>  WillPopWidget(child: Scaffold(
+          backgroundColor: MyColor.getScreenBgColor2(),
+          // appBar: CustomAppBar(title: MyStrings.twoFASecurity.tr),
+          // appBar: AppBar(
+          //   title: Text(MyStrings.twoFASecurity.tr,
+          //       style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
+          //   backgroundColor: MyColor.primaryColor,
+          //   elevation: 0,
+          //   leading: IconButton(
+          //     onPressed: () {
+          //       Get.offAndToNamed(RouteHelper.menuScreen);
+          //     },
+          //     icon: const Icon(Icons.arrow_back,
+          //         color: MyColor.colorWhite, size: 20),
+          //   ),
+          // ),
+          appBar: CustomAppBar(
+            title: MyStrings.twoFASecurity.tr,
+            isTitleCenter: false,
+          ),
+          body:  controller.isTwoFactorEnabled.toString() == "1" ? SingleChildScrollView(
+            padding: Dimensions.screenPaddingHV1,
+            child: Center(
+              child: Column(
+                children: [
+                  Text(
+                    MyStrings.disableTwoFactorSecurity,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontHeader1),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomTextField(
+                      hintText:
+                      " ",
+                      needLabel: true,
+                      needOutlineBorder: true,
+                      controller: controller.authenticationCode,
+                      textInputType: TextInputType.number,
+                      labelText:
+                      MyStrings.googleAuthOtp,
+                      isRequired: true,
+                      disableColor: MyColor.getGreyText(),
+                      onChanged: (value) {
+                        // controller.changeSelectedValue(value, index);
+                      }
+                  ),
+                  const SizedBox(height: 25),
+                  controller.submitLoading?const RoundedLoadingBtn():
+                  RoundedButton(
+                    text: MyStrings.submit,
+                    textColor: MyColor.textColor,
+                    width: double.infinity,
+                    press: () {
+                      controller.disableGoogleAuthenticate();
+                    },
+                  ),
+                ],
               ),
             ),
-            body:  controller.isTwoFactorEnabled.toString() == "1" ? SingleChildScrollView(
-              padding: Dimensions.screenPaddingHV1,
-              child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      MyStrings.disableTwoFactorSecurity,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontHeader1),
+          ) : controller.isLoading ? const CustomLoader() :
+          SingleChildScrollView(
+            padding: Dimensions.screenPaddingHV1,
+            child: Center(
+              child: Column(
+                children: [
+                  Text(
+                    MyStrings.addYourAccount,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontHeader1),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    MyStrings.useQRCode,
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: interRegularSmall.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault),
+                  ),
+                  const SizedBox(height: 20), // Add some space before the QR code
+                  // Image.network(
+                  //   '${controller.authenticatorModel?.data.qrCodeUrl}',
+                  //   height: 150, // Adjust height as needed
+                  //   width: 150, // Adjust width as needed
+                  //   fit: BoxFit.contain, // Adjust fit as needed
+                  // ),
+                  CachedNetworkImage(
+                    imageUrl: '${controller.authenticatorModel?.data.qrCodeUrl}',
+                    height: 150, // Adjust height as needed
+                    width: 150, // Adjust width as needed
+                    fit: BoxFit.contain, // Adjust fit as needed
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
                     ),
-                    const SizedBox(height: 20),
-                    CustomTextField(
-                        hintText:
-                        " ",
-                        needLabel: true,
-                        needOutlineBorder: true,
-                        controller: controller.authenticationCode,
-                        textInputType: TextInputType.number,
-                        labelText:
-                        MyStrings.googleAuthOtp,
-                        isRequired: true,
-                        disableColor: MyColor.getGreyText(),
-                        onChanged: (value) {
-                          // controller.changeSelectedValue(value, index);
-                        }
-                    ),
-                    const SizedBox(height: 25),
-                    controller.submitLoading?const RoundedLoadingBtn():
-                    RoundedButton(
-                      text: MyStrings.submit,
-                      textColor: MyColor.textColor,
-                      width: double.infinity,
-                      press: () {
-                        controller.disableGoogleAuthenticate();
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ) : controller.isLoading ? const CustomLoader() :
-            SingleChildScrollView(
-              padding: Dimensions.screenPaddingHV1,
-              child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      MyStrings.addYourAccount,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontHeader1),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      MyStrings.useQRCode,
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: interRegularSmall.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault),
-                    ),
-                    const SizedBox(height: 20), // Add some space before the QR code
-                    // Image.network(
-                    //   '${controller.authenticatorModel?.data.qrCodeUrl}',
-                    //   height: 150, // Adjust height as needed
-                    //   width: 150, // Adjust width as needed
-                    //   fit: BoxFit.contain, // Adjust fit as needed
-                    // ),
-                    CachedNetworkImage(
-                      imageUrl: '${controller.authenticatorModel?.data.qrCodeUrl}',
-                      height: 150, // Adjust height as needed
-                      width: 150, // Adjust width as needed
-                      fit: BoxFit.contain, // Adjust fit as needed
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                    const SizedBox(height: 20),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        children: [
-                          Text(
-                            MyStrings.setupKey,
-                            textAlign: TextAlign.left,
-                            style: interRegularDefault.copyWith(
-                              color: MyColor.colorBlack,
-                              fontSize: Dimensions.fontLarge,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Stack(
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                  const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
                       children: [
-                        Container(
-                          width: double.infinity,
-                          height: 40,
-                          padding: const EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: MyColor.colorBlack),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Text(
-                            "${controller.authenticatorModel?.data.secret.toString()}",
-                            style: interRegularSmall.copyWith(
-                              color: MyColor.colorBlack,
-                              fontSize: Dimensions.fontDefault,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: IconButton(
-                            icon: Icon(Icons.copy, color: MyColor.colorBlack),
-                            onPressed: () {
-                              Clipboard.setData(ClipboardData(text: "${controller.authenticatorModel?.data.secret.toString()}"));
-                              CustomSnackBar.success(successList: [MyStrings.setupKeyCopiedSuccessfully]);
-                            },
+                        Text(
+                          MyStrings.setupKey,
+                          textAlign: TextAlign.left,
+                          style: interRegularDefault.copyWith(
+                            color: MyColor.colorBlack,
+                            fontSize: Dimensions.fontLarge,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        const Icon(Icons.info, color: MyColor.colorGrey2),
-                        const SizedBox(width: 2), // Add some space between the icon and the text
-                        Text(
-                          MyStrings.help,
+                  ),
+                  const SizedBox(height: 10),
+                  Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 40,
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: MyColor.colorBlack),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Text(
+                          "${controller.authenticatorModel?.data.secret.toString()}",
                           style: interRegularSmall.copyWith(
                             color: MyColor.colorBlack,
                             fontSize: Dimensions.fontDefault,
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    RichText(
-                      text: TextSpan(
-                        text: MyStrings.googleAuthenticateHint,
+                      ),
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        child: IconButton(
+                          icon: Icon(Icons.copy, color: MyColor.colorBlack),
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: "${controller.authenticatorModel?.data.secret.toString()}"));
+                            CustomSnackBar.success(successList: [MyStrings.setupKeyCopiedSuccessfully]);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      const Icon(Icons.info, color: MyColor.colorGrey2),
+                      const SizedBox(width: 2), // Add some space between the icon and the text
+                      Text(
+                        MyStrings.help,
                         style: interRegularSmall.copyWith(
                           color: MyColor.colorBlack,
                           fontSize: Dimensions.fontDefault,
                         ),
-                        children: [
-                          TextSpan(
-                            text: MyStrings.download,
-                            style: interRegularDefault.copyWith(
-                              color: MyColor.primaryColor,
-                              fontSize: Dimensions.fontDefault,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                String url =  io.Platform.isIOS ? _iosUrl : _androidUrl;
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                          ),
-                        ],
                       ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  RichText(
+                    text: TextSpan(
+                      text: MyStrings.googleAuthenticateHint,
+                      style: interRegularSmall.copyWith(
+                        color: MyColor.colorBlack,
+                        fontSize: Dimensions.fontDefault,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: MyStrings.download,
+                          style: interRegularDefault.copyWith(
+                            color: MyColor.primaryColor,
+                            fontSize: Dimensions.fontDefault,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async {
+                              String url =  io.Platform.isIOS ? _iosUrl : _androidUrl;
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 30),
-                    Text(
-                      MyStrings.enableTwoFactorSecurity,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontHeader1),
-                    ),
-                    const SizedBox(height: 20),
-                    CustomTextField(
-                        hintText:
-                        " ",
-                        needLabel: true,
-                        needOutlineBorder: true,
-                        controller: controller.authenticationCode,
-                        textInputType: TextInputType.number,
-                        labelText:
-                        MyStrings.googleAuthOtp,
-                        isRequired: true,
-                        disableColor: MyColor.getGreyText(),
-                        onChanged: (value) {
-                          // controller.changeSelectedValue(value, index);
-                        }
-                    ),
-                    const SizedBox(height: 25),
-                    controller.submitLoading?const RoundedLoadingBtn():
-                    RoundedButton(
-                      text: MyStrings.submit,
-                      textColor: MyColor.textColor,
-                      width: double.infinity,
-                      press: () {
-                        controller.enableGoogleAuthenticate();
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 30),
+                  Text(
+                    MyStrings.enableTwoFactorSecurity,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontHeader1),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomTextField(
+                      hintText:
+                      " ",
+                      needLabel: true,
+                      needOutlineBorder: true,
+                      controller: controller.authenticationCode,
+                      textInputType: TextInputType.number,
+                      labelText:
+                      MyStrings.googleAuthOtp,
+                      isRequired: true,
+                      disableColor: MyColor.getGreyText(),
+                      onChanged: (value) {
+                        // controller.changeSelectedValue(value, index);
+                      }
+                  ),
+                  const SizedBox(height: 25),
+                  controller.submitLoading?const RoundedLoadingBtn():
+                  RoundedButton(
+                    text: MyStrings.submit,
+                    textColor: MyColor.textColor,
+                    width: double.infinity,
+                    press: () {
+                      controller.enableGoogleAuthenticate();
+                    },
+                  ),
+                ],
               ),
-
             ),
-          ),
 
-        ),),
+          ),
+        ),
+        ),
     );
   }
 }

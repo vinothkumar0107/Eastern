@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/helper/string_format_helper.dart';
@@ -55,7 +56,7 @@ class LoanInstallmentPreviewBottomSheet{
                 ],
               ),
               const SizedBox(height: 15,),
-              Text('*${MyStrings.chargeWillBeApplyMsg.tr} ${controller.loan?.delayValue??'1'} ${MyStrings.orMoreDays.tr}'.tr,style: interRegularDefault.copyWith(color: MyColor.colorRed),)
+              Text('*${MyStrings.chargeWillBeApplyMsg.tr} ${controller.loan?.delayValue??'1'} ${MyStrings.orMoreDays.tr}'.tr,style: interRegularLarge.copyWith(color: MyColor.primaryColor2,fontSize: Dimensions.fontSmall12),)
             ],
           ),
           const SizedBox(height: 15,)

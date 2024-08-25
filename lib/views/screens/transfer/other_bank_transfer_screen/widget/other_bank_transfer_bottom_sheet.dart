@@ -32,6 +32,7 @@ class OtherBankTransferBottomSheet{
             BottomSheetTopRow(header: '${MyStrings.transferMoneyTo} ${beneficiary.beneficiaryOf?.name??''}'.tr),
             BottomSheetContainer(
               showBorder: true,
+              backgroundColor: MyColor.primaryColor.withOpacity(0.05),
               child: Column(
                 children: [
                   InkWell(
@@ -42,6 +43,7 @@ class OtherBankTransferBottomSheet{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const InfoRow(
+                          textColor: MyColor.colorBlack,
                           text: MyStrings.transferLimit,
                         ),
                         Icon(
@@ -61,7 +63,7 @@ class OtherBankTransferBottomSheet{
                       LimitPreviewRow(firstText: MyStrings.monthlyMax,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.monthlyMaximumLimit??'0')}'),
                       LimitPreviewRow(firstText: MyStrings.dailyMaxTrx,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.dailyMaximumLimit??'0')}'),
                       LimitPreviewRow(firstText: MyStrings.monthlyMinTrx,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.monthlyMaximumLimit??'0')}'),
-                      Text('*${MyStrings.processingTime.tr} ${controller.beneficiaryList[index].beneficiaryOf?.processingTime??'0'}',style: interSemiBoldSmall.copyWith(color: MyColor.colorRed),),
+                      Text('*${MyStrings.processingTime.tr} ${controller.beneficiaryList[index].beneficiaryOf?.processingTime??'0'}',style: interSemiBoldSmall.copyWith(color: MyColor.primaryColor),),
                     ],
                   ))
                 ],
@@ -98,9 +100,14 @@ class OtherBankTransferBottomSheet{
                           const SizedBox(height: Dimensions.space10),
                           LabelText(text: MyStrings.authorizationMethod.tr,required: true,),
                           const SizedBox(height: 8),
-                          CustomDropDownTextField(selectedValue:controller.selectedAuthorizationMode,list: controller.authorizationList,onChanged:(dynamic value) {
+                          CustomDropDownTextField(selectedValue:controller.selectedAuthorizationMode,
+                            list: controller.authorizationList,onChanged:(dynamic value) {
                             controller.changeAuthorizationMode(value);
-                          },)
+                          },
+                            backgroundColor: MyColor.colorWhite,
+                            borderColor: MyColor.borderColor,
+                            borderWidth: 1.0,
+                          )
                         ],
                       )),
                   const SizedBox(height: Dimensions.space30),

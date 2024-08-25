@@ -53,46 +53,47 @@ class _LoanInstallmentLogScreenState extends State<LoanInstallmentLogScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: GetBuilder<LoanInstallmentLogController>(
-            builder: (controller) => Scaffold(
-                  backgroundColor: MyColor.getScreenBgColor1(),
-                  appBar: CustomAppBar(
-                    title: MyStrings.loanInstallment,
-                    isShowActionBtn: true,
-                    actionIcon: Icons.info_outline,
-                    actionText: MyStrings.loanInfo,
-                    press: () {
-                      LoanInstallmentPreviewBottomSheet().bottomSheet(context);
-                  }),
-                  body: controller.isLoading
-                      ? const CustomLoader()
-                      : controller.installmentLogList.isEmpty
-                          ? const NoDataWidget()
-                          : Container(
-                              width: MediaQuery.of(context).size.width,
-                              padding: const EdgeInsets.all(
-                                  Dimensions.screenPadding),
-                              child: ListView.separated(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                physics: const BouncingScrollPhysics(),
-                                controller: scrollController,
-                                itemCount: controller.installmentLogList.length+1,
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(height: Dimensions.space10),
-                                itemBuilder: (context, index) {
-                                  if(controller.installmentLogList.length==index){
-                                    return controller.hasNext()?const CustomLoader(isPagination: true):const SizedBox.shrink();
-                                  }
-                                  return  InstallmentLogItem(
-                                      serialNumber: '${index + 1}',
-                                      installmentDate: controller.installmentLogList[index].installmentDate ?? '',
-                                      giveOnDate: controller.installmentLogList[index].givenAt ?? '',
-                                      delay: DateConverter.delayDate(controller.installmentLogList[index].installmentDate,controller.installmentLogList[index].givenAt));
-                                }),
-                            ),
-                )));
+    return GetBuilder<LoanInstallmentLogController>(
+        builder: (controller) => Scaffold(
+          backgroundColor: MyColor.getScreenBgColor1(),
+          appBar: CustomAppBar(
+              title: MyStrings.loanInstallment,
+              isShowActionBtn: true,
+              actionIcon: Icons.info_outline,
+              actionText: MyStrings.loanInfo,
+              isTitleCenter: false,
+              press: () {
+                LoanInstallmentPreviewBottomSheet().bottomSheet(context);
+              }),
+          body: controller.isLoading
+              ? const CustomLoader()
+              : controller.installmentLogList.isEmpty
+              ? const NoDataWidget()
+              : Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.all(
+                Dimensions.screenPadding),
+            child: ListView.separated(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                controller: scrollController,
+                itemCount: controller.installmentLogList.length+1,
+                separatorBuilder: (context, index) =>
+                const SizedBox(height: Dimensions.space10),
+                itemBuilder: (context, index) {
+                  if(controller.installmentLogList.length==index){
+                    return controller.hasNext()?const CustomLoader(isPagination: true):const SizedBox.shrink();
+                  }
+                  return  InstallmentLogItem(
+                      serialNumber: '${index + 1}',
+                      installmentDate: controller.installmentLogList[index].installmentDate ?? '',
+                      giveOnDate: controller.installmentLogList[index].givenAt ?? '',
+                      delay: DateConverter.delayDate(controller.installmentLogList[index].installmentDate,controller.installmentLogList[index].givenAt));
+                }),
+          ),
+        )
+    );
   }
 }

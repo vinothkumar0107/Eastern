@@ -45,7 +45,8 @@ class ApplyLoanBottomSheet{
                       controller.submitLoanPlan(planId);
                     },
                     text: MyStrings.applyNow,
-                  )
+                  ),
+                  const SizedBox(height: Dimensions.space10),
                 ],
               ),
             )

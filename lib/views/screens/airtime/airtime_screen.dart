@@ -48,6 +48,7 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
         backgroundColor: MyColor.containerBgColor,
         appBar: CustomAppBar(
           title: MyStrings.airtime.tr,
+          isTitleCenter: false,
         ),
         body: controller.isLoading ? const CustomLoader() :  SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10),
@@ -65,7 +66,7 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
                   decoration: BoxDecoration(
                       color: MyColor.transparentColor,
                       border:  Border.all(color: MyColor.naturalLight,width: .5),
-                    borderRadius: BorderRadius.circular(4)
+                    borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,9 +103,13 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
                       const SizedBox(height: 10),
                       LabelText(text: MyStrings.authorizationMethod.tr,required: true,),
                       const SizedBox(height: 8),
-                      CustomDropDownTextField(selectedValue:controller.selectedAuthorizationMode,list: controller.authorizationList,onChanged:(dynamic value) {
+                      CustomDropDownTextField(
+                        selectedValue:controller.selectedAuthorizationMode,
+                        list: controller.authorizationList,onChanged:(dynamic value) {
                         controller.changeAuthorizationMode(value);
-                      },)
+                      },
+                      borderWidth: 0.5,
+                      borderColor: MyColor.naturalLight,)
                     ],
                   )
               ),

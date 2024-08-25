@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
@@ -18,7 +19,7 @@ class FormRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(label.tr,style: interRegularDefault.copyWith(color: MyColor.getLabelTextColor()),),
+        Text(label.tr,style: interSemiBoldLarge.copyWith(color: MyColor.getLabelTextColor(), fontSize: Dimensions.fontDefault)),
         Text(isRequired?' *':'',style: interBoldDefault.copyWith(color: MyColor.red),)
       ],
     );

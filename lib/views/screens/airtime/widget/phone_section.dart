@@ -22,10 +22,10 @@ class PhoneSection extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 13),
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 13),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: MyColor.naturalLight, width: .5)
+                    borderRadius: BorderRadius.circular(Dimensions.paddingSize25),
+                    border: Border.all(color: MyColor.naturalLight, width: .5),
                 ),
                 child: Text(controller.selectedCountry.callingCodes?[0] ?? MyStrings.code.tr,style: interMediumDefault,),
               ),

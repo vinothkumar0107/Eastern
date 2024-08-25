@@ -29,6 +29,7 @@ class MyBankTransferBottomSheet{
             const BottomSheetTopRow(header: MyStrings.transferMoney),
             BottomSheetContainer(
               showBorder: true,
+              backgroundColor: MyColor.primaryColor.withOpacity(0.05),
               child: Column(
                 children: [
                   InkWell(
@@ -39,6 +40,7 @@ class MyBankTransferBottomSheet{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const InfoRow(
+                          textColor: MyColor.colorBlack,
                           text: MyStrings.transferLimit,
                         ),
                         Icon(
@@ -88,9 +90,15 @@ class MyBankTransferBottomSheet{
                           const SizedBox(height: 10),
                           LabelText(text: MyStrings.authorizationMethod.tr,required: true,),
                           const SizedBox(height: 8),
-                          CustomDropDownTextField(selectedValue:controller.selectedAuthorizationMode,list: controller.authorizationList,onChanged:(dynamic value) {
+                          CustomDropDownTextField(
+                            selectedValue:controller.selectedAuthorizationMode,
+                            list: controller.authorizationList,onChanged:(dynamic value) {
                             controller.changeAuthorizationMode(value);
-                          },)
+                          },
+                            backgroundColor: MyColor.colorWhite,
+                            borderColor: MyColor.borderColor,
+                            borderWidth: 1.0,
+                          )
                         ],
                       )),
                   const SizedBox(height: Dimensions.space30),

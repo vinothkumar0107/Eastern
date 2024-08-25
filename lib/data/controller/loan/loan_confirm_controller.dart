@@ -32,6 +32,9 @@ class LoanConfirmController extends GetxController {
   String perInstallment = '';
   String youNeedToPay = '';
   String chargeText = '';
+  String maximumAmount = '';
+  String installmentInterval = '';
+  String perInstallmentPercentage = '';
 
   String currencySymbol = '';
   loadData(LoanPreviewResponseModel model) async {
@@ -39,8 +42,11 @@ class LoanConfirmController extends GetxController {
     setStatusTrue();
     planId = model.data?.plan?.id.toString()??'';
     amount = Converter.formatNumber(model.data?.amount??'');
+    maximumAmount = Converter.formatNumber(model.data?.plan?.maximumAmount??'');
     planName = model.data?.plan?.name??'';
+    installmentInterval = model.data?.plan?.installmentInterval??'';
     totalInstallment = model.data?.plan?.totalInstallment??'';
+    perInstallmentPercentage = model.data?.plan?.perInstallment??'';
     perInstallment = model.data?.plan?.perInstallment??'';
     perInstallment =(((double.tryParse(amount)??0)*(double.tryParse(perInstallment)??0))/100).toString();
     youNeedToPay = Converter.mul(totalInstallment, perInstallment);

@@ -15,21 +15,21 @@ class ChooseFileItem extends StatelessWidget {
     return Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: 8),
       decoration: BoxDecoration(
-          color: MyColor.transparentColor,
-          border: Border.all(color: MyColor.getFieldDisableBorderColor(), width: 0.5),
-          borderRadius: BorderRadius.circular(Dimensions.defaultRadius)
+          color: MyColor.liteGreyColor,
+          borderRadius:const  BorderRadius.all(Radius.circular(Dimensions.paddingSize25)),
+          border: Border.all(color: MyColor.borderColor,width: 1.0)
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(Dimensions.space5),
-            decoration: BoxDecoration(color:MyColor.primaryColor600, borderRadius: BorderRadius.circular(5)),
+            padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: 3),
+            decoration: BoxDecoration(color:MyColor.primaryColor600, borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
             alignment: Alignment.center,
-            child: Text(MyStrings.chooseFile.tr, textAlign: TextAlign.center, style: interRegularDefault.copyWith(color: MyColor.getPrimaryColor(), fontWeight: FontWeight.w500)),
+            child: Text(MyStrings.chooseFile.tr, textAlign: TextAlign.center, style: interRegularDefault.copyWith(color: MyColor.getPrimaryColor(), fontWeight: FontWeight.w500, fontSize: Dimensions.fontSmall12)),
           ),
           const SizedBox(width: Dimensions.space15,),
           Expanded(

@@ -6,6 +6,8 @@ import 'package:eastern_trust/core/utils/my_strings.dart';
 import 'package:eastern_trust/core/utils/style.dart';
 import 'package:eastern_trust/views/components/column/label_column.dart';
 
+import '../../../../../core/utils/util.dart';
+
 class InstallmentLogItem extends StatelessWidget {
 
   final String serialNumber;
@@ -26,8 +28,9 @@ class InstallmentLogItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal:Dimensions.space12,vertical: Dimensions.space15),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-        color: MyColor.getCardBg()
+          color: MyColor.colorWhite,
+          borderRadius: BorderRadius.circular(Dimensions.defaultBorderRadius),
+          boxShadow: MyUtil.getBottomSheetShadow()
       ),
       child: Row(
         children: [

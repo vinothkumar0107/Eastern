@@ -34,8 +34,8 @@ class OperatorWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space16,vertical: 13),
         decoration: BoxDecoration(
           // color: MyColor.skyBlue.withOpacity(.7),
-          color: MyColor.primaryColor.withOpacity(.2),
-          borderRadius: BorderRadius.circular(4),
+          color: MyColor.colorWhite,
+          borderRadius: BorderRadius.circular(Dimensions.paddingSize25),
           boxShadow: MyUtil.getCardShadow()
         ),
         child: Row(
@@ -51,6 +51,7 @@ class OperatorWidget extends StatelessWidget {
             ),
             const SizedBox(width: 14,),
             Expanded(child: Text(title ?? "".tr,style: interRegularLarge.copyWith(color:MyColor.colorBlack),maxLines: 1,overflow: TextOverflow.ellipsis,)),
+            !isShowChangeButton?Icon(Icons.expand_more_rounded,color: MyColor.getGreyText(),size: 20,):const SizedBox.shrink(),
 
             isShowChangeButton ?
             Container(

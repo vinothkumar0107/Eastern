@@ -40,34 +40,32 @@ class _WireTransferScreenState extends State<WireTransferScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return SafeArea(
-      child: GetBuilder<WireTransferController>(builder: (controller)=>Scaffold(
-        backgroundColor: MyColor.getScreenBgColor1(),
-        appBar: const CustomAppBar(title: MyStrings.wireTransfer),
-        body: controller.isLoading? const CustomLoader():controller.noInternet?
-        NoDataFoundScreen(isNoInternet: true,
-            press: (value){
-             controller.initData();
-             controller.changeNoInternetStatus(false);
-            }):
-        SingleChildScrollView(
-          child: Container(
-            padding: Dimensions.screenPaddingHV,
-            decoration: BoxDecoration(
-              color: MyColor.colorWhite,
-              borderRadius: BorderRadius.circular(3),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                SizedBox(height: Dimensions.space15),
-                WireTransferForm()
-              ],
-            ),
+    return GetBuilder<WireTransferController>(builder: (controller)=>Scaffold(
+      backgroundColor: MyColor.getScreenBgColor1(),
+      appBar: const CustomAppBar(title: MyStrings.wireTransfer, isTitleCenter: false,),
+      body: controller.isLoading? const CustomLoader():controller.noInternet?
+      NoDataFoundScreen(isNoInternet: true,
+          press: (value){
+            controller.initData();
+            controller.changeNoInternetStatus(false);
+          }):
+      SingleChildScrollView(
+        child: Container(
+          padding: Dimensions.screenPaddingHV,
+          decoration: BoxDecoration(
+            color: MyColor.colorWhite,
+            borderRadius: BorderRadius.circular(3),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              SizedBox(height: Dimensions.space15),
+              WireTransferForm()
+            ],
           ),
         ),
-      )),
-    );
+      ),
+    ));
   }
 
 }

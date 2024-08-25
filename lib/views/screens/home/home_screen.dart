@@ -50,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // Check if there's a notch by verifying the top padding
     bool hasNotch = notchHeight > 0;
 
-    print('has notch $hasNotch , notchHeight $notchHeight');
     // Adjust height based on whether the device has a notch or not
     double appBarHeightDynamic = notchHeight > 55 ? 40 : notchHeight > 50 ? 50 :  notchHeight > 45 ? 45 : 70;
     double appBarHeight = hasNotch ? 120 + appBarHeightDynamic : 160;
