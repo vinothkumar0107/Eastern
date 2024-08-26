@@ -672,6 +672,7 @@ class MyStrings{
   static const String needHelp = "Need Help?";
   static const String provideHelp = "we provide help 24*7";
   static const String loanUpTo = "Loan Upto";
+  static const String uploadDocument = "Upload Document";
 
 
 
