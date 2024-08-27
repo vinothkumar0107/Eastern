@@ -33,6 +33,7 @@ class CustomTextField extends StatefulWidget {
   final Color disableColor;
   final int maxiLines;
   final Color backgroundColor;
+  final double borderRadius;
 
  const CustomTextField({
     Key? key,
@@ -62,6 +63,7 @@ class CustomTextField extends StatefulWidget {
     this.isRequired = false,
     this.maxiLines = 1,
    this.backgroundColor =  MyColor.liteGreyColor,
+   this.borderRadius = Dimensions.paddingSize25
 
   }) : super(key: key);
 
@@ -111,9 +113,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             fillColor: widget.backgroundColor,
             filled: true,
             border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5),
-                borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
-            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: .5), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5), borderRadius: BorderRadius.circular(Dimensions.paddingSize25)),
+                borderRadius: BorderRadius.circular(widget.borderRadius)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: .5), borderRadius: BorderRadius.circular(widget.borderRadius)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5), borderRadius: BorderRadius.circular(widget.borderRadius)),
             suffixIcon: widget.isShowSuffixIcon
                 ? widget.isPassword
                 ? IconButton(

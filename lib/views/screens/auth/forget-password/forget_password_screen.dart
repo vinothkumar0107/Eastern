@@ -42,69 +42,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     super.dispose();
   }
 
-  //Need to remove
-  @override
-  Widget build2(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: MyColor.primaryColor2,
-        appBar: const CustomAppBar(title: MyStrings.forgotPassword,),
-        body: GetBuilder<ForgetPasswordController>(
-          builder: (controller) => SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
-              height: MediaQuery.of(context).size.height*.82,
-              child:  Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const HeadingTextWidget(header:MyStrings.recoverAccount,body: MyStrings.resetPassMsg,),
-                    SizedBox(height: MediaQuery.of(context).size.height*.02,),
-                    CustomTextField(
-                        labelText: MyStrings.usernameOrEmail.toString(),
-                        hintText: MyStrings.enterUsernameOrEmail.toString(),
-                        textInputType: TextInputType.emailAddress,
-                        inputAction: TextInputAction.go,
-                        controller: controller.emailOrUsernameController,
-                        onSuffixTap: () {},
-                        onSubmitted: (value){
-                          if(formKey.currentState!.validate()){
-                            controller.submitForgetPassCode();
-                          }
-                        },
-                        onChanged: (value) {
-                          return;
-                        },
-                        validator: (value) {
-                          if (controller.emailOrUsernameController.text.isEmpty) {
-                            return MyStrings.enterUsernameOrEmail.tr;
-                          } else {
-                            return null;
-                          }
-                        }),
-                    const SizedBox(height: Dimensions.space25),
-                    const Spacer(),
-                    controller.submitLoading ? const RoundedLoadingBtn() : RoundedButton(
-                      press: () {
-                        if(formKey.currentState!.validate()){
-                          controller.submitForgetPassCode();
-                        }
-                      },
-                      text: MyStrings.submit.tr,
-                      textColor: MyColor.colorWhite,
-                      color: MyColor.primaryColor,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

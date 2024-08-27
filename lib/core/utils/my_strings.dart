@@ -30,8 +30,8 @@ class MyStrings{
   static const String range = "RANGE";
   static const String fixed = "FIXED";
   static const String subject = "Subject";
-    static const String message = "Message";
-    static const String fileSize = "Max 5 files can be uploaded. Maximum upload size is 320M";
+  static const String message = "Message";
+  static const String fileSize = "Max 5 files can be upload. Max upload size is 320MB";
   static const String selectCountry = "Select country";
   static const String loginForgotPassword = "Forgot Password?";
   static const String forgotPassword = "Forgot Password";
@@ -673,6 +673,8 @@ class MyStrings{
   static const String needHelp = "Need Help?";
   static const String provideHelp = "we provide help 24*7";
   static const String loanUpTo = "Loan Upto";
+  static const String uploadDocument = "Upload Document";
+  static const String close = "Close";
 
 
 

@@ -92,7 +92,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   void addNewChooseFileView() {
     setState(() {
       if (selectedFiles.length < 5) {
-        selectedFiles.add(MyStrings.noFileChosen);
+        selectedFiles.add(MyStrings.uploadDocument);
         // selectedFilesData.add(File(""));
       } else {
         // Optional: Show a message or disable adding more items
@@ -285,6 +285,8 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                       CustomDropDownTextField(
                         selectedValue: _selectedValue,
                         list: _dropdownItems,
+                        borderWidth: 0.5,
+                        borderColor: MyColor.getGreyText(),
                         onChanged: (value) {
                           setState(() {
                             _selectedValue = value;
@@ -306,6 +308,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                       isRequired: true,
                       maxiLines: 5,
                       disableColor: MyColor.getGreyText(),
+                      borderRadius: Dimensions.paddingSize10,
                       onChanged: (value) {
                         // controller.changeSelectedValue(value, index);
                       }),
@@ -408,44 +411,46 @@ class ChooseFileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: MyColor.getGreyText(), width: 0.5),
-        borderRadius: BorderRadius.circular(Dimensions.paddingSize30),
-      ),
-      child: Row(
-        children: <Widget>[
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: MyColor.bgColorLight, // Background color
-              foregroundColor: MyColor.colorBlack, // Text color
-            ),
-            onPressed: chooseFile,
-            child: Text(
-              MyStrings.chooseFile,
-              maxLines: 1,
-              style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontLarge ),
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Expanded(child:
+        Container(
+          height: 50,
+          margin: const EdgeInsets.only(left: 0,top: Dimensions.paddingSize5,right: 0, bottom: Dimensions.paddingSize5),
+          padding: const EdgeInsets.only(left: Dimensions.paddingSize20,top: Dimensions.paddingSize5,right: Dimensions.paddingSize10, bottom: Dimensions.paddingSize5),
+          decoration: BoxDecoration(
+            border: Border.all(color: MyColor.getGreyText(), width: 0.5),
+            borderRadius: BorderRadius.circular(Dimensions.paddingSize30),
           ),
-          const SizedBox(width: 10.0),
-          Expanded(
-            child: Text(
-              selectedFileName,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault ),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  selectedFileName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
+                ),
+              ),
+              const SizedBox(width: Dimensions.paddingSize10),
+              IconButton(
+                onPressed: chooseFile,
+                icon: const Icon(Icons.upload),
+                color: Colors.grey,
+                iconSize: 25,
+
+              ),
+            ],
+          ),),),
+        if (removeFile != null) // Conditionally show cancel button if removeFile callback is not null
+          IconButton(
+            onPressed: removeFile!,
+            icon: const Icon(Icons.cancel),
+            color: Colors.red,
           ),
-          if (removeFile != null) // Conditionally show cancel button if removeFile callback is not null
-            IconButton(
-              onPressed: removeFile!,
-              icon: const Icon(Icons.cancel),
-              color: Colors.red,
-            ),
-        ],
-      ),
+      ],
     );
   }
 }
