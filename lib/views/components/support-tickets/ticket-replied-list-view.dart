@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../core/helper/date_converter.dart';
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
 import '../../../core/utils/style.dart';
@@ -42,111 +43,23 @@ class RepliedListView extends StatelessWidget {
     return messages?.adminId == 1 ?  BoxDecoration(
       border: Border.all(color: MyColor.colorGrey, width: 0.1),
       borderRadius: const BorderRadius.only(
-        bottomRight: Radius.circular(10),
-        topRight: Radius.circular(10),
-        bottomLeft: Radius.circular(10),
+        bottomRight: Radius.circular(Dimensions.paddingSize15),
+        topRight: Radius.circular(Dimensions.paddingSize15),
+        bottomLeft: Radius.circular(Dimensions.paddingSize15),
       ),
-      color: MyColor.liteGreyColor,
+      color: MyColor.colorGrey.withOpacity(0.2),
     ) : BoxDecoration(
       border: Border.all(color: MyColor.colorGrey, width: 0.0),
       borderRadius: const BorderRadius.only(
-        bottomRight: Radius.circular(10),
-        topLeft: Radius.circular(10),
-        bottomLeft: Radius.circular(10),
+        bottomRight: Radius.circular(Dimensions.paddingSize15),
+        topLeft: Radius.circular(Dimensions.paddingSize15),
+        bottomLeft: Radius.circular(Dimensions.paddingSize15),
       ),
       color: MyColor.primaryColor.withOpacity(0.95),
     );
   }
 
 
-  @override
-  Widget build2(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      padding: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 1.0),
-        borderRadius: BorderRadius.circular(5.0),
-        color: getAdminColor(),
-      ),
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-            width: 100,
-            child: Text(
-              '${getReplierName()}',
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.right,
-              style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontLarge ),
-            ),
-          ),
-
-          const SizedBox(width: 10.0),
-
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            width: 1.0,
-            height: 70,
-            color: Colors.grey,
-          ),
-          const SizedBox(width: 10.0),
-          Expanded(child:
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Posted on ${messages?.ticket.lastReply ?? " "}',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault ),
-              ),
-              const SizedBox(height: 5.0),
-              Text(
-                messages?.message ?? " ",
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: interRegularSmall.copyWith(color:MyColor.getGreyText(),fontSize: Dimensions.fontDefault ),
-              ),
-              const SizedBox(height: 5.0),
-              SizedBox(
-                height: 25,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: messages?.attachments.length ?? 0,
-                  itemBuilder: (ctx, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8.0), // Add trailing padding
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DocumentViewer(
-                                url: '${UrlContainer.assetViewBaseUrl}${messages?.attachments[index].attachment ?? " "}', attachmentName: 'Attachment ${index + 1}', // Replace with your URL
-                              ),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Attachment ${index + 1}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: interRegularDefault.copyWith(color:MyColor.primaryColor,fontSize: Dimensions.fontDefault ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +115,7 @@ class RepliedListView extends StatelessWidget {
                                 );
                               },
                               child: Text(
-                                'Document_${index + 1}',
+                                'Attachment_${index + 1}',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: interRegularDefault.copyWith(color:MyColor.green,fontSize: Dimensions.fontSmall12 ),
@@ -216,18 +129,19 @@ class RepliedListView extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 2),
+              const SizedBox(height: 3),
               Text(
-                messages?.ticket.lastReply ?? " ",
+
+                DateConverter.convertIsoToString(messages?.createdAt??''),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: getAdminStatus() ? TextAlign.left : TextAlign.right,
                 style: interRegularLarge.copyWith(
-                  color: MyColor.colorGrey,
+                  color: MyColor.colorGrey2,
                   fontSize: Dimensions.fontSmall,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: Dimensions.paddingSize15),
             ],
           ),
         ),

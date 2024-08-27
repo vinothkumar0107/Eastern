@@ -151,8 +151,8 @@ class MessageReply {
   int supportTicketId;
   int adminId;
   String message;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
   Ticket ticket;
   Ticket admin; // Since admin is null, you can use dynamic or define an Admin model if needed.
   List<Attachment> attachments;
@@ -175,8 +175,10 @@ class MessageReply {
       supportTicketId: json['support_ticket_id'] ?? 0,
       adminId: json['admin_id'] ?? 0,
       message: json['message'] ?? '',
-      createdAt: DateTime.tryParse(json['created_at'] ?? '') ?? DateTime.now(),
-      updatedAt: DateTime.tryParse(json['updated_at'] ?? '') ?? DateTime.now(),
+      createdAt: json['created_at'] ?? '',
+      updatedAt: json['updated_at'] ?? '',
+      // createdAt: DateTime.tryParse(json['created_at'] ?? '') ?? DateTime.now(),
+      // updatedAt: DateTime.tryParse(json['updated_at'] ?? '') ?? DateTime.now(),
       ticket: Ticket.fromJson(json['ticket'] ?? {}),
       admin: Ticket.fromJson(json['admin'] ?? {}),
       attachments: (json['attachments'] as List?)
@@ -191,8 +193,10 @@ class MessageReply {
       'support_ticket_id': supportTicketId,
       'admin_id': adminId,
       'message': message,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+      // 'created_at': createdAt.toIso8601String(),
+      // 'updated_at': updatedAt.toIso8601String(),
       'ticket': ticket.toJson(),
       'admin': admin.toJson(),
       'attachments': attachments.map((i) => i.toJson()).toList(),

@@ -24,6 +24,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool isActionIconAlignEnd;
   final Color bgColor;
   final bool isForceBackHome;
+  final bool isNeedActionButtonText;
 
 
   const CustomAppBar(
@@ -39,7 +40,8 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
       this.bgColor = MyColor.primaryColor,
       this.isActionIconAlignEnd = false,
       this.isForceBackHome = false,
-      this.isShowActionBtn = false})
+      this.isShowActionBtn = false,
+      this.isNeedActionButtonText = false})
       : super(key: key);
 
   @override
@@ -99,12 +101,41 @@ class _CustomAppBarState extends State<CustomAppBar> {
               color: MyColor.colorWhite, size: 20))
           : const SizedBox.shrink(),
       backgroundColor: MyColor.primaryColor,
+      titleSpacing: 0,
       title: Text(widget.title.tr,
           style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite)),
       centerTitle: widget.isTitleCenter,
       actions: [
         widget.isShowActionBtn
-            ?GestureDetector(
+            ? widget.isNeedActionButtonText ? Row(
+          mainAxisAlignment: MainAxisAlignment.end, // Aligns the button to the right
+          children: [
+            Container(
+              height: 25,
+              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 5), // Margin around the button
+              padding: const EdgeInsets.symmetric(horizontal: 0), // Horizontal padding inside the button
+              decoration: BoxDecoration(
+                color: MyColor.colorWhite, // Background color of the button
+                borderRadius: BorderRadius.circular(20), // Rounded corners
+              ),
+              child: TextButton(
+                onPressed: widget.press,
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 15), // Add padding to align the text properly
+                  minimumSize: Size.zero, // Ensures no minimum size constraint
+                  alignment: Alignment.center, // Center the text inside the button
+                ),
+                child: Text(
+                  widget.actionText,
+                  style: interRegularDefault.copyWith(
+                    color: MyColor.red, // Customize text color
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )
+            : GestureDetector(
           onTap: widget.press,
           child: Container(
             margin: const EdgeInsetsDirectional.only(end: 7,bottom: 7,top: 7),
@@ -138,11 +169,41 @@ class _CustomAppBarState extends State<CustomAppBar> {
       elevation: 0,
       backgroundColor: widget.bgColor,
       centerTitle: widget.isTitleCenter,
+      titleSpacing: 0,
       title: Text(widget.title.tr,
           style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite)),
       actions: [
         widget.isShowActionBtn
-            ? InkWell(
+            ? widget.isNeedActionButtonText ?
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end, // Aligns the button to the right
+          children: [
+            Container(
+              height: 25,
+              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 5), // Margin around the button
+              padding: const EdgeInsets.symmetric(horizontal: 0), // Horizontal padding inside the button
+              decoration: BoxDecoration(
+                color: MyColor.colorWhite, // Background color of the button
+                borderRadius: BorderRadius.circular(20), // Rounded corners
+              ),
+              child: TextButton(
+                onPressed: widget.press,
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 15), // Add padding to align the text properly
+                  minimumSize: Size.zero, // Ensures no minimum size constraint
+                  alignment: Alignment.center, // Center the text inside the button
+                ),
+                child: Text(
+                  widget.actionText,
+                  style: interRegularDefault.copyWith(
+                    color: MyColor.red, // Customize text color
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ) :
+        InkWell(
             onTap: () {
               Get.toNamed(RouteHelper.notificationScreen)
                   ?.then((value) {

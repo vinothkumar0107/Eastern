@@ -71,7 +71,8 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ReplyTicketRepo(apiClient: Get.find()));
     final controller = Get.put(ReplyTicketController(replyTicketRepo: Get.find(), onReplyComplete: () {  }));
-    controller.isLoading = false;
+    controller.replyModel = ReplyTicketData();
+    controller.isLoading = true;
     controller.selectedFiles = selectedFiles;
     controller.selectedFilesData = selectedFilesData;
     super.initState();
@@ -315,215 +316,18 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
     }
   }
 
-// need to remove
-  @override
-  Widget build2(BuildContext context) {
-    return GetBuilder<ReplyTicketController>(
-        builder: (controller) =>  Scaffold(
-          backgroundColor: MyColor.getScreenBgColor2(),
-          appBar: const CustomAppBar(title: MyStrings.replyTicket, isTitleCenter: false,),
-
-          body:  controller.isLoading
-              ? const CustomLoader() :
-          SingleChildScrollView(
-            padding: Dimensions.screenPaddingHV1,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: MyColor.getScreenBgColor2(),
-                borderRadius: BorderRadius.circular(Dimensions.defaultBorderRadius),
-              ),
-              child:  Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: 'Ticket: ',
-                          style: interRegularDefault.copyWith(color:MyColor.primaryColor2,fontSize: Dimensions.fontDefault),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: getTicketId(),
-                              style: interRegularLarge.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault)),
-                          ]
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      Container(
-                        padding: const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2), // Padding inside the border
-                        decoration: BoxDecoration(
-                          color: getStatusColorFromCode().withOpacity(0.2), // Background color
-                          border: Border.all(
-                            color: getStatusColorFromCode(), // Border color
-                            width: 1.0, // Border width
-                          ),
-                          borderRadius: BorderRadius.circular(Dimensions.paddingSize25), // Border radius
-                        ),
-                        child: Text(
-                          getStatusFromCode(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: interRegularSmall.copyWith(color:getStatusColorFromCode(),fontSize: Dimensions.fontSmall12),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Column(
-                    children: [
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                            text: 'Subject: ',
-                            style: interRegularDefault.copyWith(color:MyColor.primaryColor2,fontSize: Dimensions.fontDefault),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: getSubject(),
-                                  style: interRegularLarge.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault)),
-                            ]
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextField(
-                      hintText:
-                      MyStrings.message.capitalizeFirst!.tr,
-                      needLabel: true,
-                      needOutlineBorder: true,
-                      controller: controller.messageController,
-                      labelText:
-                      MyStrings.message.capitalizeFirst!.tr,
-                      isRequired: true,
-                      maxiLines: 3,
-                      disableColor: MyColor.getGreyText(),
-                      onChanged: (value) {
-                        // controller.changeSelectedValue(value, index);
-                      }),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget> [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: MyColor.primaryColor, // Background color
-                          foregroundColor: MyColor.textColor, // Text color
-                        ),
-                        onPressed:addNewChooseFileView,
-                        //_openGallery(context);
-                        child: Row(
-                          children: [
-                            Text('+ ${MyStrings.addNew}', style: interRegularDefault.copyWith(color:MyColor.colorWhite,fontSize: Dimensions.fontLarge ))
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: '${MyStrings.attachment}s ',
-                        style: interSemiBoldSmall.copyWith(
-                            color: MyColor.colorBlack),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: MyStrings.fileSize,
-                            style: interMediumSmall.copyWith(
-                                color: MyColor.red),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemCount: selectedFiles.length,
-                      itemBuilder: (ctx, index) {
-                        bool isFirstItem = index == 0;
-                        return ChooseFileView(
-                          key: Key('ChooseFileView_$index'),
-                          selectedFileName: selectedFiles[index],
-                          chooseFile: () => chooseFile(index),
-                          removeFile: isFirstItem ? null : () => removeFile(index),
-                        );
-                      }),
-                  const SizedBox(height: 0),
-                  Text(
-                    MyStrings.allowedFileExtensionHint,
-                    style: interMediumSmall.copyWith(
-                      color: MyColor.colorBlack,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  controller.submitLoading?const RoundedLoadingBtn():
-                  RoundedButton(
-                    text: MyStrings.reply,
-                    textColor: MyColor.textColor,
-                    width: double.infinity,
-                    press: () {
-                      controller.selectedFilesData = selectedFilesData;
-                      controller.selectedFiles = selectedFiles;
-                      controller.ticketId = getTicketId();
-                      controller.id = getId();
-                      controller.onReplyComplete = _refreshList;
-                      controller.submitTicket();
-                      dismissKeyboard();
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  controller.closeLoading?const RoundedLoadingBtn():
-                  RoundedButton(
-                    text: MyStrings.closeTicket,
-                    textColor: MyColor.textColor,
-                    color: MyColor.red,
-                    width: double.infinity,
-                    press: () {
-                      _showCloseTicketConfirmationDialog(context);
-                      dismissKeyboard();
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemCount: controller.replyModel.messages?.length ?? 0,
-                      itemBuilder: (ctx, index) {
-                        bool isFirstItem = index == 0;
-                        return RepliedListView(
-                          key: Key('RepliedListView_$index'),
-                          messages: controller.replyModel.messages?[index],
-                          callback: () => {},
-                        );
-                      }),
-                ],
-              ),
-            ),
-          ),
-        ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ReplyTicketController>(
       builder: (controller) =>  Scaffold(
         backgroundColor: MyColor.colorGrey,
-        appBar: const CustomAppBar(title: MyStrings.replyTicket, isTitleCenter: false,),
+        appBar: CustomAppBar(title: MyStrings.replyTicket, isTitleCenter: false,isNeedActionButtonText: true, actionText: MyStrings.close,
+          isShowActionBtn: true, press: () {
+              _showCloseTicketConfirmationDialog(context);
+              dismissKeyboard();
+            },
+        ),
 
         body:  controller.isLoading
             ? const CustomLoader() :
@@ -585,7 +389,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 2),
                         Column(
                           children: [
                             RichText(
@@ -658,7 +462,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                       }),
                   const SizedBox(height: Dimensions.paddingSize15),
                    Row(
-                     mainAxisAlignment: MainAxisAlignment.start,
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: [
                        Expanded(child: Column(
                          children: [
@@ -696,7 +500,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                        ),
                      ],
                    ),
-                  const SizedBox(height: Dimensions.paddingSize10),
+                  const SizedBox(height: Dimensions.paddingSize15),
                   ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -711,6 +515,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                           removeFile: isFirstItem ? null : () => removeFile(index),
                         );
                       }),
+                  Platform.isAndroid ? const SizedBox(height: Dimensions.paddingSize25) : const SizedBox.shrink(),
                   controller.submitLoading?const RoundedLoadingBtn():
                   RoundedButton(
                     text: MyStrings.reply,
@@ -726,7 +531,7 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
                       dismissKeyboard();
                     },
                   ),
-                  const SizedBox(height: Dimensions.paddingSize20),
+                  const SizedBox(height: Dimensions.paddingSize10),
                 ],
               ),
             ),
@@ -738,133 +543,20 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
 }
 
 
-//Need to remove
-// class RepliedListView2 extends StatelessWidget {
-//   final VoidCallback callback;
-//   final MessageReply? messages;
-//
-//   const RepliedListView2({
-//     required this.callback,
-//     this.messages,
-//     Key? key,
-//   }) : super(key: key);
-//
-//   String? getReplierName() {
-//     String? status = messages?.adminId == 1 ? '${messages?.admin.name}\n\nStaff'
-//         : messages?.ticket.name;
-//     return status;
-//   }
-//   Color getAdminColor() {
-//     Color color = (messages?.adminId == 1 ? MyColor.paybillBaseColor.withOpacity(0.3)
-//         : Colors.white);
-//     return color;
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: const EdgeInsets.symmetric(vertical: 5.0),
-//       padding: const EdgeInsets.all(10.0),
-//       decoration: BoxDecoration(
-//         border: Border.all(color: Colors.grey, width: 1.0),
-//         borderRadius: BorderRadius.circular(5.0),
-//         color: getAdminColor(),
-//       ),
-//       child: Row(
-//         children: <Widget>[
-//           SizedBox(
-//             width: 100,
-//             child: Text(
-//               '${getReplierName()}',
-//               maxLines: 3,
-//               overflow: TextOverflow.ellipsis,
-//               textAlign: TextAlign.right,
-//               style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontLarge ),
-//             ),
-//           ),
-//
-//           const SizedBox(width: 10.0),
-//
-//           Container(
-//             padding: const EdgeInsets.all(10.0),
-//             width: 1.0,
-//             height: 70,
-//             color: Colors.grey,
-//           ),
-//           const SizedBox(width: 10.0),
-//           Expanded(child:
-//           Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 'Posted on ${messages?.ticket.lastReply ?? " "}',
-//                 maxLines: 2,
-//                 overflow: TextOverflow.ellipsis,
-//                 style: interRegularDefault.copyWith(color:MyColor.colorBlack,fontSize: Dimensions.fontDefault ),
-//               ),
-//               const SizedBox(height: 5.0),
-//               Text(
-//                 messages?.message ?? " ",
-//                 maxLines: 3,
-//                 overflow: TextOverflow.ellipsis,
-//                 style: interRegularSmall.copyWith(color:MyColor.getGreyText(),fontSize: Dimensions.fontDefault ),
-//               ),
-//               const SizedBox(height: 5.0),
-//               SizedBox(
-//                 height: 25,
-//                 child: ListView.builder(
-//                   shrinkWrap: true,
-//                   scrollDirection: Axis.horizontal,
-//                   itemCount: messages?.attachments.length ?? 0,
-//                   itemBuilder: (ctx, index) {
-//                     return Padding(
-//                       padding: const EdgeInsets.only(right: 8.0), // Add trailing padding
-//                       child: InkWell(
-//                         onTap: () {
-//                           Navigator.push(
-//                             context,
-//                             MaterialPageRoute(
-//                               builder: (context) => DocumentViewer(
-//                                 url: '${UrlContainer.assetViewBaseUrl}${messages?.attachments[index].attachment ?? " "}', attachmentName: 'Attachment ${index + 1}', // Replace with your URL
-//                               ),
-//                             ),
-//                           );
-//                         },
-//                         child: Text(
-//                           'Attachment ${index + 1}',
-//                           maxLines: 1,
-//                           overflow: TextOverflow.ellipsis,
-//                           style: interRegularDefault.copyWith(color:MyColor.primaryColor,fontSize: Dimensions.fontDefault ),
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                 ),
-//               ),
-//             ],
-//           ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class WebViewScreen extends StatelessWidget {
   final String url;
 
-  WebViewScreen({required this.url});
+  const WebViewScreen({super.key, required this.url});
 
   @override
   Widget build(BuildContext context) {
-    print("Web url $url");
-    return SafeArea(child: Scaffold(
+    return Scaffold(
       appBar: const CustomAppBar(title: 'Attachments'),
       body: WebView(
         initialUrl: url,
         javascriptMode: JavascriptMode.unrestricted,
       ),
-    ),
     );
   }
 }
@@ -905,7 +597,7 @@ class _DocumentViewerState extends State<DocumentViewer> {
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(child: Scaffold(
+    return  Scaffold(
       appBar: CustomAppBar(title: widget.attachmentName),
       body: WebView(
         initialUrl: isImage
@@ -913,7 +605,6 @@ class _DocumentViewerState extends State<DocumentViewer> {
             : 'https://docs.google.com/viewer?url=${widget.url}&embedded=true',
         javascriptMode: JavascriptMode.unrestricted,
       ),
-    )
     );
   }
 }

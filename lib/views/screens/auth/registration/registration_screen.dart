@@ -48,39 +48,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.dispose();
   }
 
-  @override
-  Widget build2(BuildContext context) {
 
-    return GetBuilder<RegistrationController>(
-      builder: (controller) => WillPopWidget(
-        nextRoute: RouteHelper.loginScreen,
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: MyColor.primaryColor2,
-            appBar: const CustomAppBar(title: MyStrings.signUp,fromAuth: true,),
-            body: controller.isLoading ? const CustomLoader() : SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(child: Image.asset(MyImages.appLogo,width: 300,height: 150)),
-                   /* Text(MyStrings.signUpTitle.tr, style: interSemiBoldExtraLarge.copyWith(fontSize:Dimensions.fontHeader2,fontWeight: FontWeight.w500)),
-                    const SizedBox(height: 15),
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*.2),
-                      child: Text(MyStrings.signUpSologan.tr, textAlign: TextAlign.left,style: interRegularDefault.copyWith(color: MyColor.getGreyText(),fontWeight: FontWeight.w500),)),
-                   */ const SizedBox(height: Dimensions.space30),
-                    const RegistrationForm(),
-                    ],
-                  ),
-                ),
-              ),
-            )
-          ),
-      ),
-      );
-  }
 
   @override
   Widget build(BuildContext context) {
