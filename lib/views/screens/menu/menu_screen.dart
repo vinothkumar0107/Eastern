@@ -121,35 +121,35 @@ class _MenuScreenState extends State<MenuScreen> {
 
                       const CustomDivider(space: Dimensions.space15),
 
-                      Visibility(
-                          visible: menuController.isDepositEnable,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MenuRowWidget(
-                                image: MyImages.deposit,
-                                label: MyStrings.deposit.tr,
-                                onPressed: () => Get.toNamed(RouteHelper.depositsScreen),
-                              ),
-
-                              const CustomDivider(space: Dimensions.space15),
-                            ],
-                          )),
-
-                      Visibility(
-                          visible: menuController.isWithdrawEnable,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MenuRowWidget(
-                                image: MyImages.withdrawMenu,
-                                label: MyStrings.withdraw.tr,
-                                onPressed: () => Get.toNamed(RouteHelper.withdrawScreen),
-                              ),
-
-                              const CustomDivider(space: Dimensions.space15),
-                            ],
-                          )),
+                      // Visibility(
+                      //     visible: menuController.isDepositEnable,
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         MenuRowWidget(
+                      //           image: MyImages.deposit,
+                      //           label: MyStrings.deposit.tr,
+                      //           onPressed: () => Get.toNamed(RouteHelper.depositsScreen),
+                      //         ),
+                      //
+                      //         const CustomDivider(space: Dimensions.space15),
+                      //       ],
+                      //     )),
+                      //
+                      // Visibility(
+                      //     visible: menuController.isWithdrawEnable,
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         MenuRowWidget(
+                      //           image: MyImages.withdrawMenu,
+                      //           label: MyStrings.withdraw.tr,
+                      //           onPressed: () => Get.toNamed(RouteHelper.withdrawScreen),
+                      //         ),
+                      //
+                      //         const CustomDivider(space: Dimensions.space15),
+                      //       ],
+                      //     )),
 
                       Visibility(
                           visible: menuController.langSwitchEnable,
@@ -172,6 +172,14 @@ class _MenuScreenState extends State<MenuScreen> {
                               ),
                             ],
                           )),
+                      const CustomDivider(space: Dimensions.space15),
+                      MenuRowWidget(
+                        image: MyImages.lock,
+                        label: MyStrings.twoFactorSecurity.tr,
+                        onPressed: (){
+                          Get.toNamed(RouteHelper.twoFactorScreen);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -195,14 +203,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           Get.toNamed(RouteHelper.faqScreen);
                         },
                       ),
-                      const CustomDivider(space: Dimensions.space15),
-                      MenuRowWidget(
-                        image: MyImages.lock,
-                        label: MyStrings.twoFactorSecurity.tr,
-                        onPressed: (){
-                          Get.toNamed(RouteHelper.twoFactorScreen);
-                        },
-                      ),
+
                       const CustomDivider(space: Dimensions.space15),
                       MenuRowWidget(
                         isLoading: menuController.logoutLoading,

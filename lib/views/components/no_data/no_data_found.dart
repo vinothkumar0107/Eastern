@@ -12,16 +12,40 @@ class NoDataWidget extends StatelessWidget {
   final double bottomMargin;
   final String title;
   final double imageHeight;
+  final bool isNeedHeight;
 
   const NoDataWidget({Key? key,
     this.topMargin = 0,
     this.title = MyStrings.noDataFound,
     this.imageHeight = 150,
+    this.isNeedHeight = false,
     this.bottomMargin = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return isNeedHeight ? SizedBox(
+      height: MediaQuery.of(context).size.height*0.5,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: topMargin,),
+            SvgPicture.asset(
+                MyImages.noDataImage,
+                height: 100,
+                width: 100,
+                color: MyColor.getUnselectedIconColor()
+            ),
+            const SizedBox(height: Dimensions.space20),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: interRegularDefault.copyWith(color: MyColor.getTextColor().withOpacity(.6), fontSize: Dimensions.fontDefault),
+            )
+          ],
+        ),
+      ),
+    ):Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

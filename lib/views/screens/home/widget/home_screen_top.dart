@@ -63,12 +63,6 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                 ),
               ),
               const Spacer(),
-              IconButton(
-                icon: const Icon(Icons.notifications_none_sharp, color: Colors.white),
-                onPressed: () {
-                  Get.toNamed(RouteHelper.notificationScreen);
-                },
-              ),
               Column(
                 children: [
                   Row(
@@ -78,6 +72,12 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                   )
 
                 ],
+              ),
+              IconButton(
+                icon: const Icon(Icons.notifications_none_sharp, color: Colors.white),
+                onPressed: () {
+                  Get.toNamed(RouteHelper.notificationScreen);
+                },
               ),
             ],
           ),

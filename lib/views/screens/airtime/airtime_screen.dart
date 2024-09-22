@@ -15,10 +15,18 @@ import 'package:eastern_trust/views/screens/airtime/widget/phone_section.dart';
 
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
+import '../../../data/controller/auth/forget_password/forget_password_controller.dart';
 import '../../../data/services/api_service.dart';
+import '../../components/appbar/appbar_specific_device.dart';
 import '../../components/buttons/custom_rounded_button.dart';
+import '../../components/buttons/rounded_button.dart';
+import '../../components/buttons/rounded_loading_button.dart';
+import '../../components/heading_text_widget.dart';
+import '../../components/row_item/form_row.dart';
 import '../../components/text-field/custom_drop_down_button_with_text_field.dart';
+import '../../components/text-field/custom_text_field.dart';
 import '../../components/text/label_text.dart';
+import '../../components/will_pop_widget.dart';
 class AirtimeScreen extends StatefulWidget {
   const AirtimeScreen({super.key});
 
@@ -27,6 +35,7 @@ class AirtimeScreen extends StatefulWidget {
 }
 
 class _AirtimeScreenState extends State<AirtimeScreen> {
+
 
   @override
   void initState() {
@@ -42,7 +51,7 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
     return GetBuilder<AirtimeController>(
       builder: (controller) => Scaffold(
         backgroundColor: MyColor.containerBgColor,
@@ -138,6 +147,167 @@ class _AirtimeScreenState extends State<AirtimeScreen> {
         ),
       ),
 
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<AirtimeController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: '',
+        child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            appBar: AppBarSpecificScreen.buildAppBar(),
+            backgroundColor: MyColor.colorWhite,
+            body: Stack(
+              children: [
+                const GradientView(gradientViewHeight: 3.5),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Expanded(
+                        child: Text(
+                            MyStrings.airtime.tr,
+                            textAlign: TextAlign.left,
+                            style: interBoldOverLarge.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor)
+                        ),
+                      ),
+                      // To keep the title centered, you can add an empty `SizedBox`
+                      const SizedBox(width: 48.0),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(15.0, 70.0, 15.0, 0.0),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        child: Column(
+                          children: [
+                            Card(
+                              color: MyColor.colorWhite,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
+                                    FormRow(label: MyStrings.selectACountry.tr, isRequired: true),
+                                    const SizedBox(height: Dimensions.space8,),
+                                    InkWell(
+                                      onTap: () {
+                                        AirtimeCountryBottomSheet.bottomSheet(context, controller);
+                                      },
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 45,
+                                        padding: EdgeInsets.symmetric(vertical:controller.selectedCountry.id != -1 ? 11 : 13,horizontal:  10),
+                                        decoration: BoxDecoration(
+                                            color: MyColor.liteGreyColor,
+                                            border:  Border.all(color: MyColor.naturalLight,width: .5),
+                                            borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children:  [
+                                            Row(
+                                              children: [
+                                                controller.selectedCountry.id != -1 ? ClipRRect(
+                                                  borderRadius: BorderRadius.circular(4),
+                                                  child: SvgPicture.network(
+                                                      width: 25,
+                                                      height:25,
+                                                      fit: BoxFit.cover,
+                                                      controller.selectedCountry.flagUrl ?? ""),
+                                                ) : const SizedBox.shrink() ,
+                                                const SizedBox(width: Dimensions.space10,),
+                                                Text(controller.selectedCountry.id == -1 ? MyStrings.selectOne : controller.selectedCountry.name ?? "",style: interRegularLarge.copyWith(color: MyColor.colorBlack),),
+                                              ],
+                                            ),
+
+                                            Icon(Icons.expand_more_rounded,color: MyColor.getGreyText(),size: 20,)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    const OperatorSection(),
+                                    const PhoneSection(),
+
+                                    Visibility(
+                                        visible: controller.authorizationList.length>1,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(height: 10),
+                                            LabelText(text: MyStrings.authorizationMethod.tr,required: true,),
+                                            const SizedBox(height: 8),
+                                            CustomDropDownTextField(
+                                              selectedValue:controller.selectedAuthorizationMode,
+                                              list: controller.authorizationList,onChanged:(dynamic value) {
+                                              controller.changeAuthorizationMode(value);
+                                            },
+                                              borderWidth: 0.5,
+                                              borderColor: MyColor.naturalLight,)
+                                          ],
+                                        )
+                                    ),
+
+                                    controller.selectedOperator.denominationType == MyStrings.range ?
+                                    const AmountInputByUserSection() : const SizedBox.shrink(),
+
+                                    controller.selectedOperator.denominationType == MyStrings.fixed ?
+                                    const FixedAmountSection() : const SizedBox.shrink(),
+
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10), // Add spacing if needed
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            bottomNavigationBar: controller.isLoading ? const SizedBox.shrink() : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSize15,vertical: Dimensions.paddingSize30),
+                child: SizedBox(
+                  height: 50,
+                  child: CustomRoundedButton(
+                    isLoading: controller.submitLoading,
+                    labelName: MyStrings.topUp.tr,
+                    press: () {
+                      controller.submitTopUp();
+                    },
+                  ),
+                )
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

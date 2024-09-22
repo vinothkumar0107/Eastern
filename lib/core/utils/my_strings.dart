@@ -44,7 +44,7 @@ class MyStrings{
   static const String enterYourUsername = "Enter your username";
   static const String email = "Email";
   static const String enterYourEmail = "Enter your email";
-  static const String selectACountry = "Select a country";
+  static const String selectACountry = "Select a Country";
   static const String phoneNumber = "Phone Number";
   static const String operator = "Operator";
   static const String change = "Change";
@@ -170,7 +170,7 @@ class MyStrings{
   static const String fdrInformation  = "FDR Information";
   static const String myDpsLists = "My DPS Lists";
   static const String applyNow = "Apply Now";
-  static const String applyToOpenDPS = "Apply to open a DPS";
+  static const String applyToOpenDPS = "Apply to open a";
   static const String authorizationMethod = "Authorization Method";
   static const String investInDPS = "Invest in DPS";
   static const String requestInvestDPS = "Request to Invest in DPS";
@@ -674,6 +674,7 @@ class MyStrings{
   static const String loanUpTo = "Loan Upto";
   static const String uploadDocument = "Upload Document";
   static const String close = "Close";
+  static const String searchCountry = 'Search Country';
 
 
 

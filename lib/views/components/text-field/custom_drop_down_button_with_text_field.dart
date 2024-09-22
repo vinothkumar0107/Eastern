@@ -75,7 +75,7 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
                     value: value,
                     child: Text(
                       value.tr,
-                      style: interRegularLarge.copyWith(color: MyColor.getTextColor(),fontSize: Dimensions.fontDefault),
+                      style: interRegularLarge.copyWith(color:MyColor.colorBlack),
                     ),
                   );
                 }).toList(),

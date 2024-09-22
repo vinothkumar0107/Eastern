@@ -33,10 +33,14 @@ class AppBarSpecificScreen {
 
 class GradientView extends StatefulWidget {
   final double gradientViewHeight;
+  final bool isStaticHeight;
+  final double staticHeightGradient;
 
   const GradientView({
     Key? key,
     this.gradientViewHeight = 3.5,
+    this.isStaticHeight = false,
+    this.staticHeightGradient = 0,
   }) : super(key: key);
 
 
@@ -50,7 +54,7 @@ class _GradientViewState extends State<GradientView> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height / widget.gradientViewHeight, // Half of the screen height
+          height: widget.isStaticHeight ? widget.staticHeightGradient:MediaQuery.of(context).size.height / widget.gradientViewHeight, // Half of the screen height
           decoration: BoxDecoration(
             gradient: MyColor.getBackgroundGradient(),
           ),

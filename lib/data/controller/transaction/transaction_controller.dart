@@ -129,9 +129,9 @@ class TransactionController extends GetxController{
     return nextPageUrl !=null && nextPageUrl!.isNotEmpty && nextPageUrl != 'null'? true:false;
   }
 
-  bool isSearch = false;
+  bool isSearch = true; // Setting by default false -> true
   void changeSearchIcon(){
-    isSearch = !isSearch;
+    // isSearch = !isSearch;
     update();
     if(!isSearch){
       initialSelectedValue();

@@ -60,6 +60,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 }
               },
               onChanged: (value) {
+                formKey.currentState!.validate();
                 return;
               },
             ),
@@ -83,6 +84,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 }
               },
               onChanged: (value) {
+                formKey.currentState!.validate();
                 return;
               },
             ),
@@ -94,56 +96,70 @@ class _RegistrationFormState extends State<RegistrationForm> {
               text:controller.countryName == null?MyStrings.selectACountry.tr:(controller.countryName)!.tr,
             ),
             const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
-
-            Row(
-              children: [
-                Flexible(
-                  flex: 3,
-                  child: FractionallySizedBox(
-                    widthFactor: 1, // This will give you the desired effect
-                    child:CustomTextField(
-                      labelText: MyStrings.phone,
-                      hintText: MyStrings.code.tr,
-                      needOutlineBorder: true,
-                      needLabel: false,
-                      controller: TextEditingController(text: controller.mobileCode??''),
-                      textInputType: TextInputType.phone,
-                      disableColor: controller.hasMobileFocus?MyColor.colorWhite:MyColor.borderColor,
-                      isEnable: false,
-                      onChanged: (value) {
-                        return;
-                      },
-                    ),),
-                  ),
-                const SizedBox(width: 8,),
-                Flexible(
-                    flex: 10,
-                    child: Focus(
-                      onFocusChange: (hasFocus){
-                        controller.changeMobileFocus(hasFocus);
-                      },
-                      child:  CustomTextField(
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: MyColor.borderColor), // Add border color
+                borderRadius: BorderRadius.circular(Dimensions.paddingSize25),
+                color: MyColor.liteGreyColor// Add corner radius
+              ),
+              child: Row(
+                children: [
+                  Flexible(
+                    flex: 3,
+                    child: FractionallySizedBox(
+                      widthFactor: 1, // This will give you the desired effect
+                      child:CustomTextField(
+                        labelText: MyStrings.phone,
+                        hintText: MyStrings.code.tr,
                         needOutlineBorder: true,
                         needLabel: false,
-                        labelText: '',
-                        hintText: MyStrings.enterYourPhoneNo.tr,
-                        controller: controller.mobileController,
-                        focusNode: controller.mobileFocusNode,
+                        controller: TextEditingController(text: controller.mobileCode??''),
                         textInputType: TextInputType.phone,
-                        inputAction: TextInputAction.next,
+                        disableColor: controller.hasMobileFocus?MyColor.colorWhite:MyColor.colorWhite,
+                        isEnable: false,
+                        backgroundColor: MyColor.transparentColor,
+                        borderWidth: 0,
                         onChanged: (value) {
                           return;
                         },
-                        validator: (value){
-                          if(value.toString().isEmpty){
-                            return MyStrings.enterYourPhoneNumber.tr;
-                          }
-                          return null;
+                      ),),
+                  ),
+                  const SizedBox(width: 8,),
+                  Flexible(
+                      flex: 10,
+                      child: Focus(
+                        onFocusChange: (hasFocus){
+                          controller.changeMobileFocus(hasFocus);
                         },
-                      ),
-                    )),
-              ],
+                        child:  CustomTextField(
+                          needOutlineBorder: true,
+                          needLabel: false,
+                          labelText: '',
+                          hintText: MyStrings.enterYourPhoneNo.tr,
+                          controller: controller.mobileController,
+                          focusNode: controller.mobileFocusNode,
+                          textInputType: TextInputType.phone,
+                          inputAction: TextInputAction.next,
+                          backgroundColor: MyColor.transparentColor,
+                          disableColor: controller.hasMobileFocus?MyColor.colorWhite:MyColor.colorWhite,
+                          borderWidth: 0,
+                          onChanged: (value) {
+                            formKey.currentState!.validate();
+                            return;
+                          },
+                          validator: (value){
+                            if(value.toString().isEmpty){
+                              return MyStrings.enterYourPhoneNumber.tr;
+                            }
+                            return null;
+                          },
+                        ),
+                      )),
+                ],
+              ),
             ),
+
+
 
             const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
             Visibility(
@@ -168,6 +184,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     if(controller.checkPasswordStrength){
                       controller.updateValidationList(value);
                     }
+                    formKey.currentState!.validate();
                   },
                   validator: (value) {
                     return controller.validatPassword(value ?? '');

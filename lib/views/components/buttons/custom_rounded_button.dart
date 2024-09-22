@@ -47,9 +47,14 @@ class CustomRoundedButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: verticalPadding,horizontal: horizontalPadding),
         decoration: BoxDecoration(
           color: isOutline ? MyColor.transparentColor : buttonColor,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Dimensions.paddingSize30),
           border: isOutline ? Border.all(color: buttonColor) : null,
-          boxShadow: MyUtil.getCardShadow()
+          boxShadow: MyUtil.getCardShadow(),
+          gradient: const LinearGradient(
+            colors: [MyColor.appPrimaryColorSecondary2, MyColor.primaryColor],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
         ),
         child: isLoading ? const CustomLoader(strokeWidth: 2,circularLoader: true,) : Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +63,7 @@ class CustomRoundedButton extends StatelessWidget {
                 SvgPicture.asset(svgImage!, height: imageSize,width: imageSize,color: textColor,) :
             svgImage != null ? const SizedBox(width: Dimensions.space7): const SizedBox.shrink(),
             svgImage != null ? const SizedBox(width: 8,) : const SizedBox.shrink(),
-            Text(labelName.tr,style: interMediumLarge.copyWith(color: textColor,fontSize: 15),)
+            Text(labelName.tr,style: interMediumLarge.copyWith(color: textColor,fontSize: Dimensions.fontMediumLarge, fontWeight: FontWeight.w600),),
           ],
         ),
       ),
