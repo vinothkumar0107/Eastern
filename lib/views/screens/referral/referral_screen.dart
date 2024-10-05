@@ -20,6 +20,8 @@ import 'package:eastern_trust/views/components/no_data/no_data_found.dart';
 import 'package:eastern_trust/views/components/snackbar/show_custom_snackbar.dart';
 
 import '../../../core/helper/string_format_helper.dart';
+import '../../components/appbar/appbar_specific_device.dart';
+import '../../components/will_pop_widget.dart';
 
 class ReferralScreen extends StatefulWidget {
 
@@ -63,7 +65,7 @@ class _ReferralScreenState extends State<ReferralScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
     return GetBuilder<ReferralController>(builder: (controller)=>Scaffold(
       backgroundColor: MyColor.getScreenBgColor(),
       appBar: const CustomAppBar(title: MyStrings.referral, isTitleCenter: false,),
@@ -203,6 +205,199 @@ class _ReferralScreenState extends State<ReferralScreen> {
         ),
       ),
     ),);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<ReferralController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: '',
+        child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            appBar: AppBarSpecificScreen.buildAppBar(),
+            backgroundColor: MyColor.colorWhite,
+            body: Stack(
+              children: [
+                const GradientView(gradientViewHeight: 6.5,isStaticHeight: true, staticHeightGradient: 150,),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Expanded(
+                        child: Text(
+                            MyStrings.referral.tr,
+                            textAlign: TextAlign.left,
+                            style: interBoldOverLarge.copyWith(color: MyColor.colorWhite,decorationColor:MyColor.primaryColor)
+                        ),
+                      ),
+                      // To keep the title centered, you can add an empty `SizedBox`
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(10.0, 70.0, 10.0, 0.0),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        child: Column(
+                          children: [
+                            Card(
+                              color: MyColor.colorWhite,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 150, width: 200,
+                                      alignment: Alignment.center,
+                                      child: SvgPicture.asset(MyImages.referralImg.tr, height: MediaQuery.of(context).size.width * 0.4, width: MediaQuery.of(context).size.width * 0.6,),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    DottedBorder(
+                                      color: MyColor.getTextColor().withOpacity(0.22),
+                                      radius: const Radius.circular(Dimensions.paddingSize30), // Corner radius for DottedBorder
+                                      borderType: BorderType.RRect, // Rounded rectangle border type
+                                      strokeWidth: 1, // Optional: Thickness of the dotted border
+                                      dashPattern: [6, 3], // Optional: Pattern for the dotted effect
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: MyColor.borderColor, // Background color
+                                          borderRadius: BorderRadius.circular(Dimensions.paddingSize30), // Corner radius for background
+                                        ),
+                                        padding: const EdgeInsets.symmetric(horizontal: 15), // Padding for left and right
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: SizedBox(
+                                                height: 40,
+                                                width: MediaQuery.of(context).size.width,
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                                                    child: Text(
+                                                      "${UrlContainer.domainUrl}?reference=${controller.referralRepo.apiClient.getCurrencyOrUsername(isCurrency: false)}",
+                                                      textAlign: TextAlign.start,
+                                                      style: interRegularSmall.copyWith(color: MyColor.getTextColor()),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: Dimensions.space10),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Clipboard.setData(ClipboardData(text: "${UrlContainer.domainUrl}?reference=${controller.referralRepo.apiClient.getCurrencyOrUsername(isCurrency: false)}"));
+                                                CustomSnackBar.success(successList: [MyStrings.copyLink]);
+                                              },
+                                              child: SvgPicture.asset(MyImages.copyImg.tr, height: 30, width: 30),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10), // Add spacing if needed
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: controller.dataList.isEmpty?360:320, // Adjust the top position based on your layout
+                  left: 15,
+                  right: 15,
+                  child: controller.isLoading? const Expanded(child:  CustomLoader()):
+                  controller.dataList.isEmpty?const Expanded(child: NoDataWidget()):Expanded(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          controller: scrollController,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: controller.dataList.length+1,
+                          separatorBuilder: (context, index) => const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+
+                            if(controller.dataList.length==index){
+                              return controller.hasNext()?
+                              const CustomLoader(isPagination: true,) : const SizedBox();
+                            }
+
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                              decoration: BoxDecoration(
+                                  color: MyColor.getCardBg(),
+                                  borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                                  boxShadow: MyUtil.getCardShadow()
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    height: 35, width: 35,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: MyColor.primaryColor900,
+                                    ),
+                                    child: Text(
+                                      Converter.addLeadingZero("${index+1}"),
+                                      textAlign: TextAlign.center,
+                                      style: interRegularLarge.copyWith(color: MyColor.getGreyText1(), fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  const SizedBox(width: Dimensions.space10),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(flex:3,child: LabelColumn(header: MyStrings.username.tr, body:  controller.dataList[index].username,)),
+                                        Expanded(flex:2,child: LabelColumn(alignmentEnd:true,header: MyStrings.level.tr, body:  Converter.getTrailingExtension(int.tryParse(controller.dataList[index].level)??0),),)
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

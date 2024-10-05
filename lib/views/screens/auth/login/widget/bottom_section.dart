@@ -16,7 +16,8 @@ class BottomSection extends StatelessWidget {
         Text(MyStrings.doNotHaveAccount.tr, style: interMediumLarge.copyWith(color: MyColor.colorBlack,decorationColor:MyColor.colorGrey,decoration: TextDecoration.none)),
         TextButton(
           onPressed: () {
-            Get.offAndToNamed(RouteHelper.registrationScreen);
+            // Get.offAndToNamed(RouteHelper.registrationScreen);
+            Get.toNamed(RouteHelper.registrationScreen);
           },
           child: Text(
             MyStrings.createNew.tr,

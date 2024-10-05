@@ -97,29 +97,37 @@ class _DepositsScreenState extends State<DepositsScreen> {
                   color: MyColor.colorWhite, size: 20),
             ),
             actions: [
-              GestureDetector(
-                onTap: (){
-                  controller.changeIsPress();
-                },
-                child: Container(
-                    padding: const EdgeInsets.all(Dimensions.space7),
-                    decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
-                    child:  Icon(controller.isSearch?Icons.clear:Icons.search, color: MyColor.primaryColor, size: 15)
-                ),
-              ),
-              const SizedBox(width: Dimensions.space7),
-              GestureDetector(
-                onTap: (){
+              // GestureDetector(
+              //   onTap: (){
+              //     controller.changeIsPress();
+              //   },
+              //   child: Container(
+              //       padding: const EdgeInsets.all(Dimensions.space7),
+              //       decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
+              //       child:  Icon(controller.isSearch?Icons.clear:Icons.search, color: MyColor.primaryColor, size: 15)
+              //   ),
+              // ),
+              // const SizedBox(width: Dimensions.space7),
+              TextButton(
+                onPressed: () {
                   Get.toNamed(RouteHelper.newDepositScreenScreen);
                 },
-                child: Container(
-                  margin: const EdgeInsets.only(left: 7,right: 10,bottom: 7,top: 7),
-                  padding: const EdgeInsets.all(Dimensions.space7),
-                  decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
-                  child:  const Icon(Icons.add, color: MyColor.primaryColor, size: 15),
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: Dimensions.space7, horizontal: Dimensions.space20),
+                  backgroundColor: MyColor.colorWhite,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20), // Rounded corners
+                    side: const BorderSide(color: MyColor.primaryColor, width: 2), // Border with color and width
+                  ),
+                ),
+                child: Text(
+                  MyStrings.depositNow,
+                  style: interSemiBoldDefault.copyWith(color: MyColor.primaryColor),
                 ),
               ),
-            ],
+              const SizedBox(width: Dimensions.space15),
+
+        ],
           ),
           body: controller.isLoading ? const CustomLoader() : Padding(
             padding: const EdgeInsets.only(top: Dimensions.space20, left: Dimensions.space15, right: Dimensions.space15),

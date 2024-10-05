@@ -71,7 +71,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 60.0, 15.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 50.0, 15.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
@@ -95,7 +95,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: Dimensions.space15),
+                                  const SizedBox(height: Dimensions.space5),
                                   const RegistrationForm(), // Your form goes here
                                 ],
                               ),

@@ -181,7 +181,7 @@ class AddNewWithdrawController extends GetxController{
     }
 
   bool isShowRate() {
-    if(rate>1 && currency.toLowerCase()!= withdrawMethod?.currency?.toLowerCase()){
+    if(rate>=1.0 && currency.toLowerCase()!= withdrawMethod?.currency?.toLowerCase()){
       return true;
     }else{
       return false;

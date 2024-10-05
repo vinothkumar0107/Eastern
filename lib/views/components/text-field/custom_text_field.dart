@@ -34,6 +34,8 @@ class CustomTextField extends StatefulWidget {
   final int maxiLines;
   final Color backgroundColor;
   final double borderRadius;
+  final double borderWidth;
+
 
  const CustomTextField({
     Key? key,
@@ -63,7 +65,8 @@ class CustomTextField extends StatefulWidget {
     this.isRequired = false,
     this.maxiLines = 1,
    this.backgroundColor =  MyColor.liteGreyColor,
-   this.borderRadius = Dimensions.paddingSize25
+   this.borderRadius = Dimensions.paddingSize25,
+   this.borderWidth = .5
 
   }) : super(key: key);
 
@@ -112,10 +115,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
             hintStyle: interMediumLarge.copyWith(color: MyColor.colorGrey,decorationColor:MyColor.primaryColor),
             fillColor: widget.backgroundColor,
             filled: true,
-            border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5),
+            border: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: widget.borderWidth),
                 borderRadius: BorderRadius.circular(widget.borderRadius)),
-            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.primaryColor,width: .5), borderRadius: BorderRadius.circular(widget.borderRadius)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: .5), borderRadius: BorderRadius.circular(widget.borderRadius)),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyColor.primaryColor,width: widget.borderWidth), borderRadius: BorderRadius.circular(widget.borderRadius)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: widget.disableColor,width: widget.borderWidth), borderRadius: BorderRadius.circular(widget.borderRadius)),
             suffixIcon: widget.isShowSuffixIcon
                 ? widget.isPassword
                 ? IconButton(

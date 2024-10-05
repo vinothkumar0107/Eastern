@@ -90,4 +90,6 @@ class MyImages{
   static const String greenArrowUp = "assets/images/green_arrow_down.png";
   static const String redArrowDown = "assets/images/red_arrow_up.png";
 
+  static const String referralImg= "assets/images/referral_img.svg";
+  static const String copyImg= "assets/images/copy_img.svg";
 }

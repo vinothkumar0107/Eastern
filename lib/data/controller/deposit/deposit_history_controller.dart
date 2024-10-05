@@ -132,9 +132,9 @@ class DepositController extends GetxController{
     update();
   }
 
-  bool isSearch = false;
+  bool isSearch = true; // Default set to true
   void changeIsPress() {
-    isSearch = !isSearch;
+    // isSearch = !isSearch;
     if(!isSearch){
       searchController.text='';
       clearFilter();

@@ -87,10 +87,10 @@ class WithdrawHistoryController extends GetxController{
   }
 
 
-  bool isSearch = false;
+  bool isSearch = true; // By default set to true
   TextEditingController searchController = TextEditingController();
   void changeSearchStatus() async{
-    isSearch = ! isSearch;
+    // isSearch = ! isSearch;
     update();
     if(!isSearch){
       initData();

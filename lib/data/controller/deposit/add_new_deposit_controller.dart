@@ -150,7 +150,7 @@ class AddNewDepositController extends GetxController{
   }
 
   bool isShowRate() {
-    if(rate>1 && currency.toLowerCase() != paymentMethod?.currency?.toLowerCase()){
+    if(rate>=1.0 && currency.toLowerCase() != paymentMethod?.currency?.toLowerCase()){
       return true;
     }else{
       return false;

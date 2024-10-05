@@ -43,7 +43,7 @@ class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
               const TopButtons(),
               const SizedBox(height: Dimensions.space15),
               const LatestTransaction(),
-              controller.debitsLists.isEmpty ? const NoDataWidget(topMargin: 60) : ListView.separated(
+              controller.debitsLists.isEmpty ? const NoDataWidget(topMargin: 0,isNeedHeight: true,) : ListView.separated(
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,

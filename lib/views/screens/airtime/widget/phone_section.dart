@@ -26,6 +26,7 @@ class PhoneSection extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.paddingSize25),
                     border: Border.all(color: MyColor.naturalLight, width: .5),
+                  color: MyColor.liteGreyColor
                 ),
                 child: Text(controller.selectedCountry.callingCodes?[0] ?? MyStrings.code.tr,style: interMediumDefault,),
               ),

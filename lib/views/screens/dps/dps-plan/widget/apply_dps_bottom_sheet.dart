@@ -18,7 +18,7 @@ class ApplyDPSBottomSheet{
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const BottomSheetTopRow(header: MyStrings.applyToOpenDPS),
+          BottomSheetTopRow(header: '${MyStrings.applyToOpenDPS} ${controller.planList[index].name}'),
           controller.authorizationList.length>1?Visibility(
               visible: controller.authorizationList.length>1,
               child: Column(

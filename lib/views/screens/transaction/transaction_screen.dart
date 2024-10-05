@@ -87,30 +87,30 @@ class _TransactionScreenState extends State<TransactionScreen> {
             centerTitle: true,
             leading: const SizedBox(),
             title: Text(MyStrings.transactionHistory.tr, style: interSemiBoldOverLarge.copyWith(color: MyColor.colorWhite)),
-            actions: [
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: Dimensions.space15),
-                child: GestureDetector(
-                  onTap: (){
-                    controller.changeSearchIcon();
-                  },
-                  child: Container(
-                    height: 30, width: 30,
-                    alignment: Alignment.center,
-                    decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
-                    child: controller.isSearch ? const Icon(
-                        Icons.clear,
-                        color: MyColor.primaryColor,
-                        size: 15
-                    ) : Image.asset(
-                        MyImages.filter,
-                        color: MyColor.primaryColor,
-                        height: 15, width: 15
-                    ),
-                  ),
-                ),
-              )
-            ],
+            // actions: [
+            //   Padding(
+            //     padding: const EdgeInsetsDirectional.only(end: Dimensions.space15),
+            //     child: GestureDetector(
+            //       onTap: (){
+            //         controller.changeSearchIcon();
+            //       },
+            //       child: Container(
+            //         height: 30, width: 30,
+            //         alignment: Alignment.center,
+            //         decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
+            //         child: controller.isSearch ? const Icon(
+            //             Icons.clear,
+            //             color: MyColor.primaryColor,
+            //             size: 15
+            //         ) : Image.asset(
+            //             MyImages.filter,
+            //             color: MyColor.primaryColor,
+            //             height: 15, width: 15
+            //         ),
+            //       ),
+            //     ),
+            //   )
+            // ],
           ),
           body: controller.isLoading ? const CustomLoader() : Container(
             padding: const EdgeInsets.all(0),

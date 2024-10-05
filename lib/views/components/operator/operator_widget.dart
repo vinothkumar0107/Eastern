@@ -32,11 +32,11 @@ class OperatorWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space16,vertical: 13),
+        height: 45,
         decoration: BoxDecoration(
-          // color: MyColor.skyBlue.withOpacity(.7),
-          color: MyColor.colorWhite,
-          borderRadius: BorderRadius.circular(Dimensions.paddingSize25),
-          boxShadow: MyUtil.getCardShadow()
+            color: MyColor.liteGreyColor,
+            border:  Border.all(color: MyColor.naturalLight,width: .5),
+            borderRadius: BorderRadius.circular(Dimensions.paddingSize25)
         ),
         child: Row(
           children: [
