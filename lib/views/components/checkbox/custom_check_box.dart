@@ -8,11 +8,13 @@ class CustomCheckBox extends StatefulWidget {
   final List<String>?  selectedValue;
   final List<String> list;
   final ValueChanged? onChanged;
+  final double fontSize;
 
   const CustomCheckBox({Key? key,
     this.selectedValue,
     required this.list,
-    this.onChanged, }) : super(key: key);
+    this.onChanged,
+    this.fontSize = 15.0}) : super(key: key);
 
   @override
   State<CustomCheckBox> createState() => _CustomCheckBoxState();
@@ -38,7 +40,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                   return CheckboxListTile(
                     value: selected_,
                     activeColor: MyColor.primaryColor,
-                    title: Text(widget.list[index].tr,style: interRegularDefault.copyWith(color: MyColor.getTextColor()),),
+                    title: Text(widget.list[index].tr,style: interRegularDefault.copyWith(color: MyColor.getTextColor(), fontSize: widget.fontSize)),
                     onChanged: (bool? value) {
                       setState((){
                         if(value!=null){

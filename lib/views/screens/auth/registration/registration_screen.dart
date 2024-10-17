@@ -1,6 +1,7 @@
 import 'package:eastern_trust/views/screens/auth/registration/widget/bottom_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/route/route.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
@@ -17,6 +18,7 @@ import 'package:eastern_trust/views/screens/auth/registration/widget/registratio
 
 import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/my_strings.dart';
+import '../../../components/animated_widget/expanded_widget.dart';
 import '../../../components/appbar/appbar_specific_device.dart';
 
 

@@ -6,7 +6,7 @@ import 'package:eastern_trust/core/utils/style.dart';
 
 class FormRow extends StatelessWidget {
 
-  final String label;
+  final String? label;
   final bool isRequired;
 
   const FormRow({Key? key,
@@ -19,7 +19,7 @@ class FormRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(label.tr,style: interSemiBoldLarge.copyWith(color: MyColor.getLabelTextColor(), fontSize: Dimensions.fontDefault)),
+        Text(label?.tr ?? '',style: interSemiBoldLarge.copyWith(color: MyColor.getLabelTextColor(), fontSize: Dimensions.fontDefault)),
         Text(isRequired?' *':'',style: interBoldDefault.copyWith(color: MyColor.red),)
       ],
     );

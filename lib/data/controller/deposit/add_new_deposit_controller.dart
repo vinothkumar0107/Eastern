@@ -106,7 +106,7 @@ class AddNewDepositController extends GetxController{
       DepositInsertResponseModel.fromJson(
           jsonDecode(responseModel.responseJson));
       if (insertResponseModel.status.toString().toLowerCase() == "success") {
-        showWebView(insertResponseModel.data?.redirectUrl ?? "");
+        showWebView(insertResponseModel.data?.redirectUrl ?? "", insertResponseModel);
       } else {
         CustomSnackBar.error(errorList: insertResponseModel.message?.error ?? [MyStrings.somethingWentWrong]);
       }
@@ -157,8 +157,9 @@ class AddNewDepositController extends GetxController{
     }
   }
 
-  void showWebView(String redirectUrl) {
-    Get.offAndToNamed(RouteHelper.depositWebViewScreen, arguments: redirectUrl);
+  void showWebView(String redirectUrl, DepositInsertResponseModel model) {
+    // Get.offAndToNamed(RouteHelper.depositWebViewScreen, arguments: redirectUrl);
+    Get.offAndToNamed(RouteHelper.depositPayNowScreen, arguments: [model, paymentMethod]);
   }
 
 }

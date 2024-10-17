@@ -43,7 +43,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height:Dimensions.space30),
             SizedBox(
-              height: 60,
+              height: 50,
               child: TextField(
                 controller: controller.emailController,
                 focusNode: controller.emailFocusNode,

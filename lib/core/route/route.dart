@@ -1,4 +1,5 @@
 import 'package:eastern_trust/data/repo/tickets/ticket_list_repo.dart';
+import 'package:eastern_trust/views/screens/deposits/deposit_paynow_screen.dart';
 import 'package:eastern_trust/views/screens/tickets/create_ticket/create_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/reply_ticket.dart';
 import 'package:eastern_trust/views/screens/tickets/ticket_screen.dart';
@@ -90,6 +91,7 @@ class RouteHelper{
   static const String depositsScreen = "/deposits";
   static const String depositsDetailsScreen = "/deposits_details";
   static const String newDepositScreenScreen = "/deposits_money";
+  static const String depositPayNowScreen = "/deposits_pay_now";
 
 
 
@@ -166,6 +168,8 @@ class RouteHelper{
     GetPage(name: ticketScreen,                   page: () => const TicketScreen()),
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
     GetPage(name: createTicketScreen,             page: () => const CreateTicketScreen()),
+    GetPage(name: depositPayNowScreen,         page: () => DepositsPayNowScreen(depositInsertModel: Get.arguments[0], paymentMethod: Get.arguments[1],)),
+
 
     GetPage(name: replyTicketScreen,               page: () => ReplyTicketScreen(selectedReply: Get.arguments,)),
     GetPage(name: newDepositScreenScreen,         page: () => const NewDepositScreen()),
