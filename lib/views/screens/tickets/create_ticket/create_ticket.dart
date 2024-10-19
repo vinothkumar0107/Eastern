@@ -383,7 +383,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                     press: () {
                       controller.selectedFilesData = selectedFilesData;
                       controller.priority = _selectedValue;
-                      controller.submitTicket();
+                      controller.submitTicket(context);
                       dismissKeyboard();
                     },
                   ),

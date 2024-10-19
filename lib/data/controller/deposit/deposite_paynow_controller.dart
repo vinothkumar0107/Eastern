@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:eastern_trust/core/utils/my_images.dart';
 import 'package:eastern_trust/data/model/authorized/deposit/deposit_insert_response_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,7 +57,7 @@ class DepositPayNowController extends GetxController{
       // CustomSnackBar.success(successList: response.message?.success??[MyStrings.success.tr], );
       showCustomBottomSheetNotification(
         context: context,
-        icon: 'tick',
+        icon: MyImages.successTickImg,
         title: MyStrings.success.tr, successList: response.message?.success??[MyStrings.success.tr],
         buttonText: MyStrings.done.tr,
         onButtonPressed: () {

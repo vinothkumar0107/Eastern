@@ -12,6 +12,9 @@ import 'package:eastern_trust/data/repo/auth/login_repo.dart';
 import 'package:eastern_trust/views/components/snackbar/show_custom_snackbar.dart';
 import 'dart:io';
 
+import '../../../core/utils/my_images.dart';
+import '../../../views/components/bottom_sheet/custom_bottom_notification.dart';
+
 
 class CreateTicketController extends GetxController{
 
@@ -30,7 +33,7 @@ class CreateTicketController extends GetxController{
     isLoading = false;
   }
 
-  Future<void> submitTicket() async {
+  Future<void> submitTicket(BuildContext context) async {
     submitLoading = true;
     update();
     CreateTicketData ticketData=CreateTicketData(
@@ -40,14 +43,27 @@ class CreateTicketController extends GetxController{
         selectedFilesData: selectedFilesData
     );
 
-    bool b= await createTicketRepo.submitCreateTicket(ticketData);
-    if(b){
-      await Future.delayed(const Duration(seconds: 1));
+    // bool b= await createTicketRepo.submitCreateTicket(ticketData);
+    SubmitTicketResponse response = await createTicketRepo.submitCreateTicket(ticketData);
+
+    if(response.status){
+      // await Future.delayed(const Duration(seconds: 1));
       submitLoading = false;
       update();
       // Get.toNamed(RouteHelper.replyTicketScreen);
-      Get.offAllNamed(RouteHelper.ticketScreen);
+      // Get.offAllNamed(RouteHelper.ticketScreen);
       // Get.back();
+      if (!context.mounted) return;
+      showCustomBottomSheetNotification(
+        context: context,
+        icon: MyImages.successTickImg,
+        title: MyStrings.success.tr, successList: response.ticketModel?.message?.success??[MyStrings.success.tr],
+        buttonText: MyStrings.done.tr,
+        onButtonPressed: () {
+          Get.offAllNamed(RouteHelper.ticketScreen);
+        },
+      );
+
       return;
     }
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:eastern_trust/core/helper/shared_preference_helper.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:eastern_trust/core/utils/method.dart';
 import 'package:eastern_trust/core/utils/my_strings.dart';
@@ -12,6 +13,9 @@ import 'package:eastern_trust/data/model/global/response_model/response_model.da
 import 'package:eastern_trust/data/services/api_service.dart';
 import 'package:eastern_trust/views/components/snackbar/show_custom_snackbar.dart';
 import 'package:eastern_trust/data/controller/tickets/create_ticket_controller.dart';
+
+import '../../../core/utils/my_images.dart';
+import '../../../views/components/bottom_sheet/custom_bottom_notification.dart';
 
 class CreateTicketRepo {
   ApiClient apiClient;
@@ -31,7 +35,7 @@ class CreateTicketRepo {
   }
 
 
-  Future<bool> submitCreateTicket(CreateTicketData ticketData) async {
+  Future<SubmitTicketResponse> submitCreateTicket(CreateTicketData ticketData) async {
     try{
       apiClient.initToken();
       String url = '${UrlContainer.baseUrl}${UrlContainer.createTicketUrl}';
@@ -68,14 +72,17 @@ class CreateTicketRepo {
       CreateTicketModel model = CreateTicketModel.fromJson(jsonDecode(jsonResponse));
 
       if(model.status?.toLowerCase()==MyStrings.success.toLowerCase()){
-        CustomSnackBar.success(successList: model.message?.success??[MyStrings.success]);
-        return true;
+        // CustomSnackBar.success(successList: model.message?.success??[MyStrings.success]);
+        // return true;
+        return SubmitTicketResponse(status: true, ticketModel: model);
       }else{
         CustomSnackBar.error(errorList: model.message?.error??[MyStrings.requestFail]);
-        return false;
+        // return false;
+        return SubmitTicketResponse(status: false, ticketModel: model);
       }
     }catch(e){
-      return false;
+      // return false;
+      return SubmitTicketResponse(status: false, ticketModel: null);
     }
   }
 
@@ -184,4 +191,14 @@ class Data {
     return map;
   }
 
+}
+
+class SubmitTicketResponse {
+  final bool status;
+  final CreateTicketModel? ticketModel;
+
+  SubmitTicketResponse({
+    required this.status,
+    this.ticketModel,
+  });
 }

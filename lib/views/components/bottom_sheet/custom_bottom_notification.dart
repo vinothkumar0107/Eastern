@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
 import 'package:eastern_trust/core/helper/string_format_helper.dart';
+import '../../../core/utils/my_images.dart';
 import '../../../core/utils/my_strings.dart';
 import '../../../core/utils/style.dart';
 import '../buttons/rounded_button.dart';
@@ -43,11 +45,7 @@ void showCustomBottomSheetNotification({
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(
-              Icons.check_circle_outline, // You can pass this icon as parameter
-              color: Colors.green,
-              size: 80,
-            ),
+            SvgPicture.asset(icon, height: 60, width: 60),
             const SizedBox(height: 15),
             Text(
               title,
