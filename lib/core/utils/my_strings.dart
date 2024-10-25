@@ -539,6 +539,11 @@ class MyStrings{
   static const String bankName = "Bank Name";
   static const String routingNumber = "Routing Number";
   static const String payNow = "PAY NOW";
+  static const String enterYourBankName = "Enter your bank name";
+  static const String bankAddress = "Bank Address";
+  static const String enterYourBankAddress = "Enter your bank address";
+  static const String msgReference = "Msg Reference";
+  static const String enterYourMsgReference = "Enter your msg reference";
 
   static const String noDepositFound = "No Deposit Found";
   static const String noWithdrawFound = "No Withdraw Found";
@@ -676,6 +681,8 @@ class MyStrings{
   static const String uploadDocument = "Upload Document";
   static const String close = "Close";
   static const String searchCountry = 'Search Country';
+
+  static const String done = 'Done';
 
 
 

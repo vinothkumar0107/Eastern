@@ -31,6 +31,7 @@ class UrlContainer{
   static const String depositMethodUrl = 'deposit/methods';
   static const String depositInsertUrl = 'deposit/insert';
   static const String transactionEndpoint = 'transactions';
+  static const String depositSubmitManualUrl = 'deposit/manual';
 
   static const String otherBankBeneficiaryUrl = 'beneficiary/other';
   static const String myBankBeneficiaryUrl = 'beneficiary/own';

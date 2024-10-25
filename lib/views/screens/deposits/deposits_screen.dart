@@ -17,6 +17,8 @@ import 'package:eastern_trust/views/screens/deposits/widget/custom_deposits_card
 import 'package:eastern_trust/views/screens/deposits/widget/deposit_bottom_sheet.dart';
 import 'package:eastern_trust/views/screens/deposits/widget/deposit_history_top.dart';
 
+import 'new_deposit/new_deposit_screen.dart';
+
 class DepositsScreen extends StatefulWidget {
 
   const DepositsScreen({Key? key}) : super(key: key);

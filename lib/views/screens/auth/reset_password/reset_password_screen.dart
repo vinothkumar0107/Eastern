@@ -46,95 +46,93 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: GestureDetector(
-          onTap: (){
-            FocusScope.of(context).unfocus();
-          },
-          child: Scaffold(
-              backgroundColor: MyColor.colorWhite,
-              appBar: CustomAppBar(title:MyStrings.resetPassword.tr, fromAuth: true),
-              body: GetBuilder<ResetPasswordController>(
-                builder: (controller) => SingleChildScrollView(
-                  padding: Dimensions.screenPaddingHV,
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: Dimensions.space30),
-                        HeaderText(text: MyStrings.resetYourPassword.tr),
-                        const SizedBox(height: Dimensions.space15),
-                        Padding(padding: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*.2),
-                        child: DefaultText(maxLines:3,text: MyStrings.resetPassContent.tr, textStyle: interRegularDefault.copyWith(color: MyColor.getGreyText())),),
-                        const SizedBox(height: Dimensions.space20),
-                        Visibility(
-                            visible: controller.hasPasswordFocus && controller.checkPasswordStrength,
-                            child: ValidationWidget(list: controller.passwordValidationRulse,fromReset: true,)),
+    return GestureDetector(
+      onTap: (){
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: MyColor.colorWhite,
+        appBar: CustomAppBar(title:MyStrings.resetPassword.tr, fromAuth: true),
+        body: GetBuilder<ResetPasswordController>(
+          builder: (controller) => SingleChildScrollView(
+            padding: Dimensions.screenPaddingHV,
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: Dimensions.space30),
+                  HeaderText(text: MyStrings.resetYourPassword.tr),
+                  const SizedBox(height: Dimensions.space15),
+                  Padding(padding: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width*.2),
+                    child: DefaultText(maxLines:3,text: MyStrings.resetPassContent.tr, textStyle: interRegularDefault.copyWith(color: MyColor.getGreyText())),),
+                  const SizedBox(height: Dimensions.space20),
+                  Visibility(
+                      visible: controller.hasPasswordFocus && controller.checkPasswordStrength,
+                      child: ValidationWidget(list: controller.passwordValidationRulse,fromReset: true,)),
 
-                        Focus(
-                          onFocusChange: (hasFocus){
-                            controller.changePasswordFocus(hasFocus);
-                          },
-                          child: CustomTextField(
-                              focusNode: controller.passwordFocusNode,
-                              nextFocus: controller.confirmPasswordFocusNode,
-                              labelText: MyStrings.password,
-                              hintText: MyStrings.enterYourPassword.tr,
-                              isShowSuffixIcon: true,
-                              isPassword: true,
-                              textInputType: TextInputType.text,
-                              controller: controller.passController,
-                              validator: (value) {
-                                return controller.validatPassword(value ?? '');
-                              },
-                              onChanged: (value) {
-                                if(controller.checkPasswordStrength){
-                                  controller.updateValidationList(value);
-                                }
-                               return;
-                              }
-                          ),
-                        ),
-                        const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
-                        CustomTextField(
-                            inputAction: TextInputAction.done,
-                            isPassword: true,
-                            labelText: MyStrings.confirmPassword,
-                            hintText: MyStrings.confirmYourPassword.tr,
-                            isShowSuffixIcon: true,
-                            controller: controller.confirmPassController,
-                            onChanged: (value){
-                              return;
-                            },
-                            validator: (value) {
-                            if (controller.passController.text.toLowerCase() != controller.confirmPassController.text.toLowerCase()) {
-                              return MyStrings.kMatchPassError.tr;
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                        const SizedBox(height: Dimensions.space35),
-                        controller.submitLoading ? const RoundedLoadingBtn() : RoundedButton(
-                          color: MyColor.primaryColor,
-                          textColor: MyColor.colorWhite,
-                          width: 1,
-                          text: MyStrings.submit.tr,
-                          press: () {
-                            if (formKey.currentState!.validate()) {
-                              controller.resetPassword();
-                            }
-                          },
-                        ),
-                      ],
+                  Focus(
+                    onFocusChange: (hasFocus){
+                      controller.changePasswordFocus(hasFocus);
+                    },
+                    child: CustomTextField(
+                        focusNode: controller.passwordFocusNode,
+                        nextFocus: controller.confirmPasswordFocusNode,
+                        labelText: MyStrings.password,
+                        hintText: MyStrings.enterYourPassword.tr,
+                        isShowSuffixIcon: true,
+                        isPassword: true,
+                        textInputType: TextInputType.text,
+                        controller: controller.passController,
+                        validator: (value) {
+                          return controller.validatPassword(value ?? '');
+                        },
+                        onChanged: (value) {
+                          if(controller.checkPasswordStrength){
+                            controller.updateValidationList(value);
+                          }
+                          return;
+                        }
                     ),
                   ),
-                ),
+                  const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
+                  CustomTextField(
+                    inputAction: TextInputAction.done,
+                    isPassword: true,
+                    labelText: MyStrings.confirmPassword,
+                    hintText: MyStrings.confirmYourPassword.tr,
+                    isShowSuffixIcon: true,
+                    controller: controller.confirmPassController,
+                    onChanged: (value){
+                      return;
+                    },
+                    validator: (value) {
+                      if (controller.passController.text.toLowerCase() != controller.confirmPassController.text.toLowerCase()) {
+                        return MyStrings.kMatchPassError.tr;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  const SizedBox(height: Dimensions.space35),
+                  controller.submitLoading ? const RoundedLoadingBtn() : RoundedButton(
+                    color: MyColor.primaryColor,
+                    textColor: MyColor.colorWhite,
+                    width: 1,
+                    text: MyStrings.submit.tr,
+                    press: () {
+                      if (formKey.currentState!.validate()) {
+                        controller.resetPassword();
+                      }
+                    },
+                  ),
+                ],
               ),
+            ),
           ),
         ),
+      ),
     );
   }
 }

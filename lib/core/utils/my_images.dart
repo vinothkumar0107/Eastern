@@ -92,4 +92,5 @@ class MyImages{
 
   static const String referralImg= "assets/images/referral_img.svg";
   static const String copyImg= "assets/images/copy_img.svg";
+  static const String successTickImg = "assets/images/success_tick.svg";
 }
