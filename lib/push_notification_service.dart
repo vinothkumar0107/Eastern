@@ -196,3 +196,7 @@ class PushNotificationService {
 
 
 }
+
+extension on AndroidFlutterLocalNotificationsPlugin? {
+  requestPermission() {}
+}

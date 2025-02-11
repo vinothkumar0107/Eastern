@@ -127,6 +127,7 @@ class MyStrings{
 
   static const String loanPlan = "Loan Plans";
   static const String applyForLoan = "Apply for Loan";
+  static const String applyLoanFor = "Apply Loan for";
   static const String myLoanList = "My Loan List";
 
   static const String somethingWentWrong = "Something went wrong";
@@ -682,6 +683,7 @@ class MyStrings{
   static const String searchCountry = 'Search Country';
 
   static const String done = 'Done';
+  static const String comingSoon = 'Coming Soon...';
 
 
 

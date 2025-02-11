@@ -114,7 +114,7 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
                                   )
                                 ]))),
                     const SizedBox(height: 20,),
-                    Flexible(
+                controller.formList.isNotEmpty ?  Flexible(
                       child:  Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 25),
                         decoration: BoxDecoration(
@@ -256,7 +256,7 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
                           ],
                         ),
                       ),
-                    ),
+                    ) : const SizedBox.shrink(),
                     const SizedBox(height: Dimensions.space25),
                     controller.submitLoading
                         ? const Center(child: RoundedLoadingBtn())

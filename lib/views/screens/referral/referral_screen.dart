@@ -333,8 +333,8 @@ class _ReferralScreenState extends State<ReferralScreen> {
                   top: controller.dataList.isEmpty?360:320, // Adjust the top position based on your layout
                   left: 15,
                   right: 15,
-                  child: controller.isLoading? const Expanded(child:  CustomLoader()):
-                  controller.dataList.isEmpty?const Expanded(child: NoDataWidget()):Expanded(
+                  child: controller.isLoading? const  CustomLoader():
+                  controller.dataList.isEmpty?const NoDataWidget():Expanded(
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height,
                         child: ListView.separated(

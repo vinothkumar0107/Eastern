@@ -86,7 +86,7 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(child: controller.moduleList[0]),
-              Expanded(child: controller.moduleList[4]),
+              Expanded(child: controller.moduleList[1]),
             ],
           ),
         ],

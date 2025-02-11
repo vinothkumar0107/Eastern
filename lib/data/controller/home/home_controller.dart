@@ -12,6 +12,8 @@ import 'package:eastern_trust/data/repo/home/home_repo.dart';
 import 'package:eastern_trust/views/components/snackbar/show_custom_snackbar.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../core/helper/shared_preference_helper.dart';
+
 class HomeController extends GetxController {
 
   HomeRepo repo;
@@ -69,6 +71,8 @@ class HomeController extends GetxController {
         if(tempDebitList != null && tempDebitList.isNotEmpty){
           debitsLists.addAll(tempDebitList);
         }
+        await repo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, true);
+        print('=====> home controller loggrd in');
       }
       else{
         CustomSnackBar.error(errorList: model.message?.error ??[ MyStrings.somethingWentWrong],);

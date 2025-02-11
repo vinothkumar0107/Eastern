@@ -13,13 +13,15 @@ class NoDataWidget extends StatelessWidget {
   final String title;
   final double imageHeight;
   final bool isNeedHeight;
+  final double fontSize;
 
   const NoDataWidget({Key? key,
     this.topMargin = 0,
     this.title = MyStrings.noDataFound,
-    this.imageHeight = 150,
+    this.imageHeight = 100,
     this.isNeedHeight = false,
-    this.bottomMargin = 0}) : super(key: key);
+    this.bottomMargin = 0,
+    this.fontSize = Dimensions.fontDefault,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class NoDataWidget extends StatelessWidget {
             SizedBox(height: topMargin,),
             SvgPicture.asset(
                 MyImages.noDataImage,
-                height: 100,
+                height: imageHeight,
                 width: 100,
                 color: MyColor.getUnselectedIconColor()
             ),
@@ -40,7 +42,7 @@ class NoDataWidget extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: interRegularDefault.copyWith(color: MyColor.getTextColor().withOpacity(.6), fontSize: Dimensions.fontDefault),
+              style: interRegularDefault.copyWith(color: MyColor.getTextColor().withOpacity(.6), fontSize: fontSize),
             )
           ],
         ),
