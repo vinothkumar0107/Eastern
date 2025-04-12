@@ -103,7 +103,12 @@ class WithdrawConfirmController extends GetxController {
     List<String> errorList = [];
     for (var element in formList) {
       if (element.isRequired == 'required') {
-        if (element.selectedValue == '' || element.selectedValue == selectOne ) {
+        if (element.type == 'checkbox') {
+          if (element.cbSelected == null || element.cbSelected!.isEmpty) {
+            errorList.add('${element.name} ${MyStrings.isRequired}');
+          }
+        }
+       else if (element.selectedValue == '' || element.selectedValue == selectOne ) {
           errorList.add('${element.name} ${MyStrings.isRequired}');
         }
       }
