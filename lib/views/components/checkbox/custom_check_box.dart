@@ -40,7 +40,9 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                   return CheckboxListTile(
                     value: selected_,
                     activeColor: MyColor.primaryColor,
-                    title: Text(widget.list[index].tr,style: interRegularDefault.copyWith(color: MyColor.getTextColor(), fontSize: widget.fontSize)),
+                    title: Text(widget.list[index].tr,
+                        style: interRegularDefault.copyWith(color: MyColor.getTextColor(),
+                            fontSize: widget.fontSize)),
                     onChanged: (bool? value) {
                       setState((){
                         if(value!=null){

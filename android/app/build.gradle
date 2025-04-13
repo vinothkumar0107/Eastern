@@ -17,7 +17,7 @@ if (localPropertiesFile.exists()) {
     }
     android {
         namespace "com.eastern.easterntrust"
-        compileSdk flutter.compileSdkVersion
+        compileSdk 34
 //    ndkVersion flutter.ndkVersion
         ndkVersion "25.1.8937393"
 
@@ -37,9 +37,9 @@ if (localPropertiesFile.exists()) {
         defaultConfig {
             applicationId "com.eastern.easterntrust"
             minSdkVersion 21
-            targetSdkVersion flutter.targetSdkVersion
-            versionCode 7
-            versionName "1.8"
+            targetSdkVersion 34
+            versionCode 10
+            versionName "2.1"
             multiDexEnabled true
         }
 

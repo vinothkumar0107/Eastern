@@ -77,11 +77,15 @@ class _DepositPayNowFormState extends State<DepositPayNowForm> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: Dimensions.space10,),
+            const SizedBox(height: Dimensions.space10),
             FormRow(label: (field.name??'').toLowerCase().capitalizeFirst, isRequired: field.isRequired=='optional'?false:true),
-            CustomCheckBox(selectedValue:payController.formList?[index].cbSelected,list: field.options??[],fontSize: Dimensions.fontDefault, onChanged: (value){
+            CustomCheckBox(selectedValue:payController.formList?[index].cbSelected,
+              list: field.options??[],
+              fontSize: Dimensions.fontDefault,
+              onChanged: (value){
               payController.changeSelectedCheckBoxValue(index,value);
-            },),
+            },
+            ),
           ],
         );
       case 'radio':
@@ -101,7 +105,7 @@ class _DepositPayNowFormState extends State<DepositPayNowForm> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: Dimensions.space10,),
+            const SizedBox(height: Dimensions.space10),
             FormRow(label: (field.name??'').toLowerCase().capitalizeFirst, isRequired: field.isRequired=='optional'?false:true),
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
