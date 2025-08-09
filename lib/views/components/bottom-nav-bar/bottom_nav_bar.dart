@@ -54,7 +54,7 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
             const SizedBox(height: Dimensions.space5),
             Text(
               textList[index].tr,
-              style: interRegularExtraSmall.copyWith(color: isActive ? MyColor.primaryColor : MyColor.colorGrey,fontSize: Dimensions.fontSmall)
+              style: interRegularExtraSmall.copyWith(color: isActive ? MyColor.primaryColor : MyColor.colorGrey, fontWeight: FontWeight.w600, fontSize: Dimensions.fontDefault)
             )
           ],
         );

@@ -37,15 +37,15 @@ class _BalanceAnimationContainerState extends State<BalanceAnimationContainer> {
                             opacity: _isBalanceShown ? 1 : 0,
                             duration: const Duration(milliseconds: 500),
                             child:  FittedBox(
-                              child: Text('${widget.curSymbol} ${widget.amount}',
+                              child: Text('${widget.curSymbol} ${widget.amount.makeCurrencyComma(precision: 2)}',
                                   style:interSemiBold.copyWith(color: MyColor.primaryColor,fontSize: Dimensions.fontDefault)),
                             )),
                         AnimatedOpacity(
                             opacity: _isBalance ? 1 : 0,
                             duration: const Duration(milliseconds: 300),
-                            child: Text(MyStrings.balance.tr,
+                            child: Text("  ${MyStrings.balance.tr}",
                                 style: const TextStyle(
-                                    color: MyColor.primaryColor, fontSize: 14))),
+                                    color: MyColor.primaryColor, fontSize: 15))),
 
                         /// Circle
                         AnimatedPositioned(

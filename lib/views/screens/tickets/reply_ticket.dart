@@ -544,18 +544,55 @@ class _ReplyTicketScreenState extends State<ReplyTicketScreen> {
 
 
 
-class WebViewScreen extends StatelessWidget {
+class WebViewScreen extends StatefulWidget {
   final String url;
 
   const WebViewScreen({super.key, required this.url});
 
   @override
+  State<WebViewScreen> createState() => _WebViewScreenState();
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: const CustomAppBar(title: 'Attachments'),
+  //     body: WebView(
+  //       initialUrl: url,
+  //       javascriptMode: JavascriptMode.unrestricted,
+  //     ),
+  //   );
+  // }
+}
+
+class _WebViewScreenState extends State<WebViewScreen> {
+  late final WebViewController _controller;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (_) {
+            setState(() => _isLoading = false);
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.url));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Attachments'),
-      body: WebView(
-        initialUrl: url,
-        javascriptMode: JavascriptMode.unrestricted,
+      body: Stack(
+        children: [
+          WebViewWidget(controller: _controller),
+          if (_isLoading)
+            const Center(child: CircularProgressIndicator()),
+        ],
       ),
     );
   }
@@ -565,49 +602,117 @@ class DocumentViewer extends StatefulWidget {
   final String url;
   final String attachmentName;
 
-  const DocumentViewer({super.key, required this.url, required this.attachmentName});
+  const DocumentViewer({
+    super.key,
+    required this.url,
+    required this.attachmentName,
+  });
 
   @override
-  _DocumentViewerState createState() => _DocumentViewerState();
+  State<DocumentViewer> createState() => _DocumentViewerState();
 }
 
 class _DocumentViewerState extends State<DocumentViewer> {
+  late final WebViewController _controller;
   bool isImage = false;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     checkIfImage();
+    initWebView();
   }
 
   void checkIfImage() {
-    final uri = Uri.parse(widget.url);
-    final path = uri.path.toLowerCase();
-    if (path.endsWith('.png') || path.endsWith('.jpg') ||
-        path.endsWith('.jpeg') || path.endsWith('.gif')) {
-      setState(() {
-        isImage = true;
-      });
-    } else {
-      setState(() {
-        isImage = false;
-      });
-    }
+    final path = Uri.parse(widget.url).path.toLowerCase();
+    isImage = path.endsWith('.png') ||
+        path.endsWith('.jpg') ||
+        path.endsWith('.jpeg') ||
+        path.endsWith('.gif');
+  }
+
+  void initWebView() {
+    final String displayUrl = isImage
+        ? widget.url
+        : 'https://docs.google.com/viewer?url=${widget.url}&embedded=true';
+
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (_) {
+            setState(() => _isLoading = false);
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(displayUrl));
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(title: widget.attachmentName),
-      body: WebView(
-        initialUrl: isImage
-            ? widget.url
-            : 'https://docs.google.com/viewer?url=${widget.url}&embedded=true',
-        javascriptMode: JavascriptMode.unrestricted,
+      body: Stack(
+        children: [
+          WebViewWidget(controller: _controller),
+          if (_isLoading)
+            const Center(child: CircularProgressIndicator()),
+        ],
       ),
     );
   }
 }
+
+// Need to remove
+
+// class DocumentViewer extends StatefulWidget {
+//   final String url;
+//   final String attachmentName;
+//
+//   const DocumentViewer({super.key, required this.url, required this.attachmentName});
+//
+//   @override
+//   _DocumentViewerState createState() => _DocumentViewerState();
+// }
+//
+// class _DocumentViewerState extends State<DocumentViewer> {
+//   bool isImage = false;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     checkIfImage();
+//   }
+//
+//   void checkIfImage() {
+//     final uri = Uri.parse(widget.url);
+//     final path = uri.path.toLowerCase();
+//     if (path.endsWith('.png') || path.endsWith('.jpg') ||
+//         path.endsWith('.jpeg') || path.endsWith('.gif')) {
+//       setState(() {
+//         isImage = true;
+//       });
+//     } else {
+//       setState(() {
+//         isImage = false;
+//       });
+//     }
+//   }
+//
+//   // @override
+//   // Widget build(BuildContext context) {
+//   //   return  Scaffold(
+//   //     appBar: CustomAppBar(title: widget.attachmentName),
+//   //     body: WebView(
+//   //       initialUrl: isImage
+//   //           ? widget.url
+//   //           : 'https://docs.google.com/viewer?url=${widget.url}&embedded=true',
+//   //       javascriptMode: JavascriptMode.unrestricted,
+//   //     ),
+//   //   );
+//   // }
+// }
 
 
 

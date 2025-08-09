@@ -51,9 +51,9 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(controller.username, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularLarge.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w600)),
+                            Text(controller.username, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularLarge.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w800, fontSize: Dimensions.fontExtraLarge)),
                             const SizedBox(height: Dimensions.space5),
-                            Text(controller.accountNumber, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularSmall.copyWith(fontSize:Dimensions.fontExtraSmall+1,fontWeight: FontWeight.w600, color: MyColor.colorWhite.withOpacity(.8))),
+                            Text(controller.accountNumber, overflow:TextOverflow.ellipsis,textAlign: TextAlign.left, style: interRegularSmall.copyWith(fontSize:Dimensions.fontExtraSmall+3,fontWeight: FontWeight.w800, color: MyColor.colorWhite.withOpacity(.8))),
                             const SizedBox(height: Dimensions.space5),
                           ],
                         ),

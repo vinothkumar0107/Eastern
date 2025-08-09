@@ -1,5 +1,6 @@
 
 import 'package:eastern_trust/data/model/language/language_model.dart';
+import 'package:intl/intl.dart';
 
 class MyStrings{
 
@@ -696,4 +697,16 @@ class MyStrings{
     LanguageModel(imageUrl: '', languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
   ];
 
+}
+
+extension StringFormatting on String {
+  String makeCurrencyComma({int precision = 2}) {
+    try {
+      double number = double.parse(this);
+      final formatter = NumberFormat('#,##0.${'0' * precision}');
+      return formatter.format(number);
+    } catch (e) {
+      return this;
+    }
+  }
 }
