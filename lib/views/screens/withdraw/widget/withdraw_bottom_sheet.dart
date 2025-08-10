@@ -27,11 +27,11 @@ class WithdrawBottomSheet{
             children: [
               Expanded(
                   flex: 6,
-                  child:  LabelColumn(header:  MyStrings.amount, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].amount??'0')}')
+                  child:  LabelColumn(header:  MyStrings.amount, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].amount??'0').makeCurrencyComma(precision: 2)}')
               ),
               Expanded(
                   flex: 2,
-                  child: LabelColumn(alignmentEnd:true,header: MyStrings.charge, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].charge??'')}')
+                  child: LabelColumn(alignmentEnd:true,header: MyStrings.charge, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].charge??'').makeCurrencyComma(precision: 2)}')
               ),
             ],
           ),
@@ -42,11 +42,11 @@ class WithdrawBottomSheet{
 
               Expanded(
                   flex: 3,
-                  child: LabelColumn(header:MyStrings.payableAmount, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].afterCharge??'')}')
+                  child: LabelColumn(header:MyStrings.payableAmount, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].afterCharge??'').makeCurrencyComma(precision: 2)}')
               ),
               Expanded(
                   flex: 4,
-                  child: LabelColumn(alignmentEnd:true,header:MyStrings.conversionRate, body:'1 ${controller.currency} = ${Converter.formatNumber(controller.withdrawList[index].rate??'')} ${controller.withdrawList[index].currency}')
+                  child: LabelColumn(alignmentEnd:true,header:MyStrings.conversionRate, body:'1 ${controller.currency} = ${Converter.formatNumber(controller.withdrawList[index].rate??'').makeCurrencyComma(precision: 2)} ${controller.withdrawList[index].currency}')
               ),
             ],
           ),
@@ -56,7 +56,7 @@ class WithdrawBottomSheet{
             children: [
               Expanded(
                   flex: 4,
-                  child: LabelColumn(header:MyStrings.finalAmount, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].finalAmount??'0')}')
+                  child: LabelColumn(header:MyStrings.finalAmount, body:'${controller.curSymbol}${Converter.formatNumber(controller.withdrawList[index].finalAmount??'0').makeCurrencyComma(precision: 2)}')
               ),
               Expanded(
                   flex: 3,

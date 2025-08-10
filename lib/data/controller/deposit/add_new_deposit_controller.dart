@@ -48,9 +48,9 @@ class AddNewDepositController extends GetxController{
     paymentMethod = method;
     depositLimit =
     '${Converter.formatNumber(
-        method?.minAmount?.toString() ?? '-1')} - ${Converter
+        method?.minAmount?.toString() ?? '-1').makeCurrencyComma()} - ${Converter
         .formatNumber(
-        method?.maxAmount?.toString() ?? '-1')} $currency';
+        method?.maxAmount?.toString() ?? '-1').makeCurrencyComma()} $currency';
     changeInfoWidgetValue(mainAmount);
     update();
   }
@@ -130,13 +130,13 @@ class AddNewDepositController extends GetxController{
     double percentCharge = (amount*percent)/100;
     double temCharge = double.tryParse(paymentMethod?.fixedCharge??'0')??0;
     double totalCharge = percentCharge+temCharge;
-    charge = '${Converter.formatNumber('$totalCharge')} $currency';
+    charge = '${Converter.formatNumber('$totalCharge').makeCurrencyComma()} $currency';
     double payable = totalCharge + amount;
-    payableText = '$payable $currency';
+    payableText = '${'$payable'.makeCurrencyComma()} $currency';
 
     rate = double.tryParse(paymentMethod?.rate??'0')??0;
-    conversionRate = '1 $currency = $rate ${paymentMethod?.currency??''}';
-    inLocal = Converter.formatNumber('${payable*rate}');
+    conversionRate = '1 $currency = ${'$rate'.makeCurrencyComma()} ${paymentMethod?.currency??''}';
+    inLocal = Converter.formatNumber('${payable*rate}'.makeCurrencyComma());
     update();
     return;
   }

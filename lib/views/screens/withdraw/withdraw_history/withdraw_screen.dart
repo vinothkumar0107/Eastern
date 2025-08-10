@@ -164,7 +164,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                           date: DateConverter.isoToLocalDateAndTime(controller.withdrawList[index].createdAt ?? ""),
                           status: controller.getStatus(index),
                           statusBgColor: controller.getColor(index),
-                          amount: "${Converter.formatNumber(controller.withdrawList[index].finalAmount ?? " ")} ${controller.currency}",
+                          amount: "${Converter.formatNumber(controller.withdrawList[index].finalAmount ?? " ").makeCurrencyComma(precision: 2)} ${controller.currency}",
                         );
                       },
                     ),

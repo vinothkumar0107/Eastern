@@ -44,7 +44,7 @@ class FDRListCard extends StatelessWidget {
                   CardColumn(
                     alignmentEnd: true,
                     header:MyStrings.amount,
-                    body: "${Converter.formatNumber(controller.fdrList[index].amount ?? "")} ${controller.currency}",
+                    body: "${Converter.formatNumber(controller.fdrList[index].amount ?? "").makeCurrencyComma()} ${controller.currency}",
                   ),
                 ],
               ),

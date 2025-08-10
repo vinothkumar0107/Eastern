@@ -26,7 +26,7 @@ class LoanListBottomSheet{
                 flex: 1,
                 child: BottomSheetColumn(
                   header: MyStrings.amount,
-                  body: '${controller.currencySymbol}${Converter.formatNumber(controller.loanList[index].amount??'')}',
+                  body: '${controller.currencySymbol}${Converter.formatNumber(controller.loanList[index].amount??'').makeCurrencyComma()}',
                 )
             ),
             Expanded(
@@ -34,7 +34,7 @@ class LoanListBottomSheet{
                 child: BottomSheetColumn(
                   alignmentEnd: true,
                   header: MyStrings.needToPay,
-                  body: '${controller.currencySymbol}${controller.getNeedToPayAmount(index)}',
+                  body: '${controller.currencySymbol}${controller.getNeedToPayAmount(index).makeCurrencyComma()}',
                 )
             ),
           ],
@@ -49,7 +49,7 @@ class LoanListBottomSheet{
                 flex: 1,
                 child: BottomSheetColumn(
                   header: MyStrings.installmentAmount,
-                  body: "${controller.currencySymbol}${Converter.formatNumber(controller.loanList[index].perInstallment??'')}",
+                  body: "${controller.currencySymbol}${Converter.formatNumber(controller.loanList[index].perInstallment??'').makeCurrencyComma()}",
                 )
             ),
             Expanded(
@@ -100,7 +100,7 @@ class LoanListBottomSheet{
                 child: BottomSheetColumn(
                   alignmentEnd: true,
                   header: MyStrings.paidAmount,
-                  body: "${controller.currencySymbol}${Converter.mul(controller.loanList[index].givenInstallment??'0',controller.loanList[index].perInstallment??'0')}",
+                  body: "${controller.currencySymbol}${'${Converter.mul(controller.loanList[index].givenInstallment??'0',controller.loanList[index].perInstallment??'0')}'.makeCurrencyComma()}",
                 )
             ),
           ],

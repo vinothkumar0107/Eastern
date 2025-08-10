@@ -31,7 +31,7 @@ class ApplyFDRBottomSheet{
                  hintText: MyStrings.enterAmount,
                  onChanged: (value){}
              ),
-             WarningRow(text: '${MyStrings.limit.tr}: ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].minimumAmount??'0')} - ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].maximumAmount??'0')}',),
+             WarningRow(text: '${MyStrings.limit.tr}: ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].minimumAmount??'0').makeCurrencyComma()} - ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].maximumAmount??'0').makeCurrencyComma()}',),
              Visibility(
                  visible: controller.authorizationList.length>1,
                  child: Column(

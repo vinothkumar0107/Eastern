@@ -177,7 +177,7 @@ class _DepositsScreenState extends State<DepositsScreen> {
                           date: DateConverter.isoToLocalDateAndTime(controller.depositList[index].createdAt ?? ""),
                           status:controller.getStatus(index),
                           statusBgColor:controller.getStatusColor(index),
-                          amount: "${Converter.formatNumber(controller.depositList[index].amount ?? " ")} ${controller.currency}",
+                          amount: "${Converter.formatNumber(controller.depositList[index].amount ?? " ").makeCurrencyComma(precision: 2)} ${controller.currency}",
                         );
                       },
                     ),

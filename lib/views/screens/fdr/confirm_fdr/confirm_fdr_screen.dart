@@ -57,8 +57,8 @@ class _ConfirmFDRScreenState extends State<ConfirmFDRScreen> {
               const SizedBox(height: 25,),
               PreviewRow(firstText: MyStrings.plan, secondText: controller.plan?.name??''),
               PreviewRow(firstText: MyStrings.profitRate, secondText: '${Converter.roundDoubleAndRemoveTrailingZero(controller.plan?.interestRate??'0')}%'),
-              PreviewRow(firstText: MyStrings.amount, secondText: '${controller.currencySymbol}${controller.amount}'),
-              PreviewRow(firstText: '${MyStrings.profitInEvery.tr} ${controller.plan?.installmentInterval??'-'} ${MyStrings.days.tr}', secondText: '${controller.currencySymbol}${controller.getProfitAmount()}'),
+              PreviewRow(firstText: MyStrings.amount, secondText: '${controller.currencySymbol}${controller.amount.makeCurrencyComma()}'),
+              PreviewRow(firstText: '${MyStrings.profitInEvery.tr} ${controller.plan?.installmentInterval??'-'} ${MyStrings.days.tr}', secondText: '${controller.currencySymbol}${controller.getProfitAmount().makeCurrencyComma()}'),
               PreviewRow(firstText: MyStrings.cannotBeWithdrawTill, secondText: controller.withdrawAvailableTil,showDivider: false,),
               const SizedBox(height: 35,),
               Row(

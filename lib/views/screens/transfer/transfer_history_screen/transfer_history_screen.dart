@@ -87,7 +87,7 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
                     status: controller.getStatusAndColor(index),
                     statusBgColor: controller.getStatusAndColor(index,isStatus: false),
                     accountName:  controller.getAccountName(index),
-                    amount: '${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].amount??'0')}'
+                    amount: '${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].amount??'0').makeCurrencyComma()}'
                 );}
           ),
         ),

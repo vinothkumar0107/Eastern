@@ -14,14 +14,14 @@ class CustomWithdrawCard extends StatelessWidget {
   final VoidCallback onPressed;
 
   const CustomWithdrawCard({
-    Key? key,
+    super.key,
     required this.trxValue,
     required this.date,
     required this.status,
     required this.statusBgColor,
     required this.amount,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

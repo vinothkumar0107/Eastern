@@ -74,7 +74,7 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
                         cardStatusTitle: controller.planName ?? '',
                         percentRate: controller.perInstallmentPercentage ?? '0',
                         takeMin: '',
-                        takeMax: ' ${controller.currencySymbol}${controller.maximumAmount}',
+                        takeMax: ' ${controller.currencySymbol}${controller.maximumAmount.makeCurrencyComma()}',
                         perInstallment: controller.perInstallmentPercentage ?? '0',
                         installmentInterval: controller.installmentInterval ?? '',
                         totalInstallment: controller.totalInstallment ?? '',
@@ -100,10 +100,10 @@ class _LoanConfirmScreenState extends State<LoanConfirmScreen> {
                                   Text('(${MyStrings.beSureBeforeConfirm.tr})', style: interRegularDefault.copyWith(color: MyColor.primaryColor2, fontSize: Dimensions.fontSmall12),),
                                   const SizedBox(height: 25,),
                                   PreviewRow(firstText: MyStrings.planName, secondText: controller.planName, showDivider: false,),
-                                  PreviewRow(firstText: MyStrings.loanAmount, secondText: '${controller.currencySymbol}${controller.amount}',showDivider: false,),
+                                  PreviewRow(firstText: MyStrings.loanAmount, secondText: '${controller.currencySymbol}${controller.amount.makeCurrencyComma()}',showDivider: false,),
                                   PreviewRow(firstText: MyStrings.totalInstallment, secondText: controller.totalInstallment,showDivider: false,),
-                                  PreviewRow(firstText: MyStrings.perInstallment, secondText: '${controller.currencySymbol}${controller.perInstallment}',showDivider: false,),
-                                  PreviewRow(firstText: MyStrings.youNeedToPay, secondText: '${controller.currencySymbol}${controller.youNeedToPay}',showDivider: false,),
+                                  PreviewRow(firstText: MyStrings.perInstallment, secondText: '${controller.currencySymbol}${controller.perInstallment.makeCurrencyComma()}',showDivider: false,),
+                                  PreviewRow(firstText: MyStrings.youNeedToPay, secondText: '${controller.currencySymbol}${controller.youNeedToPay.makeCurrencyComma()}',showDivider: false,),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(

@@ -54,10 +54,10 @@ class MyBankTransferBottomSheet{
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       WidgetDivider(space: Dimensions.space12,lineColor: MyColor.transparentColor),
-                      LimitPreviewRow(firstText: MyStrings.limitPerTrx,secondText:  '${controller.currencySymbol}${Converter.formatNumber(controller.limitPerTrx)} (${MyStrings.min.tr})'),
+                      LimitPreviewRow(firstText: MyStrings.limitPerTrx,secondText:  '${controller.currencySymbol}${Converter.formatNumber(controller.limitPerTrx).makeCurrencyComma()} (${MyStrings.min.tr})'),
                       LimitPreviewRow(firstText: MyStrings.chargePerTrx,secondText: Converter.formatNumber(controller.chargePerTrx)),
-                      LimitPreviewRow(firstText: MyStrings.dailyLimit,secondText:   '${controller.currencySymbol}${Converter.formatNumber(controller.dailyMaxLimit)} (${MyStrings.max.tr})'),
-                      LimitPreviewRow(firstText: MyStrings.monthlyLimit,secondText: '${controller.currencySymbol}${Converter.formatNumber(controller.monthlyLimit)} (${MyStrings.max})',showDivider: false,),
+                      LimitPreviewRow(firstText: MyStrings.dailyLimit,secondText:   '${controller.currencySymbol}${Converter.formatNumber(controller.dailyMaxLimit).makeCurrencyComma()} (${MyStrings.max.tr})'),
+                      LimitPreviewRow(firstText: MyStrings.monthlyLimit,secondText: '${controller.currencySymbol}${Converter.formatNumber(controller.monthlyLimit).makeCurrencyComma()} (${MyStrings.max})',showDivider: false,),
                     ],
                   ))
                 ],
