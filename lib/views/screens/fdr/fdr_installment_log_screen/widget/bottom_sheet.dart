@@ -35,14 +35,14 @@ class FDRInstallmentBottomSheet{
                     alignment: Alignment.bottomRight,
                     child: BottomSheetColumn(
                         alignmentEnd: true,
-                        header: MyStrings.deposited, body: '${Converter.formatNumber(controller.depositAmount,precision: 2)} ${controller.currency}'),)),
+                        header: MyStrings.deposited, body: '${Converter.formatNumber(controller.depositAmount,precision: 2).makeCurrencyComma()} ${controller.currency}'),)),
                 ],
               ),
               const SizedBox(height: 15,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: BottomSheetColumn(header: MyStrings.perInstallment, body: '${Converter.formatNumber(controller.fdr?.perInstallment ?? '0')} ${controller.currency}',)),
+                  Expanded(child: BottomSheetColumn(header: MyStrings.perInstallment, body: '${Converter.formatNumber(controller.fdr?.perInstallment ?? '0').makeCurrencyComma()} ${controller.currency}',)),
                   const SizedBox(width: 10),
                   Expanded(child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.receivedInstallment, body:  controller.receivedInstallment.padLeft(2,'0'),)),
                 ],
@@ -51,7 +51,7 @@ class FDRInstallmentBottomSheet{
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: BottomSheetColumn(header: MyStrings.profitReceived, body: '${Converter.formatNumber(controller.profitAmount)} ${controller.currency}',)),
+                  Expanded(child: BottomSheetColumn(header: MyStrings.profitReceived, body: '${Converter.formatNumber(controller.profitAmount).makeCurrencyComma()} ${controller.currency}',)),
                 ],
               ),
             ],

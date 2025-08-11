@@ -52,7 +52,7 @@ class LoanInstallmentPreviewBottomSheet{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(child: BottomSheetColumn(header: MyStrings.needToPay, body: '${'${Converter.mul(controller.loan?.perInstallment??'0', controller.loan?.totalInstallment??'0')}'.makeCurrencyComma()} ${controller.currency}',)),
-                  Expanded(child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.delayCharge, body: '${Converter.formatNumber(controller.loan?.chargePerInstallment??'0')} ${controller.currency} /${MyStrings.day.tr}',)),
+                  Expanded(child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.delayCharge, body: '${Converter.formatNumber(controller.loan?.chargePerInstallment??'0').makeCurrencyComma()} ${controller.currency} /${MyStrings.day.tr}',)),
                 ],
               ),
               const SizedBox(height: 15,),

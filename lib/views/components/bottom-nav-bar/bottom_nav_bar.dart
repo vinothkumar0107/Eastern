@@ -40,6 +40,11 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
     return AnimatedBottomNavigationBar.builder(
       height: 65,
       elevation: 10,
+      shadow:Shadow(
+        color: MyColor.colorGrey2,
+        offset: Offset(0, 2), // horizontal & vertical offset of shadow
+        blurRadius: 2,        // softness of shadow
+      ),
       itemCount: iconList.length,
       tabBuilder: (int index, bool isActive) {
         return Column(

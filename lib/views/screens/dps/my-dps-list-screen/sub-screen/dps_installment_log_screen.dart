@@ -91,7 +91,7 @@ class _DPSInstallmentLogScreenState extends State<DPSInstallmentLogScreen> {
                   serialNumber: '${index + 1}',
                   installmentDate: controller.installmentLogList[index].installmentDate ?? '',
                   giveOnDate: controller.installmentLogList[index].givenAt ?? '',
-                  delayCharge: '${controller.currencySymbol}${Converter.formatNumber(controller.dps?.chargePerInstallment??'0')}',
+                  delayCharge: '${controller.currencySymbol}${Converter.formatNumber(controller.dps?.chargePerInstallment??'0').makeCurrencyComma()}',
                   delay: DateConverter.delayDate(controller.installmentLogList[index].installmentDate,controller.installmentLogList[index].givenAt));
             },
           ),

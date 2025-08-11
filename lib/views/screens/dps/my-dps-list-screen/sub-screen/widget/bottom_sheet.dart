@@ -41,7 +41,7 @@ class DPSInstallmentBottomSheet{
                       alignment: Alignment.bottomRight,
                       child: LabelColumn(
                           alignmentEnd: true,
-                          header: MyStrings.perInstallment.tr, body: '${Converter.formatNumber(controller.dps?.perInstallment??'0',precision: 2)} ${controller.currency}'),)),
+                          header: MyStrings.perInstallment.tr, body: '${Converter.formatNumber(controller.dps?.perInstallment??'0',precision: 2).makeCurrencyComma()} ${controller.currency}'),)),
                   ],
                 ),
                 const SizedBox(height: 15,),
@@ -57,18 +57,18 @@ class DPSInstallmentBottomSheet{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: LabelColumn(header: MyStrings.totalDeposit.tr, body: '${Converter.formatNumber(controller.depositAmount)} ${controller.currency}',)),
+                    Expanded(child: LabelColumn(header: MyStrings.totalDeposit.tr, body: '${Converter.formatNumber(controller.depositAmount).makeCurrencyComma()} ${controller.currency}',)),
                     const SizedBox(width: 10,),
-                    Expanded(child: LabelColumn(alignmentEnd:true,header: MyStrings.profit.tr, body: '${Converter.formatNumber(controller.profitAmount)} ${controller.currency}',)),
+                    Expanded(child: LabelColumn(alignmentEnd:true,header: MyStrings.profit.tr, body: '${Converter.formatNumber(controller.profitAmount).makeCurrencyComma()} ${controller.currency}',)),
                   ],
                 ),
                 const SizedBox(height: 15,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: LabelColumn(header: MyStrings.includingProfit.tr, body: '${controller.getIncludingProfit()} ${controller.currency}',)),
+                    Expanded(child: LabelColumn(header: MyStrings.includingProfit.tr, body: '${controller.getIncludingProfit().makeCurrencyComma()} ${controller.currency}',)),
                     const SizedBox(width: 10,),
-                    Expanded(child: LabelColumn(alignmentEnd:true,header: MyStrings.delayCharge.tr, body: '${Converter.formatNumber(controller.dps?.chargePerInstallment??'0')} ${controller.currency} /${MyStrings.day}',)),
+                    Expanded(child: LabelColumn(alignmentEnd:true,header: MyStrings.delayCharge.tr, body: '${Converter.formatNumber(controller.dps?.chargePerInstallment??'0').makeCurrencyComma()} ${controller.currency} /${MyStrings.day}',)),
                   ],
                 ),
               ],

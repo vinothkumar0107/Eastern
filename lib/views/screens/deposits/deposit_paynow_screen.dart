@@ -155,7 +155,7 @@ class _DepositsPayNowScreenState extends State<DepositsPayNowScreen> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        "$currency $finalAmt",
+                                        "$currency ${finalAmt?.makeCurrencyComma()}",
                                         style: interSemiBoldLarge.copyWith(
                                           color: MyColor.green,
                                           fontSize: Dimensions.fontHeader1,

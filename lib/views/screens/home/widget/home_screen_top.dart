@@ -62,7 +62,7 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                   ),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: Dimensions.space10),
               Column(
                 children: [
                   Row(
