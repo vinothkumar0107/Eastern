@@ -29,6 +29,7 @@ class LatestTransaction extends StatelessWidget {
               style: TextStyle(
                 color: MyColor.getGreyText1(),
                 decoration: TextDecoration.none,
+                fontSize: Dimensions.fontLarge
               ),
             ),
           ),

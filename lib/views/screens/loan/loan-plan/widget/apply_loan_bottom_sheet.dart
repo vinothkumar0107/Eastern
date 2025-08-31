@@ -24,7 +24,7 @@ class ApplyLoanBottomSheet{
         builder: (controller) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const BottomSheetTopRow(header: MyStrings.applyForLoan),
+            BottomSheetTopRow(header: '${MyStrings.applyLoanFor} ${controller.planList[index].name}'),
             Form(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,11 +37,12 @@ class ApplyLoanBottomSheet{
                       hintText: MyStrings.enterAmount,
                       onChanged: (value){}
                   ),
-                  WarningRow(text: '${MyStrings.limit}: ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].minimumAmount??'0')} - ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].maximumAmount??'0')}',),
+                  WarningRow(text: '${MyStrings.limit}: ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].minimumAmount??'0').makeCurrencyComma()} - ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].maximumAmount??'0').makeCurrencyComma()}',),
                   const SizedBox(height: Dimensions.space30),
                   controller.submitLoading?const RoundedLoadingBtn():RoundedButton(
                     press: (){
                       String planId = controller.planList[index].id.toString();
+                      controller.index = index;
                       controller.submitLoanPlan(planId);
                     },
                     text: MyStrings.applyNow,

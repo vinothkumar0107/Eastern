@@ -32,7 +32,7 @@ class DepositBottomSheet{
                 Expanded(
                     child: BottomSheetColumn(
                         alignmentEnd:true,
-                        header:MyStrings.amount, body: '${controller.curSymbol}${Converter.formatNumber(controller.depositList[index].amount??'')}')
+                        header:MyStrings.amount, body: '${controller.curSymbol}${Converter.formatNumber(controller.depositList[index].amount ??'').makeCurrencyComma(precision: 2)}')
                 ),
               ],
             ),
@@ -41,10 +41,10 @@ class DepositBottomSheet{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                    child: BottomSheetColumn(header: MyStrings.depositCharge, body:'${controller.curSymbol}${Converter.formatNumber(controller.depositList[index].charge??'0')}')
+                    child: BottomSheetColumn(header: MyStrings.depositCharge, body:'${controller.curSymbol}${Converter.formatNumber(controller.depositList[index].charge??'0').makeCurrencyComma(precision: 2)}')
                 ),
                 Expanded(
-                    child: BottomSheetColumn(alignmentEnd: true,header: MyStrings.payableAmount, body:'${controller.curSymbol}${Converter.sum(controller.depositList[index].amount??'0',controller.depositList[index].charge??'0')}')
+                    child: BottomSheetColumn(alignmentEnd: true,header: MyStrings.payableAmount, body:'${controller.curSymbol}${Converter.sum(controller.depositList[index].amount??'0',controller.depositList[index].charge??'0').makeCurrencyComma(precision: 2)}')
                 ),
 
                ],
@@ -54,10 +54,10 @@ class DepositBottomSheet{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                    child: BottomSheetColumn(header:  MyStrings.conversionRate, body: "1 ${controller.currency} = ${Converter.formatNumber(controller.depositList[index].rate ?? "")} ${controller.depositList[index].methodCurrency}")
+                    child: BottomSheetColumn(header:  MyStrings.conversionRate, body: "1 ${controller.currency} = ${Converter.formatNumber(controller.depositList[index].rate ?? "").makeCurrencyComma(precision: 2)} ${controller.depositList[index].methodCurrency}")
                 ),
                 Expanded(
-                    child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.finalAmount, body:'${controller.curSymbol}${Converter.formatNumber(controller.depositList[index].finalAmo??'')}')),
+                    child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.finalAmount, body:'${controller.curSymbol}${Converter.formatNumber(controller.depositList[index].finalAmo??'').makeCurrencyComma(precision: 2)}')),
 
               ],
             ),

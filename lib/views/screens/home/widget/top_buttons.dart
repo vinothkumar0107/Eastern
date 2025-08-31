@@ -23,8 +23,9 @@ class _TopButtonsState extends State<TopButtons> {
                   children: [
                     // Expanded(child: controller.moduleList[0]),
                     Expanded(child: controller.moduleList[2]),
-                    Expanded(child: controller.moduleList[1]),
                     Expanded(child: controller.moduleList[3]),
+                    Expanded(child: controller.moduleList[4]),
+
                   ],
                 ),
                 const SizedBox(height: Dimensions.space20),
@@ -39,6 +40,32 @@ class _TopButtonsState extends State<TopButtons> {
                 )
               ],
             )
+          : controller.moduleList.length == 7
+          ? Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Expanded(child: controller.moduleList[0]),
+              Expanded(child: controller.moduleList[2]),
+              Expanded(child: controller.moduleList[3]),
+              // Expanded(child: controller.moduleList[4]),
+
+            ],
+          ),
+          const SizedBox(height: Dimensions.space20),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Expanded(child: controller.moduleList[4]),
+              // Expanded(child: controller.moduleList[5]),
+              // Expanded(child: controller.moduleList[6]),
+              // Expanded(child: controller.moduleList[7]),
+            ],
+          )
+        ],
+      )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

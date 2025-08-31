@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/my_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/helper/date_converter.dart';
@@ -54,7 +55,7 @@ class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
                   isCredit:controller.debitsLists[index].trxType=='+'?true:false,
                   trx: controller.debitsLists[index].trx ?? "",
                   date: '${DateConverter.isoStringToLocalDateOnly(controller.debitsLists[index].createdAt ?? "")}, ${DateConverter.isoStringToLocalTimeOnly(controller.debitsLists[index].createdAt ?? "")}',
-                  amount: "${controller.currencySymbol}${Converter.formatNumber(controller.debitsLists[index].amount ?? "")}",
+                  amount: "${controller.currencySymbol}${Converter.formatNumber(controller.debitsLists[index].amount ?? "").makeCurrencyComma(precision: 2)}",
                   postBalance: "${Converter.formatNumber(controller.debitsLists[index].postBalance ?? "")} ${controller.currency}",
                   onPressed: (){
 

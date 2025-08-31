@@ -49,7 +49,7 @@ class AddNewWithdrawController extends GetxController{
   setWithdrawMethod(WithdrawMethod?method){
 
     withdrawMethod = method;
-    withdrawLimit   = '${MyStrings.depositLimit.tr}: ${Converter.formatNumber(method?.minLimit??'-1')} - ${Converter.formatNumber(method?.maxLimit?.toString()??'-1')} ${method?.currency}';
+    withdrawLimit   = '${MyStrings.depositLimit.tr}: ${Converter.formatNumber(method?.minLimit??'-1').makeCurrencyComma(precision: 2)} - ${Converter.formatNumber(method?.maxLimit?.toString()??'-1').makeCurrencyComma(precision: 2)} ${method?.currency}';
     charge         = '${MyStrings.charge.tr}: ${Converter.formatNumber(method?.fixedCharge?.toString()??'0')} + ${Converter.formatNumber(method?.percentCharge?.toString()??'0')} %';
     update();
 
@@ -58,9 +58,9 @@ class AddNewWithdrawController extends GetxController{
     withdrawMethod = method;
     withdrawLimit   =
     '${Converter.formatNumber(
-        method?.minLimit?.toString() ?? '-1')} - ${Converter
+        method?.minLimit?.toString() ?? '-1').makeCurrencyComma(precision: 2)} - ${Converter
         .formatNumber(
-        method?.maxLimit?.toString() ?? '-1')} $currency';
+        method?.maxLimit?.toString() ?? '-1').makeCurrencyComma(precision: 2)} $currency';
     changeInfoWidgetValue(mainAmount);
     update();
   }
@@ -72,9 +72,9 @@ class AddNewWithdrawController extends GetxController{
     double percentCharge = (amount*percent)/100;
     double temCharge = double.tryParse(withdrawMethod?.fixedCharge??'0')??0;
     double totalCharge = percentCharge+temCharge;
-    charge = '${Converter.formatNumber('$totalCharge')} $currency';
+    charge = '${Converter.formatNumber('$totalCharge').makeCurrencyComma(precision: 2)} $currency';
     double payable = amount - totalCharge;
-    payableText = '$payable $currency';
+    payableText = '${'$payable'.makeCurrencyComma(precision: 2)} $currency';
 
     rate = double.tryParse(withdrawMethod?.rate??'0')??0;
     conversionRate = '1 $currency = $rate ${withdrawMethod?.currency??''}';

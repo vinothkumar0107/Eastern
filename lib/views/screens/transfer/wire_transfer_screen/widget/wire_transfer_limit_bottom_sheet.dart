@@ -26,15 +26,15 @@ class WireTransferLimitBottomSheet{
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(child: BottomSheetColumn(header: MyStrings.perTransaction, body: '${Converter.formatNumber(controller.setting?.minimumLimit??'0')}-${Converter.formatNumber(controller.setting?.maximumLimit??'0')} ${controller.currency}')),
-                      Expanded(child: BottomSheetColumn(alignmentEnd:true,isCharge:true,header: MyStrings.charge, body: '${controller.setting?.percentCharge??''}%${Converter.showPercent(controller.currencySymbol,controller.setting?.fixedCharge??'0')}')),
+                      Expanded(child: BottomSheetColumn(header: MyStrings.perTransaction, body: '${Converter.formatNumber(controller.setting?.minimumLimit??'0').makeCurrencyComma()}-${Converter.formatNumber(controller.setting?.maximumLimit??'0').makeCurrencyComma()} ${controller.currency}')),
+                      Expanded(child: BottomSheetColumn(alignmentEnd:true,isCharge:true,header: MyStrings.charge, body: '${controller.setting?.percentCharge??''}%${Converter.showPercent(controller.currencySymbol,controller.setting?.fixedCharge??'0').makeCurrencyComma()}')),
                     ],
                   ),
                   const SizedBox(height: Dimensions.space15),
                   Row(
                     children: [
-                      Expanded(child: BottomSheetColumn(header: MyStrings.dailyMax, body: '${Converter.formatNumber(controller.setting?.dailyMaximumLimit??'0')} ${controller.currency}')),
-                      Expanded(child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.monthlyMax, body: '${Converter.formatNumber(controller.setting?.dailyMaximumLimit??'0')} ${controller.currency}')),
+                      Expanded(child: BottomSheetColumn(header: MyStrings.dailyMax, body: '${Converter.formatNumber(controller.setting?.dailyMaximumLimit??'0').makeCurrencyComma()} ${controller.currency}')),
+                      Expanded(child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.monthlyMax, body: '${Converter.formatNumber(controller.setting?.dailyMaximumLimit??'0').makeCurrencyComma()} ${controller.currency}')),
                     ],
                   ),
                   const SizedBox(height: Dimensions.space15),

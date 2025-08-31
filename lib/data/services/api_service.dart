@@ -253,6 +253,29 @@ class ApiClient extends GetxService{
       );
     }
 
+    if(isWithdrawEnable){
+      moduleList.add(DashboardAnimatedButtonWithText(
+        buttonName: MyStrings.withdrawal,
+        height: 40, width: 40,
+        backgroundColor: MyColor.homeColorList[4].withOpacity(.0),
+        child: SvgPicture.asset(MyImages.withdrawIcon, height: 35, width: 35),
+        onTap: (){
+          Get.toNamed(RouteHelper.withdrawScreen);
+        },
+      ));
+    }
+
+    if(isDPSEnable){
+      moduleList.add(CircleAnimatedButtonWithText(
+        buttonName: MyStrings.dps,
+        height: 50, width: 50,
+        backgroundColor:  MyColor.homeColorList[2].withOpacity(.0),
+        child: Image.asset(MyImages.dpsIcon,  height: 50, width: 50),
+        onTap: (){
+          Get.toNamed(RouteHelper.dpsScreen);
+        },
+      ));
+    }
 
     if(isFDREnable){
       moduleList.add(CircleAnimatedButtonWithText(
@@ -265,17 +288,7 @@ class ApiClient extends GetxService{
         },
       ));
     }
-    if(isDPSEnable){
-      moduleList.add(CircleAnimatedButtonWithText(
-        buttonName: MyStrings.dps,
-        height: 50, width: 50,
-        backgroundColor:  MyColor.homeColorList[2].withOpacity(.0),
-        child: Image.asset(MyImages.dpsIcon,  height: 50, width: 50),
-        onTap: (){
-          Get.toNamed(RouteHelper.dpsScreen);
-        },
-      ));
-    }
+
     if(isLoanEnable){
       moduleList.add(CircleAnimatedButtonWithText(
         buttonName: MyStrings.loan,
@@ -298,17 +311,7 @@ class ApiClient extends GetxService{
     //     },
     //   ));
     // }
-    if(isWithdrawEnable){
-      moduleList.add(DashboardAnimatedButtonWithText(
-        buttonName: MyStrings.withdrawal,
-        height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[4].withOpacity(.0),
-        child: SvgPicture.asset(MyImages.withdrawIcon, height: 35, width: 35),
-        onTap: (){
-          Get.toNamed(RouteHelper.withdrawScreen);
-        },
-      ));
-    }
+
 
       moduleList.add(CircleAnimatedButtonWithText(
         buttonName: MyStrings.transfer,

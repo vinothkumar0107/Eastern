@@ -52,7 +52,7 @@ class FdrListBottomSheet{
                flex: 1,
                child: BottomSheetColumn(
                  header: MyStrings.amount,
-                 body: '${controller.currencySymbol}${Converter.formatNumber(controller.fdrList[index].amount??'')}',
+                 body: '${controller.currencySymbol}${Converter.formatNumber(controller.fdrList[index].amount??'').makeCurrencyComma()}',
                )
              ),
              Expanded(
@@ -60,7 +60,7 @@ class FdrListBottomSheet{
                  child: BottomSheetColumn(
                    alignmentEnd: true,
                    header: MyStrings.profit,
-                   body: '${controller.currencySymbol}${Converter.formatNumber(controller.fdrList[index].profit??'')}',
+                   body: '${controller.currencySymbol}${Converter.formatNumber(controller.fdrList[index].profit??'').makeCurrencyComma()}',
                  )
              ),
            ],

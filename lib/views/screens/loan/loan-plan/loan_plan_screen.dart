@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/my_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/helper/string_format_helper.dart';
@@ -42,8 +43,8 @@ class _LoanPlanScreenState extends State<LoanPlanScreen> {
                     index: index,
                     cardStatusTitle: controller.planList[index].name ?? '',
                     percentRate: controller.planList[index].perInstallment ?? '0',
-                    takeMin: '${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].minimumAmount ?? '')}',
-                    takeMax: ' ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].maximumAmount ?? '0')}',
+                    takeMin: '${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].minimumAmount ?? '').makeCurrencyComma()}',
+                    takeMax: ' ${controller.currencySymbol}${Converter.formatNumber(controller.planList[index].maximumAmount ?? '0').makeCurrencyComma()}',
                     perInstallment: '${Converter.roundDoubleAndRemoveTrailingZero(controller.planList[index].perInstallment ?? '')}%',
                     installmentInterval: controller.planList[index].installmentInterval ?? '',
                     totalInstallment: controller.planList[index].totalInstallment ?? '',

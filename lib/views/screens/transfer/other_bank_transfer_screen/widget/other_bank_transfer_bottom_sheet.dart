@@ -57,12 +57,12 @@ class OtherBankTransferBottomSheet{
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       WidgetDivider(space: Dimensions.space12,lineColor: MyColor.transparentColor),
-                      LimitPreviewRow(firstText: MyStrings.limitPerTrx, secondText:  '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.minimumLimit??'0')} - ${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.maximumLimit??'0')}'),
+                      LimitPreviewRow(firstText: MyStrings.limitPerTrx, secondText:  '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.minimumLimit??'0').makeCurrencyComma()} - ${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.maximumLimit??'0').makeCurrencyComma()}'),
                       LimitPreviewRow(firstText: MyStrings.charge, secondText: '*${beneficiary.beneficiaryOf?.percentCharge??'0'}%${Converter.showPercent(controller.currencySymbol,controller.beneficiaryList[index].beneficiaryOf?.percentCharge??'0')}'),
-                      LimitPreviewRow(firstText: MyStrings.dailyMax,secondText:   '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.dailyMaximumLimit??'0')}'),
-                      LimitPreviewRow(firstText: MyStrings.monthlyMax,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.monthlyMaximumLimit??'0')}'),
-                      LimitPreviewRow(firstText: MyStrings.dailyMaxTrx,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.dailyMaximumLimit??'0')}'),
-                      LimitPreviewRow(firstText: MyStrings.monthlyMinTrx,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.monthlyMaximumLimit??'0')}'),
+                      LimitPreviewRow(firstText: MyStrings.dailyMax,secondText:   '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.dailyMaximumLimit??'0').makeCurrencyComma()}'),
+                      LimitPreviewRow(firstText: MyStrings.monthlyMax,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.monthlyMaximumLimit??'0').makeCurrencyComma()}'),
+                      LimitPreviewRow(firstText: MyStrings.dailyMaxTrx,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.dailyMaximumLimit??'0').makeCurrencyComma()}'),
+                      LimitPreviewRow(firstText: MyStrings.monthlyMinTrx,secondText: '${controller.currencySymbol}${Converter.formatNumber(beneficiary.beneficiaryOf?.monthlyMaximumLimit??'0').makeCurrencyComma()}'),
                       Text('*${MyStrings.processingTime.tr} ${controller.beneficiaryList[index].beneficiaryOf?.processingTime??'0'}',style: interSemiBoldSmall.copyWith(color: MyColor.primaryColor),),
                     ],
                   ))

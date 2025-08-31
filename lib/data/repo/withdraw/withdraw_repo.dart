@@ -51,7 +51,7 @@ class WithdrawRepo {
 
   Future<dynamic> confirmWithdrawRequest(String trx, List<FormModel>list, String twoFactorCode) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.withdrawRequestConfirm}/$trx';
-
+   print('urllll====>>>>$url');
     apiClient.initToken();
     await modelToMap(list);
 

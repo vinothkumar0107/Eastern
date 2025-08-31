@@ -83,7 +83,7 @@ class _DashboardAnimatedButtonWithText extends State<DashboardAnimatedButtonWith
                           const SizedBox(width: Dimensions.space10),
                           _animatedButton(),
                           const SizedBox(width: Dimensions.space10),
-                          Text(widget.buttonName.tr, textAlign: TextAlign.center, style: interRegularDefault.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w500)),
+                          Text(widget.buttonName.tr, textAlign: TextAlign.center, style: interRegularDefault.copyWith(color: MyColor.colorWhite, fontWeight: FontWeight.w600, fontSize: Dimensions.fontMediumLarge)),
                         ],
                       )
                     ),

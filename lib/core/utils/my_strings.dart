@@ -1,5 +1,6 @@
 
 import 'package:eastern_trust/data/model/language/language_model.dart';
+import 'package:intl/intl.dart';
 
 class MyStrings{
 
@@ -127,6 +128,7 @@ class MyStrings{
 
   static const String loanPlan = "Loan Plans";
   static const String applyForLoan = "Apply for Loan";
+  static const String applyLoanFor = "Apply Loan for";
   static const String myLoanList = "My Loan List";
 
   static const String somethingWentWrong = "Something went wrong";
@@ -683,6 +685,7 @@ class MyStrings{
   static const String searchCountry = 'Search Country';
 
   static const String done = 'Done';
+  static const String comingSoon = 'Coming Soon...';
 
 
 
@@ -695,4 +698,16 @@ class MyStrings{
     LanguageModel(imageUrl: '', languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
   ];
 
+}
+
+extension StringFormatting on String {
+  String makeCurrencyComma({int precision = 2}) {
+    try {
+      double number = double.parse(this);
+      final formatter = NumberFormat('#,##0.${'0' * precision}');
+      return formatter.format(number);
+    } catch (e) {
+      return this;
+    }
+  }
 }

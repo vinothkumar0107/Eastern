@@ -73,7 +73,7 @@ class _DPSListScreenState extends State<DPSListScreen> {
                   children: [
                     Expanded(
                       flex: 5,
-                      child: BottomSheetColumn(header: MyStrings.amount, body: '${controller.currencySymbol}${Converter.formatNumber(controller.dpsList[index].perInstallment??'')}') ),
+                      child: BottomSheetColumn(header: MyStrings.amount, body: '${controller.currencySymbol}${Converter.formatNumber(controller.dpsList[index].perInstallment??'').makeCurrencyComma(precision: 2)}') ),
                     Expanded(
                       flex: 5,
                       child: BottomSheetColumn(alignmentEnd:true,header: MyStrings.payInstallment, body: "${MyStrings.per} ${controller.dpsList[index].installmentInterval} ${MyStrings.days}".tr) ),
@@ -110,7 +110,7 @@ class _DPSListScreenState extends State<DPSListScreen> {
                     Expanded(
                       flex: 2,
                       child:BottomSheetColumn(header: MyStrings.afterMatureYouGet,
-                          body: "${controller.currencySymbol}${Converter.formatNumber(controller.dpsList[index].plan?.finalAmount??'')}") ),
+                          body: "${controller.currencySymbol}${Converter.formatNumber(controller.dpsList[index].plan?.finalAmount??'').makeCurrencyComma()}") ),
                   ],
                 ),
                 const SizedBox(height: Dimensions.space30),

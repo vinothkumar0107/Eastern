@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:eastern_trust/core/utils/my_strings.dart';
+import 'package:intl/intl.dart';
 
 class Converter {
   static String roundDoubleAndRemoveTrailingZero(String value) {

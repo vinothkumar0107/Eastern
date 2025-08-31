@@ -279,8 +279,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                   detailsText: controller.transactionList[index].details ?? "",
                                   trxData: controller.transactionList[index].trx ?? "",
                                   dateData: DateConverter.isoToLocalDateAndTime(controller.transactionList[index].createdAt ?? ""),
-                                  amountData: "${controller.transactionList[index].trxType} ${Converter.formatNumber(controller.transactionList[index].amount.toString())} ${controller.transactionList[index].currency??''}",
-                                  postBalanceData: "${Converter.formatNumber(controller.transactionList[index].postBalance.toString())} ${controller.transactionList[index].currency??''}"
+                                  amountData: "${controller.transactionList[index].trxType} ${Converter.formatNumber(controller.transactionList[index].amount.toString()).makeCurrencyComma()} ${controller.transactionList[index].currency??''}",
+                                  postBalanceData: "${Converter.formatNumber(controller.transactionList[index].postBalance.toString()).makeCurrencyComma()} ${controller.transactionList[index].currency??''}"
                               ),
                             );
                           },

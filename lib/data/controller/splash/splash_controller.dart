@@ -134,7 +134,7 @@ class SplashController extends GetxController  {
   checkAndRedirect(String remark) async{
     repo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.hasNewNotificationKey,true);
     bool rememberMe =  repo.apiClient.sharedPreferences.getBool(SharedPreferenceHelper.rememberMeKey)??false;
-
+    print('=====> splash controller remember me ==> $rememberMe');
 
     if(rememberMe){
 

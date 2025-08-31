@@ -66,7 +66,7 @@ class CustomTransactionCard extends StatelessWidget {
                   controller.changeImage(trxType),
                   const SizedBox(width: Dimensions.space10),
                   Expanded(child: CardColumn(header: trxData, body: dateData, textColor: MyColor.colorBlack,)),
-                  Expanded(child: CardColumn(alignmentEnd:true,header: '$amountData ${controller.currency}', body: '',isDate: false, textColor: controller.changeTextColor(trxType)),),
+                  Expanded(child: CardColumn(alignmentEnd:true,header: '${amountData.makeCurrencyComma()} ${controller.currency}', body: '',isDate: false, textColor: controller.changeTextColor(trxType)),),
                 ],
               ),
             ),
@@ -88,7 +88,7 @@ class CustomTransactionCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(child: CardColumn(header: '', body: detailsText, textColor: MyColor.colorBlack),),
-                    Expanded(child: CardColumn(textAlignment: TextAlign.end, alignmentEnd:true,header: '', body: '${MyStrings.postBalance}\n $postBalanceData ${controller.currency}')),
+                    Expanded(child: CardColumn(textAlignment: TextAlign.end, alignmentEnd:true,header: '', body: '${MyStrings.postBalance}\n ${postBalanceData.makeCurrencyComma()} ${controller.currency}')),
                   ],
                 )
             ),

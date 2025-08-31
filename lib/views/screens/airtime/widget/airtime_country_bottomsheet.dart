@@ -1,3 +1,4 @@
+import 'package:eastern_trust/core/utils/my_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'package:eastern_trust/data/controller/airtime/airtime_controller.dart';
 
 import '../../../components/custom_cash_network_image.dart';
 import '../../../components/image_loader.dart';
+import '../../../components/no_data/no_data_found.dart';
 
 class AirtimeCountryBottomSheet{
 
@@ -42,7 +44,7 @@ class AirtimeCountryBottomSheet{
                 ),
                 const SizedBox(height: 15,),
                 Flexible(
-                  child: ListView.builder(itemCount:controller.countryList.length,
+                  child: controller.countryList.isNotEmpty ? ListView.builder(itemCount:controller.countryList.length,
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context,index){
@@ -80,7 +82,8 @@ class AirtimeCountryBottomSheet{
                             ),
                           ),
                         );
-                      }),
+                      }
+                      ) : const NoDataWidget(title: MyStrings.comingSoon,isNeedHeight: true,imageHeight: 0,fontSize: Dimensions.fontHeader1,),
                 )
               ],
             ),

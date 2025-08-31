@@ -54,7 +54,7 @@ class LoanListCard extends StatelessWidget {
                 CardColumn(
                   alignmentEnd: true,
                   header:MyStrings.amount,
-                  body: "${Converter.formatNumber(amount)} $currency",
+                  body: "${Converter.formatNumber(amount).makeCurrencyComma()} $currency",
                 ),
               ],
             ),

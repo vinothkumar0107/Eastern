@@ -1,4 +1,5 @@
 import 'package:eastern_trust/core/utils/my_images.dart';
+import 'package:eastern_trust/core/utils/my_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:eastern_trust/core/utils/dimensions.dart';
 import 'package:eastern_trust/core/utils/my_color.dart';
@@ -75,14 +76,14 @@ class LatestTransactionListItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(trx,
-                            style: interRegularDefault.copyWith(color: MyColor.getTextColor(), fontWeight: FontWeight.w500),
+                            style: interRegularDefault.copyWith(color: MyColor.getTextColor(), fontWeight: FontWeight.w600, fontSize: Dimensions.fontLarge),
                           ),
                           const SizedBox(height: Dimensions.space10),
                           SizedBox(
                             width: 150,
                             child: Text(
                               date,
-                              style: interRegularSmall.copyWith(color: MyColor.getTextColor().withOpacity(0.5)),
+                              style: interRegularSmall.copyWith(color: MyColor.getTextColor().withOpacity(0.5), fontSize: Dimensions.fontDefault),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                             ),

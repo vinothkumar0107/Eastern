@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (controller) => WillPopWidget(
         nextRoute: '',
         child: Scaffold(
-          backgroundColor: controller.isLoading ? MyColor.colorWhite : MyColor.primaryColor,
+          backgroundColor: controller.isLoading ? MyColor.colorWhite : MyColor.colorWhite,
           body: controller.isLoading ? const CustomLoader() : controller.noInternet?
           NoDataFoundScreen(
             isNoInternet: true,

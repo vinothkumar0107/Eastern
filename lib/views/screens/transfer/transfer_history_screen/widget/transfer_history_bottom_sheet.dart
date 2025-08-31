@@ -48,7 +48,7 @@ class TransferHistoryBottomSheet{
                       child: LabelColumn(header: MyStrings.bank.tr, body: bankName),
                     ),
                     Expanded(
-                      child: LabelColumn(alignmentEnd:true,header: MyStrings.amount.tr, body: "${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].amount??'0')}"),
+                      child: LabelColumn(alignmentEnd:true,header: MyStrings.amount.tr, body: "${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].amount??'0').makeCurrencyComma()}"),
                     )
 
                   ],
@@ -58,10 +58,10 @@ class TransferHistoryBottomSheet{
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: LabelColumn(header: MyStrings.charge.tr, body: '${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].charge??'0')}'),
+                      child: LabelColumn(header: MyStrings.charge.tr, body: '${controller.currencySymbol}${Converter.formatNumber(controller.historyList[index].charge??'0').makeCurrencyComma()}'),
                     ),
                     Expanded(
-                      child: LabelColumn(alignmentEnd:true,header: MyStrings.paidAmount.tr, body: '${controller.currencySymbol}${Converter.sum(controller.historyList[index].amount??'0',controller.historyList[index].charge??'0')}'),
+                      child: LabelColumn(alignmentEnd:true,header: MyStrings.paidAmount.tr, body: '${controller.currencySymbol}${Converter.sum(controller.historyList[index].amount??'0',controller.historyList[index].charge??'0').makeCurrencyComma()}'),
                     )
                   ],
                 ),
