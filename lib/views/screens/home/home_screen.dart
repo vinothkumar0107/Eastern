@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState123 extends State<HomeScreen> {
 
   @override
   void initState() {
@@ -132,3 +132,135 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+// before remove
+class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    Get.put(ApiClient(sharedPreferences: Get.find()));
+    Get.put(HomeRepo(apiClient: Get.find()));
+    final controller = Get.put(HomeController(repo: Get.find()));
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.loadData();
+      controller.updateScrollStatus();
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double notchHeight = MediaQuery.of(context).padding.top;
+    bool hasNotch = notchHeight > 0;
+    double appBarHeightDynamic =
+    notchHeight > 55 ? 40 : notchHeight > 50 ? 50 : notchHeight > 45 ? 45 : 70;
+    double appBarHeight = hasNotch ? 120 + appBarHeightDynamic : 160;
+
+    return GetBuilder<HomeController>(
+      builder: (controller) => WillPopWidget(
+        nextRoute: '',
+        child: Scaffold(
+          backgroundColor: MyColor.colorWhite,
+          body: controller.isLoading
+              ? const CustomLoader()
+              : controller.noInternet
+              ? NoDataFoundScreen(
+            isNoInternet: true,
+            press: (value) {
+              if (value) {
+                controller.changeNoInternetStatus(false);
+                controller.loadData();
+              }
+            },
+          )
+              : SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: RefreshIndicator(
+              color: MyColor.primaryColor,
+              backgroundColor: MyColor.colorWhite,
+              onRefresh: () async {
+                await controller.loadData();
+              },
+              child: CustomScrollView(
+                controller: scrollController,
+                physics: controller.isContentScrollable
+                    ? const ClampingScrollPhysics()
+                    : const NeverScrollableScrollPhysics(),
+                slivers: [
+                  /// 🔹 SliverAppBar with TradingViewTicker on top
+                  SliverAppBar(
+                    pinned: false,
+                    elevation: 0,
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.transparent,
+                    expandedHeight: controller.homeTopModuleList.isEmpty
+                        ? 120
+                        : appBarHeight,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              MyColor.primaryColor2,
+                              MyColor.primaryColor,
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                        ),
+                        padding: const EdgeInsets.only(
+                          left: Dimensions.space15,
+                          right: Dimensions.space15,
+                          top: Dimensions.space60,
+                          bottom: Dimensions.space10,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            /// Existing top widget
+                            const Expanded(
+                              child: HomeScreenTop(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  /// Main content
+                  SliverToBoxAdapter(
+                    child: Transform.translate(
+                      offset: const Offset(0, 0),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: MyColor.colorWhite,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
+                        ),
+                        child: const HomeScreenItemsSection(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: const CustomBottomNav(currentIndex: 0),
+        ),
+      ),
+    );
+  }
+}
+
+
