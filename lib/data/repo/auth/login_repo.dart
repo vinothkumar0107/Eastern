@@ -21,7 +21,7 @@ class LoginRepo {
     Map<String, String> map = {'username': email, 'password': password};
     String url = '${UrlContainer.baseUrl}${UrlContainer.loginEndPoint}';
     ResponseModel model=await apiClient.request(url, Method.postMethod, map,passHeader: false);
-    print("HeaderValue-->"+password);
+    print("Login url-->"+url);
     return model;
   }
 

@@ -158,9 +158,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 ],
               ),
             ),
-
-
-
             const SizedBox(height: Dimensions.textFieldToTextFieldSpace),
             Visibility(
                 visible: controller.hasPasswordFocus && controller.checkPasswordStrength,
@@ -195,15 +192,31 @@ class _RegistrationFormState extends State<RegistrationForm> {
               needOutlineBorder: true,
               needLabel: false,
               labelText: MyStrings.confirmPassword.tr,
-              hintText: MyStrings.confirmYourPassword.tr,
+              hintText: controller.isPasswordMatched
+                  ? MyStrings.confirmYourPassword.tr
+                  : "",
               controller: controller.cPasswordController,
               focusNode: controller.confirmPasswordFocusNode,
               inputAction: TextInputAction.done,
               isShowSuffixIcon: true,
               isPassword: true,
-              onChanged: (value) {},
+              onChanged: (value) {
+                final password = controller.passwordController.text.trim();
+                final confirm = controller.cPasswordController.text.trim();
+
+                final isMatch =
+                    password.toLowerCase() == confirm.toLowerCase();
+
+                if (controller.isPasswordMatched != isMatch) {
+                  controller.isPasswordMatched = isMatch;
+                  controller.update(); // rebuild GetBuilder
+                }
+
+                formKey.currentState?.validate();
+              },
               validator: (value) {
-                if (controller.passwordController.text.toLowerCase() != controller.cPasswordController.text.toLowerCase()) {
+                if (controller.passwordController.text.toLowerCase() !=
+                    controller.cPasswordController.text.toLowerCase()) {
                   return MyStrings.kMatchPassError.tr;
                 } else {
                   return null;
@@ -269,3 +282,4 @@ class _RegistrationFormState extends State<RegistrationForm> {
     );
   }
 }
+

@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.loadData();
+      controller.updateScrollStatus();
     });
   }
 
@@ -78,14 +79,16 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: CustomScrollView(
                 controller: scrollController,
-                physics: const ClampingScrollPhysics(),
+                physics: controller.isContentScrollable
+                    ? const ClampingScrollPhysics()
+                    : const NeverScrollableScrollPhysics(),
                 slivers: [
                   SliverAppBar(
                     pinned: false,
                     elevation: 0,
                     automaticallyImplyLeading: false,
                     backgroundColor: Colors.transparent, // Set backgroundColor to transparent to avoid any color conflicts
-                    expandedHeight: appBarHeight,
+                   expandedHeight: controller.homeTopModuleList.isEmpty ? 90 : appBarHeight,
                     flexibleSpace: FlexibleSpaceBar(
                       background: Container(
                         decoration: const BoxDecoration(
@@ -93,10 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             colors: [MyColor.primaryColor2, MyColor.primaryColor],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0),
-                            bottomRight: Radius.circular(0),
                           ),
                         ),
                         padding: const EdgeInsets.only(

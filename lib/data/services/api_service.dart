@@ -37,6 +37,7 @@ class ApiClient extends GetxService{
 
     try {
       if (method == Method.postMethod) {
+        print("Authorization token-->$tokenType $token");
 
         if(passHeader){
 
@@ -51,7 +52,7 @@ class ApiClient extends GetxService{
               "Accept": "application/json",
               "Authorization": "$tokenType $token"
             });
-
+            print("Authorization token-->$tokenType $token");
           }
 
         }
@@ -101,11 +102,11 @@ class ApiClient extends GetxService{
         }
       }
 
-      print(response.statusCode);
+      print("response -- >$response");
       print(response.body.toString());
-      print(url.toString());
-      print(token);
-      print(params.toString());
+      print("url.toString() -- >${url.toString()}");
+      print("token----> $token");
+      print("params.toString() ---- > ${params.toString()}");
 
 
       if (response.statusCode == 200) {
@@ -240,29 +241,29 @@ class ApiClient extends GetxService{
 
 
 
-    if(isDepositEnable){
-      moduleList.add(DashboardAnimatedButtonWithText(
-        buttonName: MyStrings.deposit,
-        height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[0].withOpacity(.0),
-        child: SvgPicture.asset(MyImages.depositIcon, height: 35, width: 35),
-        onTap: (){
-          Get.toNamed(RouteHelper.depositsScreen);
-        },
-      ));
-    }
+    // if(isDepositEnable){
+    //   moduleList.add(DashboardAnimatedButtonWithText(
+    //     buttonName: MyStrings.deposit,
+    //     height: 40, width: 40,
+    //     backgroundColor: MyColor.homeColorList[0].withOpacity(.0),
+    //     child: SvgPicture.asset(MyImages.depositIcon, height: 35, width: 35),
+    //     onTap: (){
+    //       Get.toNamed(RouteHelper.depositsScreen);
+    //     },
+    //   ));
+    // }
 
-    if(isWithdrawEnable){
-      moduleList.add(DashboardAnimatedButtonWithText(
-        buttonName: MyStrings.withdrawal,
-        height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[4].withOpacity(.0),
-        child: SvgPicture.asset(MyImages.withdrawIcon, height: 35, width: 35),
-        onTap: (){
-          Get.toNamed(RouteHelper.withdrawScreen);
-        },
-      ));
-    }
+    // if(isWithdrawEnable){
+    //   moduleList.add(DashboardAnimatedButtonWithText(
+    //     buttonName: MyStrings.withdrawal,
+    //     height: 40, width: 40,
+    //     backgroundColor: MyColor.homeColorList[4].withOpacity(.0),
+    //     child: SvgPicture.asset(MyImages.withdrawIcon, height: 35, width: 35),
+    //     onTap: (){
+    //       Get.toNamed(RouteHelper.withdrawScreen);
+    //     },
+    //   ));
+    // }
 
     if(isDPSEnable){
       moduleList.add(CircleAnimatedButtonWithText(
@@ -312,27 +313,104 @@ class ApiClient extends GetxService{
     // }
 
 
-      moduleList.add(CircleAnimatedButtonWithText(
-        buttonName: MyStrings.transfer,
+      // moduleList.add(CircleAnimatedButtonWithText(
+      //   buttonName: MyStrings.transfer,
+      //   height: 40, width: 40,
+      //   backgroundColor: MyColor.homeColorList[5].withOpacity(.1),
+      //   child: SvgPicture.asset(MyImages.transferIcon2, height: 35, width: 35),
+      //   onTap: (){
+      //     Get.toNamed(RouteHelper.transferScreen);
+      //   },
+      // ));
+
+      // if(isAirtimeEnable){
+      //   moduleList.add(CircleAnimatedButtonWithText(
+      //     buttonName: MyStrings.airTime.tr,
+      //     height: 40, width: 40,
+      //     backgroundColor: MyColor.homeColorList[6].withOpacity(.1),
+      //     child: SvgPicture.asset(MyImages.mobile, color: MyColor.homeColorList[6], height: 20, width: 20),
+      //     onTap: (){
+      //       Get.toNamed(RouteHelper.airtimeScreen);
+      //     },
+      //   ));
+      // }
+
+
+
+
+    // if(isReferralEnable){
+    //   moduleList.add(CircleAnimatedButtonWithText(
+    //     buttonName: MyStrings.referral,
+    //     height: 40, width: 40,
+    //     backgroundColor: MyColor.homeColorList[7].withOpacity(.1),
+    //     child: SvgPicture.asset(MyImages.referralIcon1, color:MyColor.homeColorList[7], height: 20, width: 20),
+    //     onTap: (){
+    //       Get.toNamed(RouteHelper.referralScreen);
+    //     },
+    //   ));
+    // }
+
+    return moduleList;
+  }
+
+  List<Widget>getHomeTopModuleList(){
+
+    List<Widget>moduleList = [];
+
+    String pre= sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey)??'';
+    GeneralSettingsResponseModel model=GeneralSettingsResponseModel.fromJson(jsonDecode(pre));
+    bool isDepositEnable = model.data?.generalSetting?.modules?.deposit=='0'?false:true;
+    bool isWithdrawEnable = model.data?.generalSetting?.modules?.withdraw=='0'?false:true;
+
+
+
+    if(isDepositEnable){
+      moduleList.add(DashboardAnimatedButtonWithText(
+        buttonName: MyStrings.deposit,
         height: 40, width: 40,
-        backgroundColor: MyColor.homeColorList[5].withOpacity(.1),
-        child: SvgPicture.asset(MyImages.transferIcon2, height: 35, width: 35),
+        backgroundColor: MyColor.homeColorList[0].withOpacity(.0),
+        child: SvgPicture.asset(MyImages.depositIcon, height: 35, width: 35),
         onTap: (){
-          Get.toNamed(RouteHelper.transferScreen);
+          Get.toNamed(RouteHelper.depositsScreen);
         },
       ));
+    }
 
-      if(isAirtimeEnable){
-        moduleList.add(CircleAnimatedButtonWithText(
-          buttonName: MyStrings.airTime.tr,
-          height: 40, width: 40,
-          backgroundColor: MyColor.homeColorList[6].withOpacity(.1),
-          child: SvgPicture.asset(MyImages.mobile, color: MyColor.homeColorList[6], height: 20, width: 20),
-          onTap: (){
-            Get.toNamed(RouteHelper.airtimeScreen);
-          },
-        ));
-      }
+    if(isWithdrawEnable){
+      moduleList.add(DashboardAnimatedButtonWithText(
+        buttonName: MyStrings.withdrawal,
+        height: 40, width: 40,
+        backgroundColor: MyColor.homeColorList[4].withOpacity(.0),
+        child: SvgPicture.asset(MyImages.withdrawIcon, height: 35, width: 35),
+        onTap: (){
+          Get.toNamed(RouteHelper.withdrawScreen);
+        },
+      ));
+    }
+    return moduleList;
+  }
+
+  List<Widget>getMenuModuleList(){
+
+    List<Widget>moduleList = [];
+
+    String pre= sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey)??'';
+    GeneralSettingsResponseModel model=GeneralSettingsResponseModel.fromJson(jsonDecode(pre));
+    bool isAirtimeEnable = model.data?.generalSetting?.modules?.airtime=='0'?false:true;
+    bool isReferralEnable = model.data?.generalSetting?.modules?.referralSystem=='0'?false:true;
+
+
+    // if(isAirtimeEnable){
+    //   moduleList.add(CircleAnimatedButtonWithText(
+    //     buttonName: MyStrings.airTime.tr,
+    //     height: 40, width: 40,
+    //     backgroundColor: MyColor.homeColorList[6].withOpacity(.1),
+    //     child: SvgPicture.asset(MyImages.mobile, color: MyColor.homeColorList[6], height: 20, width: 20),
+    //     onTap: (){
+    //       Get.toNamed(RouteHelper.airtimeScreen);
+    //     },
+    //   ));
+    // }
 
 
 
