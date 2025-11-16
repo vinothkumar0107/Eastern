@@ -248,7 +248,7 @@ class TradingViewTicker extends StatelessWidget {
           "showSymbolLogo": true,
           "isTransparent": false,
           "displayMode": "regular",
-          "colorTheme": "dark",
+          "colorTheme": "light",
           "locale": "en"
         }
         </script>
