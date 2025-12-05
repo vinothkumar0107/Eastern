@@ -75,7 +75,7 @@ class HomeController extends GetxController {
           debitsLists.addAll(tempDebitList);
         }
         await repo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, true);
-        print('=====> home controller loggrd in');
+        print('=====> home controller logged in');
       }
       else{
         CustomSnackBar.error(errorList: model.message?.error ??[ MyStrings.somethingWentWrong],);

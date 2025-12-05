@@ -67,11 +67,16 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.0
 
 flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/app_logo/eastern_logo.png"
+
+flutter_native_splash:
+  color: "#FFFFFF"          # background color
+  image: assets/images/launcher_img.png   # your splash image path
 
 flutter:
   uses-material-design: true

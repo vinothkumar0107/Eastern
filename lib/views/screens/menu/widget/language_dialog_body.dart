@@ -97,10 +97,30 @@ class _LanguageDialogBodyState extends State<LanguageDialogBody> {
                           height: 15,
                           width: 15,
                           child: CircularProgressIndicator(color: MyColor.primaryColor)),
-                    ):Text(
-                     ( widget.langList[index].languageName).tr,
-                      style: interRegularDefault.copyWith(color: MyColor.getTextColor()),
-                    ),
+                    ): Row(
+                      children: [
+                        Image.network(
+                          widget.langList[index].imageUrl,   // server image URL
+                          height: 20,
+                          width: 20,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(Icons.flag);   // fallback icon if image fails
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          child: Text(
+                            widget.langList[index].languageName.tr,
+                            style: interRegularDefault.copyWith(
+                              color: MyColor.getTextColor(),
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    )
+
                   ),
                 );
               })),

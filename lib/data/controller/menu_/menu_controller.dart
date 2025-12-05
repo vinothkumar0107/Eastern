@@ -40,7 +40,6 @@ class MenuController extends GetxController  {
   configureMenuItem()async{
 
     ResponseModel response = await repo.getGeneralSetting();
-
     if(response.statusCode==200){
       GeneralSettingsResponseModel model =
       GeneralSettingsResponseModel.fromJson(jsonDecode(response.responseJson));

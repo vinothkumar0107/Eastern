@@ -220,6 +220,11 @@ class ApiClient extends GetxService{
     if(isSMSEnable){
       authList.add(MyStrings.sms);
     }
+
+    String twoFactor= sharedPreferences.getString(SharedPreferenceHelper.twoFactorEnableKey)??'';
+    if (twoFactor == "1"){
+      authList.add(MyStrings.twoFactor);
+    }
     return authList;
   }
 

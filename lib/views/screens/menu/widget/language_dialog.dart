@@ -9,7 +9,7 @@ import 'package:eastern_trust/views/screens/menu/widget/language_dialog_body.dar
 void showLanguageDialog(String languageList,Locale selectedLocal,BuildContext context,{bool fromSplash = false}){
   var language = jsonDecode(languageList);
   MainLanguageResponseModel model = MainLanguageResponseModel.fromJson(language);
- 
+
   List<LanguageModel>langList = [];
 
   if(model.data?.languages !=null && model.data!.languages!.isNotEmpty){

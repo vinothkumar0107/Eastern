@@ -25,5 +25,7 @@ class SharedPreferenceHelper{
   static const String languageKey = 'language-key';
   static const String languageListKey = 'language-list-key';
 
+  static const String twoFactorEnableKey='two-factor-enable-key';
+
 
 }

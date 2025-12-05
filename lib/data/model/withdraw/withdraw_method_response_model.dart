@@ -45,8 +45,11 @@ class WithdrawMethodResponseModel {
 
 class Data {
   Data({
-    List<WithdrawMethod>? withdrawMethod,}){
+    List<WithdrawMethod>? withdrawMethod,
+    VerificationsList? verificationsList,
+  }){
     _withdrawMethod = withdrawMethod;
+    _verificationsList = verificationsList;
   }
 
   Data.fromJson(dynamic json) {
@@ -56,15 +59,24 @@ class Data {
         _withdrawMethod?.add(WithdrawMethod.fromJson(v));
       });
     }
+    if (json['verification'] != null) {
+      _verificationsList = VerificationsList.fromJson(json['verification']);
+    }
   }
   List<WithdrawMethod>? _withdrawMethod;
+  VerificationsList? _verificationsList;
 
   List<WithdrawMethod>? get withdrawMethod => _withdrawMethod;
+  VerificationsList? get verificationsList => _verificationsList;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_withdrawMethod != null) {
       map['withdraw_method'] = _withdrawMethod?.map((v) => v.toJson()).toList();
+    }
+
+    if (_verificationsList != null) {
+      map['verification'] = _verificationsList?.toJson();
     }
     return map;
   }
@@ -170,4 +182,37 @@ class WithdrawMethod {
     return map;
   }
 
+}
+
+class VerificationsList {
+  VerificationsList({
+    String? email,
+    String? sms,
+    String? twoFactor,
+   }) {
+    _email = email;
+    _sms = sms;
+    _twoFactor = twoFactor;
+  }
+
+  VerificationsList.fromJson(dynamic json) {
+    _email = json['Email'].toString();
+    _sms = json['Sms'].toString();
+    _twoFactor = json['2fa'].toString();
+  }
+  String? _email;
+  String? _sms;
+  String? _twoFactor;
+
+  String? get email => _email;
+  String? get sms => _sms;
+  String? get twoFactor => _twoFactor;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['Email'] = _email;
+    map['Sms'] = _sms;
+    map['2fa'] = _twoFactor;
+    return map;
+  }
 }

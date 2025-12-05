@@ -25,7 +25,8 @@ class LoanRepo{
     };
 
     if(authMode!=null && authMode.isNotEmpty && authMode.toLowerCase()!=MyStrings.selectOne.toLowerCase()){
-      params['auth_mode'] = authMode.toLowerCase();
+      // params['auth_mode'] = authMode.toLowerCase();
+      params['auth_mode'] = authMode.toLowerCase() == MyStrings.twoFactor.toLowerCase() ? MyStrings.twoFactorValue.toLowerCase() : authMode.toLowerCase();
     }
     ResponseModel responseModel = await apiClient.request(url,Method.postMethod, params, passHeader: true);
     return responseModel;
@@ -53,7 +54,8 @@ class LoanRepo{
     };
 
     if(authMode!=null && authMode.isNotEmpty && authMode.toLowerCase()!=MyStrings.selectOne.toLowerCase()){
-      params['auth_mode'] = authMode.toLowerCase();
+      // params['auth_mode'] = authMode.toLowerCase();
+      params['auth_mode'] = authMode.toLowerCase() == MyStrings.twoFactor.toLowerCase() ? MyStrings.twoFactorValue.toLowerCase() : authMode.toLowerCase();
     }
     ResponseModel responseModel = await apiClient.request(url,Method.postMethod, params, passHeader: true);
     return responseModel;

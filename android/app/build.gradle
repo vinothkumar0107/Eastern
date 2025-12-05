@@ -40,8 +40,8 @@ if (localPropertiesFile.exists()) {
             minSdkVersion 21
 //            targetSdkVersion flutter.targetSdkVersion
             targetSdkVersion 35
-            versionCode 11
-            versionName "2.0"
+            versionCode 12
+            versionName "1.0"
             multiDexEnabled true
         }
 
