@@ -38,11 +38,13 @@ import '../../../core/utils/style.dart';
       btnOk:
       RoundedButton(text: MyStrings.yes.tr, press: (){
         // SystemNavigator.pop();
+        print("yessssssssssss");
         Navigator.of(context).pop();
         Get.back();
       },horizontalPadding: 3,verticalPadding: 3,color: MyColor.red,textColor: MyColor.colorWhite,),
       btnCancelOnPress: () {},
       btnOkOnPress: () {
+        print("popppppppppp");
         SystemNavigator.pop();
       },
     ).show();

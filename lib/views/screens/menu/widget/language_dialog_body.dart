@@ -31,7 +31,7 @@ class _LanguageDialogBodyState extends State<LanguageDialogBody> {
   int pressIndex = -1;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build123(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: Column(
@@ -128,4 +128,125 @@ class _LanguageDialogBodyState extends State<LanguageDialogBody> {
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Stack(
+        children: [
+
+          // ---- Cross Button (Top-Right) ----
+          Positioned(
+            right: -10,
+            top: -10,
+            child: IconButton(
+              icon: const Icon(Icons.close, size: 24),
+              onPressed: () {
+                Get.back();   // dismiss popup
+              },
+            ),
+          ),
+
+          // ---- Actual Content ----
+          Padding(
+            padding: const EdgeInsets.only(top: 15), // give space for close button
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Center(child: Text(MyStrings.selectALanguage,style: interRegularDefault.copyWith(color:MyColor.getTextColor(),fontSize: Dimensions.fontLarge),),),
+                const SizedBox(height: Dimensions.space15,),
+                Flexible(child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:  widget.langList.length,
+                    itemBuilder: (context,index){
+                      return GestureDetector(
+                        onTap: ()async{
+                          setState(() {
+                            pressIndex = index;
+                          });
+                          String languageCode = widget.langList[index].languageCode;
+                          final repo = Get.put(GeneralSettingRepo(apiClient: Get.find()));
+                          final localizationController = Get.put(LocalizationController(sharedPreferences: Get.find()));
+                          ResponseModel response = await repo.getLanguage(languageCode);
+                          if(response.statusCode == 200){
+                            try{
+                              Map<String,Map<String,String>> language = {};
+                              var resJson = jsonDecode(response.responseJson);
+                              await repo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.languageListKey, response.responseJson);
+                              var value = resJson['data']['language_data'] as Map<String,dynamic>;
+                              Map<String,String> json = {};
+                              value.forEach((key, value) {
+                                json[key] = value.toString();
+                              });
+
+                              language['${widget.langList[index].languageCode}_${'US'}'] = json;
+
+                              Get.clearTranslations();
+                              Get.addTranslations(Messages(languages: language).keys);
+
+                              Locale local = Locale(widget.langList[index].languageCode,'US');
+                              localizationController.setLanguage(local);
+                              if(widget.fromSplashScreen){
+                                Get.offAndToNamed(RouteHelper.loginScreen,);
+                              }else{
+                                Get.back();
+                              }
+                            }catch(e){
+                              CustomSnackBar.error(errorList: [e.toString()]);
+                              Get.back();
+                            }
+
+                          } else{
+                            CustomSnackBar.error(errorList: [response.message]);
+                            setState(() {
+                              pressIndex=-1;
+                            });
+                          }
+                        },
+                        child: Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                            decoration: BoxDecoration(color: MyColor.getCardBg(), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+                            child: pressIndex==index?const  Center(
+                              child: SizedBox(
+                                  height: 15,
+                                  width: 15,
+                                  child: CircularProgressIndicator(color: MyColor.primaryColor)),
+                            ): Row(
+                              children: [
+                                Image.network(
+                                  widget.langList[index].imageUrl,   // server image URL
+                                  height: 20,
+                                  width: 20,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(Icons.flag);   // fallback icon if image fails
+                                  },
+                                ),
+                                const SizedBox(width: 10),
+                                Flexible(
+                                  child: Text(
+                                    widget.langList[index].languageName.tr,
+                                    style: interRegularDefault.copyWith(
+                                      color: MyColor.getTextColor(),
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            )
+
+                        ),
+                      );
+                    })),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }

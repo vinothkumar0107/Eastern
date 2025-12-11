@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:eastern_trust/views/components/circle_widget/circle_image_button.dart';
@@ -136,9 +137,21 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery ,
     );
+    if (pickedFile == null) return;
+
+    // Fix orientation
+    final fixedImage = await FlutterExifRotation.rotateImage(
+      path: pickedFile.path,
+    );
+
+    // setState(() {
+    //   Get.find<ProfileController>().imageFile=File(pickedFile!.path);
+    //   imageFile = pickedFile;
+    // });
+
     setState(() {
-      Get.find<ProfileController>().imageFile=File(pickedFile!.path);
-      imageFile = pickedFile;
+      imageFile = XFile(fixedImage.path);
+      Get.find<ProfileController>().imageFile = File(fixedImage.path);
     });
 
 

@@ -25,6 +25,20 @@ class HomeScreenItemsSection extends StatefulWidget {
 class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
 
   var selectedIndex = 0;
+  bool _showTicker = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() {
+          _showTicker = true;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

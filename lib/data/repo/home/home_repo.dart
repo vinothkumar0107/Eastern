@@ -5,8 +5,11 @@ import 'package:eastern_trust/core/utils/url.dart';
 import 'package:eastern_trust/data/model/general_setting/general_settings_response_model.dart';
 import 'package:eastern_trust/data/model/global/response_model/response_model.dart';
 import 'package:eastern_trust/data/services/api_service.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../core/helper/shared_preference_helper.dart';
+import '../../../core/route/route.dart';
 import '../../model/dashboard/dashboard_response_model.dart';
 
 class HomeRepo {

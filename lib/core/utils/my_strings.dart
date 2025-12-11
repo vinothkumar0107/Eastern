@@ -6,7 +6,7 @@ class MyStrings{
 
   static  RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   // static const String appName = "ViserBank";
-  static const String appName = "Easterntrust";
+  static const String appName = "Monetry";
   static const String fileDownloadAt = "File download at";
   static const String errorDownloadingFile = "Error downloading file";
   static const String downloading = "Downloading";

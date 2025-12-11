@@ -73,6 +73,7 @@ class HomeController extends GetxController {
         List<LatestDebitsData>? tempDebitList = model.data?.latestDebits?.data;
         if(tempDebitList != null && tempDebitList.isNotEmpty){
           debitsLists.addAll(tempDebitList);
+          updateScrollStatus();
         }
         await repo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, true);
         print('=====> home controller logged in');
