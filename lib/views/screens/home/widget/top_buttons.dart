@@ -10,7 +10,7 @@ class TopButtons extends StatefulWidget {
   State<TopButtons> createState() => _TopButtonsState();
 }
 
-class _TopButtonsState extends State<TopButtons> {
+class _TopButtonsState123 extends State<TopButtons> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (controller) {
@@ -40,7 +40,7 @@ class _TopButtonsState extends State<TopButtons> {
                 )
               ],
             )
-          : controller.moduleList.length == 7
+          : controller.moduleList.length == 4
           ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -51,6 +51,33 @@ class _TopButtonsState extends State<TopButtons> {
               Expanded(child: controller.moduleList[2]),
               Expanded(child: controller.moduleList[3]),
               // Expanded(child: controller.moduleList[4]),
+
+            ],
+          ),
+          const SizedBox(height: Dimensions.space20),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Expanded(child: controller.moduleList[4]),
+              // Expanded(child: controller.moduleList[5]),
+              // Expanded(child: controller.moduleList[6]),
+              // Expanded(child: controller.moduleList[7]),
+            ],
+          )
+        ],
+      )
+          : controller.moduleList.length == 6
+          ? Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Expanded(child: controller.moduleList[0]),
+              Expanded(child: controller.moduleList[2]),
+              Expanded(child: controller.moduleList[3]),
+              Expanded(child: controller.moduleList[4]),
+              Expanded(child: controller.moduleList[5]),
 
             ],
           ),
@@ -102,9 +129,10 @@ class _TopButtonsState extends State<TopButtons> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               // Expanded(child: controller.moduleList[0]),
-                              Expanded(child: controller.moduleList[1]),
+                              // Expanded(child: controller.moduleList[1]),
                               Expanded(child: controller.moduleList[2]),
                               Expanded(child: controller.moduleList[3]),
+                              // Expanded(child: controller.moduleList[4]),
                             ],
                           )
                     : Row(
@@ -122,6 +150,54 @@ class _TopButtonsState extends State<TopButtons> {
                           ),
               ],
             );
+    });
+  }
+}
+
+class _TopButtonsState extends State<TopButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(builder: (controller) {
+      final moduleList = controller.moduleList;
+
+      if (moduleList.isEmpty) return const SizedBox();
+
+      // Adjust the number of items per row here 👇
+      const int itemsPerRow = 3;
+      final double totalSpacing = 24.0; // total spacing between items in a row
+      final double horizontalPadding = 32.0; // left + right padding
+      final double itemWidth = (MediaQuery.of(context).size.width -
+          horizontalPadding -
+          totalSpacing) /
+          itemsPerRow;
+
+      // Split list into multiple rows
+      List<Row> rows = [];
+      for (int i = 0; i < moduleList.length; i += itemsPerRow) {
+        final rowItems = moduleList.skip(i).take(itemsPerRow).toList();
+        rows.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: rowItems
+                .map(
+                  (item) => SizedBox(width: itemWidth, child: item),
+            )
+                .toList(),
+          ),
+        );
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (int i = 0; i < rows.length; i++) ...[
+            rows[i],
+            if (i != rows.length - 1)
+              const SizedBox(height: Dimensions.space20),
+          ],
+          const SizedBox(height: Dimensions.space20),
+        ],
+      );
     });
   }
 }

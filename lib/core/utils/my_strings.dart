@@ -6,7 +6,7 @@ class MyStrings{
 
   static  RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   // static const String appName = "ViserBank";
-  static const String appName = "Easterntrust";
+  static const String appName = "Monetry";
   static const String fileDownloadAt = "File download at";
   static const String errorDownloadingFile = "Error downloading file";
   static const String downloading = "Downloading";
@@ -102,7 +102,7 @@ class MyStrings{
   static const String verifyPasswordSubText = "A 6 digits verification code sent to your email address";
 
   static const String twoFactorAuth = "Two-Factor Authentication";
-  static const String twoFactorMsg = 'Enter 6-digit code from your two factor authenticator APP.';
+  static const String twoFactorMsg = 'Enter 6-digit code from your Google Authenticator app';
   static const String twoFASecurity = "2FA Security";
 
   static const String profileComplete = "Profile Complete";
@@ -162,20 +162,20 @@ class MyStrings{
   static const String payable = "Payable";
   static const String newDepositScreen = "Deposit Money";
 
-  static const String dpsPlan = "DPS Plan";
-  static const String fdrInstallments = "FDR Installments";
-  static const String fdrInfo = "FDR Info";
+  static const String dpsPlan = "Saving Plan";
+  static const String fdrInstallments = "Staking Installments";
+  static const String fdrInfo = "Staking Info";
   static const String loanInfo = "Loan Info";
   static const String ifAnInstallmentIsDelayedFor = "If an installment is delayed for";
   static const String orMoreDaysThen = "or more days then, an amount of,";
   static const String willBeAppliedForEachDay = "will be applied for each day";
-  static const String fdrInformation  = "FDR Information";
-  static const String myDpsLists = "My DPS Lists";
+  static const String fdrInformation  = "Staking Information";
+  static const String myDpsLists = "My Saving Lists";
   static const String applyNow = "Apply Now";
   static const String applyToOpenDPS = "Apply to open a";
   static const String authorizationMethod = "Authorization Method";
-  static const String investInDPS = "Invest in DPS";
-  static const String requestInvestDPS = "Request to Invest in DPS";
+  static const String investInDPS = "Invest in Saving";
+  static const String requestInvestDPS = "Request to Invest in Saving";
   static const String beSureBeforeConfirm = "Be sure before confirm";
   static const String plan = "Plan";
   static const String statusTicket = "Status";
@@ -201,17 +201,17 @@ class MyStrings{
   static const String profitReceived = "Profit Received";
   static const String afterMatureYouGet = "After Mature You will Get";
   static const String status = "Status";
-  static const String dpsNo = "DPS No.";
+  static const String dpsNo = "Saving No.";
   static const String payInstallment = "Pay Installment";
   static const String interestRate = "Interest Rate";
   static const String givenInstallment = "Given Installment";
   static const String givenOn  = "Given On";
   static const String nextInstallment = "Next Installment";
-  static const String closeThisDps = "Close this DPS";
+  static const String closeThisDps = "Close this Saving";
   static const String viewInstallment = "View Installment";
-  static const String dpsInstallments = "DPS Installments";
-  static const String dpsInformation = "DPS Information";
-  static const String dpsInfo = "DPS Info";
+  static const String dpsInstallments = "Saving Installments";
+  static const String dpsInformation = "Saving Information";
+  static const String dpsInfo = "Saving Info";
   static const String notYet = "Not yet";
   static const String importantNote = "Important Note";
   static const String chargeWillBeApplyMsg = "Charge will be applied if an installment delayed for";
@@ -228,32 +228,32 @@ class MyStrings{
   static const String selectAuthModeMsg = "Please select an authorization mode";
   static const String selectTrxType = "Select an Transaction Type";
   static const String selectRemarks = "Select an Remarks";
-  static const String fdrPlan = "FDR Plans";
-  static const String investInFDR = "Invest in FDR";
-  static const String requestInvestFDR = "Request to Invest in FDR";
+  static const String fdrPlan = "Staking Plans";
+  static const String investInFDR = "Invest in Staking";
+  static const String requestInvestFDR = "Request to Invest in Staking";
   static const String cannotBeWithdrawTill = "Can't Be Withdrawn Till";
-  static const String applyToOpenFDR = "Apply to Open FDR";
+  static const String applyToOpenFDR = "Apply to Open Staking";
   static const String latestTransaction = "Latest Transactions";
-  static const String youHaveRequestToInvestMsg = "You have requested to invest in FDR";
-  static const String youHaveRequestToDPSInvestMsg = "You have requested to invest in DPS";
+  static const String youHaveRequestToInvestMsg = "You have requested to invest in Staking";
+  static const String youHaveRequestToDPSInvestMsg = "You have requested to invest in Saving";
   static const String youAreApplyingToTakeLoan = "You are applying to take loan";
   static const String transferInformation = "Transfer Information";
   static const String applyPlanMsg = "Are you sure to apply for this plan?";
-  static const String fdrApplicationPreview = "FDR Application Preview";
-  static const String dpsApplicationPreview = "DPS Application Preview";
+  static const String fdrApplicationPreview = "Staking Application Preview";
+  static const String dpsApplicationPreview = "Saving Application Preview";
   static const String applicationForm = "Application Form";
   static const String profitInEvery  = "Profit in Every ";
   static const String profit  = "Profit";
   static const String cannotWithdrawnTill  = "Can't Be Withdrawn Till";
   static const String profitAmount = "Your Amount";
-  static const String myFdrList = "My FDR List";
-  static const String myDpsList = "My DPS List";
+  static const String myFdrList = "My Staking List";
+  static const String myDpsList = "My Saving List";
   static const String nextProfit = "Next Profit";
   static const String lockInPeriod = "Lock in Period";
   static const String getProfitEvery = "Get Profit Every";
-  static const String closeThisFdr = "Close FDR";
-  static const String closeFDRMsg = "Are you sure to close this FDR?";
-  static const String fdrInstallmentLogs = "FDR Installment Logs";
+  static const String closeThisFdr = "Close Staking";
+  static const String closeFDRMsg = "Are you sure to close this Staking?";
+  static const String fdrInstallmentLogs = "Staking Installment Logs";
   static const String minAmount = "Minimum Amount";
   static const String maxAmount = "Maximum Amount";
 
@@ -272,11 +272,11 @@ class MyStrings{
   static const String deposits = "Deposits";
   static const String withdrawals = "Withdrawals";
   static const String withdrawal = "Withdraw";
-  static const String fdr = "FDR";
-  static const String fdrDetails = "FDR Details";
-  static const String fdrNo = "FDR No.";
-  static const String fdrNumber = "FDR Number";
-  static const String dps = "DPS";
+  static const String fdr = "Staking";
+  static const String fdrDetails = "Staking Details";
+  static const String fdrNo = "Staking No.";
+  static const String fdrNumber = "Staking Number";
+  static const String dps = "Saving";
   static const String loan = "Loan";
   static const String applyingToTakeLoan = "You are applying to take loan";
   static const String takeMinimum = "Take Minimum";
@@ -561,7 +561,7 @@ class MyStrings{
   static const String resendCodeFail = 'Failed to resend code';
   static const String noRedirectUrlFound = 'No redirect url found';
   static const String invalidAmount = 'Invalid amount';
-  static const String fdrLimitMsg = 'Please follow the FDR limit';
+  static const String fdrLimitMsg = 'Please follow the Staking limit';
   static const String loanLimitMsg = 'Please follow the loan limit';
   static const String searchResult = 'Search Result';
   static const String resetPassMsg = "Enter your email or username below to receive a password reset verification code";
@@ -634,8 +634,8 @@ class MyStrings{
   static const String dailyMaxTrx = "Daily Maximum TRX";
   static const String monthlyMinTrx = "Monthly Maximum TRX";
   static const String recipient = "Recipient";
-  static const String fdrPlans = "FDR Plans";
-  static const String myFDRLists = "My FDR Lists";
+  static const String fdrPlans = "Staking Plans";
+  static const String myFDRLists = "My Staking Lists";
   static const String next = "Next";
   static const String days = "Days";
   static const String per = "Per";
@@ -686,6 +686,9 @@ class MyStrings{
 
   static const String done = 'Done';
   static const String comingSoon = 'Coming Soon...';
+
+  static const String twoFactor = 'Google Authenticator';
+  static const String twoFactorValue = '2fa';
 
 
 

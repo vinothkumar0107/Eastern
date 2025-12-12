@@ -11,6 +11,7 @@ import 'package:eastern_trust/views/components/widget-divider/widget_divider.dar
 import 'package:eastern_trust/views/screens/home/widget/latest_transaction_list_item.dart';
 import 'package:eastern_trust/views/screens/home/widget/top_buttons.dart';
 
+import 'home_screen_top.dart';
 import 'latest_transaction.dart';
 
 class HomeScreenItemsSection extends StatefulWidget {
@@ -24,6 +25,20 @@ class HomeScreenItemsSection extends StatefulWidget {
 class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
 
   var selectedIndex = 0;
+  bool _showTicker = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() {
+          _showTicker = true;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,36 +51,50 @@ class _HomeScreenItemsSectionState extends State<HomeScreenItemsSection> {
             topRight: Radius.circular(24),
           ),
         ),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: Dimensions.space20, horizontal: Dimensions.space15),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const TopButtons(),
-              const SizedBox(height: Dimensions.space15),
-              const LatestTransaction(),
-              controller.debitsLists.isEmpty ? const NoDataWidget(topMargin: 0,isNeedHeight: true,) : ListView.separated(
-                scrollDirection: Axis.vertical,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: controller.debitsLists.length,
-                itemBuilder: (context, index) => LatestTransactionListItem(
-                  isShowDivider:false,
-                  isCredit:controller.debitsLists[index].trxType=='+'?true:false,
-                  trx: controller.debitsLists[index].trx ?? "",
-                  date: '${DateConverter.isoStringToLocalDateOnly(controller.debitsLists[index].createdAt ?? "")}, ${DateConverter.isoStringToLocalTimeOnly(controller.debitsLists[index].createdAt ?? "")}',
-                  amount: "${controller.currencySymbol}${Converter.formatNumber(controller.debitsLists[index].amount ?? "").makeCurrencyComma(precision: 2)}",
-                  postBalance: "${Converter.formatNumber(controller.debitsLists[index].postBalance ?? "")} ${controller.currency}",
-                  onPressed: (){
-
-                  },
-                ),
-                separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+        child: Column(
+          children: [
+            /// ✅ TradingView ticker here
+            Container(
+              height: 40,
+              decoration: BoxDecoration(
+                color: MyColor.primaryColor, // your desired background color
+                borderRadius: BorderRadius.circular(8),
               ),
-            ],
-          ),
-        ),
+              child: TradingViewTicker(),
+            ),
+            const SizedBox(height: 15),
+            SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const TopButtons(),
+                  const SizedBox(height: Dimensions.space15),
+                  const LatestTransaction(),
+                  controller.debitsLists.isEmpty ? const NoDataWidget(topMargin: 0,isNeedHeight: true,) : ListView.separated(
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: controller.debitsLists.length,
+                    itemBuilder: (context, index) => LatestTransactionListItem(
+                      isShowDivider:false,
+                      isCredit:controller.debitsLists[index].trxType=='+'?true:false,
+                      trx: controller.debitsLists[index].trx ?? "",
+                      date: '${DateConverter.isoStringToLocalDateOnly(controller.debitsLists[index].createdAt ?? "")}, ${DateConverter.isoStringToLocalTimeOnly(controller.debitsLists[index].createdAt ?? "")}',
+                      amount: "${controller.currencySymbol}${Converter.formatNumber(controller.debitsLists[index].amount ?? "").makeCurrencyComma(precision: 2)}",
+                      postBalance: "${Converter.formatNumber(controller.debitsLists[index].postBalance ?? "")} ${controller.currency}",
+                      onPressed: (){
+
+                      },
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
       ),
     );
   }

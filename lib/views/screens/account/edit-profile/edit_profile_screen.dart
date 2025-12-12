@@ -8,6 +8,7 @@ import 'package:eastern_trust/data/services/api_service.dart';
 import 'package:eastern_trust/views/components/appbar/custom_appbar.dart';
 import 'package:eastern_trust/views/components/custom_loader.dart';
 
+import '../../../../data/repo/home/home_repo.dart';
 import 'widget/edit_profile_form.dart';
 
 class EditProfileScreen extends StatefulWidget {

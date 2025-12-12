@@ -11,6 +11,8 @@ import 'package:eastern_trust/data/model/withdraw/withdraw_request_response_mode
 import 'package:eastern_trust/data/repo/withdraw/withdraw_repo.dart';
 import 'package:eastern_trust/views/components/snackbar/show_custom_snackbar.dart';
 
+import '../../repo/home/home_repo.dart';
+
 class AddNewWithdrawController extends GetxController{
 
   WithdrawRepo repo;
@@ -83,6 +85,28 @@ class AddNewWithdrawController extends GetxController{
     return;
   }
 
+  void setWithdrawVerificationList(WithdrawMethodResponseModel model) {
+    authorizationList = [];
+
+    String selectOne = MyStrings.selectOne;
+    authorizationList.insert(0, selectOne);
+
+    bool isEmailEnable =  model.data?.verificationsList?.email == '1'?true:false;
+    bool isSMSEnable =  model.data?.verificationsList?.sms == '1'?true:false;
+    bool isTwoFactorEnable =  model.data?.verificationsList?.twoFactor == '1'?true:false;
+    if(isEmailEnable){
+      authorizationList.add(MyStrings.email);
+    }
+    print("Verification List ==> ${isEmailEnable}");
+    if(isSMSEnable){
+      authorizationList.add(MyStrings.sms);
+    }
+    if(isTwoFactorEnable){
+      authorizationList.add(MyStrings.twoFactor);
+    }
+    changeAuthorizationMode(authorizationList[0]);
+  }
+
 
   Future<void>loadDepositMethod()async{
 
@@ -108,6 +132,7 @@ class AddNewWithdrawController extends GetxController{
         List<WithdrawMethod>?tempMethodList = model.data?.withdrawMethod;
         if(tempMethodList != null && tempMethodList.isNotEmpty){
           withdrawMethodList.addAll(tempMethodList);
+          // setWithdrawVerificationList(model);
         }
       }else{
         CustomSnackBar.error(errorList: model.message?.error??[MyStrings.somethingWentWrong],);

@@ -20,6 +20,7 @@ class GeneralSettingRepo {
   Future<dynamic> getLanguage(String languageCode) async {
     try{
       String url='${UrlContainer.baseUrl}${UrlContainer.languageUrl}$languageCode';
+      print("=======> language url ${url}");
       ResponseModel response= await apiClient.request(url,Method.getMethod, null,passHeader: false);
       return response;
     }catch(e){

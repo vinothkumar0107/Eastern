@@ -20,7 +20,9 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+// before remove
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -28,99 +30,124 @@ class _HomeScreenState extends State<HomeScreen> {
     Get.put(HomeRepo(apiClient: Get.find()));
     final controller = Get.put(HomeController(repo: Get.find()));
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.loadData();
+      controller.updateScrollStatus();
     });
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    scrollController.dispose();
     super.dispose();
   }
 
-  final ScrollController scrollController = ScrollController();
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Screen is visible again
+      final controller = Get.find<HomeController>();
+      controller.loadData();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    // Get the top padding (notch height)
     double notchHeight = MediaQuery.of(context).padding.top;
-
-    // Check if there's a notch by verifying the top padding
     bool hasNotch = notchHeight > 0;
-
-    // Adjust height based on whether the device has a notch or not
-    double appBarHeightDynamic = notchHeight > 55 ? 40 : notchHeight > 50 ? 50 :  notchHeight > 45 ? 45 : 70;
+    double appBarHeightDynamic =
+    notchHeight > 55 ? 40 : notchHeight > 50 ? 50 : notchHeight > 45 ? 45 : 70;
     double appBarHeight = hasNotch ? 120 + appBarHeightDynamic : 160;
 
     return GetBuilder<HomeController>(
       builder: (controller) => WillPopWidget(
         nextRoute: '',
         child: Scaffold(
-          backgroundColor: controller.isLoading ? MyColor.colorWhite : MyColor.colorWhite,
-          body: controller.isLoading ? const CustomLoader() : controller.noInternet?
-          NoDataFoundScreen(
+          backgroundColor: MyColor.colorWhite,
+          body: controller.isLoading
+              ? const CustomLoader()
+              : controller.noInternet
+              ? NoDataFoundScreen(
             isNoInternet: true,
-            press:(value){
-              if(value){
+            press: (value) {
+              if (value) {
                 controller.changeNoInternetStatus(false);
                 controller.loadData();
               }
             },
-          ) :SizedBox(
+          )
+              : SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: RefreshIndicator(color: MyColor.primaryColor,
+            child: RefreshIndicator(
+              color: MyColor.primaryColor,
               backgroundColor: MyColor.colorWhite,
               onRefresh: () async {
                 await controller.loadData();
               },
               child: CustomScrollView(
                 controller: scrollController,
-                physics: const ClampingScrollPhysics(),
+                physics: controller.isContentScrollable
+                    ? const ClampingScrollPhysics()
+                    : const NeverScrollableScrollPhysics(),
                 slivers: [
+                  /// 🔹 SliverAppBar with TradingViewTicker on top
                   SliverAppBar(
                     pinned: false,
                     elevation: 0,
                     automaticallyImplyLeading: false,
-                    backgroundColor: Colors.transparent, // Set backgroundColor to transparent to avoid any color conflicts
-                    expandedHeight: appBarHeight,
+                    backgroundColor: Colors.transparent,
+                    expandedHeight: controller.homeTopModuleList.isEmpty
+                        ? 120
+                        : appBarHeight,
                     flexibleSpace: FlexibleSpaceBar(
                       background: Container(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [MyColor.primaryColor2, MyColor.primaryColor],
+                            colors: [
+                              MyColor.primaryColor2,
+                              MyColor.primaryColor,
+                            ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0),
-                            bottomRight: Radius.circular(0),
                           ),
                         ),
                         padding: const EdgeInsets.only(
                           left: Dimensions.space15,
                           right: Dimensions.space15,
                           top: Dimensions.space60,
+                          bottom: Dimensions.space10,
                         ),
-                        child: const HomeScreenTop(),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            /// Existing top widget
+                            const Expanded(
+                              child: HomeScreenTop(),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
+
+                  /// Main content
                   SliverToBoxAdapter(
                     child: Transform.translate(
-                        offset: const Offset(0, 0), // If need change x, y position
-                        child: Container(
-                            decoration: const BoxDecoration(
-                              color: MyColor.colorWhite,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(24),
-                                topRight: Radius.circular(24),
-                              ),
-                            ),
-                            child: const HomeScreenItemsSection()
-                        )
+                      offset: const Offset(0, 0),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: MyColor.colorWhite,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
+                        ),
+                        child: const HomeScreenItemsSection(),
+                      ),
                     ),
                   ),
                 ],
@@ -133,3 +160,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+

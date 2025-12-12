@@ -83,13 +83,27 @@ class _MenuScreenState extends State<MenuScreen> {
                         label: MyStrings.changePassword.tr,
                         onPressed: () => Get.toNamed(RouteHelper.changePasswordScreen),
                       ),
-                      const CustomDivider(space: Dimensions.space15),
-                      MenuRowWidget(
-                        image: MyImages.referral,
-                        label: MyStrings.referral.tr,
-                        onPressed: () => Get.toNamed(RouteHelper.referralScreen),
+                      // const CustomDivider(space: Dimensions.space15),
+                      // MenuRowWidget(
+                      //   image: MyImages.referral,
+                      //   label: MyStrings.referral.tr,
+                      //   onPressed: () => Get.toNamed(RouteHelper.referralScreen),
+                      // ),
+                      menuController.isReferralEnable ? const CustomDivider(space: Dimensions.space15) : const SizedBox(height: 0),
+                      Visibility(
+                          visible: menuController.isReferralEnable,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MenuRowWidget(
+                                image: MyImages.referral,
+                                label: MyStrings.referral.tr,
+                                onPressed: () => Get.toNamed(RouteHelper.referralScreen),
+                              ),
+                            ],
+                          )
                       ),
-                      const CustomDivider(space: Dimensions.space15),
+                      menuController.isDepositEnable ? const CustomDivider(space: Dimensions.space15) : const SizedBox(height: 0),
                       Visibility(
                           visible: menuController.isDepositEnable,
                           child: Column(
@@ -101,9 +115,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                 onPressed: () => Get.toNamed(RouteHelper.airtimeScreen),
                               ),
                             ],
-                          )),
-
-
+                          )
+                      ),
                     ],
                   ),
                 ),

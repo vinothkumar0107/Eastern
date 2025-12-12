@@ -38,7 +38,8 @@ class WithdrawRepo {
     };
 
    if(authMode!=null && authMode.isNotEmpty && authMode.toLowerCase()!=MyStrings.selectOne.toLowerCase()){
-     params['auth_mode'] = authMode.toLowerCase();
+     params['auth_mode'] = authMode.toLowerCase() == MyStrings.twoFactor.toLowerCase() ? MyStrings.twoFactorValue.toLowerCase() : authMode.toLowerCase();
+     print("authmode ==> ${authMode.toLowerCase()}");
    }
 
     ResponseModel responseModel = await apiClient.request(url, request.Method.postMethod, params, passHeader: true);

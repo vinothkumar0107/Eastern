@@ -129,7 +129,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                           children: [
                                             Text(MyStrings.enterYourOTPCode.tr, style: interRegularMediumLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w600)),
                                             const SizedBox(height: Dimensions.space20),
-                                            Text(controller.otpType=="sms"?MyStrings.sixDigitSMSOtpMsg:controller.otpType == "email"?MyStrings.sixDigitEmailOtpMsg:controller.otpType=='2fa'?MyStrings.twoFactorMsg.tr:'', maxLines: 2, textAlign: TextAlign.start, style: interRegularLarge.copyWith(color: MyColor.labelTextColor)),
+                                            Text(controller.otpType=="sms"?MyStrings.sixDigitSMSOtpMsg:controller.otpType == "email"?MyStrings.sixDigitEmailOtpMsg:controller.otpType=='2fa'?MyStrings.twoFactorMsg.tr:controller.otpType.toLowerCase()==MyStrings.twoFactor.tr.toLowerCase()?MyStrings.twoFactorMsg.tr:'', maxLines: 2, textAlign: TextAlign.start, style: interRegularLarge.copyWith(color: MyColor.labelTextColor)),
                                           ],
                                         )
                                       ),
@@ -170,12 +170,12 @@ class _OtpScreenState extends State<OtpScreen> {
                                                 child: Text(MyStrings.resend.tr, style: interRegularDefault.copyWith(color: MyColor.getPrimaryColor(),decoration: TextDecoration.underline)),
                                               )
                                             ],
-                                          ) : OtpTimer(
+                                          ) : (controller.otpType!='2fa' && controller.otpType.toLowerCase()!=MyStrings.twoFactor.tr.toLowerCase()) ? OtpTimer(
                                               duration: controller.time,
                                               onTimeComplete: (){
                                                 controller.makeOtpExpired(true);
                                               }
-                                          ),
+                                          ) : const SizedBox(height: 0),
                                         ],
                                       ),
                                       const SizedBox(height: Dimensions.space30),

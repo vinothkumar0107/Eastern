@@ -37,6 +37,7 @@ class LoginController extends GetxController{
 
   void checkAndGotoNextStep(LoginResponseModel responseModel) async{
 
+    print('responseModel ---> $responseModel');
     bool needEmailVerification=responseModel.data?.user?.ev == "1" ? false:true;
     bool needSmsVerification=responseModel.data?.user?.sv == '1' ? false:true;
     bool isTwoFactorEnable = responseModel.data?.user?.tv == '1' ? false:true;

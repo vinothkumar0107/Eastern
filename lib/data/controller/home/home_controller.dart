@@ -31,10 +31,13 @@ class HomeController extends GetxController {
 
   List<LatestDebitsData> debitsLists = [];
   List<Widget>moduleList = [];
+  List<Widget>homeTopModuleList = [];
+  bool isContentScrollable = false;
 
   Future<void> loadData() async{
 
     moduleList = repo.apiClient.getModuleList();
+    homeTopModuleList = repo.apiClient.getHomeTopModuleList();
     currency = repo.apiClient.getCurrencyOrUsername();
     currencySymbol = repo.apiClient.getCurrencyOrUsername(isSymbol: true);
     ResponseModel responseModel = await repo.getData();
@@ -70,9 +73,10 @@ class HomeController extends GetxController {
         List<LatestDebitsData>? tempDebitList = model.data?.latestDebits?.data;
         if(tempDebitList != null && tempDebitList.isNotEmpty){
           debitsLists.addAll(tempDebitList);
+          updateScrollStatus();
         }
         await repo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, true);
-        print('=====> home controller loggrd in');
+        print('=====> home controller logged in');
       }
       else{
         CustomSnackBar.error(errorList: model.message?.error ??[ MyStrings.somethingWentWrong],);
@@ -92,6 +96,10 @@ class HomeController extends GetxController {
     update();
   }
 
+  void updateScrollStatus() {
+    isContentScrollable = debitsLists.length > 3 ? true : false;
+    update(); // triggers GetBuilder rebuild
+  }
 
  /* bool isCreditSelected = true;
   void changeButtonState(bool status){

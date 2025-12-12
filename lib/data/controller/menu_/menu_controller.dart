@@ -20,6 +20,7 @@ class MenuController extends GetxController  {
   bool balTransferEnable = true;
   bool langSwitchEnable = true;
   bool isDepositEnable = true;
+  bool isReferralEnable = true;
   bool isWithdrawEnable = true;
 
   MenuController({required this.repo});
@@ -28,6 +29,7 @@ class MenuController extends GetxController  {
     GeneralSettingsResponseModel model = repo.apiClient.getGSData();
     isDepositEnable = model.data?.generalSetting?.modules?.deposit=='0'?false:true;
     isWithdrawEnable = model.data?.generalSetting?.modules?.withdraw=='0'?false:true;
+    isReferralEnable = model.data?.generalSetting?.modules?.referralSystem=='0'?false:true;
     isLoading = true;
     update();
     await configureMenuItem();
@@ -38,7 +40,6 @@ class MenuController extends GetxController  {
   configureMenuItem()async{
 
     ResponseModel response = await repo.getGeneralSetting();
-
     if(response.statusCode==200){
       GeneralSettingsResponseModel model =
       GeneralSettingsResponseModel.fromJson(jsonDecode(response.responseJson));

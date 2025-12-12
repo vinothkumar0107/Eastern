@@ -29,7 +29,9 @@ class TransferRepo{
     String url = '${UrlContainer.baseUrl}${UrlContainer.otherBankTransferUrl}$id';
     Map<String, dynamic>params = {'amount': amount.toString()};
     if(authMode!=null && authMode.isNotEmpty && authMode.toLowerCase()!=MyStrings.selectOne.toLowerCase()){
-      params['auth_mode'] = authMode.toLowerCase();
+      // params['auth_mode'] = authMode.toLowerCase();
+      params['auth_mode'] = authMode.toLowerCase() == MyStrings.twoFactor.toLowerCase() ? MyStrings.twoFactorValue.toLowerCase() : authMode.toLowerCase();
+
     }
     ResponseModel responseModel = await apiClient.request(url,Method.postMethod, params, passHeader: true);
     return responseModel;
@@ -39,7 +41,8 @@ class TransferRepo{
     String url = '${UrlContainer.baseUrl}${UrlContainer.myBankTransferUrl}$id';
     Map<String, dynamic>params = {'amount': amount.toString()};
     if(authMode!=null && authMode.isNotEmpty && authMode.toLowerCase()!=MyStrings.selectOne.toLowerCase()){
-      params['auth_mode'] = authMode.toLowerCase();
+      // params['auth_mode'] = authMode.toLowerCase();
+      params['auth_mode'] = authMode.toLowerCase() == MyStrings.twoFactor.toLowerCase() ? MyStrings.twoFactorValue.toLowerCase() : authMode.toLowerCase();
     }
     ResponseModel responseModel = await apiClient.request(url,Method.postMethod, params, passHeader: true);
     return responseModel;

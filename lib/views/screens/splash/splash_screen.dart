@@ -76,8 +76,9 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Center(
           child: Image.asset(
             MyImages.splashAnimationGif,
-            height: MediaQuery.sizeOf(context).width,
-            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).width * 0.5,
+            width: MediaQuery.sizeOf(context).width * 0.5,
+            fit: BoxFit.cover,
           ),
           // child: Column(
           //   mainAxisAlignment: MainAxisAlignment.center,

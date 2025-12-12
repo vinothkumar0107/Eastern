@@ -11,6 +11,8 @@ import 'package:eastern_trust/data/model/user_post_model/user_post_model.dart';
 import 'package:eastern_trust/data/repo/account/profile_repo.dart';
 import 'package:eastern_trust/views/components/snackbar/show_custom_snackbar.dart';
 
+import '../home/home_controller.dart';
+
 
 
 class ProfileController extends GetxController {
@@ -91,6 +93,8 @@ class ProfileController extends GetxController {
 
       if(b){
         await loadProfileInfo();
+        final controller = Get.find<HomeController>();
+        controller.loadData();
       }
     }else{
       if(firstName.isEmpty){

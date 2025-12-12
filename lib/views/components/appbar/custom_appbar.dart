@@ -90,6 +90,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               showExitDialog(Get.context!);
             } else {
               String previousRoute = Get.previousRoute;
+              print("<========= previousRoute  =======> $previousRoute");
               if (previousRoute == '/splash-screen' || widget.isForceBackHome == true) {
                 Get.offAndToNamed(RouteHelper.homeScreen);
               } else {

@@ -32,6 +32,8 @@ class RegistrationController extends GetxController {
   //it will come from general setting api
   bool checkPasswordStrength = false;
   bool needAgree=true;
+  bool isPasswordMatched = true;
+
 
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
