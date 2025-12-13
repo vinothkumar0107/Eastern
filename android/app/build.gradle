@@ -19,7 +19,8 @@ if (localPropertiesFile.exists()) {
         namespace "com.eastern.easterntrust"
         compileSdk flutter.compileSdkVersion
 //    ndkVersion flutter.ndkVersion
-        ndkVersion "25.1.8937393"
+//        ndkVersion "25.1.8937393"
+        ndkVersion "26.1.10909125"
 
         compileOptions {
             coreLibraryDesugaringEnabled true
@@ -37,11 +38,11 @@ if (localPropertiesFile.exists()) {
         compileSdkVersion 35
         defaultConfig {
             applicationId "com.eastern.easterntrust"
-            minSdkVersion 21
+            minSdkVersion flutter.minSdkVersion
 //            targetSdkVersion flutter.targetSdkVersion
             targetSdkVersion 35
-            versionCode 13
-            versionName "1.0"
+            versionCode 16
+            versionName "2.1"
             multiDexEnabled true
         }
 
